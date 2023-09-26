@@ -12,7 +12,7 @@ class BaseView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureHirachy()
+        configureUI()
         setConstraints()
         
     }
@@ -23,7 +23,7 @@ class BaseView: UIView {
     }
     
     
-    func configureHirachy() {
+    func configureUI() {
     }
     
     func setConstraints() {

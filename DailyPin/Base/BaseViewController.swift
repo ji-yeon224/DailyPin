@@ -12,16 +12,26 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureHirachy()
+        configureUI()
         setConstraints()
     }
     
-    func configureHirachy() {
+    func configureUI() {
         view.backgroundColor = Constants.Color.background
     }
     
     func setConstraints() {
         
+    }
+    
+    func showAlertMessage(title: String, message: String, handler: (() -> ())?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .default) { _ in
+            handler?()
+        }
+        alert.addAction(ok)
+        
+        present(alert, animated: true)
     }
     
 }
