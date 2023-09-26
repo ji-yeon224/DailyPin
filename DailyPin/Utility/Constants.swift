@@ -7,12 +7,16 @@
 
 import UIKit
 
-enum Color {
+final class Constants {
     
-    static let background = UIColor(named: "backGroundColor")
-    static let basicText = UIColor(named: "textColor")
-    static let mainColor = UIColor(named: "mainColor")
-    
+    enum Color {
+        
+        static let background = UIColor(named: "backGroundColor")
+        static let basicText = UIColor(named: "textColor")
+        static let mainColor = UIColor(named: "mainColor")
+        
+    }
 }
+
 
 

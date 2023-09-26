@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA3233B8710733D24E0D3C79 /* Pods_DailyPin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D05AB0618135E1D91B89A6 /* Pods_DailyPin.framework */; };
 		CE3DF7EA2AC1602D00653CE1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CE3DF7E92AC1602D00653CE1 /* .gitignore */; };
 		CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */; };
 		CE3DF7F22AC2A9C500653CE1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE3DF7F42AC2A9C500653CE1 /* Localizable.strings */; };
+		CE3DF7FA2AC2B1BB00653CE1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF7F92AC2B1BB00653CE1 /* BaseViewController.swift */; };
+		CE3DF7FC2AC2B39D00653CE1 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF7FB2AC2B39D00653CE1 /* BaseView.swift */; };
 		CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */; };
 		CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */; };
 		CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC42AC030BF001E7BB0 /* ViewController.swift */; };
@@ -19,10 +22,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05D05AB0618135E1D91B89A6 /* Pods_DailyPin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyPin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		27EC23796111CB4C7B43E763 /* Pods-DailyPin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyPin.debug.xcconfig"; path = "Target Support Files/Pods-DailyPin/Pods-DailyPin.debug.xcconfig"; sourceTree = "<group>"; };
+		8EEB27B0A9722F91D177EF65 /* Pods-DailyPin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyPin.release.xcconfig"; path = "Target Support Files/Pods-DailyPin/Pods-DailyPin.release.xcconfig"; sourceTree = "<group>"; };
 		CE3DF7E92AC1602D00653CE1 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE3DF7F32AC2A9C500653CE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE3DF7F52AC2A9ED00653CE1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE3DF7F92AC2B1BB00653CE1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		CE3DF7FB2AC2B39D00653CE1 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,12 +46,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA3233B8710733D24E0D3C79 /* Pods_DailyPin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04725F41E4E2D1D859B709AB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				27EC23796111CB4C7B43E763 /* Pods-DailyPin.debug.xcconfig */,
+				8EEB27B0A9722F91D177EF65 /* Pods-DailyPin.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C2290DA361F3D0A0C645E7FB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				05D05AB0618135E1D91B89A6 /* Pods_DailyPin.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CE3DF7EB2AC17CE500653CE1 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -52,11 +78,36 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		CE3DF7F62AC2B0BB00653CE1 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				CE3DF7F92AC2B1BB00653CE1 /* BaseViewController.swift */,
+				CE3DF7FB2AC2B39D00653CE1 /* BaseView.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		CE3DF7F72AC2B0C500653CE1 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		CE3DF7F82AC2B0F100653CE1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		CEB00FB42AC030BF001E7BB0 = {
 			isa = PBXGroup;
 			children = (
 				CEB00FBF2AC030BF001E7BB0 /* DailyPin */,
 				CEB00FBE2AC030BF001E7BB0 /* Products */,
+				04725F41E4E2D1D859B709AB /* Pods */,
+				C2290DA361F3D0A0C645E7FB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +122,9 @@
 		CEB00FBF2AC030BF001E7BB0 /* DailyPin */ = {
 			isa = PBXGroup;
 			children = (
+				CE3DF7F82AC2B0F100653CE1 /* View */,
+				CE3DF7F72AC2B0C500653CE1 /* Scene */,
+				CE3DF7F62AC2B0BB00653CE1 /* Base */,
 				CE3DF7EB2AC17CE500653CE1 /* Utility */,
 				CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */,
 				CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */,
@@ -92,9 +146,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEB00FD12AC030C0001E7BB0 /* Build configuration list for PBXNativeTarget "DailyPin" */;
 			buildPhases = (
+				83F56A017EBA618727ED27AD /* [CP] Check Pods Manifest.lock */,
 				CEB00FB92AC030BF001E7BB0 /* Sources */,
 				CEB00FBA2AC030BF001E7BB0 /* Frameworks */,
 				CEB00FBB2AC030BF001E7BB0 /* Resources */,
+				FA8EC86E2EA8B42786CCBC08 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -154,13 +210,57 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		83F56A017EBA618727ED27AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DailyPin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA8EC86E2EA8B42786CCBC08 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DailyPin/Pods-DailyPin-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DailyPin/Pods-DailyPin-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DailyPin/Pods-DailyPin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CEB00FB92AC030BF001E7BB0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3DF7FA2AC2B1BB00653CE1 /* BaseViewController.swift in Sources */,
 				CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */,
 				CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */,
+				CE3DF7FC2AC2B39D00653CE1 /* BaseView.swift in Sources */,
 				CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */,
 				CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */,
 			);
@@ -315,6 +415,7 @@
 		};
 		CEB00FD22AC030C0001E7BB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27EC23796111CB4C7B43E763 /* Pods-DailyPin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -347,6 +448,7 @@
 		};
 		CEB00FD32AC030C0001E7BB0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EEB27B0A9722F91D177EF65 /* Pods-DailyPin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
