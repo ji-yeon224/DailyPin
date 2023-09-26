@@ -24,12 +24,26 @@ class BaseViewController: UIViewController {
         
     }
     
-    func showAlertMessage(title: String, message: String, handler: (() -> ())?) {
+    func showOKAlert(title: String, message: String, handler: (() -> ())?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "확인", style: .default) { _ in
+        let ok = UIAlertAction(title: "okText".localized(), style: .default) { _ in
             handler?()
         }
         alert.addAction(ok)
+        
+        present(alert, animated: true)
+    }
+    
+    func showAlertWithCancel(title: String, message: String, okHandler: (() -> Void)?, cancelHandler: (() -> Void)?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "okText".localized(), style: .default) { _ in
+            okHandler?()
+        }
+        let cancel = UIAlertAction(title: "cancelText".localized(), style: .cancel) { _ in
+            cancelHandler?()
+        }
+        alert.addAction(ok)
+        alert.addAction(cancel)
         
         present(alert, animated: true)
     }

@@ -7,4 +7,6 @@
 */
 
 "searchPlaceholder" = "장소를 검색하세요.";
+"okText" = "확인";
+"cancelText" = "취소";
 

@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  DailyPin
+
+  Created by 김지연 on 2023/09/26.
+  
+*/
+
+NSLocationWhenInUseUsageDescription = "Permission is required to locate the user.";
