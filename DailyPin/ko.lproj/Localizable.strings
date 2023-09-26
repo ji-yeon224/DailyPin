@@ -6,7 +6,10 @@
   
 */
 
-"searchPlaceholder" = "장소를 검색하세요.";
+"searchPlaceholder" = " 장소를 검색하세요.";
 "okText" = "확인";
 "cancelText" = "취소";
-
+"locationAlertTitle" = "위치정보 이용";
+"location_denied" = "위치 서비스를 사용할 수 없습니다. 기기의 '설정>개인정보 보호'에서 위치 서비스를 켜주세요.";
+"location_Restricted" = "위치 서비스 사용이 불가능합니다.";
+"locationServicesEnabled" = "위치 서비스가 꺼져있습니다.";

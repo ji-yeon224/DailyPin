@@ -6,23 +6,59 @@
 //
 
 import UIKit
-
+import MapKit
 
 final class MainMapView: BaseView {
     
-    let label = UILabel()
+
+    let mapView = MKMapView()
+    let textField = {
+        let view = SearchTextField()
+        view.placeholder = "searchPlaceholder".localized()
+        return view
+    }()
+    let calendarButton = CalendarButton()
+    let currentLocation = MyLocationButton()
     
     override func configureUI() {
-        addSubview(label)
+        addSubview(mapView)
+        mapView.addSubview(textField)
+        mapView.addSubview(calendarButton)
+        mapView.addSubview(currentLocation)
     }
     
     override func setConstraints() {
-        label.text = "hello"
         
-        label.snp.makeConstraints { make in
-            make.center.equalTo(safeAreaLayoutGuide)
-            
+        mapView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
+        textField.snp.makeConstraints { make in
+            make.leading.equalTo(mapView).inset(20)
+            make.top.equalTo(safeAreaLayoutGuide).offset(10)
+            make.height.equalTo(50)
+        }
+        calendarButton.snp.makeConstraints { make in
+            make.trailing.equalTo(mapView).inset(20)
+            make.leading.equalTo(textField.snp.trailing).offset(5)
+            make.top.equalTo(safeAreaLayoutGuide).offset(10)
+            make.height.equalTo(50)
+            make.width.equalTo(calendarButton.snp.height).multipliedBy(1)
+        }
+        currentLocation.snp.makeConstraints { make in
+            make.trailing.equalTo(mapView).inset(20)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-30)
+            make.size.equalTo(40)
+        }
+        
+    }
+    
+    func setRegionAndAnnotation(center: CLLocationCoordinate2D){
+        
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: 5000, longitudinalMeters: 5000)
+        mapView.setRegion(region, animated: true)
+        
+        mapView.showsUserLocation = true
+        
     }
     
 }
