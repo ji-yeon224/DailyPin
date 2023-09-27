@@ -31,10 +31,21 @@ final class MainMapViewController: BaseViewController {
     
     override func configureUI() {
         super.configureUI()
-        
+        mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
         
     }
     
+    @objc func currentButtonClicked() {
+        checkDeviceLocationAuthorization()
+    }
+    
+    
+    
+    
+}
+
+// 위치 서비스
+extension MainMapViewController {
     func checkDeviceLocationAuthorization() {
         //위치 서비스 활성화 체크
         DispatchQueue.global().async {
@@ -59,9 +70,7 @@ final class MainMapViewController: BaseViewController {
             showOKAlert(title: "locationAlertTitle".localized(), message: "location_Restricted".localized()) { }
         case .denied: // 사용자가 권한 요청 거부
             showRequestLocationServiceAlert()
-            print("denied")
-        case .authorizedAlways:
-            print("authorizedAlways")
+        case .authorizedAlways: break
         case .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
         @unknown default: print("default")
@@ -78,10 +87,6 @@ final class MainMapViewController: BaseViewController {
         }
 
     }
-    
-    
-    
-    
 }
 
 extension MainMapViewController: CLLocationManagerDelegate {
@@ -92,13 +97,13 @@ extension MainMapViewController: CLLocationManagerDelegate {
         if let coordinate = locations.last?.coordinate {
             mainView.setRegionAndAnnotation(center: coordinate)
         }
-        mainView.mapView.showsUserLocation = true
         locationManager.stopUpdatingLocation()
     }
     
     
     // 사용자의 위치를 가져오지 못함
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("fail")
         let center = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
         mainView.setRegionAndAnnotation(center: center)
     }

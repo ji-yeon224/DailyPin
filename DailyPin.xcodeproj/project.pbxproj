@@ -21,6 +21,7 @@
 		CE3DF8122AC3300500653CE1 /* CalendarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF8112AC3300500653CE1 /* CalendarButton.swift */; };
 		CE3DF8142AC330DB00653CE1 /* MyLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF8132AC330DB00653CE1 /* MyLocationButton.swift */; };
 		CE3DF8162AC3311400653CE1 /* BaseUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF8152AC3311400653CE1 /* BaseUIButton.swift */; };
+		CE3DF81A2AC3B26900653CE1 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF8192AC3B26900653CE1 /* Observable.swift */; };
 		CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */; };
 		CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */; };
 		CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC42AC030BF001E7BB0 /* ViewController.swift */; };
@@ -48,6 +49,7 @@
 		CE3DF8112AC3300500653CE1 /* CalendarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarButton.swift; sourceTree = "<group>"; };
 		CE3DF8132AC330DB00653CE1 /* MyLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationButton.swift; sourceTree = "<group>"; };
 		CE3DF8152AC3311400653CE1 /* BaseUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIButton.swift; sourceTree = "<group>"; };
+		CE3DF8192AC3B26900653CE1 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				CE3DF7E92AC1602D00653CE1 /* .gitignore */,
 				CE3DF7F42AC2A9C500653CE1 /* Localizable.strings */,
 				CE3DF80A2AC2C34400653CE1 /* InfoPlist.strings */,
+				CE3DF8192AC3B26900653CE1 /* Observable.swift */,
 			);
 			path = DailyPin;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE3DF8162AC3311400653CE1 /* BaseUIButton.swift in Sources */,
+				CE3DF81A2AC3B26900653CE1 /* Observable.swift in Sources */,
 				CE3DF8142AC330DB00653CE1 /* MyLocationButton.swift in Sources */,
 				CE3DF8012AC2B5B100653CE1 /* MainMapViewController.swift in Sources */,
 				CE3DF80E2AC2D25600653CE1 /* String+Extension.swift in Sources */,
