@@ -26,7 +26,6 @@ final class MainMapViewController: BaseViewController {
         super.viewDidLoad()
         
         locationManager.delegate = self
-        mainView.mapView.delegate = self
         checkDeviceLocationAuthorization()
     }
     
@@ -35,6 +34,16 @@ final class MainMapViewController: BaseViewController {
         mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped(_ :)))
         mainView.mapView.addGestureRecognizer(tapGesture)
+        mainView.searchBar.searchTextField.addTarget(self, action: #selector(searchViewTransition), for: .editingDidBegin)
+    }
+    
+    @objc private func searchViewTransition() {
+        let vc = SearchViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true)
+        
+        
     }
     
     @objc private func currentButtonClicked() {
@@ -52,16 +61,7 @@ final class MainMapViewController: BaseViewController {
     
 }
 
-// mapkit
-extension MainMapViewController: MKMapViewDelegate {
-    
-    func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
-        print(mapView.centerCoordinate)
-        mainView.setAnnotation(center: mapView.centerCoordinate)
-    }
-    
-    
-}
+
 
 
 // 위치 서비스

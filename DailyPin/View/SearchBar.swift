@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchTextField: UITextField {
+final class SearchBar: UISearchBar {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,10 +20,17 @@ final class SearchTextField: UITextField {
     }
     
     private func configure() {
+        clipsToBounds = true
         backgroundColor = Constants.Color.background
         layer.cornerRadius = 10
+        searchTextField.backgroundColor = Constants.Color.background
+        
+        searchTextField.backgroundColor = .white
+        setImage(UIImage(), for: UISearchBar.Icon.search, state: .normal)
         setShadow()
     }
+    
+   
     
     private func setShadow() {
         layer.shadowColor = UIColor.black.cgColor

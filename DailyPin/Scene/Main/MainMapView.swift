@@ -12,8 +12,8 @@ final class MainMapView: BaseView {
     
 
     let mapView = MKMapView()
-    let textField = {
-        let view = SearchTextField()
+    let searchBar = {
+        let view = SearchBar()//UISearchBar()
         view.placeholder = "searchPlaceholder".localized()
         return view
     }()
@@ -22,7 +22,7 @@ final class MainMapView: BaseView {
     
     override func configureUI() {
         addSubview(mapView)
-        mapView.addSubview(textField)
+        mapView.addSubview(searchBar)
         mapView.addSubview(calendarButton)
         mapView.addSubview(currentLocation)
         
@@ -36,14 +36,14 @@ final class MainMapView: BaseView {
         mapView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        textField.snp.makeConstraints { make in
+        searchBar.snp.makeConstraints { make in
             make.leading.equalTo(mapView).inset(20)
             make.top.equalTo(safeAreaLayoutGuide).offset(10)
             make.height.equalTo(50)
         }
         calendarButton.snp.makeConstraints { make in
             make.trailing.equalTo(mapView).inset(20)
-            make.leading.equalTo(textField.snp.trailing).offset(5)
+            make.leading.equalTo(searchBar.snp.trailing).offset(5)
             make.top.equalTo(safeAreaLayoutGuide).offset(10)
             make.height.equalTo(50)
             make.width.equalTo(calendarButton.snp.height).multipliedBy(1)
