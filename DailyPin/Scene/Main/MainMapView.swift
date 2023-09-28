@@ -56,11 +56,10 @@ final class MainMapView: BaseView {
         
     }
     
-    func setRegionAndAnnotation(center: CLLocationCoordinate2D){
+    func setRegion(center: CLLocationCoordinate2D){
         
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(region, animated: true)
-        setAnnotation(center: center)
         mapView.showsUserLocation = true
         
     }

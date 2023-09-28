@@ -14,12 +14,11 @@ final class MainMapViewController: BaseViewController {
     
     private let mainView = MainMapView()
     private let locationManager = CLLocationManager()
-    
+    private let defaultLoaction = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
     
     override func loadView() {
         self.view = mainView
         
-       
     }
     
     
@@ -76,7 +75,9 @@ extension MainMapViewController {
                     self.checkCurrentLocationAuthorization(status: authorization)
                 }
             }else {
-                self.showOKAlert(title: "", message: "locationServicesEnabled".localized()) { }
+                self.showOKAlert(title: "", message: "locationServicesEnabled".localized()) {
+                    self.mainView.setRegion(center: self.defaultLoaction)
+                }
             }
         }
     }
@@ -88,7 +89,9 @@ extension MainMapViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest // 정확도
             locationManager.requestWhenInUseAuthorization() // 인증 요청
         case .restricted: // 위치 서비스 사용 권한이 없음
-            showOKAlert(title: "locationAlertTitle".localized(), message: "location_Restricted".localized()) { }
+            showOKAlert(title: "locationAlertTitle".localized(), message: "location_Restricted".localized()) {
+                self.mainView.setRegion(center: self.defaultLoaction)
+            }
         case .denied: // 사용자가 권한 요청 거부
             showRequestLocationServiceAlert()
         case .authorizedAlways: break
@@ -101,12 +104,13 @@ extension MainMapViewController {
     // 권한이 거부되었을 때 얼럿
     private func showRequestLocationServiceAlert() {
         
-        showAlertWithCancel(title: "locationAlertTitle".localized(), message: "locationAlertMessage".localized()) {
+        showAlertWithCancel(title: "locationAlertTitle".localized(), message: "location_denied".localized()) {
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         } cancelHandler: {
             // toast
         }
-
+        
+        self.mainView.setRegion(center: self.defaultLoaction)
     }
 }
 
@@ -116,7 +120,7 @@ extension MainMapViewController: CLLocationManagerDelegate {
     // 사용자의 위치를 성공적으로 가져옴
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
-            mainView.setRegionAndAnnotation(center: coordinate)
+            mainView.setRegion(center: coordinate)
         }
         locationManager.stopUpdatingLocation()
     }
@@ -125,8 +129,7 @@ extension MainMapViewController: CLLocationManagerDelegate {
     // 사용자의 위치를 가져오지 못함
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("fail")
-        let center = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
-        mainView.setRegionAndAnnotation(center: center)
+        self.mainView.setRegion(center: self.defaultLoaction)
     }
     
     // 사용자의 권한 상태가 바뀜을 체크함(iOS 14~)
