@@ -9,19 +9,16 @@ import UIKit
 
 final class SearchView: BaseView {
     
-    let label = UILabel()
+    let searchBar = SearchBar()
     
     override func configureUI() {
         super.configureUI()
-        addSubview(label)
+        searchBar.placeholder = "장소 검색"
+        
     }
     
     override func setConstraints() {
-        label.text = "hello"
-        label.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.size.equalTo(100)
-        }
+        
     }
     
 }

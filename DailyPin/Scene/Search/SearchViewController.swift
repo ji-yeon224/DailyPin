@@ -18,12 +18,18 @@ final class SearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationItem.titleView = mainView.searchBar
+        mainView.searchBar.becomeFirstResponder()
     }
     
     override func configureUI() {
         super.configureUI()
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
+        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
+    }
+    
+    @objc private func backButtonClicked() {
+        dismiss(animated: true)
     }
     
 }

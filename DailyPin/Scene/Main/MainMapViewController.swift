@@ -39,9 +39,10 @@ final class MainMapViewController: BaseViewController {
     
     @objc private func searchViewTransition() {
         let vc = SearchViewController()
-        vc.modalPresentationStyle = .fullScreen
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .crossDissolve
-        present(vc, animated: true)
+        present(nav, animated: true)
         
         
     }
