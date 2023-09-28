@@ -25,6 +25,10 @@ final class MainMapView: BaseView {
         mapView.addSubview(textField)
         mapView.addSubview(calendarButton)
         mapView.addSubview(currentLocation)
+        
+        
+        
+        
     }
     
     override func setConstraints() {
@@ -56,9 +60,26 @@ final class MainMapView: BaseView {
         
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(region, animated: true)
-        
+        setAnnotation(center: center)
         mapView.showsUserLocation = true
         
+    }
+    
+    func setAnnotation(center: CLLocationCoordinate2D) {
+        removeAllAnotation()
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        mapView.setRegion(region, animated: true)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = center
+        mapView.addAnnotation(annotation)
+        
+        
+    }
+    
+    func removeAllAnotation() {
+        let annotations = mapView.annotations
+        mapView.removeAnnotations(annotations)
     }
     
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 
 final class MainMapViewController: BaseViewController {
@@ -26,27 +27,47 @@ final class MainMapViewController: BaseViewController {
         super.viewDidLoad()
         
         locationManager.delegate = self
+        mainView.mapView.delegate = self
         checkDeviceLocationAuthorization()
     }
     
     override func configureUI() {
         super.configureUI()
         mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped(_ :)))
+        mainView.mapView.addGestureRecognizer(tapGesture)
     }
     
-    @objc func currentButtonClicked() {
+    @objc private func currentButtonClicked() {
         checkDeviceLocationAuthorization()
     }
     
-    
+    @objc private func mapViewTapped(_ sender: UITapGestureRecognizer) {
+        let location: CGPoint = sender.location(in: mainView.mapView)
+        let mapPoint: CLLocationCoordinate2D = mainView.mapView.convert(location, toCoordinateFrom: mainView.mapView)
+        
+        mainView.setAnnotation(center: mapPoint)
+        
+    }
     
     
 }
 
+// mapkit
+extension MainMapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
+        print(mapView.centerCoordinate)
+        mainView.setAnnotation(center: mapView.centerCoordinate)
+    }
+    
+    
+}
+
+
 // 위치 서비스
 extension MainMapViewController {
-    func checkDeviceLocationAuthorization() {
+    private func checkDeviceLocationAuthorization() {
         //위치 서비스 활성화 체크
         DispatchQueue.global().async {
             if CLLocationManager.locationServicesEnabled() {
@@ -61,11 +82,11 @@ extension MainMapViewController {
     }
     
     // 권한 상태 확인
-    func checkCurrentLocationAuthorization(status: CLAuthorizationStatus) {
+    private func checkCurrentLocationAuthorization(status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined: // 사용자가 권한 설정 여부를 선택 안함
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestWhenInUseAuthorization()
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest // 정확도
+            locationManager.requestWhenInUseAuthorization() // 인증 요청
         case .restricted: // 위치 서비스 사용 권한이 없음
             showOKAlert(title: "locationAlertTitle".localized(), message: "location_Restricted".localized()) { }
         case .denied: // 사용자가 권한 요청 거부
@@ -78,7 +99,7 @@ extension MainMapViewController {
     }
     
     // 권한이 거부되었을 때 얼럿
-    func showRequestLocationServiceAlert() {
+    private func showRequestLocationServiceAlert() {
         
         showAlertWithCancel(title: "locationAlertTitle".localized(), message: "locationAlertMessage".localized()) {
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
