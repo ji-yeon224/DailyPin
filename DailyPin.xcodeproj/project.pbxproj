@@ -25,6 +25,12 @@
 		CE3DF81F2AC52C3B00653CE1 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF81E2AC52C3B00653CE1 /* SearchViewController.swift */; };
 		CE3DF8222AC53E5700653CE1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE3DF8212AC53E5700653CE1 /* SnapKit */; };
 		CE3DF8252AC53E6300653CE1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE3DF8242AC53E6300653CE1 /* Alamofire */; };
+		CE52CB682AC5ADBB007AD7F8 /* GoogleNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB672AC5ADBB007AD7F8 /* GoogleNetwork.swift */; };
+		CE52CB6A2AC5AE17007AD7F8 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB692AC5AE17007AD7F8 /* Place.swift */; };
+		CE52CB6C2AC5AED6007AD7F8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB6B2AC5AED6007AD7F8 /* APIKey.swift */; };
+		CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB6D2AC5B1D6007AD7F8 /* Router.swift */; };
+		CE52CB702AC7186F007AD7F8 /* LangCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB6F2AC7186F007AD7F8 /* LangCode.swift */; };
+		CE52CB722AC7197C007AD7F8 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB712AC7197C007AD7F8 /* SearchViewModel.swift */; };
 		CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */; };
 		CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */; };
 		CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC42AC030BF001E7BB0 /* ViewController.swift */; };
@@ -52,6 +58,12 @@
 		CE3DF8192AC3B26900653CE1 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		CE3DF81C2AC52C2E00653CE1 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		CE3DF81E2AC52C3B00653CE1 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		CE52CB672AC5ADBB007AD7F8 /* GoogleNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleNetwork.swift; sourceTree = "<group>"; };
+		CE52CB692AC5AE17007AD7F8 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		CE52CB6B2AC5AED6007AD7F8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		CE52CB6D2AC5B1D6007AD7F8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		CE52CB6F2AC7186F007AD7F8 /* LangCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangCode.swift; sourceTree = "<group>"; };
+		CE52CB712AC7197C007AD7F8 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +137,9 @@
 		CE3DF7FE2AC2B59100653CE1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				CE52CB672AC5ADBB007AD7F8 /* GoogleNetwork.swift */,
+				CE52CB6B2AC5AED6007AD7F8 /* APIKey.swift */,
+				CE52CB6D2AC5B1D6007AD7F8 /* Router.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -132,6 +147,8 @@
 		CE3DF7FF2AC2B59900653CE1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CE52CB692AC5AE17007AD7F8 /* Place.swift */,
+				CE52CB6F2AC7186F007AD7F8 /* LangCode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -149,6 +166,7 @@
 			children = (
 				CE3DF81C2AC52C2E00653CE1 /* SearchView.swift */,
 				CE3DF81E2AC52C3B00653CE1 /* SearchViewController.swift */,
+				CE52CB712AC7197C007AD7F8 /* SearchViewModel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -276,20 +294,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE52CB722AC7197C007AD7F8 /* SearchViewModel.swift in Sources */,
 				CE3DF8162AC3311400653CE1 /* BaseUIButton.swift in Sources */,
+				CE52CB6C2AC5AED6007AD7F8 /* APIKey.swift in Sources */,
 				CE3DF81A2AC3B26900653CE1 /* Observable.swift in Sources */,
 				CE3DF8142AC330DB00653CE1 /* MyLocationButton.swift in Sources */,
+				CE52CB702AC7186F007AD7F8 /* LangCode.swift in Sources */,
 				CE3DF8012AC2B5B100653CE1 /* MainMapViewController.swift in Sources */,
 				CE3DF80E2AC2D25600653CE1 /* String+Extension.swift in Sources */,
 				CE3DF7FA2AC2B1BB00653CE1 /* BaseViewController.swift in Sources */,
 				CE3DF8102AC3298300653CE1 /* SearchBar.swift in Sources */,
 				CE3DF8032AC2B5BA00653CE1 /* MainMapView.swift in Sources */,
 				CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */,
+				CE52CB682AC5ADBB007AD7F8 /* GoogleNetwork.swift in Sources */,
 				CE3DF8122AC3300500653CE1 /* CalendarButton.swift in Sources */,
+				CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */,
 				CE3DF81F2AC52C3B00653CE1 /* SearchViewController.swift in Sources */,
 				CE3DF81D2AC52C2E00653CE1 /* SearchView.swift in Sources */,
 				CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */,
 				CE3DF7FC2AC2B39D00653CE1 /* BaseView.swift in Sources */,
+				CE52CB6A2AC5AE17007AD7F8 /* Place.swift in Sources */,
 				CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */,
 				CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */,
 			);

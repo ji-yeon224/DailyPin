@@ -10,6 +10,7 @@ import UIKit
 final class SearchViewController: BaseViewController {
     
     private let mainView = SearchView()
+    private let viewModel = SearchViewModel()
     
     override func loadView() {
         self.view = mainView
@@ -20,6 +21,9 @@ final class SearchViewController: BaseViewController {
         super.viewDidLoad()
         navigationItem.titleView = mainView.searchBar
         mainView.searchBar.becomeFirstResponder()
+        
+        viewModel.callPlaceRequest(query: "카페", langCode: .ko)
+        
     }
     
     override func configureUI() {
