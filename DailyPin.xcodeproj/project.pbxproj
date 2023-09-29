@@ -31,6 +31,7 @@
 		CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB6D2AC5B1D6007AD7F8 /* Router.swift */; };
 		CE52CB702AC7186F007AD7F8 /* LangCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB6F2AC7186F007AD7F8 /* LangCode.swift */; };
 		CE52CB722AC7197C007AD7F8 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB712AC7197C007AD7F8 /* SearchViewModel.swift */; };
+		CE52CB752AC71B47007AD7F8 /* InputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB742AC71B47007AD7F8 /* InputError.swift */; };
 		CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */; };
 		CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */; };
 		CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC42AC030BF001E7BB0 /* ViewController.swift */; };
@@ -64,6 +65,7 @@
 		CE52CB6D2AC5B1D6007AD7F8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		CE52CB6F2AC7186F007AD7F8 /* LangCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangCode.swift; sourceTree = "<group>"; };
 		CE52CB712AC7197C007AD7F8 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		CE52CB742AC71B47007AD7F8 /* InputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputError.swift; sourceTree = "<group>"; };
 		CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +173,14 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		CE52CB732AC71B36007AD7F8 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				CE52CB742AC71B47007AD7F8 /* InputError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		CEB00FB42AC030BF001E7BB0 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +200,7 @@
 		CEB00FBF2AC030BF001E7BB0 /* DailyPin */ = {
 			isa = PBXGroup;
 			children = (
+				CE52CB732AC71B36007AD7F8 /* Error */,
 				CE3DF7FF2AC2B59900653CE1 /* Model */,
 				CE3DF7FE2AC2B59100653CE1 /* Network */,
 				CE3DF7F82AC2B0F100653CE1 /* View */,
@@ -299,6 +310,7 @@
 				CE52CB6C2AC5AED6007AD7F8 /* APIKey.swift in Sources */,
 				CE3DF81A2AC3B26900653CE1 /* Observable.swift in Sources */,
 				CE3DF8142AC330DB00653CE1 /* MyLocationButton.swift in Sources */,
+				CE52CB752AC71B47007AD7F8 /* InputError.swift in Sources */,
 				CE52CB702AC7186F007AD7F8 /* LangCode.swift in Sources */,
 				CE3DF8012AC2B5B100653CE1 /* MainMapViewController.swift in Sources */,
 				CE3DF80E2AC2D25600653CE1 /* String+Extension.swift in Sources */,

@@ -21,10 +21,10 @@ final class SearchViewController: BaseViewController {
         super.viewDidLoad()
         navigationItem.titleView = mainView.searchBar
         mainView.searchBar.becomeFirstResponder()
-        
-        viewModel.callPlaceRequest(query: "카페", langCode: .ko)
+        mainView.searchBar.delegate = self
         
     }
+    
     
     override func configureUI() {
         super.configureUI()
@@ -34,6 +34,21 @@ final class SearchViewController: BaseViewController {
     
     @objc private func backButtonClicked() {
         dismiss(animated: true)
+    }
+    
+}
+
+
+extension SearchViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let query = searchBar.text?.trimmingCharacters(in: .whitespaces) else {
+            // error alert
+            return
+        }
+        
+        viewModel.callPlaceRequest(query: query, langCode: .ko)
+        
     }
     
 }
