@@ -22,7 +22,14 @@ final class SearchViewController: BaseViewController {
         navigationItem.titleView = mainView.searchBar
         mainView.searchBar.becomeFirstResponder()
         mainView.searchBar.delegate = self
+        bindData()
+    }
+    
+    private func bindData() {
         
+        viewModel.searchResult.bind { data in
+            self.updateSnapShot()
+        }
     }
     
     
@@ -36,6 +43,13 @@ final class SearchViewController: BaseViewController {
         dismiss(animated: true)
     }
     
+    
+    func updateSnapShot() {
+        var snapShot = NSDiffableDataSourceSnapshot<Int, PlaceElement>()
+        snapShot.appendSections([0])
+        snapShot.appendItems(viewModel.searchResult.value.places)
+        mainView.dataSource.apply(snapShot)
+    }
 }
 
 

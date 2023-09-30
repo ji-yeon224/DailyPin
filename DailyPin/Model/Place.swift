@@ -8,19 +8,19 @@
 import Foundation
 
 // MARK: - Place
-struct Place: Decodable {
+struct Place: Decodable, Hashable {
     let places: [PlaceElement]
 }
 
 // MARK: - PlaceElement
-struct PlaceElement: Decodable {
+struct PlaceElement: Decodable, Hashable {
     let id, formattedAddress: String
     let location: Location
     let displayName: DisplayName
 }
 
 // MARK: - DisplayName
-struct DisplayName: Decodable {
+struct DisplayName: Decodable, Hashable {
     let text: String
     //let languageCode: LanguageCode
 }
@@ -31,6 +31,6 @@ struct DisplayName: Decodable {
 //}
 
 // MARK: - Location
-struct Location: Decodable {
+struct Location: Decodable, Hashable {
     let latitude, longitude: Double
 }
