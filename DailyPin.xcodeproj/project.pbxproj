@@ -35,6 +35,7 @@
 		CE52CB772AC7B454007AD7F8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB762AC7B454007AD7F8 /* NetworkError.swift */; };
 		CE52CB792AC7D302007AD7F8 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB782AC7D302007AD7F8 /* BaseCollectionViewCell.swift */; };
 		CE52CB7B2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB7A2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift */; };
+		CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */; };
 		CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */; };
 		CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */; };
 		CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC42AC030BF001E7BB0 /* ViewController.swift */; };
@@ -72,6 +73,7 @@
 		CE52CB762AC7B454007AD7F8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		CE52CB782AC7D302007AD7F8 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE52CB7A2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewProtocol.swift; sourceTree = "<group>"; };
 		CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				CE3DF80C2AC2D24100653CE1 /* Extension */,
 				CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */,
+				CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */,
 				CE52CB682AC5ADBB007AD7F8 /* GoogleNetwork.swift in Sources */,
 				CE52CB792AC7D302007AD7F8 /* BaseCollectionViewCell.swift in Sources */,
+				CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */,
 				CE3DF8122AC3300500653CE1 /* CalendarButton.swift in Sources */,
 				CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */,
 				CE3DF81F2AC52C3B00653CE1 /* SearchViewController.swift in Sources */,

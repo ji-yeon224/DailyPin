@@ -11,8 +11,10 @@ final class SearchViewController: BaseViewController {
     
     private let mainView = SearchView()
     private let viewModel = SearchViewModel()
+    var selectLocationHandler: ((PlaceElement) -> Void)?
     
     override func loadView() {
+        mainView.collectionViewDelegate = self
         self.view = mainView
         
     }
@@ -62,6 +64,30 @@ extension SearchViewController: UISearchBarDelegate {
         }
         
         viewModel.callPlaceRequest(query: query, langCode: .ko)
+        view.endEditing(true)
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchBar.text == "" {
+            viewModel.searchResult.value.places.removeAll()
+            updateSnapShot()
+        }
+    }
+    
+}
+
+extension SearchViewController: CollectionViewProtocol {
+    
+    func didSelectItem(item: PlaceElement?) {
+        guard let item = item else {
+            // toast
+            return
+        }
+        
+        selectLocationHandler?(item)
+        dismiss(animated: true)
         
     }
     

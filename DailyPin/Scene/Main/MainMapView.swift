@@ -76,6 +76,17 @@ final class MainMapView: BaseView {
         
     }
     
+    func searchResultAnnotation(center: CLLocationCoordinate2D, title: String) {
+        removeAllAnotation()
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: 500, longitudinalMeters: 500)
+        mapView.setRegion(region, animated: true)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = center
+        annotation.title = title
+        mapView.addAnnotation(annotation)
+    }
+    
     func removeAllAnotation() {
         let annotations = mapView.annotations
         mapView.removeAnnotations(annotations)

@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Place
 struct Place: Decodable, Hashable {
-    let places: [PlaceElement]
+    var places: [PlaceElement]
 }
 
 // MARK: - PlaceElement

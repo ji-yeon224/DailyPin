@@ -39,6 +39,13 @@ final class MainMapViewController: BaseViewController {
     
     @objc private func searchViewTransition() {
         let vc = SearchViewController()
+        
+        vc.selectLocationHandler = { value in
+            print(value)
+            let center = CLLocationCoordinate2D(latitude: value.location.latitude, longitude: value.location.longitude)
+            self.mainView.searchResultAnnotation(center: center, title: value.displayName.text)
+        }
+        
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .crossDissolve

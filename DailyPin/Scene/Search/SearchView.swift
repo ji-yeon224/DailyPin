@@ -9,16 +9,27 @@ import UIKit
 
 final class SearchView: BaseView {
     
-    let searchBar = SearchBar()
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    weak var collectionViewDelegate: CollectionViewProtocol?
+    
+    let searchBar = {
+        let view = UISearchBar()
+        view.placeholder = "장소 검색"
+        return view
+    }()
+    lazy var collectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+        view.keyboardDismissMode = .onDrag
+        view.delegate = self
+        return view
+    }()
     
     var dataSource: UICollectionViewDiffableDataSource<Int, PlaceElement>!
     
     override func configureUI() {
         super.configureUI()
-        searchBar.placeholder = "장소 검색"
+        
         addSubview(collectionView)
-        collectionView.keyboardDismissMode = .onDrag
+        
         configureDataSource()
     }
     
@@ -28,7 +39,7 @@ final class SearchView: BaseView {
         }
     }
     
-    private static func collectionViewLayout() -> UICollectionViewLayout {
+    private func collectionViewLayout() -> UICollectionViewLayout {
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(70))
         
@@ -58,5 +69,17 @@ final class SearchView: BaseView {
         
     }
     
+    
+}
+
+extension SearchView: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else {
+            collectionViewDelegate?.didSelectItem(item: nil)
+            return
+        }
+        collectionViewDelegate?.didSelectItem(item: item)
+    }
     
 }

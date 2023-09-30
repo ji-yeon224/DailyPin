@@ -10,7 +10,7 @@ import Foundation
 final class SearchViewModel {
     
     let searchQuery: Observable<String> = Observable("")
-    let searchResult: Observable<Place> = Observable(Place(places: []))
+    var searchResult: Observable<Place> = Observable(Place(places: []))
     
     func callPlaceRequest(query: String, langCode: LangCode) {
         GoogleNetwork.shared.requestPlace(api: .place(query: query, langCode: langCode)) { response in
