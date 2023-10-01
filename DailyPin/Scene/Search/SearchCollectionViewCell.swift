@@ -18,7 +18,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     private var image = {
         var view = UIImageView()
         view.image = UIImage(systemName: "mappin.circle.fill")
-        view.backgroundColor = Constants.Color.background
+        view.backgroundColor = .clear
         view.tintColor = Constants.Color.mainColor
         
         return view
@@ -28,6 +28,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         let view = UILabel()
         view.font = .systemFont(ofSize: 13)
         view.textColor = Constants.Color.basicText
+        view.numberOfLines = 0
         return view
     }()
     
@@ -35,26 +36,26 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         contentView.addSubview(title)
         contentView.addSubview(image)
         contentView.addSubview(address)
-        
     }
     
     override func setConstraints() {
         image.snp.makeConstraints { make in
             make.leading.equalTo(contentView).offset(10)
-            make.verticalEdges.equalTo(contentView).offset(20)
-            make.height.equalTo(image.snp.width).multipliedBy(1.0)
+            make.centerY.equalTo(contentView)
+            make.size.equalTo(30)
         }
+        
         title.snp.makeConstraints { make in
-            make.top.equalTo(contentView).offset(20)
+            make.top.equalTo(contentView).offset(15)
             make.leading.equalTo(image.snp.trailing).offset(10)
             make.trailing.equalTo(contentView).offset(-20)
-            make.height.equalTo(contentView).multipliedBy(0.5)
         }
         address.snp.makeConstraints { make in
-            make.top.equalTo(title.snp.bottom).offset(-10)
+            make.top.equalTo(title.snp.bottom).offset(8)
             make.leading.equalTo(image.snp.trailing).offset(10)
             make.trailing.equalTo(contentView).offset(-20)
-            make.bottom.equalTo(contentView).offset(20)
+            make.bottom.greaterThanOrEqualTo(contentView).offset(-5)
+            //make.bottom.equalTo(contentView).offset(-10)
         }
     }
     

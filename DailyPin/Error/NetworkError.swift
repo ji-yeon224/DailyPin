@@ -19,9 +19,9 @@ enum NetworkError: Int, Error {
 extension NetworkError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .emptyResult: return "검색 결과가 없습니다."
-        case .wrongRequest: return "잘못된 요청입니다."
-        case .invalidServer: return "네트워크 오류가 발생하였습니다."
+        case .emptyResult: return "network_emptyResult".localized()
+        case .wrongRequest: return "network_wrongREquest".localized()
+        case .invalidServer: return "network_invalidServer".localized()
         }
     }
 }

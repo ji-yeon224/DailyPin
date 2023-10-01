@@ -16,3 +16,8 @@
 
 "toast_errorAlert" = "문제가 발생하였습니다. 다시 시도해주세요.";
 "toast_searchInputError" = "검색어를 입력해주세요.";
+
+// Error
+"network_emptyResult" = "검색 결과가 없습니다.";
+"network_wrongREquest" = "잘못된 요청입니다.";
+"network_invalidServer" = "네트워크 오류가 발생하였습니다.";
