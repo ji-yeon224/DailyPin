@@ -12,7 +12,7 @@ final class MainMapView: BaseView {
     
 
     let mapView = MKMapView()
-    let uiview = {
+    let searchBarView = {
         let view = UIView()
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOffset = .zero
@@ -30,13 +30,10 @@ final class MainMapView: BaseView {
     
     override func configureUI() {
         addSubview(mapView)
-        mapView.addSubview(uiview)
-        uiview.addSubview(searchBar)
+        mapView.addSubview(searchBarView)
+        searchBarView.addSubview(searchBar)
         mapView.addSubview(calendarButton)
         mapView.addSubview(currentLocation)
-        
-        
-        
         
     }
     
@@ -45,13 +42,13 @@ final class MainMapView: BaseView {
         mapView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        uiview.snp.makeConstraints { make in
+        searchBarView.snp.makeConstraints { make in
             make.leading.equalTo(mapView).inset(20)
             make.top.equalTo(safeAreaLayoutGuide).offset(10)
             make.height.equalTo(50)
         }
         searchBar.snp.makeConstraints { make in
-            make.edges.equalTo(uiview)
+            make.edges.equalTo(searchBarView)
         }
         calendarButton.snp.makeConstraints { make in
             make.trailing.equalTo(mapView).inset(20)

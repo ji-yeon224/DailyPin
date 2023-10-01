@@ -25,16 +25,6 @@ final class SearchBar: UISearchBar {
         layer.cornerRadius = 10
         searchTextField.backgroundColor = .clear
         setImage(UIImage(), for: UISearchBar.Icon.search, state: .normal)
-        //setShadow()
     }
-    
-   
-    
-    private func setShadow() {
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = .zero
-        layer.shadowOpacity = 0.3
-        layer.shadowRadius = 1
-    }
-    
+  
 }
