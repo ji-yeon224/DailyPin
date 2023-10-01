@@ -23,11 +23,9 @@ final class SearchBar: UISearchBar {
         clipsToBounds = true
         backgroundColor = Constants.Color.background
         layer.cornerRadius = 10
-        searchTextField.backgroundColor = Constants.Color.background
-        
-        searchTextField.backgroundColor = .white
+        searchTextField.backgroundColor = .clear
         setImage(UIImage(), for: UISearchBar.Icon.search, state: .normal)
-        setShadow()
+        //setShadow()
     }
     
    
