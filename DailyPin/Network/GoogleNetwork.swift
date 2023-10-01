@@ -14,13 +14,16 @@ final class GoogleNetwork {
     private init() { }
     
     
-    func requestPlace(api: Router, completion: @escaping (Result<Place, AFError>) -> Void) {
+    func requestPlace(api: Router, completion: @escaping (Result<Place, NetworkError>) -> Void) {
 
         
         AF.request(api).responseDecodable(of: Place.self) { response in
             switch response.result {
             case .success(let data): completion(.success(data))
-            case .failure(let error): completion(.failure(error))
+            case .failure(_): 
+                let status = response.response?.statusCode ?? 500
+                guard let error = NetworkError(rawValue: status) else { return }
+                completion(.failure(error))
             }
         }
         

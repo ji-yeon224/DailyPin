@@ -25,12 +25,20 @@ final class SearchViewController: BaseViewController {
         mainView.searchBar.becomeFirstResponder()
         mainView.searchBar.delegate = self
         bindData()
+        
+        
     }
     
     private func bindData() {
         
         viewModel.searchResult.bind { data in
             self.updateSnapShot()
+        }
+        
+        viewModel.resultError.bind { data in
+            guard let data = data else { return }
+            self.viewModel.removeSearchResult()
+            self.showToastMessage(message: data)
         }
     }
     
@@ -59,7 +67,7 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text?.trimmingCharacters(in: .whitespaces) else {
-            // error alert
+            showToastMessage(message: "toast_searchInputError".localized())
             return
         }
         
@@ -70,9 +78,8 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if searchBar.text == "" {
-            viewModel.searchResult.value.places.removeAll()
-            updateSnapShot()
+        if searchBar.text == "" && viewModel.searchResult.value.places.count > 0 {
+            viewModel.removeSearchResult()
         }
     }
     
@@ -82,7 +89,7 @@ extension SearchViewController: CollectionViewProtocol {
     
     func didSelectItem(item: PlaceElement?) {
         guard let item = item else {
-            // toast
+            showToastMessage(message: "toast_errorAlert".localized())
             return
         }
         

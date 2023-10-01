@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE32459A2AC8FAF500582FC5 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = CE3245992AC8FAF500582FC5 /* Toast */; };
 		CE3DF7EA2AC1602D00653CE1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CE3DF7E92AC1602D00653CE1 /* .gitignore */; };
 		CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */; };
 		CE3DF7F22AC2A9C500653CE1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE3DF7F42AC2A9C500653CE1 /* Localizable.strings */; };
@@ -89,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE32459A2AC8FAF500582FC5 /* Toast in Frameworks */,
 				CE3DF8222AC53E5700653CE1 /* SnapKit in Frameworks */,
 				CE3DF8252AC53E6300653CE1 /* Alamofire in Frameworks */,
 			);
@@ -253,6 +255,7 @@
 			packageProductDependencies = (
 				CE3DF8212AC53E5700653CE1 /* SnapKit */,
 				CE3DF8242AC53E6300653CE1 /* Alamofire */,
+				CE3245992AC8FAF500582FC5 /* Toast */,
 			);
 			productName = DailyPin;
 			productReference = CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */;
@@ -286,6 +289,7 @@
 			packageReferences = (
 				CE3DF8202AC53E5700653CE1 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				CE3DF8232AC53E6300653CE1 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				CE3245982AC8FAF500582FC5 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = CEB00FBE2AC030BF001E7BB0 /* Products */;
 			projectDirPath = "";
@@ -591,6 +595,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CE3245982AC8FAF500582FC5 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		CE3DF8202AC53E5700653CE1 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -610,6 +622,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CE3245992AC8FAF500582FC5 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE3245982AC8FAF500582FC5 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
 		CE3DF8212AC53E5700653CE1 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE3DF8202AC53E5700653CE1 /* XCRemoteSwiftPackageReference "SnapKit" */;

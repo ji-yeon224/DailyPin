@@ -13,3 +13,6 @@
 "location_denied" = "위치 서비스를 사용할 수 없습니다. 기기의 '설정>개인정보 보호'에서 위치 서비스를 켜주세요.";
 "location_Restricted" = "위치 서비스 사용이 불가능합니다.";
 "locationServicesEnabled" = "위치 서비스가 꺼져있습니다.";
+
+"toast_errorAlert" = "문제가 발생하였습니다. 다시 시도해주세요.";
+"toast_searchInputError" = "검색어를 입력해주세요.";

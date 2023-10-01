@@ -11,6 +11,7 @@ final class SearchViewModel {
     
     let searchQuery: Observable<String> = Observable("")
     var searchResult: Observable<Place> = Observable(Place(places: []))
+    var resultError: Observable<String?> = Observable(nil)
     
     func callPlaceRequest(query: String, langCode: LangCode) {
         GoogleNetwork.shared.requestPlace(api: .place(query: query, langCode: langCode)) { response in
@@ -18,10 +19,14 @@ final class SearchViewModel {
             case .success(let success):
                 self.searchResult.value = success
             case .failure(let failure):
-                print(failure)
+                self.resultError.value = failure.localizedDescription
             }
         }
         
+    }
+    
+    func removeSearchResult() {
+        searchResult.value.places.removeAll()
     }
     
 }
