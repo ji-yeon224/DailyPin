@@ -29,7 +29,7 @@ final class InfoViewController: BaseViewController {
                 self.dismiss(animated: true)
                 return
             }
-            self.mainView.titleLabel.text = data?.displayName.text
+            self.mainView.titleLabel.text = place.displayName.text
         }
         
     }
