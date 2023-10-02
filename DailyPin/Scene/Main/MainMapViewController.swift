@@ -38,14 +38,13 @@ final class MainMapViewController: BaseViewController {
         mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped(_ :)))
         mainView.mapView.addGestureRecognizer(tapGesture)
-//        mainView.searchBar.searchTextField.addTarget(self, action: #selector(searchViewTransition), for: .editingDidBegin)
         mainView.searchButton.addTarget(self, action: #selector(searchViewTransition), for: .touchUpInside)
     }
     
     @objc private func searchViewTransition() {
         let vc = SearchViewController()
-        print(infoViewOn)
         if infoViewOn == true {
+            infoViewOn = false
             self.mainView.fpc.dismiss(animated: true)
         }
         

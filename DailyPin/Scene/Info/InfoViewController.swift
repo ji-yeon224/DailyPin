@@ -30,6 +30,7 @@ final class InfoViewController: BaseViewController {
                 return
             }
             self.mainView.titleLabel.text = place.displayName.text
+            self.mainView.addressLabel.text = place.formattedAddress
         }
         
     }
