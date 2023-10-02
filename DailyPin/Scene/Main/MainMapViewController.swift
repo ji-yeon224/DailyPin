@@ -15,7 +15,7 @@ final class MainMapViewController: BaseViewController {
     private let locationManager = CLLocationManager()
     private let defaultLoaction = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
     
-    
+    private var infoViewOn: Bool = false
     
     override func loadView() {
         self.view = mainView
@@ -38,19 +38,24 @@ final class MainMapViewController: BaseViewController {
         mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped(_ :)))
         mainView.mapView.addGestureRecognizer(tapGesture)
-        mainView.searchBar.searchTextField.addTarget(self, action: #selector(searchViewTransition), for: .editingDidBegin)
+//        mainView.searchBar.searchTextField.addTarget(self, action: #selector(searchViewTransition), for: .editingDidBegin)
+        mainView.searchButton.addTarget(self, action: #selector(searchViewTransition), for: .touchUpInside)
     }
     
     @objc private func searchViewTransition() {
         let vc = SearchViewController()
+        print(infoViewOn)
+        if infoViewOn == true {
+            self.mainView.fpc.dismiss(animated: true)
+        }
         
         vc.selectLocationHandler = { value in
             let center = CLLocationCoordinate2D(latitude: value.location.latitude, longitude: value.location.longitude)
             self.mainView.searchResultAnnotation(center: center, title: value.displayName.text)
             DispatchQueue.main.async {
-                self.mainView.setFloatingPanel()
-                self.mainView.contentVC.viewModel.place.value = value
+                self.mainView.setFloatingPanel(data: value)
                 self.present(self.mainView.fpc, animated: true)
+                self.infoViewOn = true
             }
             
         }

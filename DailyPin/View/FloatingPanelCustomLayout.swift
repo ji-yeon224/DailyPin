@@ -8,7 +8,7 @@
 import Foundation
 import FloatingPanel
 
-class FloatingPanelCustomLayout: FloatingPanelLayout {
+final class FloatingPanelCustomLayout: FloatingPanelLayout {
     
     
     var position: FloatingPanelPosition {

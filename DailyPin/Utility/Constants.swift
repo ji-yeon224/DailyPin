@@ -16,6 +16,7 @@ final class Constants {
         static let mainColor = UIColor(named: "mainColor")
         static let tintColor = UIColor.black
         static let borderColor = UIColor.lightGray
+        static let placeholderColor = UIColor.lightGray
     }
     
     enum Design {

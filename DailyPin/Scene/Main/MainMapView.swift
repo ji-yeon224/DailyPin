@@ -23,6 +23,9 @@ final class MainMapView: BaseView {
         view.layer.shadowRadius = 1
         return view
     }()
+    
+    let searchButton = SearchButton()
+    
     let searchBar = {
         let view = SearchBar()//UISearchBar()
         view.placeholder = "searchPlaceholder".localized()
@@ -33,8 +36,7 @@ final class MainMapView: BaseView {
     
     override func configureUI() {
         addSubview(mapView)
-        mapView.addSubview(searchBarView)
-        searchBarView.addSubview(searchBar)
+        mapView.addSubview(searchButton)
         mapView.addSubview(calendarButton)
         mapView.addSubview(currentLocation)
         
@@ -45,17 +47,14 @@ final class MainMapView: BaseView {
         mapView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        searchBarView.snp.makeConstraints { make in
+        searchButton.snp.makeConstraints { make in
             make.leading.equalTo(mapView).inset(20)
             make.top.equalTo(safeAreaLayoutGuide).offset(10)
             make.height.equalTo(50)
         }
-        searchBar.snp.makeConstraints { make in
-            make.edges.equalTo(searchBarView)
-        }
         calendarButton.snp.makeConstraints { make in
             make.trailing.equalTo(mapView).inset(20)
-            make.leading.equalTo(searchBar.snp.trailing).offset(5)
+            make.leading.equalTo(searchButton.snp.trailing).offset(5)
             make.top.equalTo(safeAreaLayoutGuide).offset(10)
             make.height.equalTo(50)
             make.width.equalTo(calendarButton.snp.height).multipliedBy(1)
@@ -113,8 +112,8 @@ extension MainMapView {
 
 extension MainMapView {
     
-    func setFloatingPanel() {
-        
+    func setFloatingPanel(data: PlaceElement) {
+        contentVC.viewModel.place.value = data
         fpc.set(contentViewController: contentVC)
         fpc.isRemovalInteractionEnabled = true
         fpc.layout = FloatingPanelCustomLayout()

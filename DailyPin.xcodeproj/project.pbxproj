@@ -42,6 +42,7 @@
 		CE9B0E8B2ACA6A0A008A0694 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = CE9B0E8A2ACA6A0A008A0694 /* FloatingPanel */; };
 		CE9B0E8D2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */; };
 		CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */; };
+		CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E942ACA95D7008A0694 /* SearchButton.swift */; };
 		CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */; };
 		CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */; };
 		CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC42AC030BF001E7BB0 /* ViewController.swift */; };
@@ -84,6 +85,7 @@
 		CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewProtocol.swift; sourceTree = "<group>"; };
 		CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelCustomLayout.swift; sourceTree = "<group>"; };
 		CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
+		CE9B0E942ACA95D7008A0694 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				CE3DF8112AC3300500653CE1 /* CalendarButton.swift */,
 				CE3DF8132AC330DB00653CE1 /* MyLocationButton.swift */,
 				CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */,
+				CE9B0E942ACA95D7008A0694 /* SearchButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				CE52CB6A2AC5AE17007AD7F8 /* Place.swift in Sources */,
 				CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */,
 				CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */,
+				CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
