@@ -9,12 +9,13 @@ import UIKit
 import CoreLocation
 import MapKit
 
-
 final class MainMapViewController: BaseViewController {
     
     private let mainView = MainMapView()
     private let locationManager = CLLocationManager()
     private let defaultLoaction = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
+    
+    
     
     override func loadView() {
         self.view = mainView
@@ -29,6 +30,9 @@ final class MainMapViewController: BaseViewController {
         checkDeviceLocationAuthorization()
     }
     
+    
+    
+    
     override func configureUI() {
         super.configureUI()
         mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
@@ -41,9 +45,14 @@ final class MainMapViewController: BaseViewController {
         let vc = SearchViewController()
         
         vc.selectLocationHandler = { value in
-            print(value)
             let center = CLLocationCoordinate2D(latitude: value.location.latitude, longitude: value.location.longitude)
             self.mainView.searchResultAnnotation(center: center, title: value.displayName.text)
+            DispatchQueue.main.async {
+                self.mainView.setFloatingPanel()
+                self.mainView.contentVC.viewModel.place.value = value
+                self.present(self.mainView.fpc, animated: true)
+            }
+            
         }
         
         let nav = UINavigationController(rootViewController: vc)
@@ -53,6 +62,7 @@ final class MainMapViewController: BaseViewController {
         
         
     }
+    
     
     @objc private func currentButtonClicked() {
         checkDeviceLocationAuthorization()

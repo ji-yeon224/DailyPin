@@ -7,9 +7,12 @@
 
 import UIKit
 import MapKit
+import FloatingPanel
 
 final class MainMapView: BaseView {
     
+    let fpc = FloatingPanelController()
+    let contentVC = InfoViewController()
 
     let mapView = MKMapView()
     let searchBarView = {
@@ -65,6 +68,11 @@ final class MainMapView: BaseView {
         
     }
     
+    
+}
+
+// map
+extension MainMapView {
     func setRegion(center: CLLocationCoordinate2D){
         
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
@@ -99,6 +107,18 @@ final class MainMapView: BaseView {
     func removeAllAnotation() {
         let annotations = mapView.annotations
         mapView.removeAnnotations(annotations)
+    }
+    
+}
+
+extension MainMapView {
+    
+    func setFloatingPanel() {
+        
+        fpc.set(contentViewController: contentVC)
+        fpc.isRemovalInteractionEnabled = true
+        fpc.layout = FloatingPanelCustomLayout()
+        
     }
     
 }

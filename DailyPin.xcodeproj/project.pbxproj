@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CE32459A2AC8FAF500582FC5 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = CE3245992AC8FAF500582FC5 /* Toast */; };
+		CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32459B2AC9682200582FC5 /* InfoViewController.swift */; };
+		CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32459E2AC9683300582FC5 /* InfoView.swift */; };
 		CE3DF7EA2AC1602D00653CE1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CE3DF7E92AC1602D00653CE1 /* .gitignore */; };
 		CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */; };
 		CE3DF7F22AC2A9C500653CE1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE3DF7F42AC2A9C500653CE1 /* Localizable.strings */; };
@@ -37,6 +39,9 @@
 		CE52CB792AC7D302007AD7F8 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB782AC7D302007AD7F8 /* BaseCollectionViewCell.swift */; };
 		CE52CB7B2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB7A2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift */; };
 		CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */; };
+		CE9B0E8B2ACA6A0A008A0694 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = CE9B0E8A2ACA6A0A008A0694 /* FloatingPanel */; };
+		CE9B0E8D2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */; };
+		CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */; };
 		CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */; };
 		CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */; };
 		CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC42AC030BF001E7BB0 /* ViewController.swift */; };
@@ -46,6 +51,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE32459B2AC9682200582FC5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		CE32459E2AC9683300582FC5 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		CE3DF7E92AC1602D00653CE1 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE3DF7F32AC2A9C500653CE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -75,6 +82,8 @@
 		CE52CB782AC7D302007AD7F8 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE52CB7A2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewProtocol.swift; sourceTree = "<group>"; };
+		CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelCustomLayout.swift; sourceTree = "<group>"; };
+		CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE32459A2AC8FAF500582FC5 /* Toast in Frameworks */,
+				CE9B0E8B2ACA6A0A008A0694 /* FloatingPanel in Frameworks */,
 				CE3DF8222AC53E5700653CE1 /* SnapKit in Frameworks */,
 				CE3DF8252AC53E6300653CE1 /* Alamofire in Frameworks */,
 			);
@@ -99,6 +109,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE32459D2AC9682700582FC5 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				CE32459B2AC9682200582FC5 /* InfoViewController.swift */,
+				CE32459E2AC9683300582FC5 /* InfoView.swift */,
+				CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
 		CE3DF7EB2AC17CE500653CE1 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +143,7 @@
 		CE3DF7F72AC2B0C500653CE1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				CE32459D2AC9682700582FC5 /* Info */,
 				CE3DF81B2AC52C1F00653CE1 /* Search */,
 				CE3DF7FD2AC2B57700653CE1 /* Main */,
 			);
@@ -135,6 +156,7 @@
 				CE3DF80F2AC3298300653CE1 /* SearchBar.swift */,
 				CE3DF8112AC3300500653CE1 /* CalendarButton.swift */,
 				CE3DF8132AC330DB00653CE1 /* MyLocationButton.swift */,
+				CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -256,6 +278,7 @@
 				CE3DF8212AC53E5700653CE1 /* SnapKit */,
 				CE3DF8242AC53E6300653CE1 /* Alamofire */,
 				CE3245992AC8FAF500582FC5 /* Toast */,
+				CE9B0E8A2ACA6A0A008A0694 /* FloatingPanel */,
 			);
 			productName = DailyPin;
 			productReference = CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */;
@@ -290,6 +313,7 @@
 				CE3DF8202AC53E5700653CE1 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				CE3DF8232AC53E6300653CE1 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CE3245982AC8FAF500582FC5 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				CE9B0E892ACA6A0A008A0694 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 			);
 			productRefGroup = CEB00FBE2AC030BF001E7BB0 /* Products */;
 			projectDirPath = "";
@@ -327,10 +351,13 @@
 				CE3DF81A2AC3B26900653CE1 /* Observable.swift in Sources */,
 				CE3DF8142AC330DB00653CE1 /* MyLocationButton.swift in Sources */,
 				CE52CB752AC71B47007AD7F8 /* InvalidError.swift in Sources */,
+				CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */,
 				CE52CB702AC7186F007AD7F8 /* LangCode.swift in Sources */,
 				CE3DF8012AC2B5B100653CE1 /* MainMapViewController.swift in Sources */,
 				CE3DF80E2AC2D25600653CE1 /* String+Extension.swift in Sources */,
+				CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */,
 				CE52CB772AC7B454007AD7F8 /* NetworkError.swift in Sources */,
+				CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */,
 				CE3DF7FA2AC2B1BB00653CE1 /* BaseViewController.swift in Sources */,
 				CE3DF8102AC3298300653CE1 /* SearchBar.swift in Sources */,
 				CE3DF8032AC2B5BA00653CE1 /* MainMapView.swift in Sources */,
@@ -341,6 +368,7 @@
 				CE3DF8122AC3300500653CE1 /* CalendarButton.swift in Sources */,
 				CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */,
 				CE3DF81F2AC52C3B00653CE1 /* SearchViewController.swift in Sources */,
+				CE9B0E8D2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift in Sources */,
 				CE3DF81D2AC52C2E00653CE1 /* SearchView.swift in Sources */,
 				CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */,
 				CE3DF7FC2AC2B39D00653CE1 /* BaseView.swift in Sources */,
@@ -619,6 +647,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		CE9B0E892ACA6A0A008A0694 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scenee/FloatingPanel.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -636,6 +672,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE3DF8232AC53E6300653CE1 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		CE9B0E8A2ACA6A0A008A0694 /* FloatingPanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE9B0E892ACA6A0A008A0694 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
+			productName = FloatingPanel;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

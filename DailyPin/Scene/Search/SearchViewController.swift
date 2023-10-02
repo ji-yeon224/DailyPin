@@ -94,6 +94,7 @@ extension SearchViewController: CollectionViewProtocol {
         }
         
         selectLocationHandler?(item)
+        
         dismiss(animated: true)
         
     }
