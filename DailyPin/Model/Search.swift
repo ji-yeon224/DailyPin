@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Place
-struct Place: Decodable, Hashable {
+struct Search: Decodable, Hashable {
     var places: [PlaceElement]
 }
 
@@ -21,8 +21,12 @@ struct PlaceElement: Decodable, Hashable {
 
 // MARK: - DisplayName
 struct DisplayName: Decodable, Hashable {
-    let text: String
+    let placeName: String
     //let languageCode: LanguageCode
+    
+    enum CodingKeys: String, CodingKey {
+        case placeName = "text"
+    }
 }
 
 //enum LanguageCode: String, Decodable {

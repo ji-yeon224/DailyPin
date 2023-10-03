@@ -50,7 +50,7 @@ final class MainMapViewController: BaseViewController {
         
         vc.selectLocationHandler = { value in
             let center = CLLocationCoordinate2D(latitude: value.location.latitude, longitude: value.location.longitude)
-            self.mainView.searchResultAnnotation(center: center, title: value.displayName.text)
+            self.mainView.searchResultAnnotation(center: center, title: value.displayName.placeName)
             DispatchQueue.main.async {
                 self.mainView.setFloatingPanel(data: value)
                 self.present(self.mainView.fpc, animated: true)

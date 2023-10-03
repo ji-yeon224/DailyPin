@@ -21,6 +21,14 @@ final class InfoViewController: BaseViewController {
         bindData()
     }
     
+    override func configureUI() {
+        mainView.addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc private func addButtonClicked() {
+        print("add")
+    }
+    
     private func bindData() {
         
         viewModel.place.bind { data in
@@ -29,7 +37,7 @@ final class InfoViewController: BaseViewController {
                 self.dismiss(animated: true)
                 return
             }
-            self.mainView.titleLabel.text = place.displayName.text
+            self.mainView.titleLabel.text = place.displayName.placeName
             self.mainView.addressLabel.text = place.formattedAddress
         }
         

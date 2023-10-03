@@ -10,7 +10,7 @@ import Foundation
 final class SearchViewModel {
     
     let searchQuery: Observable<String> = Observable("")
-    var searchResult: Observable<Place> = Observable(Place(places: []))
+    var searchResult: Observable<Search> = Observable(Search(places: []))
     var resultError: Observable<String?> = Observable(nil)
     
     func callPlaceRequest(query: String, langCode: LangCode) {
