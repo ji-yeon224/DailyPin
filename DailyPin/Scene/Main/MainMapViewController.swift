@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import MapKit
+import RealmSwift
 
 final class MainMapViewController: BaseViewController {
     
@@ -16,6 +17,7 @@ final class MainMapViewController: BaseViewController {
     private let defaultLoaction = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
     
     private var infoViewOn: Bool = false
+    private let repository = PlaceRepository()
     
     override func loadView() {
         self.view = mainView
@@ -28,6 +30,20 @@ final class MainMapViewController: BaseViewController {
         
         locationManager.delegate = self
         checkDeviceLocationAuthorization()
+        setAllAnotation()
+    }
+    
+    private func setAllAnotation() {
+        let allData: Results<Place> = repository.fetch()
+        print(allData)
+        var annotationArray: [MKPointAnnotation] = []
+        for data in allData {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
+            annotationArray.append(annotation)
+        }
+        mainView.setAllAnnotations(locations: annotationArray)
+        
     }
     
     
@@ -76,7 +92,7 @@ final class MainMapViewController: BaseViewController {
         let location: CGPoint = sender.location(in: mainView.mapView)
         let mapPoint: CLLocationCoordinate2D = mainView.mapView.convert(location, toCoordinateFrom: mainView.mapView)
         
-        mainView.setAnnotation(center: mapPoint)
+        //mainView.setAnnotation(center: mapPoint)
         
     }
     

@@ -7,10 +7,12 @@
 
 import UIKit
 
+
 final class InfoViewController: BaseViewController {
     
     private let mainView = InfoView()
     let viewModel = InfoViewModel()
+    private let repository = PlaceRepository()
     
     override func loadView() {
         self.view = mainView
@@ -19,6 +21,7 @@ final class InfoViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindData()
+        
     }
     
     override func configureUI() {
@@ -26,7 +29,32 @@ final class InfoViewController: BaseViewController {
     }
     
     @objc private func addButtonClicked() {
-        print("add")
+        
+        
+        guard let data = viewModel.place.value else {
+            
+            // throw
+            return
+        }
+        
+        // 저장 시 중복 검사 필요
+        if repository.isExistPlace(id: data.id) {
+            return
+        } else {
+            let place = Place(placeId: data.id, address: data.formattedAddress, placeName: data.displayName.placeName, latitude: data.location.latitude, longitude: data.location.longitude)
+            
+            
+            
+            do {
+                try repository.createItem(place)
+                showToastMessage(message: "저장 성공")
+            } catch {
+                showToastMessage(message: "저장 실패")
+            }
+            
+        }
+        
+        
     }
     
     private func bindData() {

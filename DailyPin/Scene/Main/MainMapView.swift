@@ -92,6 +92,13 @@ extension MainMapView {
         
     }
     
+    func setAllAnnotations(locations: [MKPointAnnotation]) {
+        removeAllAnotation()
+        mapView.addAnnotations(locations)
+        
+        
+    }
+    
     func searchResultAnnotation(center: CLLocationCoordinate2D, title: String) {
         removeAllAnotation()
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 500, longitudinalMeters: 500)
