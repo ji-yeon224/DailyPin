@@ -18,6 +18,13 @@ final class MainMapViewController: BaseViewController {
     
     private var infoViewOn: Bool = false
     private let repository = PlaceRepository()
+    private var allData: Results<Place>?
+    
+    private var annotations: [MKPointAnnotation] = [] {
+        didSet {
+            mainView.setAllAnnotations(locations: annotations)
+        }
+    }
     
     override func loadView() {
         self.view = mainView
@@ -30,19 +37,26 @@ final class MainMapViewController: BaseViewController {
         
         locationManager.delegate = self
         checkDeviceLocationAuthorization()
+        mainView.mapView.delegate = self
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        allData = repository.fetch()
         setAllAnotation()
     }
     
     private func setAllAnotation() {
-        let allData: Results<Place> = repository.fetch()
-        print(allData)
-        var annotationArray: [MKPointAnnotation] = []
+        
+        guard let allData = allData else {
+            return
+        }
+        
         for data in allData {
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
-            annotationArray.append(annotation)
+            annotations.append(annotation)
         }
-        mainView.setAllAnnotations(locations: annotationArray)
         
     }
     
@@ -74,7 +88,7 @@ final class MainMapViewController: BaseViewController {
             }
             
         }
-        
+        vc.centerLocation = (mainView.mapView.centerCoordinate.latitude, mainView.mapView.centerCoordinate.longitude)
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .crossDissolve
@@ -175,4 +189,10 @@ extension MainMapViewController: CLLocationManagerDelegate {
         checkDeviceLocationAuthorization()
     }
     
+}
+
+extension MainMapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print(view.annotation?.coordinate)
+    }
 }

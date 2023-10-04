@@ -14,7 +14,11 @@ final class MainMapView: BaseView {
     let fpc = FloatingPanelController()
     let contentVC = InfoViewController()
 
-    let mapView = MKMapView()
+    let mapView = {
+        let view = MKMapView()
+        view.showsCompass = false
+        return view
+    }()
     let searchBarView = {
         let view = UIView()
         view.layer.shadowColor = UIColor.black.cgColor
@@ -41,6 +45,7 @@ final class MainMapView: BaseView {
         mapView.addSubview(currentLocation)
         
     }
+    
     
     override func setConstraints() {
         
@@ -100,7 +105,7 @@ extension MainMapView {
     }
     
     func searchResultAnnotation(center: CLLocationCoordinate2D, title: String) {
-        removeAllAnotation()
+        //removeAllAnotation()
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(region, animated: true)
         
