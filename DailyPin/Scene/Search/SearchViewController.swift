@@ -12,6 +12,7 @@ final class SearchViewController: BaseViewController {
     private let mainView = SearchView()
     private let viewModel = SearchViewModel()
     var selectLocationHandler: ((PlaceElement) -> Void)?
+    var centerLocation: (Double, Double) = (0, 0)
     
     override func loadView() {
         mainView.collectionViewDelegate = self
@@ -26,7 +27,7 @@ final class SearchViewController: BaseViewController {
         mainView.searchBar.delegate = self
         bindData()
         
-        
+       
     }
     
     private func bindData() {
@@ -71,7 +72,8 @@ extension SearchViewController: UISearchBarDelegate {
             return
         }
         
-        viewModel.callPlaceRequest(query: query, langCode: .ko)
+        viewModel.callPlaceRequest(query: query, langCode: .ko, location: centerLocation)
+        print(centerLocation)
         view.endEditing(true)
         
     }

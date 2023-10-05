@@ -56,6 +56,7 @@
 		CEB00FC82AC030BF001E7BB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FC62AC030BF001E7BB0 /* Main.storyboard */; };
 		CEB00FCA2AC030C0001E7BB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FC92AC030C0001E7BB0 /* Assets.xcassets */; };
 		CEB00FCD2AC030C0001E7BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FCB2AC030C0001E7BB0 /* LaunchScreen.storyboard */; };
+		CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390A62ACE840600E4B2AC /* SearchParameter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,7 @@
 		CEB00FC92AC030C0001E7BB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEB00FCC2AC030C0001E7BB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEB00FCE2AC030C0001E7BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEB390A62ACE840600E4B2AC /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 				CE4DF90B2ACBBC2700546526 /* Realm */,
 				CE52CB692AC5AE17007AD7F8 /* Search.swift */,
 				CE52CB6F2AC7186F007AD7F8 /* LangCode.swift */,
+				CEB390A62ACE840600E4B2AC /* SearchParameter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				CE52CB792AC7D302007AD7F8 /* BaseCollectionViewCell.swift in Sources */,
 				CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */,
 				CE3DF8122AC3300500653CE1 /* CalendarButton.swift in Sources */,
+				CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */,
 				CE4DF90D2ACBBC3E00546526 /* Place.swift in Sources */,
 				CE4DF9112ACBC63200546526 /* PlaceRepository.swift in Sources */,
 				CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */,

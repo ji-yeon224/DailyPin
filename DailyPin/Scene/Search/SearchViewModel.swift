@@ -13,10 +13,15 @@ final class SearchViewModel {
     var searchResult: Observable<Search> = Observable(Search(places: []))
     var resultError: Observable<String?> = Observable(nil)
     
-    func callPlaceRequest(query: String, langCode: LangCode) {
-        GoogleNetwork.shared.requestPlace(api: .place(query: query, langCode: langCode)) { response in
+    func callPlaceRequest(query: String, langCode: LangCode, location: (Double, Double)) {
+        GoogleNetwork.shared.requestPlace(api: .place(query: query, langCode: langCode, location: location)) { response in
+            
+            
             switch response {
             case .success(let success):
+                if success.places.count == 0 {
+                    print("결과 없음")
+                }
                 self.searchResult.value = success
             case .failure(let failure):
                 self.resultError.value = failure.localizedDescription

@@ -10,7 +10,7 @@ import Alamofire
 
 enum Router: URLRequestConvertible {
     
-    case place(query: String, langCode: LangCode)
+    case place(query: String, langCode: LangCode, location: (Double, Double))
     case geocoding
     
     private var baseURL: URL {
@@ -26,7 +26,9 @@ enum Router: URLRequestConvertible {
         switch self {
         case .place:
             return ["X-Goog-Api-Key": "\(APIKey.googleKey)",
-                    "X-Goog-FieldMask": "places.id,places.location,places.displayName,places.formattedAddress"]
+                    "X-Goog-FieldMask": "places.id,places.location,places.displayName,places.formattedAddress",
+                    "Content-Type": "application/json"
+            ]
         case .geocoding:
             return ["X-Goog-Api-Key": "\(APIKey.googleKey)"]
         }
@@ -41,10 +43,12 @@ enum Router: URLRequestConvertible {
         }
     }
     
-    private var parameter: [String: String] {
+    private var parameter: Codable {
         switch self {
-        case .place(let query, let langCode):
-            return ["textQuery" : "\(query)", "languageCode": "\(langCode.rawValue)"]
+        case .place(let query, let langCode, let location):
+            return SearchParameter(textQuery: "\(query)",
+                                   languageCode: "\(langCode.rawValue)",
+                                   locationBias: LocationBias(circle: Center(center: DetailLocation(latitude: location.0, longitude: location.1))))
         case .geocoding:
             return ["": ""]
         }
@@ -57,7 +61,19 @@ enum Router: URLRequestConvertible {
         var request = URLRequest(url: url)
         request.headers = header
         request.method = method
-        request = try URLEncodedFormParameterEncoder(destination: .methodDependent).encode(parameter, into: request)
+
+        let encoder = JSONEncoder()
+        let paramters = parameter
+        
+        do {
+            let jsonData = try encoder.encode(paramters)
+        } catch {
+            throw InvalidError.invalidQuery
+        }
+        let jsonData = try? encoder.encode(paramters)
+        
+        
+        request.httpBody = jsonData
         
         return request
     }
