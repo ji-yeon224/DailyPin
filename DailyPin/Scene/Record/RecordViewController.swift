@@ -25,20 +25,20 @@ class RecordViewController: BaseViewController {
         title = location?.displayName.placeName
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedView(_:)))
         view.addGestureRecognizer(tapGestureRecognizer)
-        
+       
     }
+    
+    
     
     override func configureUI() {
         super.configureUI()
         setNavRightButton()
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
-        mainView.datePicker.addTarget(self, action: #selector(dateChange), for: .valueChanged)
+        
     }
     
-    @objc func dateChange() {
-        print(DateFormatter.convertDate(date: mainView.datePicker.date))
-    }
+    
     
     @objc private func tappedView(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
@@ -54,8 +54,15 @@ class RecordViewController: BaseViewController {
     private func setNavRightButton() {
         if editMode { // 편집모드
             setSaveButton()
+            mainView.setPickerView()
+            mainView.titleTextField.isUserInteractionEnabled = true
+            mainView.memoTextView.isEditable = true
+            
         } else {
             setMenuButton()
+            mainView.setDateLabel()
+            mainView.titleTextField.isUserInteractionEnabled = false
+            mainView.memoTextView.isEditable = false
         }
     }
     
@@ -69,7 +76,6 @@ class RecordViewController: BaseViewController {
         var menuItems: [UIAction] = []
         
         let editAction = UIAction(title: Mode.edit.rawValue.localized()) { action in
-            print("edit")
             self.editMode = true
             self.setNavRightButton()
         }

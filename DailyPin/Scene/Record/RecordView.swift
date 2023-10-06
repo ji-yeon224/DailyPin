@@ -64,9 +64,8 @@ class RecordView: BaseView {
         return view
     }()
     
-    let datePicker = UIDatePicker()
     
-    let datePikcerView = {
+    var datePickerView = {
         let view = UIDatePicker()
         view.datePickerMode = .dateAndTime
         view.preferredDatePickerStyle = .compact
@@ -78,14 +77,15 @@ class RecordView: BaseView {
         return view
     }()
     
-//    lazy var dateTextField = {
-//        let view = UITextField()
-//        view.font = .systemFont(ofSize: 13, weight: .bold)
-//        view.contentVerticalAlignment = .center
-//        view.delegate = self
-//        view.tintColor = .clear
-//        return view
-//    }()
+
+    
+    var dateLabel = {
+        let view = UILabel()
+        view.font = .systemFont(ofSize: 13)
+        view.textColor = Constants.Color.basicText
+        
+        return view
+    }()
     
     let bottomView = UIView()
     
@@ -104,10 +104,20 @@ class RecordView: BaseView {
         titleView.addSubview(titleImage)
         titleView.addSubview(titleTextField)
         dateView.addSubview(dateImage)
-        dateView.addSubview(datePikcerView)
+        dateView.addSubview(datePickerView)
+        dateView.addSubview(dateLabel)
         stackViewConfiguration()
         
         memoTextView.addSubview(placeHolderLabel)
+        
+        datePickerView.addTarget(self, action: #selector(dateChange), for: .valueChanged)
+    }
+    
+    @objc func dateChange() {
+        print(DateFormatter.convertDate(date: datePickerView.date))
+        dateLabel.text = DateFormatter.convertDate(date: datePickerView.date)
+        
+        
     }
     
     private func stackViewConfiguration() {
@@ -153,7 +163,13 @@ class RecordView: BaseView {
         }
         
         
-        datePikcerView.snp.makeConstraints { make in
+        datePickerView.snp.makeConstraints { make in
+            make.leading.equalTo(dateImage.snp.trailing).offset(15)
+            make.trailing.equalTo(dateView)
+            make.height.equalTo(dateView)
+        }
+        
+        dateLabel.snp.makeConstraints { make in
             make.leading.equalTo(dateImage.snp.trailing).offset(15)
             make.trailing.equalTo(dateView)
             make.height.equalTo(dateView)
@@ -175,6 +191,7 @@ class RecordView: BaseView {
         titleView.snp.makeConstraints { make in
             make.height.equalTo(44)
         }
+        
         dateView.snp.makeConstraints { make in
             make.height.equalTo(44)
         }
@@ -188,7 +205,16 @@ class RecordView: BaseView {
     
    
     
+    func setDateLabel() {
+        dateLabel.isHidden = false
+        datePickerView.isHidden = true
+        
+    }
     
+    func setPickerView() {
+        dateLabel.isHidden = true
+        datePickerView.isHidden = false
+    }
    
     
     
