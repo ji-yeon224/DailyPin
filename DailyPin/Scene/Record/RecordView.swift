@@ -52,6 +52,7 @@ class RecordView: BaseView {
     var titleTextField = {
         let view = UITextField()
         view.placeholder = "record_writeTitle".localized()
+        view.tintColor = Constants.Color.mainColor
         view.contentVerticalAlignment = .center
         return view
     }()
@@ -63,12 +64,28 @@ class RecordView: BaseView {
         return view
     }()
     
-    var dateTextField = {
-        let view = UITextField()
-        view.placeholder = "날짜"
-        view.contentVerticalAlignment = .center
+    let datePicker = UIDatePicker()
+    
+    let datePikcerView = {
+        let view = UIDatePicker()
+        view.datePickerMode = .dateAndTime
+        view.preferredDatePickerStyle = .compact
+        view.backgroundColor = Constants.Color.background
+        view.locale = Locale(identifier: "ko-KR")
+        view.tintColor = Constants.Color.mainColor
+        
+        
         return view
     }()
+    
+//    lazy var dateTextField = {
+//        let view = UITextField()
+//        view.font = .systemFont(ofSize: 13, weight: .bold)
+//        view.contentVerticalAlignment = .center
+//        view.delegate = self
+//        view.tintColor = .clear
+//        return view
+//    }()
     
     let bottomView = UIView()
     
@@ -87,11 +104,10 @@ class RecordView: BaseView {
         titleView.addSubview(titleImage)
         titleView.addSubview(titleTextField)
         dateView.addSubview(dateImage)
-        dateView.addSubview(dateTextField)
+        dateView.addSubview(datePikcerView)
         stackViewConfiguration()
         
         memoTextView.addSubview(placeHolderLabel)
-        
     }
     
     private func stackViewConfiguration() {
@@ -137,7 +153,7 @@ class RecordView: BaseView {
         }
         
         
-        dateTextField.snp.makeConstraints { make in
+        datePikcerView.snp.makeConstraints { make in
             make.leading.equalTo(dateImage.snp.trailing).offset(15)
             make.trailing.equalTo(dateView)
             make.height.equalTo(dateView)
@@ -170,6 +186,10 @@ class RecordView: BaseView {
     }
     
     
+   
+    
+    
+   
     
     
 }
@@ -199,6 +219,14 @@ extension RecordView: UITextViewDelegate {
         }
         
         scrollView.updateContentView()
+    }
+    
+}
+
+extension RecordView: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return false
     }
     
 }

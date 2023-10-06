@@ -33,6 +33,11 @@ class RecordViewController: BaseViewController {
         setNavRightButton()
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
+        mainView.datePicker.addTarget(self, action: #selector(dateChange), for: .valueChanged)
+    }
+    
+    @objc func dateChange() {
+        print(DateFormatter.convertDate(date: mainView.datePicker.date))
     }
     
     @objc private func tappedView(_ sender: UITapGestureRecognizer) {

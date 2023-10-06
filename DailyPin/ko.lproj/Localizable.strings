@@ -26,6 +26,6 @@
 "record_writeRecord" = "장소 기록을 남겨보세요!";
 "record_writeTitle" = "제목을 입력하세요.";
 
-"saveButton" = "저장하기";
+"saveButton" = "저장";
 "editButton" = "수정하기";
 "deleteButton" = "삭제하기";
