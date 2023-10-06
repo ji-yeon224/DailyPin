@@ -13,6 +13,8 @@ import RealmSwift
 final class MainMapViewController: BaseViewController {
     
     private let mainView = MainMapView()
+    //private let viewModel = MainMapViewModel()
+    
     private let locationManager = CLLocationManager()
     private let defaultLoaction = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
     
@@ -44,6 +46,7 @@ final class MainMapViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         allData = repository.fetch()
         setAllAnotation()
+        //viewModel.setAllAnotation(allData)
     }
     
     private func setAllAnotation() {
@@ -149,7 +152,7 @@ extension MainMapViewController {
         case .authorizedAlways: break
         case .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
-        @unknown default: print("default")
+        @unknown default: break
         }
     }
     

@@ -73,7 +73,6 @@ extension SearchViewController: UISearchBarDelegate {
         }
         
         viewModel.callPlaceRequest(query: query, langCode: .ko, location: centerLocation)
-        print(centerLocation)
         view.endEditing(true)
         
     }

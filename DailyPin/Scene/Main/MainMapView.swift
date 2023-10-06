@@ -98,7 +98,7 @@ extension MainMapView {
     }
     
     func setAllAnnotations(locations: [MKPointAnnotation]) {
-        removeAllAnotation()
+        //removeAllAnotation()
         mapView.addAnnotations(locations)
         
         

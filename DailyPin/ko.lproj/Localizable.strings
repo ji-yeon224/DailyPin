@@ -21,3 +21,11 @@
 "network_emptyResult" = "검색 결과가 없습니다.";
 "network_wrongREquest" = "잘못된 요청입니다.";
 "network_invalidServer" = "네트워크 오류가 발생하였습니다.";
+
+// record view - placeholder
+"record_writeRecord" = "장소 기록을 남겨보세요!";
+"record_writeTitle" = "제목을 입력하세요.";
+
+"saveButton" = "저장하기";
+"editButton" = "수정하기";
+"deleteButton" = "삭제하기";
