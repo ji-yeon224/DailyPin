@@ -24,6 +24,8 @@ class MemoTextView: UITextView {
         layer.cornerRadius = 3
         layer.borderWidth = 1
         layer.borderColor = Constants.Color.mainColor?.cgColor
+        textColor = Constants.Color.basicText
+        backgroundColor = Constants.Color.background
         font = .systemFont(ofSize: 15)
         textContainerInset = UIEdgeInsets(top: 18, left: 18, bottom: 18, right: 18)
         tintColor = Constants.Color.mainColor

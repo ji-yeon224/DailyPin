@@ -52,6 +52,7 @@ class RecordView: BaseView {
     var titleTextField = {
         let view = UITextField()
         view.placeholder = "record_writeTitle".localized()
+        view.textColor = Constants.Color.basicText
         view.tintColor = Constants.Color.mainColor
         view.contentVerticalAlignment = .center
         return view

@@ -33,6 +33,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     }()
     
     override func configureUI() {
+        super.configureUI()
         contentView.addSubview(title)
         contentView.addSubview(image)
         contentView.addSubview(address)

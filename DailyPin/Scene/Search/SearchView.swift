@@ -14,11 +14,16 @@ final class SearchView: BaseView {
     let searchBar = {
         let view = UISearchBar()
         view.placeholder = "장소 검색"
+        view.backgroundColor = Constants.Color.background
+        view.searchTextField.backgroundColor = .clear
+        view.searchTextField.textColor = Constants.Color.basicText
+        view.tintColor = Constants.Color.mainColor
         return view
     }()
     lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         view.keyboardDismissMode = .onDrag
+        view.backgroundColor = Constants.Color.background
         view.delegate = self
         return view
     }()

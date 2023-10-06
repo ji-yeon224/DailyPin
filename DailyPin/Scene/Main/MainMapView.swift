@@ -30,11 +30,6 @@ final class MainMapView: BaseView {
     
     let searchButton = SearchButton()
     
-    let searchBar = {
-        let view = SearchBar()//UISearchBar()
-        view.placeholder = "searchPlaceholder".localized()
-        return view
-    }()
     let calendarButton = CalendarButton()
     let currentLocation = MyLocationButton()
     
