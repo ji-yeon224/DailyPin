@@ -9,6 +9,7 @@ import Foundation
 import RealmSwift
 
 final class PlaceRepository {
+  
     
     private let realm = try! Realm()
     
@@ -28,7 +29,7 @@ final class PlaceRepository {
         }
     }
     
-    func fetchOneItemByID(_ id: String) throws -> Place {
+    func searchItemByID(_ id: String) throws -> Place {
         guard let data = realm.object(ofType: Place.self, forPrimaryKey: id) else {
             throw DataBaseError.searchError
         }
@@ -37,15 +38,45 @@ final class PlaceRepository {
     
     func isExistPlace(id: String) -> Bool {
         do {
-            let _ = try fetchOneItemByID(id)
+            let _ = try searchItemByID(id)
         } catch {
             return false
         }
         return true
     }
     
+    func updateRecordList(record: Record, place: Place) throws {
+        do {
+            try realm.write {
+                place.recordList.append(record)
+            }
+        } catch {
+            throw DataBaseError.updateError
+        }
+    }
+    
+//    func isExistPlace(id: String) -> Place? {
+//        do {
+//            let place = try searchItemByID(id)
+//            return place
+//        } catch {
+//            return nil
+//        }
+//
+//    }
+    
     func getFileLocation() {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
+    }
+    
+    func deleteItem(_ item: Place) throws {
+        do {
+            try realm.write {
+                realm.delete(item)
+            }
+        } catch {
+            throw DataBaseError.deleteError
+        }
     }
     
 }

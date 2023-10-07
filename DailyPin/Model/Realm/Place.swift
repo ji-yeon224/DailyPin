@@ -14,6 +14,7 @@ final class Place: Object {
     @Persisted var placeName: String
     @Persisted var latitude: Double
     @Persisted var longitude: Double
+    @Persisted var recordList: List<Record>
     
     convenience init(placeId: String, address: String, placeName: String, latitude: Double, longitude: Double) {
         self.init()

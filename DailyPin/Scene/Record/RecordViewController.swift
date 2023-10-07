@@ -9,9 +9,13 @@ import UIKit
 
 
 
-class RecordViewController: BaseViewController {
+final class RecordViewController: BaseViewController {
     
     private let mainView = RecordView()
+    private let recordRepository = RecordRepository()
+    private let placeRepository = PlaceRepository()
+    private let viewModel = RecordViewModel()
+    
     var location: PlaceElement?
     
     var editMode: Bool = false // 읽기모드
@@ -22,10 +26,22 @@ class RecordViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = location?.displayName.placeName
+        
+        guard let location = location else {
+            dismiss(animated: true)
+            return
+        }
+        
+        title = location.displayName.placeName
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedView(_:)))
         view.addGestureRecognizer(tapGestureRecognizer)
        
+    }
+    
+    private func bindData() {
+        
+        
+        
     }
     
     
@@ -48,7 +64,80 @@ class RecordViewController: BaseViewController {
         
         editMode.toggle()
         setNavRightButton()
+        saveRecord()
+       
+    }
+    
+    private func saveRecord() {
         
+        guard let data = location else {
+            
+            // throw
+            return
+        }
+        var place: Place
+        if placeRepository.isExistPlace(id: data.id) {
+            do {
+                place = try placeRepository.searchItemByID(data.id)
+            } catch let error {
+                showOKAlert(title: "", message: error.localizedDescription) { }
+                return
+            }
+        } else {
+            do {
+                place = try savePlace()
+                
+            } catch let error {
+                showOKAlert(title: "", message: error.localizedDescription) { }
+                return
+            }
+            
+        }
+        
+        guard let title = mainView.titleTextField.text else {
+            showToastMessage(message: "제목을 입력해주세요!")
+            return
+        }
+        
+        let record = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+        
+        do {
+            
+            try placeRepository.updateRecordList(record: record, place: place)
+        } catch let error {
+            showOKAlert(title: "", message: error.localizedDescription) { }
+        }
+        
+        do {
+            try recordRepository.findPlace(record)
+        } catch {
+            
+            return
+        }
+        
+        
+        recordRepository.getFileLocation()
+    }
+    
+    private func savePlace() throws -> Place {
+        guard let data = location else {
+            
+            // throw
+            throw InvalidError.noExistData
+        }
+        
+        let place = Place(placeId: data.id, address: data.formattedAddress, placeName: data.displayName.placeName, latitude: data.location.latitude, longitude: data.location.longitude)
+        
+        
+        
+        do {
+            try placeRepository.createItem(place)
+            showToastMessage(message: "저장 성공")
+            return place
+        } catch {
+            throw DataBaseError.createError
+            //showToastMessage(message: "저장 실패")
+        }
     }
     
     private func setNavRightButton() {
@@ -58,11 +147,13 @@ class RecordViewController: BaseViewController {
             mainView.titleTextField.isUserInteractionEnabled = true
             mainView.memoTextView.isEditable = true
             
-        } else {
+        } else { // 저장 버튼 클릭
+            
             setMenuButton()
             mainView.setDateLabel()
             mainView.titleTextField.isUserInteractionEnabled = false
             mainView.memoTextView.isEditable = false
+            
         }
     }
     

@@ -12,6 +12,7 @@ enum InvalidError {
     case invalidInput
     case emptyQuery
     case invalidQuery
+    case noExistData
 }
 
 extension InvalidError: LocalizedError {
@@ -23,6 +24,8 @@ extension InvalidError: LocalizedError {
             return "검색어를 입력하세요."
         case .invalidQuery:
             return "검색 요청에 문제가 발생하였습니다."
+        case .noExistData:
+            return "데이터에 문제가 발생하였습니다."
         }
     
     }

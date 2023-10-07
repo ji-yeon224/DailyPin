@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecordView: BaseView {
+final class RecordView: BaseView {
     
     private let scrollView = {
         let view = UIScrollView()
@@ -88,7 +88,7 @@ class RecordView: BaseView {
         return view
     }()
     
-    let bottomView = UIView()
+    private let bottomView = UIView()
     
     lazy var memoTextView = {
         let view = MemoTextView()
@@ -114,7 +114,7 @@ class RecordView: BaseView {
         datePickerView.addTarget(self, action: #selector(dateChange), for: .valueChanged)
     }
     
-    @objc func dateChange() {
+    @objc private func dateChange() {
         print(DateFormatter.convertDate(date: datePickerView.date))
         dateLabel.text = DateFormatter.convertDate(date: datePickerView.date)
         
@@ -187,7 +187,7 @@ class RecordView: BaseView {
         
     }
     
-    func setStackViewConstraints() {
+    private func setStackViewConstraints() {
         
         titleView.snp.makeConstraints { make in
             make.height.equalTo(44)
