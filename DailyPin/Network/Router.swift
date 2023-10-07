@@ -65,12 +65,12 @@ enum Router: URLRequestConvertible {
         let encoder = JSONEncoder()
         let paramters = parameter
         
+        let jsonData: Data
         do {
-            let jsonData = try encoder.encode(paramters)
+            jsonData = try encoder.encode(paramters)
         } catch {
             throw InvalidError.invalidQuery
         }
-        let jsonData = try? encoder.encode(paramters)
         
         
         request.httpBody = jsonData
