@@ -65,6 +65,7 @@
 		CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390BB2ACFF89300E4B2AC /* Record.swift */; };
 		CEB5ECFA2AD0595E00BC6143 /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */; };
 		CEB5ECFE2AD05F1100BC6143 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5ECFD2AD05F1100BC6143 /* RecordViewModel.swift */; };
+		CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +125,7 @@
 		CEB390BB2ACFF89300E4B2AC /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepository.swift; sourceTree = "<group>"; };
 		CEB5ECFD2AD05F1100BC6143 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				CE32459B2AC9682200582FC5 /* InfoViewController.swift */,
 				CE32459E2AC9683300582FC5 /* InfoView.swift */,
 				CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */,
+				CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				CE3DF80E2AC2D25600653CE1 /* String+Extension.swift in Sources */,
 				CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */,
 				CEB390AC2ACEF50800E4B2AC /* RecordView.swift in Sources */,
+				CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */,
 				CE52CB772AC7B454007AD7F8 /* NetworkError.swift in Sources */,
 				CEB390BA2ACFDF4C00E4B2AC /* DateFormatter.swift in Sources */,
 				CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */,

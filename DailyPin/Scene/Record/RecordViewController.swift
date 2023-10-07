@@ -35,7 +35,7 @@ final class RecordViewController: BaseViewController {
         title = location.displayName.placeName
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedView(_:)))
         view.addGestureRecognizer(tapGestureRecognizer)
-       
+        
     }
     
     private func bindData() {
@@ -71,8 +71,7 @@ final class RecordViewController: BaseViewController {
     private func saveRecord() {
         
         guard let data = location else {
-            
-            // throw
+            showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
             return
         }
         var place: Place
@@ -106,23 +105,14 @@ final class RecordViewController: BaseViewController {
             try placeRepository.updateRecordList(record: record, place: place)
         } catch let error {
             showOKAlert(title: "", message: error.localizedDescription) { }
-        }
-        
-        do {
-            try recordRepository.findPlace(record)
-        } catch {
-            
             return
         }
         
-        
-        recordRepository.getFileLocation()
     }
     
     private func savePlace() throws -> Place {
         guard let data = location else {
             
-            // throw
             throw InvalidError.noExistData
         }
         
@@ -136,10 +126,16 @@ final class RecordViewController: BaseViewController {
             return place
         } catch {
             throw DataBaseError.createError
-            //showToastMessage(message: "저장 실패")
         }
     }
     
+    
+    
+}
+
+
+// nav
+extension RecordViewController {
     private func setNavRightButton() {
         if editMode { // 편집모드
             setSaveButton()
