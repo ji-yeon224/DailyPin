@@ -14,6 +14,7 @@ final class Constants {
         static let background = UIColor(named: "backGroundColor")
         static let basicText = UIColor(named: "textColor")
         static let mainColor = UIColor(named: "mainColor")
+        static let pinColor = UIColor(named: "PinColor")
         static let tintColor = UIColor.black
         static let subTextColor = UIColor.lightGray
         static let borderColor = UIColor.lightGray

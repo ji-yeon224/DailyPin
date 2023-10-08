@@ -23,9 +23,9 @@ final class MainMapViewController: BaseViewController {
     private let repository = PlaceRepository()
     private var allData: Results<Place>?
     
-    private var annotations: [MKPointAnnotation] = [] {
+    private var annotations: [CustomAnnotation] = [] {
         didSet {
-            mainView.setAllAnnotations(locations: annotations)
+            mainView.setAllCustomAnnotation(annotation: annotations)
         }
     }
     
@@ -41,13 +41,12 @@ final class MainMapViewController: BaseViewController {
         locationManager.delegate = self
         checkDeviceLocationAuthorization()
         mainView.mapView.delegate = self
-        
+        mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         allData = repository.fetch()
         setAllAnotation()
-        //viewModel.setAllAnotation(allData)
     }
     
     private func setAllAnotation() {
@@ -57,9 +56,9 @@ final class MainMapViewController: BaseViewController {
         }
         
         for data in allData {
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
-            annotations.append(annotation)
+            let coord = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
+            let customAnnotation = CustomAnnotation(placeID: data.placeId, coordinate: coord)
+            annotations.append(customAnnotation)
         }
         
     }
@@ -70,8 +69,7 @@ final class MainMapViewController: BaseViewController {
     override func configureUI() {
         super.configureUI()
         mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped(_ :)))
-        mainView.mapView.addGestureRecognizer(tapGesture)
+        
         mainView.searchButton.addTarget(self, action: #selector(searchViewTransition), for: .touchUpInside)
     }
     
@@ -106,13 +104,7 @@ final class MainMapViewController: BaseViewController {
         checkDeviceLocationAuthorization()
     }
     
-    @objc private func mapViewTapped(_ sender: UITapGestureRecognizer) {
-        let location: CGPoint = sender.location(in: mainView.mapView)
-        let mapPoint: CLLocationCoordinate2D = mainView.mapView.convert(location, toCoordinateFrom: mainView.mapView)
-        
-        //mainView.setAnnotation(center: mapPoint)
-        
-    }
+    
     
     
 }
@@ -197,6 +189,33 @@ extension MainMapViewController: CLLocationManagerDelegate {
 
 extension MainMapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print(view.annotation?.coordinate)
+        //print(view.annotation?.coordinate)
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotation = annotation as? CustomAnnotation else {
+            return nil
+            
+        }
+        
+        let annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier)
+        
+        if annotationView == nil {
+            annotationView?.canShowCallout = false
+            annotationView?.contentMode = .scaleAspectFit
+        } else {
+            annotationView?.annotation = annotation
+        }
+        
+        let size = CGSize(width: 30, height: 30)
+        UIGraphicsBeginImageContext(size)
+        var anoImage = Image.ImageName.star?.withTintColor(Constants.Color.pinColor ?? .systemRed)
+
+        anoImage?.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+                annotationView?.image = resizedImage
+                
+        return annotationView
+    }
+    
 }

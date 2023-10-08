@@ -99,6 +99,10 @@ extension MainMapView {
         
     }
     
+    func setAllCustomAnnotation(annotation: [CustomAnnotation]) {
+        mapView.addAnnotations(annotation)
+    }
+    
     func searchResultAnnotation(center: CLLocationCoordinate2D, title: String) {
         //removeAllAnotation()
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 500, longitudinalMeters: 500)
@@ -114,6 +118,8 @@ extension MainMapView {
         let annotations = mapView.annotations
         mapView.removeAnnotations(annotations)
     }
+    
+   
     
 }
 
