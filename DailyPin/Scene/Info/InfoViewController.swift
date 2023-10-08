@@ -21,11 +21,25 @@ final class InfoViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindData()
-        mainView.updateSnapShot()
+        //updateSnapShot()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.recordList.value = nil
+        do {
+            try viewModel.getRecordList()
+        } catch { 
+            return
+        }
     }
     
     override func configureUI() {
         mainView.addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
+        
+        
+        
     }
     
     @objc private func addButtonClicked() {
@@ -55,10 +69,33 @@ final class InfoViewController: BaseViewController {
             self.mainView.addressLabel.text = place.formattedAddress
         }
         
+        viewModel.recordList.bind { data in
+            guard let records = data else {
+                self.mainView.configureHidden(collView: true)
+                return
+            }
+            
+            
+            self.mainView.configureHidden(collView: false)
+            self.updateSnapShot()
+            
+        }
+        
     }
     
     
-   
+    func updateSnapShot() {
+        var snapShot = NSDiffableDataSourceSnapshot<Int, Record>()
+        snapShot.appendSections([0])
+        
+        guard let records = viewModel.recordList.value else {
+            mainView.configureHidden(collView: true)
+            return
+        }
+        mainView.configureHidden(collView: false)
+        snapShot.appendItems(Array(records))
+        mainView.dataSource.apply(snapShot)
+    }
     
     
 }

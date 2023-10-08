@@ -55,15 +55,18 @@ final class PlaceRepository {
         }
     }
     
-//    func isExistPlace(id: String) -> Place? {
-//        do {
-//            let place = try searchItemByID(id)
-//            return place
-//        } catch {
-//            return nil
-//        }
-//
-//    }
+    func getRecordList(id: String) throws -> Results<Record> {
+        
+        let place: Place
+        do {
+            place = try searchItemByID(id)
+        } catch {
+            throw DataBaseError.searchError
+        }
+        
+        return place.recordList.sorted(byKeyPath: "date", ascending: false)
+        
+    }
     
     func getFileLocation() {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
@@ -72,6 +75,7 @@ final class PlaceRepository {
     func deleteItem(_ item: Place) throws {
         do {
             try realm.write {
+                realm.delete(item.recordList)
                 realm.delete(item)
             }
         } catch {

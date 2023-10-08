@@ -42,15 +42,15 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
         
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView).offset(10)
-            make.horizontalEdges.equalTo(contentView).offset(10)
+            make.horizontalEdges.equalTo(contentView).inset(10)
             make.height.equalTo(contentView).multipliedBy(0.2)
             
         }
         
         titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(contentView).offset(10)
-            make.top.equalTo(dateLabel.snp.bottom).offset(-10)
-            make.bottom.greaterThanOrEqualTo(contentView).offset(10)
+            make.top.equalTo(dateLabel.snp.bottom).offset(10)
+            make.bottom.greaterThanOrEqualTo(contentView).offset(-10)
             
         }
         

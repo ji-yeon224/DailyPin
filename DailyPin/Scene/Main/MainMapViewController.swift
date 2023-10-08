@@ -14,6 +14,7 @@ final class MainMapViewController: BaseViewController {
     
     private let mainView = MainMapView()
     //private let viewModel = MainMapViewModel()
+    private let placeRepository = PlaceRepository()
     
     private let locationManager = CLLocationManager()
     private let defaultLoaction = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)

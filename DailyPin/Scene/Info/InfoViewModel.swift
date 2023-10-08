@@ -14,9 +14,21 @@ final class InfoViewModel {
     
     let placeName: Observable<String?> = Observable(nil)
     let place: Observable<PlaceElement?> = Observable(nil)
+    let recordList: Observable<Results<Record>?> = Observable(nil)
     
-    
-    
+    func getRecordList() throws {
+        
+        guard let place = place.value else {
+            throw InvalidError.noExistData
+        }
+        do {
+            recordList.value = try placeRepository.getRecordList(id: place.id)
+        } catch {
+            recordList.value = nil
+            return
+        }
+        
+    }
     
     
 }

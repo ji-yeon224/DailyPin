@@ -123,8 +123,9 @@ extension MainMapView {
         contentVC.viewModel.place.value = data
         fpc.set(contentViewController: contentVC)
         fpc.isRemovalInteractionEnabled = true
+        fpc.view.frame = contentVC.view.bounds
         fpc.layout = FloatingPanelCustomLayout()
-        
+        fpc.contentMode = .fitToBounds
     }
     
 }

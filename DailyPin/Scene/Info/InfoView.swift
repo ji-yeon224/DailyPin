@@ -7,16 +7,11 @@
 
 import UIKit
 
-struct Test: Hashable {
-    var title: String
-    var date: String
-    
-}
+
 
 final class InfoView: BaseView {
     
-    var testData = [Test(title: "aa", date: "11"), Test(title: "bb", date: "22")]
-    var dataSource: UICollectionViewDiffableDataSource<Int, Test>!
+    var dataSource: UICollectionViewDiffableDataSource<Int, Record>!
     
     private let uiView = UIView()
     
@@ -33,6 +28,7 @@ final class InfoView: BaseView {
         view.textColor = Constants.Color.subTextColor
         view.numberOfLines = 1
         view.font = .systemFont(ofSize: 13)
+        
         return view
     }()
 
@@ -42,8 +38,22 @@ final class InfoView: BaseView {
     lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         view.backgroundColor = Constants.Color.background
-        
+        view.isHidden = true
 
+        return view
+    }()
+    
+    
+    
+    let noDataLabel = {
+        let view = UILabel()
+        view.text = "아직 등록된 기록이 없습니다.\n 기록을 등록해보세요!"
+        view.backgroundColor = .clear
+        view.textColor = Constants.Color.subTextColor
+        view.font = .systemFont(ofSize: 18, weight: .bold)
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        view.isHidden = false 
         return view
     }()
     
@@ -54,41 +64,47 @@ final class InfoView: BaseView {
         uiView.addSubview(addButton)
         uiView.addSubview(addressLabel)
         addSubview(collectionView)
+        addSubview(noDataLabel)
         configureDataSource()
     }
     
     override func setConstraints() {
         uiView.backgroundColor = Constants.Color.background
         uiView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
+            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(5)
             make.height.equalTo(100)
         }
         
         setUIVIewContentsConstraints()
         
         collectionView.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
+            make.horizontalEdges.equalToSuperview().inset(20)
             make.top.equalTo(uiView.snp.bottom).offset(50)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
         
-        
+        noDataLabel.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(30)
+            make.top.equalTo(uiView.snp.bottom).offset(30)
+            make.bottom.greaterThanOrEqualTo(safeAreaLayoutGuide).offset(30)
+        }
         
     }
     
     private func setUIVIewContentsConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(uiView).offset(35)
-            make.leading.equalTo(uiView).inset(16)
+            make.leading.equalTo(uiView).offset(16)
+            make.trailing.equalTo(addButton.snp.leading).offset(-10)
             make.height.equalTo(40)
             
         }
         
         addButton.snp.makeConstraints { make in
             make.top.trailing.equalTo(uiView).inset(35)
-            make.leading.equalTo(titleLabel.snp.trailing).offset(16)
+            //make.leading.equalTo(titleLabel.snp.trailing)
             make.width.equalTo(uiView.snp.width).multipliedBy(0.08)
-            make.height.equalTo(addButton.snp.width).multipliedBy(1)
+            make.height.equalTo(addButton.snp.width)
         }
         
         addressLabel.snp.makeConstraints { make in
@@ -124,9 +140,10 @@ extension InfoView {
     
     
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<InfoCollectionViewCell, Test> { cell, indexPath, itemIdentifier in
+        let cellRegistration = UICollectionView.CellRegistration<InfoCollectionViewCell, Record> { cell, indexPath, itemIdentifier in
             cell.titleLabel.text = itemIdentifier.title
-            cell.dateLabel.text = itemIdentifier.date
+            cell.dateLabel.text = DateFormatter.convertDate(date: itemIdentifier.date)
+            
             
         }
         
@@ -136,10 +153,11 @@ extension InfoView {
         })
     }
     
-    func updateSnapShot() {
-        var snapShot = NSDiffableDataSourceSnapshot<Int, Test>()
-        snapShot.appendSections([0])
-        snapShot.appendItems(testData)
-        dataSource.apply(snapShot)
+    func configureHidden(collView: Bool) {
+        collectionView.isHidden = collView
+        noDataLabel.isHidden = !collView
+        
     }
+    
+    
 }
