@@ -29,7 +29,7 @@ final class RecordView: BaseView {
     
     
     
-    private let placeHolderLabel = {
+    let placeHolderLabel = {
         let view = UILabel()
         view.textColor = Constants.Color.placeholderColor
         view.font = .systemFont(ofSize: 15)
@@ -215,6 +215,7 @@ final class RecordView: BaseView {
     func setPickerView() {
         dateLabel.isHidden = true
         datePickerView.isHidden = false
+        
     }
    
     

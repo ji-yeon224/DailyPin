@@ -12,6 +12,7 @@ import UIKit
 final class InfoView: BaseView {
     
     var dataSource: UICollectionViewDiffableDataSource<Int, Record>!
+    weak var collectionViewDelegate: InfoCollectionViewProtocol?
     
     private let uiView = UIView()
     
@@ -39,7 +40,7 @@ final class InfoView: BaseView {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         view.backgroundColor = Constants.Color.background
         view.isHidden = true
-
+        view.delegate = self 
         return view
     }()
     
@@ -159,5 +160,19 @@ extension InfoView {
         
     }
     
+    
+}
+
+extension InfoView: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else {
+            collectionViewDelegate?.didSelectRecordItem(item: nil)
+            return
+        }
+        
+        collectionViewDelegate?.didSelectRecordItem(item: item)
+        
+    }
     
 }

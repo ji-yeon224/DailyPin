@@ -13,6 +13,7 @@ final class Image {
     enum ImageName {
         static let star = UIImage(systemName: "star.circle.fill")
         static let mappin = UIImage(systemName: "mappin.circle.fill")
+        static let selectPin = UIImage(named: "baseline_place_white_24pt")
     }
     
 }

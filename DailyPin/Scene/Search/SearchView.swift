@@ -82,10 +82,10 @@ extension SearchView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath) else {
-            collectionViewDelegate?.didSelectItem(item: nil)
+            collectionViewDelegate?.didSelectPlaceItem(item: nil)
             return
         }
-        collectionViewDelegate?.didSelectItem(item: item)
+        collectionViewDelegate?.didSelectPlaceItem(item: item)
     }
     
 }

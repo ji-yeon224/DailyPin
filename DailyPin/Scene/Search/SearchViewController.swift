@@ -88,7 +88,7 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: CollectionViewProtocol {
     
-    func didSelectItem(item: PlaceElement?) {
+    func didSelectPlaceItem(item: PlaceElement?) {
         guard let item = item else {
             showToastMessage(message: "toast_errorAlert".localized())
             return

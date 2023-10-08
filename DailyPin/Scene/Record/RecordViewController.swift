@@ -17,6 +17,8 @@ final class RecordViewController: BaseViewController {
     private let viewModel = RecordViewModel()
     
     var location: PlaceElement?
+    var record: Record?
+    var savedPlace: Place?
     
     var editMode: Bool = false // 읽기모드
     
@@ -31,14 +33,8 @@ final class RecordViewController: BaseViewController {
             dismiss(animated: true)
             return
         }
-        
         title = location.displayName.placeName
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedView(_:)))
-        view.addGestureRecognizer(tapGestureRecognizer)
         
-    }
-    
-    private func bindData() {
         
         
         
@@ -48,13 +44,32 @@ final class RecordViewController: BaseViewController {
     
     override func configureUI() {
         super.configureUI()
+        setData()
         setNavRightButton()
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
         
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedView(_:)))
+        view.addGestureRecognizer(tapGestureRecognizer)
+        
     }
     
-    
+    private func setData() {
+        
+        guard let record = record else {
+            return
+        }
+        
+        
+        
+        mainView.titleTextField.text = record.title
+        mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
+        mainView.memoTextView.text = record.memo
+        if let memo = record.memo, memo.count != 0 {
+            mainView.placeHolderLabel.isHidden = true
+        }
+        
+    }
     
     @objc private func tappedView(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
@@ -98,16 +113,71 @@ final class RecordViewController: BaseViewController {
             return
         }
         
-        let record = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+        if let record = record { // 기존 데이터 수정 시
+            do {
+                let updateRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+                try recordRepository.updateRecord(updateRecord)
+            } catch let error {
+                showOKAlert(title: "", message: error.localizedDescription) { }
+                return
+            }
+        } else {
+            let newRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+            do {
+                try placeRepository.updateRecordList(record: newRecord, place: place)
+            } catch let error {
+                showOKAlert(title: "", message: error.localizedDescription) { }
+                return
+            }
+        }
         
-        do {
-            
-            try placeRepository.updateRecordList(record: record, place: place)
-        } catch let error {
-            showOKAlert(title: "", message: error.localizedDescription) { }
+        
+        
+    }
+    
+    private func deleteRecord() {
+        guard let deleteRecord = record else {
             return
         }
         
+        showAlertWithCancel(title: "삭제하기", message: "기록을 정말 삭제하시겠습니까?") {
+            do {
+                try self.recordRepository.deleteItem(deleteRecord)
+                self.dismiss(animated: true)
+            } catch let error {
+                self.showOKAlert(title: "", message: error.localizedDescription) { }
+            }
+            //self.deletePlace()
+            
+        } cancelHandler: {
+            return
+        }
+        
+
+        
+    }
+    private func deletePlace() {
+        guard let location = location else { return }
+        if placeRepository.getRecordListCount(id: location.id) == 0 {
+            
+            var deletePlace: Place
+            do {
+                deletePlace = try placeRepository.searchItemByID(location.id)
+                
+            } catch let error {
+                self.showOKAlert(title: "", message: error.localizedDescription) {  }
+                return
+            }
+            
+            do {
+                try placeRepository.deleteItem(deletePlace)
+            } catch let error {
+                self.showOKAlert(title: "", message: error.localizedDescription) {  }
+                return
+            }
+            
+            
+        }
     }
     
     private func savePlace() throws -> Place {
@@ -164,10 +234,14 @@ extension RecordViewController {
         
         let editAction = UIAction(title: Mode.edit.rawValue.localized()) { action in
             self.editMode = true
+            self.mainView.setPickerView()
+            self.mainView.datePickerView.date = self.record?.date ?? Date()
             self.setNavRightButton()
         }
         let deleteAction = UIAction(title: Mode.delete.rawValue.localized()) { action in
-            print("delete")
+            self.deleteRecord()
+            
+            
         }
         menuItems.append(editAction)
         menuItems.append(deleteAction)

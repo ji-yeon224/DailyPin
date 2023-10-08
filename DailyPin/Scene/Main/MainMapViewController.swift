@@ -69,8 +69,14 @@ final class MainMapViewController: BaseViewController {
     override func configureUI() {
         super.configureUI()
         mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped(_ :)))
+        mainView.mapView.addGestureRecognizer(tapGesture)
         mainView.searchButton.addTarget(self, action: #selector(searchViewTransition), for: .touchUpInside)
+    }
+    
+    @objc private func mapViewTapped(_ sender: UITapGestureRecognizer) {
+       
+        
     }
     
     @objc private func searchViewTransition() {
@@ -190,6 +196,27 @@ extension MainMapViewController: CLLocationManagerDelegate {
 extension MainMapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         //print(view.annotation?.coordinate)
+        guard let annotation = view.annotation as? CustomAnnotation else {
+            return
+        }
+        let size = CGSize(width: 30, height: 30)
+        UIGraphicsBeginImageContext(size)
+        
+       // let pin = Image.ImageName.selectPin?.withTintColor(Constants.Color.pinColor ?? .systemRed, renderingMode: .alwaysTemplate)
+        
+        if let image = Image.ImageName.selectPin {
+            image.withRenderingMode(.alwaysTemplate)
+            
+            image.withTintColor(Constants.Color.pinColor ?? .systemRed, renderingMode: .alwaysTemplate)
+            image.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            view.image = resizedImage
+        }
+        
+        
+    }
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        print("didDeselect", view.annotation?.coordinate)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -213,7 +240,7 @@ extension MainMapViewController: MKMapViewDelegate {
 
         anoImage?.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-                annotationView?.image = resizedImage
+        annotationView?.image = resizedImage
                 
         return annotationView
     }

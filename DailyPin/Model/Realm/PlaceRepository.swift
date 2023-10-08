@@ -63,9 +63,19 @@ final class PlaceRepository {
         } catch {
             throw DataBaseError.searchError
         }
-        
+        print(place)
         return place.recordList.sorted(byKeyPath: "date", ascending: false)
         
+    }
+    
+    func getRecordListCount(id: String) -> Int {
+        
+        do {
+            let count = try getRecordList(id: id).count
+            return count
+        } catch {
+            return 0
+        }
     }
     
     func getFileLocation() {

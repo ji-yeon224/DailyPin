@@ -111,6 +111,7 @@ extension MainMapView {
         let annotation = MKPointAnnotation()
         annotation.coordinate = center
         annotation.title = title
+        
         mapView.addAnnotation(annotation)
     }
     
@@ -132,6 +133,7 @@ extension MainMapView {
         fpc.view.frame = contentVC.view.bounds
         fpc.layout = FloatingPanelCustomLayout()
         fpc.contentMode = .fitToBounds
+        fpc.invalidateLayout()
     }
     
 }

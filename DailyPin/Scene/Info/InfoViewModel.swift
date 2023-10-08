@@ -21,12 +21,16 @@ final class InfoViewModel {
         guard let place = place.value else {
             throw InvalidError.noExistData
         }
+        
+        recordList.value = nil
         do {
             recordList.value = try placeRepository.getRecordList(id: place.id)
         } catch {
             recordList.value = nil
             return
         }
+        
+        print(recordList.value)
         
     }
     

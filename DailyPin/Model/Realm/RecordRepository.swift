@@ -37,6 +37,27 @@ final class RecordRepository {
         }
     }
     
+    func updateRecord(_ item: Record) throws {
+        
+//        var record: Record
+//        do {
+//            record = try searchItemByID(item.objectID)
+//        } catch let error {
+//            throw error
+//        }
+//
+        do {
+            try realm.write {
+                print(item)
+                realm.create(Record.self, value: ["objectID": item.objectID, "title": item.title, "date": item.date, "memo": item.memo as Any, "placeInfo": item.placeInfo] , update: .modified)
+                
+            }
+        } catch {
+            throw DataBaseError.updateError
+        }
+        
+    }
+    
     func searchItemByID(_ id: ObjectId) throws -> Record {
         guard let data = realm.object(ofType: Record.self, forPrimaryKey: id) else {
             throw DataBaseError.searchError

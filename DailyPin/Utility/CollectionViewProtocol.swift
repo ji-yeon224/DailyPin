@@ -8,5 +8,6 @@
 import Foundation
 
 protocol CollectionViewProtocol: AnyObject {
-    func didSelectItem(item: PlaceElement?)
+    func didSelectPlaceItem(item: PlaceElement?)
+    
 }
