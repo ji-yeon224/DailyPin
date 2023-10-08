@@ -75,7 +75,7 @@ final class MainMapViewController: BaseViewController {
     }
     
     @objc private func mapViewTapped(_ sender: UITapGestureRecognizer) {
-       
+        
         
     }
     
@@ -213,10 +213,35 @@ extension MainMapViewController: MKMapViewDelegate {
             view.image = resizedImage
         }
         
+        guard let place = getPlaceData(id: annotation.placeID) else {
+            showToastMessage(message: "데이터를 가져오는데 문제가 발생하였습니다.")
+            return
+        }
+        mainView.setFloatingPanel(data: convertPlaceToPlaceElement(place: place))
+        present(self.mainView.fpc, animated: true)
+        infoViewOn = true
+        
         
     }
+    
+    private func convertPlaceToPlaceElement(place: Place) -> PlaceElement {
+        return PlaceElement(id: place.placeId, formattedAddress: place.address, location: Location(latitude: place.latitude, longitude: place.longitude), displayName: DisplayName(placeName: place.placeName))
+    }
+    
+    private func getPlaceData(id: String) -> Place? {
+        
+        do {
+            let place = try placeRepository.searchItemByID(id)
+            return place
+        } catch {
+            return nil
+        }
+    }
+    
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         print("didDeselect", view.annotation?.coordinate)
+        
+        
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

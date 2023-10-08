@@ -92,12 +92,10 @@ extension MainMapView {
         
     }
     
-    func setAllAnnotations(locations: [MKPointAnnotation]) {
-        //removeAllAnotation()
-        mapView.addAnnotations(locations)
-        
-        
-    }
+//    func setAllAnnotations(locations: [MKPointAnnotation]) {
+//        //removeAllAnotation()
+//        mapView.addAnnotations(locations)
+//    }
     
     func setAllCustomAnnotation(annotation: [CustomAnnotation]) {
         mapView.addAnnotations(annotation)
@@ -118,6 +116,10 @@ extension MainMapView {
     func removeAllAnotation() {
         let annotations = mapView.annotations
         mapView.removeAnnotations(annotations)
+    }
+    
+    func removeOneAnnotation(annotation: MKAnnotation) {
+        mapView.removeAnnotation(annotation)
     }
     
    
