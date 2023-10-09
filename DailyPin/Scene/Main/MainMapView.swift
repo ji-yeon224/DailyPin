@@ -93,6 +93,11 @@ extension MainMapView {
         mapView.addAnnotation(annotation)
     }
     
+    func setOneAnnotation(annotation: CustomAnnotation) {
+        let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+        mapView.setRegion(region, animated: true)
+        mapView.addAnnotation(annotation)
+    }
     
     
     func removeAllAnotation() {
@@ -113,7 +118,7 @@ extension MainMapView {
     func setFloatingPanel(data: PlaceElement) {
         contentVC.viewModel.place.value = data
         fpc.set(contentViewController: contentVC)
-        fpc.isRemovalInteractionEnabled = true
+        //fpc.isRemovalInteractionEnabled = true
         fpc.view.frame = contentVC.view.bounds
         fpc.layout = FloatingPanelCustomLayout()
         fpc.invalidateLayout()

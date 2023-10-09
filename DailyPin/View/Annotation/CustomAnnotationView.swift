@@ -13,18 +13,6 @@ class CustomAnnotationView: MKAnnotationView {
     static let identifier = "CustomAnnotationView"
     
     
-//    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-//        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-//        frame = CGRect(x: 0, y: 0, width: 40, height: 50)
-//        centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
-//
-//    }
-//
-//    @available(*, unavailable)
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
     let backView = {
         let view = UIView()
         view.backgroundColor = .clear
@@ -39,9 +27,9 @@ class CustomAnnotationView: MKAnnotationView {
     let imageView = {
         let view = UIImageView()
         view.backgroundColor = .clear
-        view.image = Image.ImageName.star
+        view.image = Image.ImageName.starImage
         view.contentMode = .scaleAspectFit
-        view.tintColor = .systemRed
+        view.tintColor = Constants.Color.pinColor
         view.layer.cornerRadius = view.frame.width / 2
         view.clipsToBounds = true
         return view
@@ -60,7 +48,7 @@ class CustomAnnotationView: MKAnnotationView {
     }
     
     
-    func configUI() {
+    private func configUI() {
         addSubview(backView)
         backView.addSubview(imageView)
         
@@ -70,6 +58,11 @@ class CustomAnnotationView: MKAnnotationView {
         imageView.snp.makeConstraints { make in
             make.edges.equalTo(backView).inset(5)
         }
+        
+    }
+    
+    func setImageSize() {
+        
     }
     
     override func prepareForReuse() {

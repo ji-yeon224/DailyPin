@@ -45,10 +45,17 @@ final class MainMapViewController: BaseViewController {
         mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print(#function)
         allData = repository.fetch()
         setAllAnotation()
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        allData = repository.fetch()
+//        setAllAnotation()
+//    }
     
     private func setAllAnotation() {
         
@@ -213,6 +220,10 @@ extension MainMapViewController: MKMapViewDelegate {
         guard let annotation = view.annotation as? CustomAnnotation else {
             return
         }
+        
+        guard let view = view as? CustomAnnotationView else { return }
+        view.imageView.image = Image.ImageName.selectPin
+        view.imageView.tintColor = Constants.Color.selectPinColor
        
         if infoViewOn {
             mainView.fpc.dismiss(animated: true)
@@ -224,6 +235,8 @@ extension MainMapViewController: MKMapViewDelegate {
             showToastMessage(message: "데이터를 가져오는데 문제가 발생하였습니다.")
             return
         }
+        let coord = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+        mainView.setRegion(center: coord)
         mainView.setFloatingPanel(data: convertPlaceToPlaceElement(place: place))
         present(self.mainView.fpc, animated: true)
         infoViewOn = true
@@ -247,7 +260,9 @@ extension MainMapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         print("didDeselect")
-        
+        guard let view = view as? CustomAnnotationView else { return }
+        view.imageView.image = Image.ImageName.starImage
+        view.imageView.tintColor = Constants.Color.pinColor
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
