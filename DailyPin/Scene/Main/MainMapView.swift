@@ -33,6 +33,7 @@ final class MainMapView: BaseView {
     let calendarButton = CalendarButton()
     let currentLocation = MyLocationButton()
     
+    
     override func configureUI() {
         addSubview(mapView)
         mapView.addSubview(searchButton)
@@ -53,12 +54,15 @@ final class MainMapView: BaseView {
             make.height.equalTo(50)
         }
         calendarButton.snp.makeConstraints { make in
-            make.trailing.equalTo(mapView).inset(20)
-            make.leading.equalTo(searchButton.snp.trailing).offset(5)
+            make.trailing.equalTo(mapView).inset(15)
+            make.leading.equalTo(searchButton.snp.trailing).offset(10)
             make.top.equalTo(safeAreaLayoutGuide).offset(10)
             make.height.equalTo(50)
             make.width.equalTo(calendarButton.snp.height).multipliedBy(1)
         }
+        
+        
+        
         currentLocation.snp.makeConstraints { make in
             make.trailing.equalTo(mapView).inset(20)
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-30)
@@ -93,6 +97,10 @@ extension MainMapView {
     
     func removeOneAnnotation(annotation: SelectAnnotation) {
         mapView.removeAnnotation(annotation)
+    }
+    
+    func removeAllCustomAnnotation(annotations: [CustomAnnotation]) {
+        mapView.removeAnnotations(annotations)
     }
     
    

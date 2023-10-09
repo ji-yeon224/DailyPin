@@ -24,11 +24,7 @@ final class MainMapViewController: BaseViewController {
     private var allData: Results<Place>?
     
     private var searchAnnotation: SelectAnnotation?
-    private var annotations: [CustomAnnotation] = [] {
-        didSet {
-            mainView.setAllCustomAnnotation(annotation: annotations)
-        }
-    }
+    private var annotations: [CustomAnnotation] = []
     
     override func loadView() {
         self.view = mainView
@@ -47,23 +43,28 @@ final class MainMapViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print(#function)
         super.viewWillAppear(animated)
-        allData = repository.fetch()
+        mainView.removeAllCustomAnnotation(annotations: annotations)
+//        allData = repository.fetch()
         setAllAnotation()
     }
     
     private func setAllAnotation() {
         
+        allData = repository.fetch()
         guard let allData = allData else {
             return
         }
         
+        annotations.removeAll()
         for data in allData {
             let coord = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
             let customAnnotation = CustomAnnotation(placeID: data.placeId, coordinate: coord)
             annotations.append(customAnnotation)
         }
         
+        mainView.setAllCustomAnnotation(annotation: annotations)
     }
     
     
@@ -221,7 +222,9 @@ extension MainMapViewController: CLLocationManagerDelegate {
 extension MainMapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
         print(#function)
+        
         guard let annotation = view.annotation as? CustomAnnotation else {
             return
         }
