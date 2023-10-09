@@ -16,7 +16,6 @@ final class SearchViewModel {
     func callPlaceRequest(query: String, langCode: LangCode, location: (Double, Double)) {
         GoogleNetwork.shared.requestPlace(api: .place(query: query, langCode: langCode, location: location)) { response in
             
-            
             switch response {
             case .success(let success):
                 if success.places.count == 0 {

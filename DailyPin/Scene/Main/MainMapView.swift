@@ -80,32 +80,18 @@ extension MainMapView {
         
     }
     
-   
-
-    
     func setAllCustomAnnotation(annotation: [CustomAnnotation]) {
         mapView.addAnnotations(annotation)
     }
     
-    func setSearchAnnotation(annotation: MKPointAnnotation) {
-        let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
-        mapView.setRegion(region, animated: true)
-        mapView.addAnnotation(annotation)
-    }
-    
-    func setOneAnnotation(annotation: CustomAnnotation) {
+    func setOneAnnotation(annotation: SelectAnnotation) {
         let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(region, animated: true)
         mapView.addAnnotation(annotation)
     }
     
     
-    func removeAllAnotation() {
-        let annotations = mapView.annotations
-        mapView.removeAnnotations(annotations)
-    }
-    
-    func removeOneAnnotation(annotation: MKPointAnnotation) {
+    func removeOneAnnotation(annotation: SelectAnnotation) {
         mapView.removeAnnotation(annotation)
     }
     
@@ -118,7 +104,6 @@ extension MainMapView {
     func setFloatingPanel(data: PlaceElement) {
         contentVC.viewModel.place.value = data
         fpc.set(contentViewController: contentVC)
-        //fpc.isRemovalInteractionEnabled = true
         fpc.view.frame = contentVC.view.bounds
         fpc.layout = FloatingPanelCustomLayout()
         fpc.invalidateLayout()

@@ -1,17 +1,15 @@
 //
-//  CustomAnnotationView.swift
+//  SelectAnnotationView.swift
 //  DailyPin
 //
-//  Created by 김지연 on 2023/10/08.
+//  Created by 김지연 on 2023/10/10.
 //
 
 import Foundation
 import UIKit
 
-final class CustomAnnotationView: BaseAnnotationView {
-    
-    static let identifier = "CustomAnnotationView"
-    
+final class SelectAnnotationView: BaseAnnotationView {
+    static let identifier = "SelectAnnotationView"
     
     let backView = {
         let view = UIView()
@@ -27,37 +25,33 @@ final class CustomAnnotationView: BaseAnnotationView {
     let imageView = {
         let view = UIImageView()
         view.backgroundColor = .clear
-        view.image = Image.ImageName.starImage
+        view.image = Image.ImageName.selectPin
         view.contentMode = .scaleAspectFit
-        view.tintColor = Constants.Color.pinColor
+        view.tintColor = .darkGray
         view.layer.cornerRadius = view.frame.width / 2
         view.clipsToBounds = true
         return view
     }()
     
     
-    
-    
     override func configUI() {
         addSubview(backView)
         backView.addSubview(imageView)
-        
     }
     
     override func setConstraints() {
         backView.snp.makeConstraints { make in
-            make.size.equalTo(40)
+            make.size.equalTo(50)
         }
         imageView.snp.makeConstraints { make in
             make.edges.equalTo(backView).inset(5)
         }
     }
     
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        guard let _ = annotation as? CustomAnnotation else { return }
+        guard let _ = annotation as? SelectAnnotation else { return }
         setNeedsLayout()
         
     }
@@ -65,7 +59,7 @@ final class CustomAnnotationView: BaseAnnotationView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        bounds.size = CGSize(width: 40, height: 40)
+        bounds.size = CGSize(width: 50, height: 50)
         centerOffset = CGPoint(x: 0, y: bounds.size.width / 2)
     }
     

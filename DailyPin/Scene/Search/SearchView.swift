@@ -25,6 +25,34 @@ final class SearchView: BaseView {
         view.keyboardDismissMode = .onDrag
         view.backgroundColor = Constants.Color.background
         view.delegate = self
+        view.isHidden = false
+        return view
+    }()
+    
+    private let errorView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.isHidden = true
+        return view
+    }()
+    
+    private let errorImage = {
+        let view = UIImageView()
+        view.image = Image.ImageName.networkError
+        view.tintColor = Constants.Color.subTextColor
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+    
+    private let networkErrorLabel = {
+        let view = UILabel()
+        view.text = "네트워크 연결을 확인해주세요."
+        view.backgroundColor = .clear
+        view.textColor = Constants.Color.subTextColor
+        view.font = .systemFont(ofSize: 18)
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        
         return view
     }()
     
@@ -34,6 +62,10 @@ final class SearchView: BaseView {
         super.configureUI()
         
         addSubview(collectionView)
+        addSubview(errorView)
+        errorView.addSubview(errorImage)
+        errorView.addSubview(networkErrorLabel)
+        
         
         configureDataSource()
     }
@@ -41,6 +73,29 @@ final class SearchView: BaseView {
     override func setConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        setErrorViewConstraints()
+    }
+    
+    private func setErrorViewConstraints() {
+        errorView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(30)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(40)
+            make.height.equalTo(50)
+            
+        }
+        errorImage.snp.makeConstraints { make in
+            make.top.equalTo(errorView)
+            make.centerX.equalTo(errorView)
+            make.width.equalTo(errorView.snp.width).multipliedBy(0.4)
+            make.height.equalTo(errorImage.snp.width)
+            
+        }
+        
+        networkErrorLabel.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(errorView)
+            make.top.equalTo(errorImage.snp.bottom).offset(10)
+            make.bottom.greaterThanOrEqualTo(errorView).offset(10)
         }
     }
     
@@ -73,6 +128,11 @@ final class SearchView: BaseView {
             return cell
         })
         
+    }
+    
+    func configureHidden(collection: Bool, network: Bool) {
+        collectionView.isHidden = collection
+        errorView.isHidden = network
     }
     
     

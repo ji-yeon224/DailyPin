@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import Network
 
 final class SearchViewController: BaseViewController {
     
     private let mainView = SearchView()
     private let viewModel = SearchViewModel()
+    
+    private let monitor = NWPathMonitor()
     var selectLocationHandler: ((PlaceElement) -> Void)?
     var centerLocation: (Double, Double) = (0, 0)
     
@@ -71,8 +74,8 @@ extension SearchViewController: UISearchBarDelegate {
             showToastMessage(message: "toast_searchInputError".localized())
             return
         }
-        
-        viewModel.callPlaceRequest(query: query, langCode: .ko, location: centerLocation)
+        startMonitoring(query: query, langCode: .ko)
+        //viewModel.callPlaceRequest(query: query, langCode: .ko, location: centerLocation)
         view.endEditing(true)
         
     }
@@ -100,4 +103,33 @@ extension SearchViewController: CollectionViewProtocol {
         
     }
     
+}
+
+
+// 네트워크 모니터링
+extension SearchViewController {
+    
+    
+    private func startMonitoring(query: String, langCode: LangCode) {
+
+        monitor.start(queue: .global())
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                
+                DispatchQueue.main.async {
+                    self.viewModel.callPlaceRequest(query: query, langCode: .ko, location: self.centerLocation)
+                    self.mainView.configureHidden(collection: false, network: true)
+                }
+                return
+
+            } else {
+                DispatchQueue.main.async {
+                    self.mainView.configureHidden(collection: true, network: false)
+
+                }
+            }
+
+        }
+    }
+
 }

@@ -23,7 +23,7 @@ final class MainMapViewController: BaseViewController {
     private let repository = PlaceRepository()
     private var allData: Results<Place>?
     
-    private var searchAnnotation = MKPointAnnotation()
+    private var searchAnnotation: SelectAnnotation?
     private var annotations: [CustomAnnotation] = [] {
         didSet {
             mainView.setAllCustomAnnotation(annotation: annotations)
@@ -43,19 +43,14 @@ final class MainMapViewController: BaseViewController {
         checkDeviceLocationAuthorization()
         mainView.mapView.delegate = self
         mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
+        mainView.mapView.register(SelectAnnotationView.self, forAnnotationViewWithReuseIdentifier: SelectAnnotationView.identifier)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(#function)
         allData = repository.fetch()
         setAllAnotation()
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        allData = repository.fetch()
-//        setAllAnotation()
-//    }
     
     private func setAllAnotation() {
         
@@ -89,7 +84,11 @@ final class MainMapViewController: BaseViewController {
             infoViewOn.toggle()
         }
         // 검색 결과로 찍힌 핀 지우기
-        mainView.removeOneAnnotation(annotation: searchAnnotation)
+        if let searchAnnotation = searchAnnotation {
+            mainView.removeOneAnnotation(annotation: searchAnnotation)
+            self.searchAnnotation = nil
+        }
+       
         
     }
     
@@ -100,14 +99,20 @@ final class MainMapViewController: BaseViewController {
             self.mainView.fpc.dismiss(animated: true)
         }
         
+        if let searchAnnotation = searchAnnotation {
+            mainView.removeOneAnnotation(annotation: searchAnnotation)
+            self.searchAnnotation = nil
+        }
+        
         vc.selectLocationHandler = { value in
             let center = CLLocationCoordinate2D(latitude: value.location.latitude, longitude: value.location.longitude)
             
-            self.searchAnnotation = MKPointAnnotation()
-            self.searchAnnotation.coordinate = center
-            self.searchAnnotation.title = value.displayName.placeName
             
-            self.mainView.setSearchAnnotation(annotation: self.searchAnnotation)
+            self.searchAnnotation = SelectAnnotation(placeID: value.id, coordinate: center)
+            if let searchAnnotation = self.searchAnnotation {
+                self.mainView.setOneAnnotation(annotation: searchAnnotation)
+            }
+            
             
             DispatchQueue.main.async {
                 self.mainView.setFloatingPanel(data: value)
@@ -232,7 +237,6 @@ extension MainMapViewController: MKMapViewDelegate {
         
         // InfoView Present
         guard let place = getPlaceData(id: annotation.placeID) else {
-            showToastMessage(message: "데이터를 가져오는데 문제가 발생하였습니다.")
             return
         }
         let coord = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
@@ -271,11 +275,21 @@ extension MainMapViewController: MKMapViewDelegate {
         
         var annotationView: MKAnnotationView?
         
-        if let annotation = annotation as? CustomAnnotation {
-            annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
-            
-        }
+        
+        if annotation.isKind(of: SelectAnnotation.self) {
+            if let annotation = annotation as? SelectAnnotation {
+                annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: SelectAnnotationView.identifier, for: annotation)
                 
+            }
+        } else if annotation.isKind(of: CustomAnnotation.self) {
+            if let annotation = annotation as? CustomAnnotation {
+                annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
+                
+            }
+        }
+        
+       
+        
         return annotationView
     }
     

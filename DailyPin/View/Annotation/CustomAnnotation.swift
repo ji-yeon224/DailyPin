@@ -6,13 +6,11 @@
 //
 
 import Foundation
-import UIKit
 import MapKit
-import SnapKit
 
 
 
-class CustomAnnotation: NSObject, MKAnnotation {
+final class CustomAnnotation: NSObject, MKAnnotation {
     
     let placeID: String
     @objc dynamic var coordinate: CLLocationCoordinate2D
