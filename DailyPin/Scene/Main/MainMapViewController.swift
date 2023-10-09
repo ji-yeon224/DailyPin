@@ -23,6 +23,7 @@ final class MainMapViewController: BaseViewController {
     private let repository = PlaceRepository()
     private var allData: Results<Place>?
     
+    private var searchAnnotation = MKPointAnnotation()
     private var annotations: [CustomAnnotation] = [] {
         didSet {
             mainView.setAllCustomAnnotation(annotation: annotations)
@@ -75,11 +76,13 @@ final class MainMapViewController: BaseViewController {
     }
     
     @objc private func mapViewTapped(_ sender: UITapGestureRecognizer) {
-        print(#function)
+        
         if infoViewOn {
             mainView.fpc.dismiss(animated: true)
             infoViewOn.toggle()
         }
+        // 검색 결과로 찍힌 핀 지우기
+        mainView.removeOneAnnotation(annotation: searchAnnotation)
         
     }
     
@@ -92,7 +95,13 @@ final class MainMapViewController: BaseViewController {
         
         vc.selectLocationHandler = { value in
             let center = CLLocationCoordinate2D(latitude: value.location.latitude, longitude: value.location.longitude)
-            self.mainView.searchResultAnnotation(center: center, title: value.displayName.placeName)
+            
+            self.searchAnnotation = MKPointAnnotation()
+            self.searchAnnotation.coordinate = center
+            self.searchAnnotation.title = value.displayName.placeName
+            
+            self.mainView.setSearchAnnotation(annotation: self.searchAnnotation)
+            
             DispatchQueue.main.async {
                 self.mainView.setFloatingPanel(data: value)
                 self.present(self.mainView.fpc, animated: true)
@@ -209,6 +218,7 @@ extension MainMapViewController: MKMapViewDelegate {
             mainView.fpc.dismiss(animated: true)
             infoViewOn.toggle()
         }
+        
         // InfoView Present
         guard let place = getPlaceData(id: annotation.placeID) else {
             showToastMessage(message: "데이터를 가져오는데 문제가 발생하였습니다.")

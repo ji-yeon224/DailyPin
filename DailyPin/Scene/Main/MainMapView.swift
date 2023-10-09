@@ -80,45 +80,27 @@ extension MainMapView {
         
     }
     
-    func setAnnotation(center: CLLocationCoordinate2D) {
-        removeAllAnotation()
-        let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        mapView.setRegion(region, animated: true)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = center
-        mapView.addAnnotation(annotation)
-        
-        
-    }
-    
-//    func setAllAnnotations(locations: [MKPointAnnotation]) {
-//        //removeAllAnotation()
-//        mapView.addAnnotations(locations)
-//    }
+   
+
     
     func setAllCustomAnnotation(annotation: [CustomAnnotation]) {
         mapView.addAnnotations(annotation)
     }
     
-    func searchResultAnnotation(center: CLLocationCoordinate2D, title: String) {
-        //removeAllAnotation()
-        let region = MKCoordinateRegion(center: center, latitudinalMeters: 500, longitudinalMeters: 500)
+    func setSearchAnnotation(annotation: MKPointAnnotation) {
+        let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(region, animated: true)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = center
-        annotation.title = title
-        
         mapView.addAnnotation(annotation)
     }
+    
+    
     
     func removeAllAnotation() {
         let annotations = mapView.annotations
         mapView.removeAnnotations(annotations)
     }
     
-    func removeOneAnnotation(annotation: MKAnnotation) {
+    func removeOneAnnotation(annotation: MKPointAnnotation) {
         mapView.removeAnnotation(annotation)
     }
     
