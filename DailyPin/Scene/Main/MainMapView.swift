@@ -134,7 +134,6 @@ extension MainMapView {
         fpc.isRemovalInteractionEnabled = true
         fpc.view.frame = contentVC.view.bounds
         fpc.layout = FloatingPanelCustomLayout()
-        fpc.contentMode = .fitToBounds
         fpc.invalidateLayout()
     }
     

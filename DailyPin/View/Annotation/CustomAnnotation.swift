@@ -15,7 +15,7 @@ import SnapKit
 class CustomAnnotation: NSObject, MKAnnotation {
     
     let placeID: String
-    let coordinate: CLLocationCoordinate2D
+    @objc dynamic var coordinate: CLLocationCoordinate2D
     
     init(placeID: String, coordinate: CLLocationCoordinate2D) {
         self.placeID = placeID

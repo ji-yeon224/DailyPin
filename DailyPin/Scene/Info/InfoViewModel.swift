@@ -30,7 +30,7 @@ final class InfoViewModel {
             return
         }
         
-        print(recordList.value)
+        //print(recordList.value)
         
     }
     

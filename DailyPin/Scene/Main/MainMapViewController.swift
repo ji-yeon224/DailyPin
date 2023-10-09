@@ -75,7 +75,11 @@ final class MainMapViewController: BaseViewController {
     }
     
     @objc private func mapViewTapped(_ sender: UITapGestureRecognizer) {
-        
+        print(#function)
+        if infoViewOn {
+            mainView.fpc.dismiss(animated: true)
+            infoViewOn.toggle()
+        }
         
     }
     
@@ -194,25 +198,18 @@ extension MainMapViewController: CLLocationManagerDelegate {
 }
 
 extension MainMapViewController: MKMapViewDelegate {
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        //print(view.annotation?.coordinate)
+        print(#function)
         guard let annotation = view.annotation as? CustomAnnotation else {
             return
         }
-        let size = CGSize(width: 30, height: 30)
-        UIGraphicsBeginImageContext(size)
-        
-       // let pin = Image.ImageName.selectPin?.withTintColor(Constants.Color.pinColor ?? .systemRed, renderingMode: .alwaysTemplate)
-        
-        if let image = Image.ImageName.selectPin {
-            image.withRenderingMode(.alwaysTemplate)
-            
-            image.withTintColor(Constants.Color.pinColor ?? .systemRed, renderingMode: .alwaysTemplate)
-            image.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-            view.image = resizedImage
+       
+        if infoViewOn {
+            mainView.fpc.dismiss(animated: true)
+            infoViewOn.toggle()
         }
-        
+        // InfoView Present
         guard let place = getPlaceData(id: annotation.placeID) else {
             showToastMessage(message: "데이터를 가져오는데 문제가 발생하였습니다.")
             return
@@ -239,33 +236,20 @@ extension MainMapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        print("didDeselect", view.annotation?.coordinate)
-        
+        print("didDeselect")
         
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard let annotation = annotation as? CustomAnnotation else {
-            return nil
+        
+        guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
+        
+        var annotationView: MKAnnotationView?
+        
+        if let annotation = annotation as? CustomAnnotation {
+            annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
             
         }
-        
-        let annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier)
-        
-        if annotationView == nil {
-            annotationView?.canShowCallout = false
-            annotationView?.contentMode = .scaleAspectFit
-        } else {
-            annotationView?.annotation = annotation
-        }
-        
-        let size = CGSize(width: 30, height: 30)
-        UIGraphicsBeginImageContext(size)
-        var anoImage = Image.ImageName.star?.withTintColor(Constants.Color.pinColor ?? .systemRed)
-
-        anoImage?.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-        annotationView?.image = resizedImage
                 
         return annotationView
     }

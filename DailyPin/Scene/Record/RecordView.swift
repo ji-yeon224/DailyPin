@@ -115,7 +115,7 @@ final class RecordView: BaseView {
     }
     
     @objc private func dateChange() {
-        print(DateFormatter.convertDate(date: datePickerView.date))
+        //print(DateFormatter.convertDate(date: datePickerView.date))
         dateLabel.text = DateFormatter.convertDate(date: datePickerView.date)
         
         

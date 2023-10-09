@@ -63,7 +63,7 @@ final class PlaceRepository {
         } catch {
             throw DataBaseError.searchError
         }
-        print(place)
+        //print(place)
         return place.recordList.sorted(byKeyPath: "date", ascending: false)
         
     }
