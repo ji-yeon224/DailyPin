@@ -23,22 +23,34 @@ final class InfoViewController: BaseViewController {
         
         mainView.collectionViewDelegate = self
         bindData()
+        
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: Notification.Name.updateCell, object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    @objc private func getChangeNotification(notification: NSNotification) {
         do {
             try viewModel.getRecordList()
+            mainView.configureHidden(collView: false)
         } catch {
+            mainView.configureHidden(collView: true)
             return
         }
+        
         
     }
     
     override func configureUI() {
         mainView.addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
         
+        do {
+            try viewModel.getRecordList()
+            mainView.configureHidden(collView: false)
+        } catch {
+            mainView.configureHidden(collView: true)
+            return
+        }
         
         
     }

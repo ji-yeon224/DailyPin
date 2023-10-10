@@ -7,7 +7,6 @@
 
 import Foundation
 import MapKit
-import RealmSwift
 
 final class MainMapViewModel {
     

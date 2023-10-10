@@ -9,4 +9,5 @@ import Foundation
 
 extension NSNotification.Name {
     static let databaseChange = NSNotification.Name("databaseChange")
+    static let updateCell = NSNotification.Name("updateCell")
 }

@@ -123,9 +123,10 @@ final class RecordViewController: BaseViewController {
                 showOKAlert(title: "", message: error.localizedDescription) { }
                 return
             }
+            
         }
         
-        
+        NotificationCenter.default.post(name: Notification.Name.updateCell, object: nil)
         
     }
     
@@ -142,6 +143,7 @@ final class RecordViewController: BaseViewController {
                 self.showOKAlert(title: "", message: error.localizedDescription) { }
             }
             self.deletePlace()
+            NotificationCenter.default.post(name: Notification.Name.updateCell, object: nil)
             
         } cancelHandler: {
             return
