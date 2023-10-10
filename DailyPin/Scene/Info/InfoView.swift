@@ -49,12 +49,8 @@ final class InfoView: BaseView {
     let noDataLabel = {
         let view = UILabel()
         view.text = "아직 등록된 기록이 없습니다.\n 기록을 등록해보세요!"
-        view.backgroundColor = .clear
-        view.textColor = Constants.Color.subTextColor
-        view.font = .systemFont(ofSize: 18, weight: .bold)
-        view.textAlignment = .center
-        view.numberOfLines = 0
-        view.isHidden = false 
+        
+        
         return view
     }()
     
@@ -124,11 +120,11 @@ extension InfoView {
     
     private func collectionViewLayout() -> UICollectionViewLayout {
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(70))
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(65))
+        item.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(80))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)

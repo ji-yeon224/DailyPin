@@ -51,6 +51,8 @@
 		CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */; };
 		CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5E2AD594EF00068854 /* CalendarViewController.swift */; };
 		CE814A612AD594FB00068854 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A602AD594FB00068854 /* CalendarView.swift */; };
+		CE814A642AD59D1B00068854 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = CE814A632AD59D1B00068854 /* FSCalendar */; };
+		CE814A662AD59D4900068854 /* CustomCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A652AD59D4900068854 /* CustomCalendarView.swift */; };
 		CE9A16B32AD2897E0051BE23 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A16B22AD2897E0051BE23 /* CustomAnnotation.swift */; };
 		CE9A16B52AD28F0D0051BE23 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A16B42AD28F0D0051BE23 /* Image.swift */; };
 		CE9A16B82AD2BE240051BE23 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A16B72AD2BE240051BE23 /* CustomAnnotationView.swift */; };
@@ -121,6 +123,7 @@
 		CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		CE814A5E2AD594EF00068854 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		CE814A602AD594FB00068854 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		CE814A652AD59D4900068854 /* CustomCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalendarView.swift; sourceTree = "<group>"; };
 		CE9A16B22AD2897E0051BE23 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		CE9A16B42AD28F0D0051BE23 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		CE9A16B72AD2BE240051BE23 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
@@ -160,6 +163,7 @@
 				CE9B0E8B2ACA6A0A008A0694 /* FloatingPanel in Frameworks */,
 				CE3DF8222AC53E5700653CE1 /* SnapKit in Frameworks */,
 				CE3DF8252AC53E6300653CE1 /* Alamofire in Frameworks */,
+				CE814A642AD59D1B00068854 /* FSCalendar in Frameworks */,
 				CE4DF9082ACBB6AF00546526 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,6 +235,7 @@
 				CE3DF8132AC330DB00653CE1 /* MyLocationButton.swift */,
 				CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */,
 				CEB390B32ACFCD4600E4B2AC /* MemoTextView.swift */,
+				CE814A652AD59D4900068854 /* CustomCalendarView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 				CE9B0E8A2ACA6A0A008A0694 /* FloatingPanel */,
 				CE4DF9072ACBB6AF00546526 /* Realm */,
 				CE4DF9092ACBB6AF00546526 /* RealmSwift */,
+				CE814A632AD59D1B00068854 /* FSCalendar */,
 			);
 			productName = DailyPin;
 			productReference = CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */;
@@ -442,6 +448,7 @@
 				CE3245982AC8FAF500582FC5 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				CE9B0E892ACA6A0A008A0694 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 				CE4DF9062ACBB6AF00546526 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				CE814A622AD59D1B00068854 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = CEB00FBE2AC030BF001E7BB0 /* Products */;
 			projectDirPath = "";
@@ -498,6 +505,7 @@
 				CEB390BA2ACFDF4C00E4B2AC /* DateFormatter.swift in Sources */,
 				CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */,
 				CE3DF7FA2AC2B1BB00653CE1 /* BaseViewController.swift in Sources */,
+				CE814A662AD59D4900068854 /* CustomCalendarView.swift in Sources */,
 				CE3DF8032AC2B5BA00653CE1 /* MainMapView.swift in Sources */,
 				CE546CD62AD44DB900C0392B /* SelectAnnotationView.swift in Sources */,
 				CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */,
@@ -810,6 +818,14 @@
 				kind = branch;
 			};
 		};
+		CE814A622AD59D1B00068854 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		CE9B0E892ACA6A0A008A0694 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scenee/FloatingPanel.git";
@@ -845,6 +861,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE4DF9062ACBB6AF00546526 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		CE814A632AD59D1B00068854 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE814A622AD59D1B00068854 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
 		};
 		CE9B0E8A2ACA6A0A008A0694 /* FloatingPanel */ = {
 			isa = XCSwiftPackageProductDependency;
