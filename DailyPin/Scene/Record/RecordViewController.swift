@@ -170,7 +170,7 @@ final class RecordViewController: BaseViewController {
                 return
             }
             
-            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["isChange": true])
+            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["changeType": "delete"])
         }
     }
     
@@ -187,7 +187,7 @@ final class RecordViewController: BaseViewController {
         do {
             try placeRepository.createItem(place)
             showToastMessage(message: "저장 완료!")
-            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["isChange": true])
+            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["changeType": "save"])
             return place
         } catch {
             throw DataBaseError.createError

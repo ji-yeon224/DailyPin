@@ -42,13 +42,26 @@ final class MainMapViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: Notification.Name.databaseChange, object: nil)
         
-        
+        viewModel.getAllPlaceAnnotation()
         bindData()
     }
     
-    @objc private func getChangeNotification() {
+    @objc private func getChangeNotification(notification: NSNotification) {
         
-        print("change")
+        
+        guard let notiInfo = notification.userInfo else { return }
+        
+        if let type = notiInfo["changeType"] as? String {
+            if type == "save" {
+                deleteSearchAnnotation()
+            } else {
+                if infoViewOn {
+                    mainView.fpc.dismiss(animated: true)
+                    infoViewOn.toggle()
+                }
+                deleteSearchAnnotation()
+            }
+        }
         mainView.removeAllCustomAnnotation(annotations: viewModel.annotations.value)
         viewModel.getAllPlaceAnnotation()
     }
@@ -58,7 +71,6 @@ final class MainMapViewController: BaseViewController {
     private func bindData() {
         
         viewModel.annotations.bind { data in
-            print(data)
             self.mainView.setAllCustomAnnotation(annotation: data)
         }
         
@@ -81,14 +93,12 @@ final class MainMapViewController: BaseViewController {
             mainView.fpc.dismiss(animated: true)
             infoViewOn.toggle()
         }
-        // 검색 결과로 찍힌 핀 지우기
-        if let searchAnnotation = searchAnnotation {
-            mainView.removeOneAnnotation(annotation: searchAnnotation)
-            self.searchAnnotation = nil
-        }
+        
+        deleteSearchAnnotation()
        
         
     }
+    
     
     @objc private func searchViewTransition() {
         let vc = SearchViewController()
@@ -97,10 +107,7 @@ final class MainMapViewController: BaseViewController {
             self.mainView.fpc.dismiss(animated: true)
         }
         
-        if let searchAnnotation = searchAnnotation {
-            mainView.removeOneAnnotation(annotation: searchAnnotation)
-            self.searchAnnotation = nil
-        }
+        deleteSearchAnnotation()
         
         vc.selectLocationHandler = { value in
             let center = CLLocationCoordinate2D(latitude: value.location.latitude, longitude: value.location.longitude)
@@ -133,7 +140,14 @@ final class MainMapViewController: BaseViewController {
         checkDeviceLocationAuthorization()
     }
     
-    
+    // 검색 결과로 찍힌 핀 지우기
+    private func deleteSearchAnnotation() {
+        if let searchAnnotation = searchAnnotation {
+            mainView.removeOneAnnotation(annotation: searchAnnotation)
+            self.searchAnnotation = nil
+        }
+        
+    }
     
     
 }

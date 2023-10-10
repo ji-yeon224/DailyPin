@@ -94,7 +94,6 @@ extension MainMapView {
         mapView.addAnnotation(annotation)
     }
     
-    
     func removeOneAnnotation(annotation: SelectAnnotation) {
         mapView.removeAnnotation(annotation)
     }
