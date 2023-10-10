@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 final class InfoViewModel {
     
@@ -14,7 +13,6 @@ final class InfoViewModel {
     
     let placeName: Observable<String?> = Observable(nil)
     let place: Observable<PlaceElement?> = Observable(nil)
-    //let recordList: Observable<Results<Record>?> = Observable(nil)
     let recordList: Observable<[Record]?> = Observable(nil)
     
     func getRecordList() throws {

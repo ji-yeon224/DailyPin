@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 final class RecordViewModel {
     

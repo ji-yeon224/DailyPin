@@ -12,9 +12,9 @@ final class RecordRepository {
     
     private let realm = try! Realm()
     
-    func fetch() -> Results<Record> {
+    func fetch() -> [Record] {
         let data = realm.objects(Record.self)
-        return data
+        return Array(data)
     }
     
     func createItem(_ item: Record) throws {

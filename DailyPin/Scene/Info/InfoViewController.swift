@@ -27,7 +27,6 @@ final class InfoViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(#function)
         
         do {
             try viewModel.getRecordList()
