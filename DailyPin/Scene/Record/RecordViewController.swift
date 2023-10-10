@@ -37,7 +37,7 @@ final class RecordViewController: BaseViewController {
         
         
         
-        
+        recordRepository.getFileLocation()
     }
     
     
@@ -59,7 +59,6 @@ final class RecordViewController: BaseViewController {
         guard let record = record else {
             return
         }
-        
         
         
         mainView.titleTextField.text = record.title
@@ -116,7 +115,7 @@ final class RecordViewController: BaseViewController {
         if let record = record { // 기존 데이터 수정 시
             do {
                 let updateRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
-                try recordRepository.updateRecord(updateRecord)
+                try recordRepository.updateRecord(id: record.objectID, updateRecord)
             } catch let error {
                 showOKAlert(title: "", message: error.localizedDescription) { }
                 return
