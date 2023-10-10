@@ -43,10 +43,8 @@ final class MainMapViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(#function)
         super.viewWillAppear(animated)
         mainView.removeAllCustomAnnotation(annotations: annotations)
-//        allData = repository.fetch()
         setAllAnotation()
     }
     
@@ -223,7 +221,7 @@ extension MainMapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
-        print(#function)
+        
         
         guard let annotation = view.annotation as? CustomAnnotation else {
             return
@@ -266,7 +264,7 @@ extension MainMapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        print("didDeselect")
+        
         guard let view = view as? CustomAnnotationView else { return }
         view.imageView.image = Image.ImageName.starImage
         view.imageView.tintColor = Constants.Color.pinColor

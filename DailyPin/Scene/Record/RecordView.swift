@@ -115,7 +115,7 @@ final class RecordView: BaseView {
     }
     
     @objc private func dateChange() {
-        //print(DateFormatter.convertDate(date: datePickerView.date))
+        
         dateLabel.text = DateFormatter.convertDate(date: datePickerView.date)
         
         
@@ -203,7 +203,27 @@ final class RecordView: BaseView {
         }
     }
     
+    func setEditMode() {
+        titleTextField.isUserInteractionEnabled = true
+        memoTextView.isEditable = true
+        dateLabel.isHidden = true
+        datePickerView.isHidden = false
+        
+        if let memo = memoTextView.text, !memo.isEmpty {
+            placeHolderLabel.isHidden = true
+        } else {
+            placeHolderLabel.isHidden = false
+        }
+        
+    }
     
+    func setReadMode() {
+        titleTextField.isUserInteractionEnabled = false
+        memoTextView.isEditable = false
+        dateLabel.isHidden = false
+        datePickerView.isHidden = true
+        placeHolderLabel.isHidden = true
+    }
    
     
     func setDateLabel() {

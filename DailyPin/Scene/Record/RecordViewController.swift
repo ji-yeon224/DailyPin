@@ -43,9 +43,7 @@ final class RecordViewController: BaseViewController {
     override func configureUI() {
         super.configureUI()
         setData()
-        setNavRightButton()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
+        configNavigationBar()
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedView(_:)))
         view.addGestureRecognizer(tapGestureRecognizer)
@@ -62,9 +60,8 @@ final class RecordViewController: BaseViewController {
         mainView.titleTextField.text = record.title
         mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
         mainView.memoTextView.text = record.memo
-        if let memo = record.memo, memo.count != 0 {
-            mainView.placeHolderLabel.isHidden = true
-        }
+        mainView.placeHolderLabel.isHidden = true
+        
         
     }
     
@@ -203,19 +200,23 @@ final class RecordViewController: BaseViewController {
 
 // nav
 extension RecordViewController {
+    
+    private func configNavigationBar() {
+        
+        setNavRightButton()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
+    }
+    
     private func setNavRightButton() {
         if editMode { // 편집모드
             setSaveButton()
-            mainView.setPickerView()
-            mainView.titleTextField.isUserInteractionEnabled = true
-            mainView.memoTextView.isEditable = true
+            mainView.setEditMode()
             
         } else { // 저장 버튼 클릭
             
             setMenuButton()
-            mainView.setDateLabel()
-            mainView.titleTextField.isUserInteractionEnabled = false
-            mainView.memoTextView.isEditable = false
+            mainView.setReadMode()
             
         }
     }
