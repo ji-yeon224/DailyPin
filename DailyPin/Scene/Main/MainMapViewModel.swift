@@ -11,21 +11,30 @@ import RealmSwift
 
 final class MainMapViewModel {
     
-    let annotations: Observable<[MKPointAnnotation]> = Observable([])
+    private let placeRepository = PlaceRepository()
     
-    func setAllAnotation(_ allData: Results<Place>?) {
+    let place: Observable<[Place]?> = Observable(nil)
+    let annotations: Observable<[CustomAnnotation]> = Observable([])
+    
+    func getAllPlaceAnnotation() {
         
-        guard let allData = allData else {
-            return
-        }
-        
-        for data in allData {
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
-            annotations.value.append(annotation)
-        }
+        place.value = placeRepository.fetch()
+        setAllAnnotations()
         
     }
     
+    func setAllAnnotations() {
+        
+        if let place = place.value {
+            annotations.value.removeAll()
+            place.forEach {
+                let coord = CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)
+                
+                let customAnnotation = CustomAnnotation(placeID: $0.placeId, coordinate: coord)
+                annotations.value.append(customAnnotation)
+            }
+        }
+        
+    }
     
 }

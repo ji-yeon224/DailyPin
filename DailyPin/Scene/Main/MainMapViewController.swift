@@ -8,12 +8,11 @@
 import UIKit
 import CoreLocation
 import MapKit
-import RealmSwift
 
 final class MainMapViewController: BaseViewController {
     
     private let mainView = MainMapView()
-    //private let viewModel = MainMapViewModel()
+    private let viewModel = MainMapViewModel()
     private let placeRepository = PlaceRepository()
     
     private let locationManager = CLLocationManager()
@@ -21,7 +20,7 @@ final class MainMapViewController: BaseViewController {
     
     private var infoViewOn: Bool = false
     private let repository = PlaceRepository()
-    private var allData: Results<Place>?
+    private var allData: [Place]?
     
     private var searchAnnotation: SelectAnnotation?
     private var annotations: [CustomAnnotation] = []
@@ -35,34 +34,34 @@ final class MainMapViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationManager.delegate = self
+        locationManager.delegate = self 
         checkDeviceLocationAuthorization()
         mainView.mapView.delegate = self
         mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
         mainView.mapView.register(SelectAnnotationView.self, forAnnotationViewWithReuseIdentifier: SelectAnnotationView.identifier)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: Notification.Name.databaseChange, object: nil)
+        
+        
+        bindData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        mainView.removeAllCustomAnnotation(annotations: annotations)
-        setAllAnotation()
+    @objc private func getChangeNotification() {
+        
+        print("change")
+        mainView.removeAllCustomAnnotation(annotations: viewModel.annotations.value)
+        viewModel.getAllPlaceAnnotation()
     }
     
-    private func setAllAnotation() {
+
+    
+    private func bindData() {
         
-        allData = repository.fetch()
-        guard let allData = allData else {
-            return
+        viewModel.annotations.bind { data in
+            print(data)
+            self.mainView.setAllCustomAnnotation(annotation: data)
         }
         
-        annotations.removeAll()
-        for data in allData {
-            let coord = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
-            let customAnnotation = CustomAnnotation(placeID: data.placeId, coordinate: coord)
-            annotations.append(customAnnotation)
-        }
-        
-        mainView.setAllCustomAnnotation(annotation: annotations)
     }
     
     

@@ -27,6 +27,7 @@ final class InfoViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print(#function)
         
         do {
             try viewModel.getRecordList()
@@ -116,7 +117,7 @@ extension InfoViewController: InfoCollectionViewProtocol {
         vc.editMode = false
         
         let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
+        nav.modalPresentationStyle = .overFullScreen
         nav.modalTransitionStyle = .crossDissolve
         
         present(nav, animated: true)

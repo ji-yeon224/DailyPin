@@ -141,7 +141,7 @@ final class RecordViewController: BaseViewController {
             } catch let error {
                 self.showOKAlert(title: "", message: error.localizedDescription) { }
             }
-            //self.deletePlace()
+            self.deletePlace()
             
         } cancelHandler: {
             return
@@ -170,7 +170,7 @@ final class RecordViewController: BaseViewController {
                 return
             }
             
-            
+            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["isChange": true])
         }
     }
     
@@ -186,7 +186,8 @@ final class RecordViewController: BaseViewController {
         
         do {
             try placeRepository.createItem(place)
-            showToastMessage(message: "저장 성공")
+            showToastMessage(message: "저장 완료!")
+            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["isChange": true])
             return place
         } catch {
             throw DataBaseError.createError

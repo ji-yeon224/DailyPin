@@ -10,6 +10,7 @@
 		CE32459A2AC8FAF500582FC5 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = CE3245992AC8FAF500582FC5 /* Toast */; };
 		CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32459B2AC9682200582FC5 /* InfoViewController.swift */; };
 		CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32459E2AC9683300582FC5 /* InfoView.swift */; };
+		CE3541D62AD5313F00773CD3 /* NSNotification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3541D52AD5313F00773CD3 /* NSNotification.Name.swift */; };
 		CE3DF7EA2AC1602D00653CE1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CE3DF7E92AC1602D00653CE1 /* .gitignore */; };
 		CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */; };
 		CE3DF7F22AC2A9C500653CE1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE3DF7F42AC2A9C500653CE1 /* Localizable.strings */; };
@@ -78,6 +79,7 @@
 /* Begin PBXFileReference section */
 		CE32459B2AC9682200582FC5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		CE32459E2AC9683300582FC5 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		CE3541D52AD5313F00773CD3 /* NSNotification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotification.Name.swift; sourceTree = "<group>"; };
 		CE3DF7E92AC1602D00653CE1 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE3DF7F32AC2A9C500653CE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				CE3DF80D2AC2D25600653CE1 /* String+Extension.swift */,
 				CEB390AD2ACF0DB200E4B2AC /* UIScrollView.swift */,
 				CEB390B92ACFDF4C00E4B2AC /* DateFormatter.swift */,
+				CE3541D52AD5313F00773CD3 /* NSNotification.Name.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				CE52CB792AC7D302007AD7F8 /* BaseCollectionViewCell.swift in Sources */,
 				CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */,
 				CE3DF8122AC3300500653CE1 /* CalendarButton.swift in Sources */,
+				CE3541D62AD5313F00773CD3 /* NSNotification.Name.swift in Sources */,
 				CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */,
 				CE546CD82AD44F2200C0392B /* SelectAnnotation.swift in Sources */,
 				CE4DF90D2ACBBC3E00546526 /* Place.swift in Sources */,
