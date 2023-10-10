@@ -55,7 +55,8 @@ final class PlaceRepository {
         }
     }
     
-    func getRecordList(id: String) throws -> Results<Record> {
+
+    func getRecordList(id: String) throws -> [Record] {
         
         let place: Place
         do {
@@ -63,8 +64,8 @@ final class PlaceRepository {
         } catch {
             throw DataBaseError.searchError
         }
-        //print(place)
-        return place.recordList.sorted(byKeyPath: "date", ascending: false)
+        
+        return Array(place.recordList.sorted(byKeyPath: "date", ascending: false))
         
     }
     

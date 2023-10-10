@@ -42,7 +42,6 @@ final class RecordRepository {
         
         do {
             try realm.write {
-                print(item)
                 realm.create(Record.self, value: ["objectID": id, "title": item.title, "date": item.date, "memo": item.memo as Any, "placeInfo": item.placeInfo] , update: .modified)
                 
             }

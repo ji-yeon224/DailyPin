@@ -27,6 +27,7 @@ final class InfoViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print(#function)
         //viewModel.recordList.value = nil
         do {
             try viewModel.getRecordList()
@@ -72,11 +73,12 @@ final class InfoViewController: BaseViewController {
         }
         
         viewModel.recordList.bind { data in
-            guard let records = data else {
+           
+            guard data != nil else {
                 self.mainView.configureHidden(collView: true)
                 return
             }
-            
+            //print("bind", data)
             
             self.mainView.configureHidden(collView: false)
             self.updateSnapShot()
@@ -94,8 +96,9 @@ final class InfoViewController: BaseViewController {
             mainView.configureHidden(collView: true)
             return
         }
+        
         mainView.configureHidden(collView: false)
-        snapShot.appendItems(Array(records))
+        snapShot.appendItems(records)
         mainView.dataSource.apply(snapShot)
     }
     

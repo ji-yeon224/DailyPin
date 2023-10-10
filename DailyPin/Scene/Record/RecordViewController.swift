@@ -36,8 +36,6 @@ final class RecordViewController: BaseViewController {
         title = location.displayName.placeName
         
         
-        
-        recordRepository.getFileLocation()
     }
     
     
