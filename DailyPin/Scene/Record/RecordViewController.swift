@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 final class RecordViewController: BaseViewController {
     
     private let mainView = RecordView()

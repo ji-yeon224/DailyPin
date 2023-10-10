@@ -85,6 +85,15 @@ final class MainMapViewController: BaseViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped(_ :)))
         mainView.mapView.addGestureRecognizer(tapGesture)
         mainView.searchButton.addTarget(self, action: #selector(searchViewTransition), for: .touchUpInside)
+        mainView.calendarButton.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func calendarButtonTapped() {
+        let vc = CalendarViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        nav.modalTransitionStyle = .crossDissolve
+        present(nav, animated: true)
     }
     
     @objc private func mapViewTapped(_ sender: UITapGestureRecognizer) {

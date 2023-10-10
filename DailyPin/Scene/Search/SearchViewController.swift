@@ -29,6 +29,11 @@ final class SearchViewController: BaseViewController {
         mainView.searchBar.becomeFirstResponder()
         mainView.searchBar.delegate = self
         bindData()
+        if NetworkMonitor.shared.isConnected {
+            print("connect")
+        } else {
+            print("connectError")
+        }
         
        
     }
@@ -74,8 +79,8 @@ extension SearchViewController: UISearchBarDelegate {
             showToastMessage(message: "toast_searchInputError".localized())
             return
         }
-        startMonitoring(query: query, langCode: .ko)
-        //viewModel.callPlaceRequest(query: query, langCode: .ko, location: centerLocation)
+        
+        viewModel.callPlaceRequest(query: query, langCode: .ko, location: centerLocation)
         view.endEditing(true)
         
     }
@@ -110,26 +115,26 @@ extension SearchViewController: CollectionViewProtocol {
 extension SearchViewController {
     
     
-    private func startMonitoring(query: String, langCode: LangCode) {
-
-        monitor.start(queue: .global())
-        monitor.pathUpdateHandler = { path in
-            if path.status == .satisfied {
-                
-                DispatchQueue.main.async {
-                    self.viewModel.callPlaceRequest(query: query, langCode: .ko, location: self.centerLocation)
-                    self.mainView.configureHidden(collection: false, network: true)
-                }
-                return
-
-            } else {
-                DispatchQueue.main.async {
-                    self.mainView.configureHidden(collection: true, network: false)
-
-                }
-            }
-
-        }
-    }
+//    private func startMonitoring(query: String, langCode: LangCode) {
+//
+//        monitor.start(queue: .global())
+//        monitor.pathUpdateHandler = { path in
+//            if path.status == .satisfied {
+//
+//                DispatchQueue.main.async {
+//                    self.viewModel.callPlaceRequest(query: query, langCode: .ko, location: self.centerLocation)
+//                    self.mainView.configureHidden(collection: false, network: true)
+//                }
+//                return
+//
+//            } else {
+//                DispatchQueue.main.async {
+//                    self.mainView.configureHidden(collection: true, network: false)
+//
+//                }
+//            }
+//
+//        }
+//    }
 
 }
