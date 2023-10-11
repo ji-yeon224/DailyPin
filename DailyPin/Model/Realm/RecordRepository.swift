@@ -12,9 +12,9 @@ final class RecordRepository {
     
     private let realm = try! Realm()
     
-    func fetch() -> [Record] {
+    func fetch() -> Results<Record> {
         let data = realm.objects(Record.self)
-        return Array(data)
+        return data
     }
     
     func createItem(_ item: Record) throws {
@@ -75,6 +75,19 @@ final class RecordRepository {
             throw InvalidError.noExistData
         }
         return place
+        
+    }
+    
+    // 전달한 달의 데이터 리스트를 반환
+    func filterItemByDate(_ date: String) -> [Record] {
+        
+        
+        let result = realm.objects(Record.self).filter {
+            let dateString = DateFormatter.convertMonth(date: $0.date)
+            return dateString == date
+        }
+        
+        return Array(result)
         
     }
 }

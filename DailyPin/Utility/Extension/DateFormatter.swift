@@ -15,11 +15,22 @@ extension DateFormatter {
         return format
     }()
     
+    static let monthFormat = {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy.MM"
+        return format
+    }()
+    
     static func today() -> String {
         return format.string(from: Date())
     }
+ 
     
     static func convertDate(date: Date) -> String {
         return format.string(from: date)
+    }
+    
+    static func convertMonth(date: Date) -> String {
+        return monthFormat.string(from: date)
     }
 }

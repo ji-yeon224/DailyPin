@@ -78,6 +78,8 @@
 		CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390BB2ACFF89300E4B2AC /* Record.swift */; };
 		CEB5ECFA2AD0595E00BC6143 /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */; };
 		CEB5ECFE2AD05F1100BC6143 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5ECFD2AD05F1100BC6143 /* RecordViewModel.swift */; };
+		CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */; };
+		CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */; };
 		CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +152,8 @@
 		CEB390BB2ACFF89300E4B2AC /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepository.swift; sourceTree = "<group>"; };
 		CEB5ECFD2AD05F1100BC6143 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarProtocol.swift; sourceTree = "<group>"; };
 		CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +191,7 @@
 			children = (
 				CE814A5E2AD594EF00068854 /* CalendarViewController.swift */,
 				CE814A602AD594FB00068854 /* CalendarView.swift */,
+				CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */,
 				CE9A16B42AD28F0D0051BE23 /* Image.swift */,
 				CE9A16B92AD2CCBB0051BE23 /* InfoCollectionViewProtocol.swift */,
+				CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -504,6 +510,7 @@
 				CE52CB772AC7B454007AD7F8 /* NetworkError.swift in Sources */,
 				CEB390BA2ACFDF4C00E4B2AC /* DateFormatter.swift in Sources */,
 				CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */,
+				CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */,
 				CE3DF7FA2AC2B1BB00653CE1 /* BaseViewController.swift in Sources */,
 				CE814A662AD59D4900068854 /* CustomCalendarView.swift in Sources */,
 				CE3DF8032AC2B5BA00653CE1 /* MainMapView.swift in Sources */,
@@ -525,6 +532,7 @@
 				CE9B0E8D2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift in Sources */,
 				CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */,
 				CE3DF81D2AC52C2E00653CE1 /* SearchView.swift in Sources */,
+				CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */,
 				CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */,
 				CE3DF7FC2AC2B39D00653CE1 /* BaseView.swift in Sources */,
 				CEB5ECFE2AD05F1100BC6143 /* RecordViewModel.swift in Sources */,
