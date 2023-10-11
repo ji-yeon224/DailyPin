@@ -31,10 +31,10 @@ class CustomCalendarView: FSCalendar {
         //appearance.subtitleOffset = CGPoint(x: 0, y: 4)
         
         appearance.headerDateFormat = "YYYY.MM"
-        appearance.headerTitleColor = .black
+        appearance.headerTitleColor = Constants.Color.basicText
         
         appearance.weekdayFont = .systemFont(ofSize: 12)
-        appearance.weekdayTextColor = .black
+        appearance.weekdayTextColor = Constants.Color.basicText
         
         //appearance.titleTodayColor = .white
         appearance.titleFont = .systemFont(ofSize: 16)

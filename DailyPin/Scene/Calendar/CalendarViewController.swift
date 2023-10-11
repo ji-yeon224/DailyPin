@@ -20,7 +20,9 @@ final class CalendarViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindData()
-        viewModel.getRecords(date: "2023.10")
+        mainView.calendarDelegate = self
+        
+        
     }
     
     private func bindData() {
@@ -38,11 +40,31 @@ final class CalendarViewController: BaseViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
         
+        let date = DateFormatter.convertMonth(date: mainView.currentPage)
+        viewModel.getRecords(date: date)
+        
     }
     
     @objc private func backButtonTapped() {
         dismiss(animated: true)
     }
     
+    
+}
+
+extension CalendarViewController: FSCalendarProtocol {
+    
+    func didSelectDate(date: Date) {
+        print(date)
+    }
+    
+//    func numberOfEventsFor() -> Int {
+//        
+//    }
+    
+    func calendarCurrentPageDidChange(date: String) {
+        viewModel.getRecords(date: date)
+        // 컬렉션 뷰 갱신 구현
+    }
     
 }

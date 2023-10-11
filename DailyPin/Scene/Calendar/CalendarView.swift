@@ -12,6 +12,7 @@ import FSCalendar
 final class CalendarView: BaseView {
     
     lazy var currentPage = calendarView.currentPage
+    weak var calendarDelegate: FSCalendarProtocol?
     
     lazy var calendarView = {
         let view = CustomCalendarView()
@@ -86,12 +87,14 @@ final class CalendarView: BaseView {
 
 extension CalendarView: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
     
-//    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-//        self.navigationController?.popViewController(animated: true)
-//        self.delegate?.dateUpdated(date: date.key)
-//    }
-    
-    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        calendarDelegate?.didSelectDate(date: date)
+    }
+   
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        let currentMonth = DateFormatter.convertMonth(date: calendar.currentPage)
+        calendarDelegate?.calendarCurrentPageDidChange(date: currentMonth)
+    }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         calendar.snp.updateConstraints { (make) in
@@ -101,22 +104,6 @@ extension CalendarView: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDele
         
         self.layoutIfNeeded()
     }
-    
-//    func calendar(_ calendar: FSCalendar, subtitleFor date: Date) -> String? {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.locale = Locale(identifier: "ko_KR")
-//        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//
-//        switch dateFormatter.string(from: date) {
-//        case dateFormatter.string(from: Date()):
-//            return "오늘"
-//
-//        default:
-//            return nil
-//
-//        }
-//    }
     
     // 일요일에 해당되는 모든 날짜의 색상 red로 변경
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
@@ -133,7 +120,7 @@ extension CalendarView: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDele
     
     // 표시되는 이벤트 갯수
 //    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-//
+//        return calendarDelegate?.numberOfEventsFor() ?? 0
 //    }
     
 }
