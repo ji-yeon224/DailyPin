@@ -29,3 +29,7 @@
 "saveButton" = "저장";
 "editButton" = "수정하기";
 "deleteButton" = "삭제하기";
+
+
+// calendar
+"language" = "ko_KR";
