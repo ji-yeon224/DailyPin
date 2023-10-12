@@ -17,6 +17,7 @@ final class Constants {
         static let subColor = UIColor(named: "SubColor")
         static let pinColor = UIColor(named: "PinColor")
         static let selectPinColor = UIColor(named: "SelectColor")
+        static let eventColor = UIColor(named: "EventColor")
         static let tintColor = UIColor.black
         static let subTextColor = UIColor.lightGray
         static let borderColor = UIColor.lightGray

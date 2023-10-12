@@ -47,7 +47,8 @@ class CustomCalendarView: FSCalendar {
         calendarWeekdayView.weekdayLabels.first!.textColor = .systemRed
         calendarWeekdayView.weekdayLabels.last!.textColor = .systemBlue
         
-        
+        appearance.eventDefaultColor = Constants.Color.eventColor
+        appearance.eventSelectionColor = Constants.Color.eventColor
         select(selectedDate)
     }
     
