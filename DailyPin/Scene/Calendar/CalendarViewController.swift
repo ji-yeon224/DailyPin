@@ -24,21 +24,18 @@ final class CalendarViewController: BaseViewController {
         //mainView.collectionViewDelegate = self
         viewModel.filterDate(DateFormatter.convertCalendarDate(date: Date()))
         updateSnapShot()
+        mainView.setDefaultSelectDate(Date())
     }
     
     private func bindData() {
-        viewModel.recordFilterByMonth.bind { data in
-            //print(data)
-        }
         
         viewModel.recordDateList.bind { data in
-            //print(data)
-            
             self.dateList = data
         }
         
         viewModel.recordFileterByDate.bind { data in
             self.updateSnapShot()
+            
         }
     }
     
@@ -56,7 +53,7 @@ final class CalendarViewController: BaseViewController {
         dismiss(animated: true)
     }
     
-    func updateSnapShot() {
+    private func updateSnapShot() {
         var snapShot = NSDiffableDataSourceSnapshot<Int, Record>()
         snapShot.appendSections([0])
         snapShot.appendItems(viewModel.recordFileterByDate.value)
@@ -68,11 +65,13 @@ final class CalendarViewController: BaseViewController {
 
 extension CalendarViewController: FSCalendarProtocol {
     
+    func moveCalendar(date: Date) {
+        viewModel.filterDate(DateFormatter.convertCalendarDate(date: date))
+    }
+    
     func didSelectDate(date: Date) {
-        print(DateFormatter.convertCalendarDate(date: date))
         viewModel.filterDate(DateFormatter.convertCalendarDate(date: date))
         
-       
     }
     
     func numberOfEventsFor(date: Date) -> Int {
@@ -84,7 +83,7 @@ extension CalendarViewController: FSCalendarProtocol {
     
     func calendarCurrentPageDidChange(date: String) {
         viewModel.getRecords(date: date)
-        // 컬렉션 뷰 갱신 구현
+        
     }
     
 }

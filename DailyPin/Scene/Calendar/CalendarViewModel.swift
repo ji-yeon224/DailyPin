@@ -14,24 +14,21 @@ final class CalendarViewModel {
     let recordFilterByMonth: Observable<[Record]> = Observable([])
     let recordDateList: Observable<[Date]> = Observable([])
     let recordFileterByDate: Observable<[Record]> = Observable([])
-    private var dateSet: Set<String> = []
+    private var dateSet: Set<Date> = []
     
     func getRecords(date: String) {
         let data = recordRepository.filterItemByMonth(date)
         recordFilterByMonth.value = data
         
+        let calendar = Calendar.current
+        
         dateSet.removeAll()
         data.forEach {
-            dateSet.insert(DateFormatter.convertCalendarDate(date: $0.date))
             
+            dateSet.insert(calendar.startOfDay(for: $0.date))
         }
-        
-        dateSet.forEach {
-            if let convert = DateFormatter.stringToDate(date: $0) {
-                recordDateList.value.append(convert)
-            }
-        }
-        
+        recordDateList.value.append(contentsOf: dateSet)
+
     }
     
     func filterDate(_ date: String) {

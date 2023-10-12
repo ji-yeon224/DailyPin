@@ -50,6 +50,7 @@ class CustomCalendarView: FSCalendar {
         appearance.eventDefaultColor = Constants.Color.eventColor
         appearance.eventSelectionColor = Constants.Color.eventColor
         select(selectedDate)
+        
     }
     
     

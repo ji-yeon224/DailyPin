@@ -14,12 +14,14 @@ extension DateFormatter {
         let format = DateFormatter()
         format.locale = Locale(identifier: "ko_KR")
         format.dateFormat = "yyyy-MM-dd hh:mm a"
+        format.timeZone = TimeZone(abbreviation: "KST")
         return format
     }()
     
     static let monthFormat = {
         let format = DateFormatter()
         format.locale = Locale(identifier: "ko_KR")
+        format.timeZone = TimeZone(abbreviation: "KST")
         format.dateFormat = "yyyy.MM"
         return format
     }()
@@ -27,6 +29,7 @@ extension DateFormatter {
     static let formatDate = {
         let form = DateFormatter()
         format.locale = Locale(identifier: "ko_KR")
+        format.timeZone = TimeZone(abbreviation: "KST")
         form.dateFormat = "yyyy-MM-dd"
         return form
         

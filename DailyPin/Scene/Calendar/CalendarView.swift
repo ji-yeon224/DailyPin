@@ -30,11 +30,6 @@ final class CalendarView: BaseView {
         return view
     }()
     
-    let noDataLabel = {
-        let view = UILabel()
-        view.text = "아직 등록된 기록이 없습니다.\n 기록을 등록해보세요!"
-        return view
-    }()
     
     // 이전 달로 이동 버튼
     private let prevButton = {
@@ -62,6 +57,8 @@ final class CalendarView: BaseView {
         setAction()
     }
     
+    
+    
     override func setConstraints() {
         calendarView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -86,6 +83,8 @@ final class CalendarView: BaseView {
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
             make.bottom.equalTo(safeAreaLayoutGuide).offset(20)
         }
+        
+        
     }
     
     private func setAction() {
@@ -104,6 +103,13 @@ final class CalendarView: BaseView {
         dateComponents.month = next ? 1 : -1
         self.currentPage = Calendar.current.date(byAdding: dateComponents, to: self.currentPage)!
         calendarView.setCurrentPage(self.currentPage, animated: true)
+        setDefaultSelectDate(currentPage)
+        calendarDelegate?.moveCalendar(date: currentPage)
+        
+    }
+    
+    func setDefaultSelectDate(_ date: Date){
+        calendarView.select(date)
     }
     
 }
