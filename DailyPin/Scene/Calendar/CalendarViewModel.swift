@@ -13,7 +13,7 @@ final class CalendarViewModel {
     
     let recordSortedByMonth: Observable<[Record]> = Observable([])
     let recordDateList: Observable<[Date]> = Observable([])
-    private var dateSet: Set<Date> = []
+    private var dateSet: Set<String> = []
     
     func getRecords(date: String) {
         let data = recordRepository.filterItemByDate(date)
@@ -21,9 +21,15 @@ final class CalendarViewModel {
         
         dateSet.removeAll()
         data.forEach {
-            dateSet.insert($0.date)
+            dateSet.insert(DateFormatter.convertCalendarDate(date: $0.date))
         }
-        recordDateList.value.append(contentsOf: dateSet)
+        
+        dateSet.forEach {
+            if let convert = DateFormatter.stringToDate(date: $0) {
+                recordDateList.value.append(convert)
+            }
+        }
+        
     }
     
     

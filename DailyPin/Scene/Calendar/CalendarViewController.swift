@@ -11,7 +11,7 @@ final class CalendarViewController: BaseViewController {
     
     private let mainView = CalendarView()
     private let viewModel = CalendarViewModel()
-    
+    private var dateList: [Date] = []
     override func loadView() {
         self.view = mainView
         
@@ -27,11 +27,13 @@ final class CalendarViewController: BaseViewController {
     
     private func bindData() {
         viewModel.recordSortedByMonth.bind { data in
-            print(data)
+            //print(data)
         }
         
         viewModel.recordDateList.bind { data in
-            print(data)
+            //print(data)
+            
+            self.dateList = data
         }
     }
     
@@ -55,12 +57,17 @@ final class CalendarViewController: BaseViewController {
 extension CalendarViewController: FSCalendarProtocol {
     
     func didSelectDate(date: Date) {
-        print(date)
+        print(DateFormatter.convertCalendarDate(date: date))
+       
+       
     }
     
-//    func numberOfEventsFor() -> Int {
-//        
-//    }
+    func numberOfEventsFor(date: Date) -> Int {
+        if self.dateList.contains(date){
+            return 1
+        }
+        return 0
+    }
     
     func calendarCurrentPageDidChange(date: String) {
         viewModel.getRecords(date: date)

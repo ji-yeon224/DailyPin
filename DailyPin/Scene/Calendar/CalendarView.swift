@@ -14,6 +14,8 @@ final class CalendarView: BaseView {
     lazy var currentPage = calendarView.currentPage
     weak var calendarDelegate: FSCalendarProtocol?
     
+    
+    
     lazy var calendarView = {
         let view = CustomCalendarView()
         view.delegate = self
@@ -119,8 +121,9 @@ extension CalendarView: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDele
     }
     
     // 표시되는 이벤트 갯수
-//    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-//        return calendarDelegate?.numberOfEventsFor() ?? 0
-//    }
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let data = calendarDelegate?.numberOfEventsFor(date: date) ?? 0
+        return data
+    }
     
 }

@@ -10,6 +10,6 @@ import Foundation
 protocol FSCalendarProtocol: AnyObject {
     
     func didSelectDate(date: Date)
-    //func numberOfEventsFor() -> Int
+    func numberOfEventsFor(date: Date) -> Int
     func calendarCurrentPageDidChange(date: String)
 }

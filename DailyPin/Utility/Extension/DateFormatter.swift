@@ -9,22 +9,29 @@ import Foundation
 
 
 extension DateFormatter {
+    
     static let format = {
         let format = DateFormatter()
+        format.locale = Locale(identifier: "ko_KR")
         format.dateFormat = "yyyy-MM-dd hh:mm a"
         return format
     }()
     
     static let monthFormat = {
         let format = DateFormatter()
+        format.locale = Locale(identifier: "ko_KR")
         format.dateFormat = "yyyy.MM"
         return format
     }()
     
-    static func today() -> String {
-        return format.string(from: Date())
-    }
- 
+    static let formatDate = {
+        let form = DateFormatter()
+        format.locale = Locale(identifier: "ko_KR")
+        form.dateFormat = "yyyy-MM-dd"
+        return form
+        
+    }()
+    
     
     static func convertDate(date: Date) -> String {
         return format.string(from: date)
@@ -32,5 +39,13 @@ extension DateFormatter {
     
     static func convertMonth(date: Date) -> String {
         return monthFormat.string(from: date)
+    }
+    
+    static func convertCalendarDate(date: Date) -> String {
+        return formatDate.string(from: date)
+    }
+    
+    static func stringToDate(date: String) -> Date? {
+        return formatDate.date(from: date) ?? nil
     }
 }
