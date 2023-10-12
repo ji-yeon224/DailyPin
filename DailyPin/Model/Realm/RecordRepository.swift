@@ -79,10 +79,10 @@ final class RecordRepository {
     }
     
     // 전달한 달의 데이터 리스트를 반환
-    func filterItemByDate(_ date: String) -> [Record] {
+    func filterItemByMonth(_ date: String) -> [Record] {
         
         
-        let result = realm.objects(Record.self).filter {
+        let result = realm.objects(Record.self).sorted(byKeyPath: "date", ascending: true).filter {
             let dateString = DateFormatter.convertMonth(date: $0.date)
             return dateString == date
         }
@@ -90,4 +90,6 @@ final class RecordRepository {
         return Array(result)
         
     }
+    
+    
 }

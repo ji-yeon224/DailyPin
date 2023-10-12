@@ -6,6 +6,6 @@
 //
 
 import Foundation
-protocol InfoCollectionViewProtocol: AnyObject {
+protocol RecordCollectionViewProtocol: AnyObject {
     func didSelectRecordItem(item: Record?)
 }

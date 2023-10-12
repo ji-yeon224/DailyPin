@@ -12,7 +12,7 @@ import UIKit
 final class InfoView: BaseView {
     
     var dataSource: UICollectionViewDiffableDataSource<Int, Record>!
-    weak var collectionViewDelegate: InfoCollectionViewProtocol?
+    weak var collectionViewDelegate: RecordCollectionViewProtocol?
     
     private let uiView = UIView()
     

@@ -115,7 +115,7 @@ final class InfoViewController: BaseViewController {
     
 }
 
-extension InfoViewController: InfoCollectionViewProtocol {
+extension InfoViewController: RecordCollectionViewProtocol {
     func didSelectRecordItem(item: Record?) {
         guard let item = item else {
             showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { }

@@ -21,12 +21,13 @@ final class CalendarViewController: BaseViewController {
         super.viewDidLoad()
         bindData()
         mainView.calendarDelegate = self
-        
-        
+        //mainView.collectionViewDelegate = self
+        viewModel.filterDate(DateFormatter.convertCalendarDate(date: Date()))
+        updateSnapShot()
     }
     
     private func bindData() {
-        viewModel.recordSortedByMonth.bind { data in
+        viewModel.recordFilterByMonth.bind { data in
             //print(data)
         }
         
@@ -34,6 +35,10 @@ final class CalendarViewController: BaseViewController {
             //print(data)
             
             self.dateList = data
+        }
+        
+        viewModel.recordFileterByDate.bind { data in
+            self.updateSnapShot()
         }
     }
     
@@ -51,6 +56,13 @@ final class CalendarViewController: BaseViewController {
         dismiss(animated: true)
     }
     
+    func updateSnapShot() {
+        var snapShot = NSDiffableDataSourceSnapshot<Int, Record>()
+        snapShot.appendSections([0])
+        snapShot.appendItems(viewModel.recordFileterByDate.value)
+        mainView.dataSource.apply(snapShot)
+    }
+    
     
 }
 
@@ -58,7 +70,8 @@ extension CalendarViewController: FSCalendarProtocol {
     
     func didSelectDate(date: Date) {
         print(DateFormatter.convertCalendarDate(date: date))
-       
+        viewModel.filterDate(DateFormatter.convertCalendarDate(date: date))
+        
        
     }
     
@@ -75,3 +88,24 @@ extension CalendarViewController: FSCalendarProtocol {
     }
     
 }
+
+//extension CalendarViewController: RecordCollectionViewProtocol {
+//    func didSelectRecordItem(item: Record?) {
+//        guard let item = item else {
+//            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { }
+//            return
+//        }
+//
+//        let vc = RecordViewController()
+//        vc.record = item
+//        vc.location = viewModel.place.value
+//        vc.editMode = false
+//
+//        let nav = UINavigationController(rootViewController: vc)
+//        nav.modalPresentationStyle = .overFullScreen
+//        nav.modalTransitionStyle = .crossDissolve
+//
+//        present(nav, animated: true)
+//
+//    }
+//}

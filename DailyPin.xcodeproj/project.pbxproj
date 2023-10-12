@@ -56,7 +56,7 @@
 		CE9A16B32AD2897E0051BE23 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A16B22AD2897E0051BE23 /* CustomAnnotation.swift */; };
 		CE9A16B52AD28F0D0051BE23 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A16B42AD28F0D0051BE23 /* Image.swift */; };
 		CE9A16B82AD2BE240051BE23 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A16B72AD2BE240051BE23 /* CustomAnnotationView.swift */; };
-		CE9A16BA2AD2CCBB0051BE23 /* InfoCollectionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A16B92AD2CCBB0051BE23 /* InfoCollectionViewProtocol.swift */; };
+		CE9A16BA2AD2CCBB0051BE23 /* RecordCollectionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A16B92AD2CCBB0051BE23 /* RecordCollectionViewProtocol.swift */; };
 		CE9B0E8B2ACA6A0A008A0694 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = CE9B0E8A2ACA6A0A008A0694 /* FloatingPanel */; };
 		CE9B0E8D2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */; };
 		CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */; };
@@ -129,7 +129,7 @@
 		CE9A16B22AD2897E0051BE23 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		CE9A16B42AD28F0D0051BE23 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		CE9A16B72AD2BE240051BE23 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
-		CE9A16B92AD2CCBB0051BE23 /* InfoCollectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionViewProtocol.swift; sourceTree = "<group>"; };
+		CE9A16B92AD2CCBB0051BE23 /* RecordCollectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewProtocol.swift; sourceTree = "<group>"; };
 		CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelCustomLayout.swift; sourceTree = "<group>"; };
 		CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		CE9B0E942ACA95D7008A0694 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 				CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */,
 				CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */,
 				CE9A16B42AD28F0D0051BE23 /* Image.swift */,
-				CE9A16B92AD2CCBB0051BE23 /* InfoCollectionViewProtocol.swift */,
+				CE9A16B92AD2CCBB0051BE23 /* RecordCollectionViewProtocol.swift */,
 				CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */,
 			);
 			path = Utility;
@@ -486,7 +486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE9A16BA2AD2CCBB0051BE23 /* InfoCollectionViewProtocol.swift in Sources */,
+				CE9A16BA2AD2CCBB0051BE23 /* RecordCollectionViewProtocol.swift in Sources */,
 				CE52CB722AC7197C007AD7F8 /* SearchViewModel.swift in Sources */,
 				CE3DF8162AC3311400653CE1 /* BaseUIButton.swift in Sources */,
 				CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */,
