@@ -38,15 +38,13 @@ final class SearchView: BaseView {
     
     private let errorImage = {
         let view = UIImageView()
-        view.image = Constants.Image.networkError
         view.tintColor = Constants.Color.subTextColor
         view.contentMode = .scaleAspectFit
         return view
     }()
     
-    private let networkErrorLabel = {
+    private let errorLabel = {
         let view = UILabel()
-        view.text = "네트워크 연결을 확인해주세요."
         view.backgroundColor = .clear
         view.textColor = Constants.Color.subTextColor
         view.font = .systemFont(ofSize: 18)
@@ -56,6 +54,7 @@ final class SearchView: BaseView {
         return view
     }()
     
+
     var dataSource: UICollectionViewDiffableDataSource<Int, PlaceElement>!
     
     override func configureUI() {
@@ -64,7 +63,7 @@ final class SearchView: BaseView {
         addSubview(collectionView)
         addSubview(errorView)
         errorView.addSubview(errorImage)
-        errorView.addSubview(networkErrorLabel)
+        errorView.addSubview(errorLabel)
         
         
         configureDataSource()
@@ -92,7 +91,7 @@ final class SearchView: BaseView {
             
         }
         
-        networkErrorLabel.snp.makeConstraints { make in
+        errorLabel.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(errorView)
             make.top.equalTo(errorImage.snp.bottom).offset(10)
             make.bottom.greaterThanOrEqualTo(errorView).offset(10)
@@ -130,9 +129,16 @@ final class SearchView: BaseView {
         
     }
     
-    func configureHidden(collection: Bool, network: Bool) {
+    func configureHidden(collection: Bool, error: Bool) {
+        
         collectionView.isHidden = collection
-        errorView.isHidden = network
+        errorView.isHidden = error
+    }
+    
+    func configureErrorView(image: UIImage?, description: String) {
+        
+        errorImage.image = image ?? Constants.Image.warning
+        errorLabel.text = description
     }
     
     

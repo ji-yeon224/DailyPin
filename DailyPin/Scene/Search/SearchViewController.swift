@@ -29,13 +29,30 @@ final class SearchViewController: BaseViewController {
         mainView.searchBar.becomeFirstResponder()
         mainView.searchBar.delegate = self
         bindData()
-        if NetworkMonitor.shared.isConnected {
-            print("connect")
-        } else {
-            print("connectError")
-        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(networkConfiguration), name: .networkConnect, object: nil)
+        
         
        
+    }
+    
+    @objc private func networkConfiguration(notification: NSNotification) {
+        
+        guard let userInfo = notification.userInfo else { return }
+        
+        if let value = userInfo["isConnected"] as? Bool {
+            if value {
+                DispatchQueue.main.async {
+                    self.mainView.configureHidden(collection: false, error: true)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.mainView.configureHidden(collection: true, error: false)
+                }
+            }
+        }
+        
+        
     }
     
     private func bindData() {
@@ -54,8 +71,16 @@ final class SearchViewController: BaseViewController {
     
     override func configureUI() {
         super.configureUI()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonClicked))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
+        
+        if NetworkMonitor.shared.isConnected {
+            self.mainView.configureHidden(collection: false, error: true)
+            self.mainView.configureErrorView(image: Constants.Image.networkError, description: "네트워크 연결을 확인해주세요!")
+        } else {
+            self.mainView.configureHidden(collection: true, error: false)
+        }
+        
     }
     
     @objc private func backButtonClicked() {
@@ -75,12 +100,14 @@ final class SearchViewController: BaseViewController {
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let query = searchBar.text?.trimmingCharacters(in: .whitespaces) else {
-            showToastMessage(message: "toast_searchInputError".localized())
+        guard let query = searchBar.text?.trimmingCharacters(in: .whitespaces), !query.isEmpty else {
+            mainView.configureErrorView(image: Constants.Image.noData, description: "검색 결과가 없습니다.")
+            mainView.configureHidden(collection: true, error: false)
             return
         }
         
         viewModel.callPlaceRequest(query: query, langCode: .ko, location: centerLocation)
+        mainView.configureHidden(collection: false, error: true)
         view.endEditing(true)
         
     }
@@ -111,30 +138,3 @@ extension SearchViewController: CollectionViewProtocol {
 }
 
 
-// 네트워크 모니터링
-extension SearchViewController {
-    
-    
-//    private func startMonitoring(query: String, langCode: LangCode) {
-//
-//        monitor.start(queue: .global())
-//        monitor.pathUpdateHandler = { path in
-//            if path.status == .satisfied {
-//
-//                DispatchQueue.main.async {
-//                    self.viewModel.callPlaceRequest(query: query, langCode: .ko, location: self.centerLocation)
-//                    self.mainView.configureHidden(collection: false, network: true)
-//                }
-//                return
-//
-//            } else {
-//                DispatchQueue.main.async {
-//                    self.mainView.configureHidden(collection: true, network: false)
-//
-//                }
-//            }
-//
-//        }
-//    }
-
-}
