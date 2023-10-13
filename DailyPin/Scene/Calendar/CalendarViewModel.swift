@@ -22,6 +22,7 @@ final class CalendarViewModel {
         
         let calendar = Calendar.current
         
+        recordDateList.value.removeAll()
         dateSet.removeAll()
         data.forEach {
             

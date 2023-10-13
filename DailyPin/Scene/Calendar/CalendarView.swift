@@ -16,7 +16,7 @@ final class CalendarView: BaseView {
     weak var collectionViewDelegate: RecordCollectionViewProtocol?
     var dataSource: UICollectionViewDiffableDataSource<Int, Record>!
     
-    private lazy var calendarView = {
+    lazy var calendarView = {
         let view = CustomCalendarView()
         view.delegate = self
         view.dataSource = self
@@ -154,7 +154,7 @@ extension CalendarView: UICollectionViewDelegate  {
             return
         }
         
-        //collectionViewDelegate?.didSelectRecordItem(item: item)
+        collectionViewDelegate?.didSelectRecordItem(item: item)
         
     }
     
@@ -200,5 +200,6 @@ extension CalendarView: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDele
         let data = calendarDelegate?.numberOfEventsFor(date: date) ?? 0
         return data
     }
+    
     
 }

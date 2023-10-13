@@ -12,6 +12,8 @@ final class CalendarViewController: BaseViewController {
     private let mainView = CalendarView()
     private let viewModel = CalendarViewModel()
     private var dateList: [Date] = []
+    private var selectedDate = Date()
+    
     override func loadView() {
         self.view = mainView
         
@@ -21,10 +23,10 @@ final class CalendarViewController: BaseViewController {
         super.viewDidLoad()
         bindData()
         mainView.calendarDelegate = self
-        //mainView.collectionViewDelegate = self
-        viewModel.filterDate(DateFormatter.convertCalendarDate(date: Date()))
+        mainView.collectionViewDelegate = self
+        viewModel.filterDate(convertDate(selectedDate))
         updateSnapShot()
-        mainView.setDefaultSelectDate(Date())
+        mainView.setDefaultSelectDate(selectedDate)
     }
     
     private func bindData() {
@@ -35,7 +37,6 @@ final class CalendarViewController: BaseViewController {
         
         viewModel.recordFileterByDate.bind { data in
             self.updateSnapShot()
-            
         }
     }
     
@@ -47,6 +48,15 @@ final class CalendarViewController: BaseViewController {
         let date = DateFormatter.convertMonth(date: mainView.currentPage)
         viewModel.getRecords(date: date)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: Notification.Name.updateCell, object: nil)
+        
+    }
+    
+    @objc private func getChangeNotification(notification: NSNotification) {
+        let currentMonth = DateFormatter.convertMonth(date: mainView.calendarView.currentPage)
+        viewModel.getRecords(date: currentMonth)
+        viewModel.filterDate(convertDate(selectedDate))
+        mainView.calendarView.reloadData()
     }
     
     @objc private func backButtonTapped() {
@@ -60,18 +70,24 @@ final class CalendarViewController: BaseViewController {
         mainView.dataSource.apply(snapShot)
     }
     
+    func convertDate(_ date: Date) -> String {
+        return DateFormatter.convertCalendarDate(date: date)
+    }
     
 }
+
+
 
 extension CalendarViewController: FSCalendarProtocol {
     
     func moveCalendar(date: Date) {
-        viewModel.filterDate(DateFormatter.convertCalendarDate(date: date))
+        viewModel.filterDate(convertDate(date))
+        selectedDate = date
     }
     
     func didSelectDate(date: Date) {
-        viewModel.filterDate(DateFormatter.convertCalendarDate(date: date))
-        
+        viewModel.filterDate(convertDate(date))
+        selectedDate = date
     }
     
     func numberOfEventsFor(date: Date) -> Int {
@@ -88,23 +104,36 @@ extension CalendarViewController: FSCalendarProtocol {
     
 }
 
-//extension CalendarViewController: RecordCollectionViewProtocol {
-//    func didSelectRecordItem(item: Record?) {
-//        guard let item = item else {
-//            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { }
-//            return
-//        }
-//
-//        let vc = RecordViewController()
-//        vc.record = item
-//        vc.location = viewModel.place.value
-//        vc.editMode = false
-//
-//        let nav = UINavigationController(rootViewController: vc)
-//        nav.modalPresentationStyle = .overFullScreen
-//        nav.modalTransitionStyle = .crossDissolve
-//
-//        present(nav, animated: true)
-//
-//    }
-//}
+extension CalendarViewController: RecordCollectionViewProtocol {
+    func didSelectRecordItem(item: Record?) {
+        guard let item = item else {
+            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { }
+            return
+        }
+        
+        guard let place = item.placeInfo.first else {
+            showOKAlert(title: "", message: "위치를 로드하는데 문제가 발생하였습니다.") { }
+            return
+        }
+        
+        let vc = RecordViewController()
+        vc.record = item
+        vc.location = convertToStruct(place)
+        vc.editMode = false
+        
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        nav.modalTransitionStyle = .crossDissolve
+
+        present(nav, animated: true)
+
+    }
+    
+    func convertToStruct(_ item: Place) -> PlaceElement {
+        
+        let location = Location(latitude: item.latitude, longitude: item.longitude)
+        let displayName = DisplayName(placeName: item.placeName)
+        
+        return PlaceElement(id: item.placeId, formattedAddress: item.address, location: location, displayName: displayName)
+    }
+}
