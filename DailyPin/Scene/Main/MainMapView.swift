@@ -13,10 +13,12 @@ final class MainMapView: BaseView {
     
     let fpc = FloatingPanelController()
     let contentVC = InfoViewController()
+    weak var mapViewDelegate: MapViewProtocol?
 
-    let mapView = {
+    lazy var mapView = {
         let view = MKMapView()
         view.showsCompass = false
+        view.delegate = self
         return view
     }()
     let searchBarView = {
@@ -114,6 +116,53 @@ extension MainMapView {
         fpc.view.frame = contentVC.view.bounds
         fpc.layout = FloatingPanelCustomLayout()
         fpc.invalidateLayout()
+    }
+    
+}
+
+extension MainMapView: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let annotation = view.annotation as? CustomAnnotation else {
+            return
+        }
+        
+        guard let view = view as? CustomAnnotationView else { return }
+        view.imageView.image = Constants.Image.selectPin
+        view.imageView.tintColor = Constants.Color.selectPinColor
+        
+        mapViewDelegate?.didSelect(annotation: annotation)
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        
+        guard let view = view as? CustomAnnotationView else { return }
+        view.imageView.image = Constants.Image.starImage
+        view.imageView.tintColor = Constants.Color.pinColor
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
+        
+        var annotationView: MKAnnotationView?
+        
+        
+        if annotation.isKind(of: SelectAnnotation.self) {
+            if let annotation = annotation as? SelectAnnotation {
+                annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: SelectAnnotationView.identifier, for: annotation)
+                
+            }
+        } else if annotation.isKind(of: CustomAnnotation.self) {
+            if let annotation = annotation as? CustomAnnotation {
+                annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
+                
+            }
+        }
+        
+       
+        
+        return annotationView
     }
     
 }

@@ -36,7 +36,8 @@ final class MainMapViewController: BaseViewController {
         
         locationManager.delegate = self 
         checkDeviceLocationAuthorization()
-        mainView.mapView.delegate = self
+        mainView.mapViewDelegate = self
+        
         mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
         mainView.mapView.register(SelectAnnotationView.self, forAnnotationViewWithReuseIdentifier: SelectAnnotationView.identifier)
         
@@ -167,23 +168,8 @@ final class MainMapViewController: BaseViewController {
     
 }
 
-
-
-
-extension MainMapViewController: MKMapViewDelegate {
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
-        
-        
-        guard let annotation = view.annotation as? CustomAnnotation else {
-            return
-        }
-        
-        guard let view = view as? CustomAnnotationView else { return }
-        view.imageView.image = Constants.Image.selectPin
-        view.imageView.tintColor = Constants.Color.selectPinColor
-       
+extension MainMapViewController: MapViewProtocol {
+    func didSelect(annotation: CustomAnnotation) {
         if infoViewOn {
             mainView.fpc.dismiss(animated: true)
             infoViewOn.toggle()
@@ -199,44 +185,80 @@ extension MainMapViewController: MKMapViewDelegate {
         present(self.mainView.fpc, animated: true)
         infoViewOn = true
         
-        
     }
     
     
-    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        
-        guard let view = view as? CustomAnnotationView else { return }
-        view.imageView.image = Constants.Image.starImage
-        view.imageView.tintColor = Constants.Color.pinColor
-    }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
-        
-        var annotationView: MKAnnotationView?
-        
-        
-        if annotation.isKind(of: SelectAnnotation.self) {
-            if let annotation = annotation as? SelectAnnotation {
-                annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: SelectAnnotationView.identifier, for: annotation)
-                
-            }
-        } else if annotation.isKind(of: CustomAnnotation.self) {
-            if let annotation = annotation as? CustomAnnotation {
-                annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
-                
-            }
-        }
-        
-       
-        
-        return annotationView
-    }
     
 }
 
-
+//
+//extension MainMapViewController: MKMapViewDelegate {
+//
+//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//
+//
+//
+//        guard let annotation = view.annotation as? CustomAnnotation else {
+//            return
+//        }
+//
+//        guard let view = view as? CustomAnnotationView else { return }
+//        view.imageView.image = Constants.Image.selectPin
+//        view.imageView.tintColor = Constants.Color.selectPinColor
+//
+//        if infoViewOn {
+//            mainView.fpc.dismiss(animated: true)
+//            infoViewOn.toggle()
+//        }
+//
+//        // InfoView Present
+//        guard let place = viewModel.getPlaceData(id: annotation.placeID) else {
+//            return
+//        }
+//        let coord = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+//        mainView.setRegion(center: coord)
+//        mainView.setFloatingPanel(data: viewModel.convertPlaceToPlaceElement(place: place))
+//        present(self.mainView.fpc, animated: true)
+//        infoViewOn = true
+//
+//
+//    }
+//
+//
+//    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+//
+//        guard let view = view as? CustomAnnotationView else { return }
+//        view.imageView.image = Constants.Image.starImage
+//        view.imageView.tintColor = Constants.Color.pinColor
+//    }
+//
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//
+//        guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
+//
+//        var annotationView: MKAnnotationView?
+//
+//
+//        if annotation.isKind(of: SelectAnnotation.self) {
+//            if let annotation = annotation as? SelectAnnotation {
+//                annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: SelectAnnotationView.identifier, for: annotation)
+//
+//            }
+//        } else if annotation.isKind(of: CustomAnnotation.self) {
+//            if let annotation = annotation as? CustomAnnotation {
+//                annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
+//
+//            }
+//        }
+//
+//
+//
+//        return annotationView
+//    }
+//
+//}
+//
+//
 
 // 위치 서비스
 extension MainMapViewController {

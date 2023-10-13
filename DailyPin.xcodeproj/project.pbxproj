@@ -78,6 +78,7 @@
 		CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390BB2ACFF89300E4B2AC /* Record.swift */; };
 		CEB5ECFA2AD0595E00BC6143 /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */; };
 		CEB5ECFE2AD05F1100BC6143 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5ECFD2AD05F1100BC6143 /* RecordViewModel.swift */; };
+		CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */; };
 		CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */; };
 		CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */; };
 		CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */; };
@@ -152,6 +153,7 @@
 		CEB390BB2ACFF89300E4B2AC /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepository.swift; sourceTree = "<group>"; };
 		CEB5ECFD2AD05F1100BC6143 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewProtocol.swift; sourceTree = "<group>"; };
 		CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarProtocol.swift; sourceTree = "<group>"; };
 		CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				CE9A16B42AD28F0D0051BE23 /* Image.swift */,
 				CE9A16B92AD2CCBB0051BE23 /* RecordCollectionViewProtocol.swift */,
 				CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */,
+				CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				CE9A16B52AD28F0D0051BE23 /* Image.swift in Sources */,
 				CE4DF9132ACBC6BB00546526 /* DatabaseError.swift in Sources */,
 				CE52CB752AC71B47007AD7F8 /* InvalidError.swift in Sources */,
+				CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */,
 				CE9B0E982ACB04DB008A0694 /* AddButton.swift in Sources */,
 				CE814A612AD594FB00068854 /* CalendarView.swift in Sources */,
 				CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */,
