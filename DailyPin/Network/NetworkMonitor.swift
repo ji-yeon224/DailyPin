@@ -5,7 +5,7 @@
 //  Created by 김지연 on 2023/10/10.
 //
 
-import Foundation
+import UIKit
 import Network
 
 final class NetworkMonitor {
@@ -25,16 +25,17 @@ final class NetworkMonitor {
             self?.isConnected = path.status == .satisfied
             
             if self?.isConnected == true{
-                //print("연결이된 상태임!")
+                NotificationCenter.default.post(name: .networkConnect, object: self, userInfo: ["isConnected": true])
             }else{
-                //print("연결 안된 상태임!")
+                NotificationCenter.default.post(name: .networkConnect, object: self, userInfo: ["isConnected": false])
+                
                 
             }
             
         }
     }
     
-
+    
     // Network Monitoring 종료
     public func stopMonitoring() {
         monitor.cancel()
