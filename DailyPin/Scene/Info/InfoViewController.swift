@@ -24,7 +24,13 @@ final class InfoViewController: BaseViewController {
         mainView.collectionViewDelegate = self
         bindData()
         
-        
+        do {
+            try viewModel.getRecordList()
+            mainView.errorViewHidden(error: true)
+        } catch {
+            mainView.errorViewHidden(error: false)
+            return
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: Notification.Name.updateCell, object: nil)
     }
@@ -32,9 +38,9 @@ final class InfoViewController: BaseViewController {
     @objc private func getChangeNotification(notification: NSNotification) {
         do {
             try viewModel.getRecordList()
-            mainView.errorViewHidden(error: false)
-        } catch {
             mainView.errorViewHidden(error: true)
+        } catch {
+            mainView.errorViewHidden(error: false)
             return
         }
         
@@ -44,13 +50,7 @@ final class InfoViewController: BaseViewController {
     override func configureUI() {
         mainView.addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
         
-        do {
-            try viewModel.getRecordList()
-            mainView.errorViewHidden(error: false)
-        } catch {
-            mainView.errorViewHidden(error: true)
-            return
-        }
+        
         
         
     }
@@ -92,13 +92,13 @@ final class InfoViewController: BaseViewController {
         }
         
         viewModel.recordList.bind { data in
-           
+           //print("data", data)
             guard data != nil else {
-                self.mainView.errorViewHidden(error: true)
+                self.mainView.errorViewHidden(error: false)
                 return
             }
             
-            self.mainView.errorViewHidden(error: false)
+            self.mainView.errorViewHidden(error: true)
             self.updateSnapShot()
             
         }
@@ -111,10 +111,11 @@ final class InfoViewController: BaseViewController {
         snapShot.appendSections([0])
         
         guard let records = viewModel.recordList.value else {
-            mainView.errorViewHidden(error: true)
+            mainView.errorViewHidden(error: false)
             return
         }
-        mainView.errorViewHidden(error: false)
+        
+        mainView.errorViewHidden(error: true)
         snapShot.appendItems(records)
         mainView.dataSource.apply(snapShot)
     }

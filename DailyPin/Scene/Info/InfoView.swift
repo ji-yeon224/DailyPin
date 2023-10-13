@@ -39,7 +39,7 @@ final class InfoView: BaseView {
     lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         view.backgroundColor = Constants.Color.background
-        view.isHidden = true
+        
         view.delegate = self 
         return view
     }()
@@ -130,6 +130,7 @@ final class InfoView: BaseView {
     
     func errorViewHidden(error: Bool) {
         errorView.isHidden = error
+        collectionView.isHidden = !error
     }
     
 //    func configureHidden(collection: Bool, error: Bool) {

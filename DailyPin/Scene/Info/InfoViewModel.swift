@@ -25,7 +25,6 @@ final class InfoViewModel {
             recordList.value = try placeRepository.getRecordList(id: place.id)
         } catch {
             recordList.value = nil
-            return
         }
         
         //print(recordList.value)
