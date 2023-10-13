@@ -44,15 +44,33 @@ final class InfoView: BaseView {
         return view
     }()
     
+    private let errorView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.isHidden = true
+        return view
+    }()
     
+    private let errorImage = {
+        let view = UIImageView()
+        view.tintColor = Constants.Color.subTextColor
+        view.contentMode = .scaleAspectFit
+        view.image = Constants.Image.warning
+        return view
+    }()
     
-    let noDataLabel = {
+    private let errorLabel = {
         let view = UILabel()
-        view.text = "아직 등록된 기록이 없습니다.\n 기록을 등록해보세요!"
-        
+        view.backgroundColor = .clear
+        view.textColor = Constants.Color.subTextColor
+        view.font = .systemFont(ofSize: 18)
+        view.textAlignment = .center
+        view.numberOfLines = 0
         
         return view
     }()
+    
+    
     
     override func configureUI() {
         super.configureUI()
@@ -61,7 +79,9 @@ final class InfoView: BaseView {
         uiView.addSubview(addButton)
         uiView.addSubview(addressLabel)
         addSubview(collectionView)
-        addSubview(noDataLabel)
+        addSubview(errorView)
+        errorView.addSubview(errorImage)
+        errorView.addSubview(errorLabel)
         configureDataSource()
     }
     
@@ -80,12 +100,48 @@ final class InfoView: BaseView {
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
         
-        noDataLabel.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(30)
-            make.top.equalTo(uiView.snp.bottom).offset(30)
-            make.bottom.greaterThanOrEqualTo(safeAreaLayoutGuide).offset(30)
+        setErrorViewConstraints()
+        
+    }
+    
+    private func setErrorViewConstraints() {
+        errorView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.top.equalTo(uiView.snp.bottom).offset(50)
+            make.height.equalTo(50)
+            
+        }
+        errorImage.snp.makeConstraints { make in
+            make.top.equalTo(errorView)
+            make.centerX.equalTo(errorView)
+            make.width.equalTo(errorView.snp.width).multipliedBy(0.3)
+            make.height.equalTo(errorImage.snp.width)
+            
         }
         
+        errorLabel.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(errorView)
+            make.top.equalTo(errorImage.snp.bottom).offset(10)
+            make.bottom.greaterThanOrEqualTo(errorView).offset(10)
+        }
+        
+        
+    }
+    
+    func errorViewHidden(error: Bool) {
+        errorView.isHidden = error
+    }
+    
+//    func configureHidden(collection: Bool, error: Bool) {
+//
+//        collectionView.isHidden = collection
+//        errorView.isHidden = error
+//    }
+    
+    func configureErrorView(image: UIImage?, description: String) {
+        
+        errorImage.image = image ?? Constants.Image.warning
+        errorLabel.text = description
     }
     
     private func setUIVIewContentsConstraints() {
@@ -150,11 +206,7 @@ extension InfoView {
         })
     }
     
-    func configureHidden(collView: Bool) {
-        collectionView.isHidden = collView
-        noDataLabel.isHidden = !collView
-        
-    }
+    
     
     
 }

@@ -32,9 +32,9 @@ final class InfoViewController: BaseViewController {
     @objc private func getChangeNotification(notification: NSNotification) {
         do {
             try viewModel.getRecordList()
-            mainView.configureHidden(collView: false)
+            mainView.errorViewHidden(error: false)
         } catch {
-            mainView.configureHidden(collView: true)
+            mainView.errorViewHidden(error: true)
             return
         }
         
@@ -46,9 +46,9 @@ final class InfoViewController: BaseViewController {
         
         do {
             try viewModel.getRecordList()
-            mainView.configureHidden(collView: false)
+            mainView.errorViewHidden(error: false)
         } catch {
-            mainView.configureHidden(collView: true)
+            mainView.errorViewHidden(error: true)
             return
         }
         
@@ -81,16 +81,24 @@ final class InfoViewController: BaseViewController {
             }
             self.mainView.titleLabel.text = place.displayName.placeName
             self.mainView.addressLabel.text = place.formattedAddress
+            
+            do {
+                try self.viewModel.getRecordList()
+            } catch {
+                print("error")
+            }
+            
+            
         }
         
         viewModel.recordList.bind { data in
            
             guard data != nil else {
-                self.mainView.configureHidden(collView: true)
+                self.mainView.errorViewHidden(error: true)
                 return
             }
             
-            self.mainView.configureHidden(collView: false)
+            self.mainView.errorViewHidden(error: false)
             self.updateSnapShot()
             
         }
@@ -98,16 +106,15 @@ final class InfoViewController: BaseViewController {
     }
     
     
-    private func updateSnapShot() {
+    func updateSnapShot() {
         var snapShot = NSDiffableDataSourceSnapshot<Int, Record>()
         snapShot.appendSections([0])
         
         guard let records = viewModel.recordList.value else {
-            mainView.configureHidden(collView: true)
+            mainView.errorViewHidden(error: true)
             return
         }
-        
-        mainView.configureHidden(collView: false)
+        mainView.errorViewHidden(error: false)
         snapShot.appendItems(records)
         mainView.dataSource.apply(snapShot)
     }
