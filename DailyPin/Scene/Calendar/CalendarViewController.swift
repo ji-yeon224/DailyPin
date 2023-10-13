@@ -80,6 +80,11 @@ final class CalendarViewController: BaseViewController {
 
 extension CalendarViewController: FSCalendarProtocol {
     
+    func returnButtonTapped() {
+        viewModel.filterDate(convertDate(Date()))
+        selectedDate = Date() 
+    }
+    
     func moveCalendar(date: Date) {
         viewModel.filterDate(convertDate(date))
         selectedDate = date

@@ -9,6 +9,7 @@ import Foundation
 
 protocol FSCalendarProtocol: AnyObject {
     
+    func returnButtonTapped()
     func moveCalendar(date: Date)
     func didSelectDate(date: Date)
     func numberOfEventsFor(date: Date) -> Int

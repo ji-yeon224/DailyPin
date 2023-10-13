@@ -47,11 +47,19 @@ final class CalendarView: BaseView {
         return view
     }()
     
+    private let returnTodayButton = {
+        let view = UIButton()
+        view.setImage(UIImage(systemName: "gobackward"), for: .normal)
+        view.tintColor = Constants.Color.basicText
+        return view
+    }()
+    
     override func configureUI() {
         super.configureUI()
         addSubview(calendarView)
         addSubview(prevButton)
         addSubview(nextButton)
+        addSubview(returnTodayButton)
         addSubview(collectionView)
         configureDataSource()
         setAction()
@@ -78,6 +86,12 @@ final class CalendarView: BaseView {
             make.trailing.equalTo(calendarView.calendarHeaderView.snp.trailing).inset(100)
         }
         
+        returnTodayButton.snp.makeConstraints { make in
+            make.centerY.equalTo(calendarView.calendarHeaderView).multipliedBy(1.1)
+            make.trailing.equalTo(calendarView.calendarHeaderView.snp.trailing).inset(30)
+            
+        }
+        
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(calendarView.snp.bottom)
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
@@ -91,6 +105,15 @@ final class CalendarView: BaseView {
         [prevButton, nextButton].forEach {
             $0.addTarget(self, action: #selector(moveMonthButtonDidTap(sender:)), for: .touchUpInside)
         }
+        
+        returnTodayButton.addTarget(self, action: #selector(returnButtonTapped), for: .touchUpInside)
+        
+    }
+        
+    @objc private func returnButtonTapped() {
+        calendarView.setCurrentPage(Date(), animated: true)
+        setDefaultSelectDate(Date())
+        calendarDelegate?.returnButtonTapped()
     }
     
     @objc private func moveMonthButtonDidTap(sender: UIButton) {
@@ -119,11 +142,11 @@ extension CalendarView: UICollectionViewDelegate  {
     
     private func collectionViewLayout() -> UICollectionViewLayout {
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(70))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(95))
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(80))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
