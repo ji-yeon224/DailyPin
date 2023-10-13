@@ -40,6 +40,21 @@ class BaseViewController: UIViewController {
         let ok = UIAlertAction(title: "okText".localized(), style: .default) { _ in
             okHandler?()
         }
+        let cancel = UIAlertAction(title: "cancelText".localized(), style: .destructive) { _ in
+            cancelHandler?()
+        }
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true)
+    }
+    
+    // 확인 버튼이 빨간버튼
+    func okDesctructiveAlert(title: String, message: String, okHandler: (() -> Void)?, cancelHandler: (() -> Void)?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "okText".localized(), style: .destructive) { _ in
+            okHandler?()
+        }
         let cancel = UIAlertAction(title: "cancelText".localized(), style: .cancel) { _ in
             cancelHandler?()
         }
@@ -48,6 +63,7 @@ class BaseViewController: UIViewController {
         
         present(alert, animated: true)
     }
+    
     
     func showToastMessage(message: String) {
         

@@ -33,7 +33,6 @@ final class RecordViewController: BaseViewController {
         }
         title = location.displayName.placeName
         
-        
     }
     
     
@@ -70,7 +69,6 @@ final class RecordViewController: BaseViewController {
     @objc private func saveButtonTapped() {
         
         editMode.toggle()
-        setNavRightButton()
         saveRecord()
        
     }
@@ -81,6 +79,19 @@ final class RecordViewController: BaseViewController {
             showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
             return
         }
+        
+        
+        guard let title = mainView.titleTextField.text else {
+            showToastMessage(message: "제목을 입력해주세요!")
+            return
+        }
+        
+        guard !title.trimmingCharacters(in: .whitespaces).isEmpty else {
+            showToastMessage(message: "제목을 입력해주세요!")
+            return
+        }
+        
+        
         var place: Place
         if placeRepository.isExistPlace(id: data.id) {
             do {
@@ -100,21 +111,18 @@ final class RecordViewController: BaseViewController {
             
         }
         
-        guard let title = mainView.titleTextField.text else {
-            showToastMessage(message: "제목을 입력해주세요!")
-            return
-        }
+        
         
         if let record = record { // 기존 데이터 수정 시
             do {
-                let updateRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+                let updateRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
                 try recordRepository.updateRecord(id: record.objectID, updateRecord)
             } catch let error {
                 showOKAlert(title: "", message: error.localizedDescription) { }
                 return
             }
         } else {
-            let newRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+            let newRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
             do {
                 try placeRepository.updateRecordList(record: newRecord, place: place)
             } catch let error {
@@ -125,7 +133,7 @@ final class RecordViewController: BaseViewController {
         }
         
         NotificationCenter.default.post(name: Notification.Name.updateCell, object: nil)
-        
+        setNavRightButton()
     }
     
     private func deleteRecord() {
@@ -256,7 +264,27 @@ extension RecordViewController {
     
     
     @objc private func backButtonTapped() {
-        dismiss(animated: true)
+        
+        if editMode {
+           
+            if !mainView.isEmptyText() {
+                okDesctructiveAlert(title: "작성 중입니다!", message: "정말로 나가시겠어요?\n 작성 중인 내용은 저장되지 않습니다!") {
+                    
+                    self.dismiss(animated: true)
+                } cancelHandler: {
+                    
+                }
+            } else {
+                dismiss(animated: true)
+            }
+           
+        } else {
+            dismiss(animated: true)
+        }
+        
+        
+
+        
     }
     
 }

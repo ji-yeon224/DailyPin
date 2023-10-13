@@ -237,6 +237,20 @@ final class RecordView: BaseView {
         datePickerView.isHidden = false
         
     }
+    
+    func isEmptyText() -> Bool {
+        
+        guard let title = titleTextField.text, let memo = memoTextView.text else {
+            
+            return true
+        }
+        
+        if title.trimmingCharacters(in: .whitespaces).isEmpty && memo.trimmingCharacters(in: .whitespaces).isEmpty {
+            return true
+        }
+        
+        return false
+    }
    
     
     
