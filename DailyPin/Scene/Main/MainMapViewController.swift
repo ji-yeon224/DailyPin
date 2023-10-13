@@ -46,6 +46,24 @@ final class MainMapViewController: BaseViewController {
         bindData()
     }
     
+    private func bindData() {
+        
+        viewModel.annotations.bind { data in
+            self.mainView.setAllCustomAnnotation(annotation: data)
+        }
+        
+    }
+    
+    override func configureUI() {
+        super.configureUI()
+        mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped(_ :)))
+        mainView.mapView.addGestureRecognizer(tapGesture)
+        mainView.searchButton.addTarget(self, action: #selector(searchViewTransition), for: .touchUpInside)
+        mainView.calendarButton.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
+    }
+    
+    
     @objc private func getChangeNotification(notification: NSNotification) {
         
         
@@ -68,27 +86,15 @@ final class MainMapViewController: BaseViewController {
     
 
     
-    private func bindData() {
-        
-        viewModel.annotations.bind { data in
-            self.mainView.setAllCustomAnnotation(annotation: data)
-        }
-        
-    }
     
-    
-    
-    
-    override func configureUI() {
-        super.configureUI()
-        mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped(_ :)))
-        mainView.mapView.addGestureRecognizer(tapGesture)
-        mainView.searchButton.addTarget(self, action: #selector(searchViewTransition), for: .touchUpInside)
-        mainView.calendarButton.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
-    }
     
     @objc private func calendarButtonTapped() {
+        
+        if infoViewOn {
+            mainView.fpc.dismiss(animated: true)
+            infoViewOn.toggle()
+        }
+        
         let vc = CalendarViewController()
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
@@ -164,6 +170,74 @@ final class MainMapViewController: BaseViewController {
 
 
 
+extension MainMapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        
+        
+        guard let annotation = view.annotation as? CustomAnnotation else {
+            return
+        }
+        
+        guard let view = view as? CustomAnnotationView else { return }
+        view.imageView.image = Constants.Image.selectPin
+        view.imageView.tintColor = Constants.Color.selectPinColor
+       
+        if infoViewOn {
+            mainView.fpc.dismiss(animated: true)
+            infoViewOn.toggle()
+        }
+        
+        // InfoView Present
+        guard let place = viewModel.getPlaceData(id: annotation.placeID) else {
+            return
+        }
+        let coord = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+        mainView.setRegion(center: coord)
+        mainView.setFloatingPanel(data: viewModel.convertPlaceToPlaceElement(place: place))
+        present(self.mainView.fpc, animated: true)
+        infoViewOn = true
+        
+        
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        
+        guard let view = view as? CustomAnnotationView else { return }
+        view.imageView.image = Constants.Image.starImage
+        view.imageView.tintColor = Constants.Color.pinColor
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
+        
+        var annotationView: MKAnnotationView?
+        
+        
+        if annotation.isKind(of: SelectAnnotation.self) {
+            if let annotation = annotation as? SelectAnnotation {
+                annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: SelectAnnotationView.identifier, for: annotation)
+                
+            }
+        } else if annotation.isKind(of: CustomAnnotation.self) {
+            if let annotation = annotation as? CustomAnnotation {
+                annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
+                
+            }
+        }
+        
+       
+        
+        return annotationView
+    }
+    
+}
+
+
+
 // 위치 서비스
 extension MainMapViewController {
     private func checkDeviceLocationAuthorization() {
@@ -235,85 +309,6 @@ extension MainMapViewController: CLLocationManagerDelegate {
     // 사용자의 권한 상태가 바뀜을 체크함(iOS 14~)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkDeviceLocationAuthorization()
-    }
-    
-}
-
-extension MainMapViewController: MKMapViewDelegate {
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
-        
-        
-        guard let annotation = view.annotation as? CustomAnnotation else {
-            return
-        }
-        
-        guard let view = view as? CustomAnnotationView else { return }
-        view.imageView.image = Constants.Image.selectPin
-        view.imageView.tintColor = Constants.Color.selectPinColor
-       
-        if infoViewOn {
-            mainView.fpc.dismiss(animated: true)
-            infoViewOn.toggle()
-        }
-        
-        // InfoView Present
-        guard let place = getPlaceData(id: annotation.placeID) else {
-            return
-        }
-        let coord = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
-        mainView.setRegion(center: coord)
-        mainView.setFloatingPanel(data: convertPlaceToPlaceElement(place: place))
-        present(self.mainView.fpc, animated: true)
-        infoViewOn = true
-        
-        
-    }
-    
-    private func convertPlaceToPlaceElement(place: Place) -> PlaceElement {
-        return PlaceElement(id: place.placeId, formattedAddress: place.address, location: Location(latitude: place.latitude, longitude: place.longitude), displayName: DisplayName(placeName: place.placeName))
-    }
-    
-    private func getPlaceData(id: String) -> Place? {
-        
-        do {
-            let place = try placeRepository.searchItemByID(id)
-            return place
-        } catch {
-            return nil
-        }
-    }
-    
-    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        
-        guard let view = view as? CustomAnnotationView else { return }
-        view.imageView.image = Constants.Image.starImage
-        view.imageView.tintColor = Constants.Color.pinColor
-    }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
-        
-        var annotationView: MKAnnotationView?
-        
-        
-        if annotation.isKind(of: SelectAnnotation.self) {
-            if let annotation = annotation as? SelectAnnotation {
-                annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: SelectAnnotationView.identifier, for: annotation)
-                
-            }
-        } else if annotation.isKind(of: CustomAnnotation.self) {
-            if let annotation = annotation as? CustomAnnotation {
-                annotationView = mainView.mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
-                
-            }
-        }
-        
-       
-        
-        return annotationView
     }
     
 }

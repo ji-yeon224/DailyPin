@@ -36,4 +36,19 @@ final class MainMapViewModel {
         
     }
     
+    func getPlaceData(id: String) -> Place? {
+        
+        do {
+            let place = try placeRepository.searchItemByID(id)
+            return place
+        } catch {
+            return nil
+        }
+    }
+    
+    func convertPlaceToPlaceElement(place: Place) -> PlaceElement {
+        return PlaceElement(id: place.placeId, formattedAddress: place.address, location: Location(latitude: place.latitude, longitude: place.longitude), displayName: DisplayName(placeName: place.placeName))
+    }
+    
+    
 }
