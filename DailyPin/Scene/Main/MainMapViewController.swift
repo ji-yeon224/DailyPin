@@ -250,7 +250,7 @@ extension MainMapViewController: MKMapViewDelegate {
         }
         
         guard let view = view as? CustomAnnotationView else { return }
-        view.imageView.image = Image.ImageName.selectPin
+        view.imageView.image = Constants.Image.selectPin
         view.imageView.tintColor = Constants.Color.selectPinColor
        
         if infoViewOn {
@@ -288,7 +288,7 @@ extension MainMapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         
         guard let view = view as? CustomAnnotationView else { return }
-        view.imageView.image = Image.ImageName.starImage
+        view.imageView.image = Constants.Image.starImage
         view.imageView.tintColor = Constants.Color.pinColor
     }
     

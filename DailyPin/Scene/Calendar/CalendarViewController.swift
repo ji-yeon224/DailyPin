@@ -42,7 +42,7 @@ final class CalendarViewController: BaseViewController {
     
     override func configureUI() {
         super.configureUI()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
         
         let date = DateFormatter.convertMonth(date: mainView.currentPage)
@@ -82,7 +82,7 @@ extension CalendarViewController: FSCalendarProtocol {
     
     func returnButtonTapped() {
         viewModel.filterDate(convertDate(Date()))
-        selectedDate = Date() 
+        selectedDate = Date()
     }
     
     func moveCalendar(date: Date) {
@@ -134,7 +134,7 @@ extension CalendarViewController: RecordCollectionViewProtocol {
 
     }
     
-    func convertToStruct(_ item: Place) -> PlaceElement {
+    private func convertToStruct(_ item: Place) -> PlaceElement {
         
         let location = Location(latitude: item.latitude, longitude: item.longitude)
         let displayName = DisplayName(placeName: item.placeName)

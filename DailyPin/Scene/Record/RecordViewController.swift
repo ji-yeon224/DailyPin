@@ -205,7 +205,7 @@ extension RecordViewController {
     private func configNavigationBar() {
         
         setNavRightButton()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
     }
     
@@ -249,7 +249,7 @@ extension RecordViewController {
             return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
         }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image:  UIImage(systemName: "ellipsis.circle"), primaryAction: nil, menu: menu)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image:  Constants.Image.menuButton, primaryAction: nil, menu: menu)
         navigationItem.rightBarButtonItem?.tintColor = Constants.Color.basicText
         
     }

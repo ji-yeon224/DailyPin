@@ -13,7 +13,7 @@ final class AddButton: BaseUIButton {
         super.configure()
         backgroundColor = Constants.Color.mainColor
         layer.cornerRadius = Constants.Design.cornerRadius
-        setImage(UIImage(systemName: "plus"), for: .normal)
+        setImage(Constants.Image.plus, for: .normal)
         tintColor = Constants.Color.tintColor
         
     }

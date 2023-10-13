@@ -25,7 +25,7 @@ final class SelectAnnotationView: BaseAnnotationView {
     let imageView = {
         let view = UIImageView()
         view.backgroundColor = .clear
-        view.image = Image.ImageName.selectPin
+        view.image = Constants.Image.selectPin
         view.contentMode = .scaleAspectFit
         view.tintColor = .darkGray
         view.layer.cornerRadius = view.frame.width / 2

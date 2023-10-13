@@ -17,7 +17,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     }()
     private var image = {
         var view = UIImageView()
-        view.image = UIImage(systemName: "mappin.circle.fill")
+        view.image = Constants.Image.mappin
         view.backgroundColor = .clear
         view.tintColor = Constants.Color.mainColor
         

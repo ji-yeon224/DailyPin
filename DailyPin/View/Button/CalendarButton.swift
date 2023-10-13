@@ -14,7 +14,7 @@ final class CalendarButton: BaseUIButton {
         super.configure()
         backgroundColor = Constants.Color.mainColor
         layer.cornerRadius = Constants.Design.cornerRadius
-        setImage(UIImage(systemName: "calendar"), for: .normal)
+        setImage(Constants.Image.calendar, for: .normal)
         tintColor = Constants.Color.tintColor
         
     }

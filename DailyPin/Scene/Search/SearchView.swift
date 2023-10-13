@@ -38,7 +38,7 @@ final class SearchView: BaseView {
     
     private let errorImage = {
         let view = UIImageView()
-        view.image = Image.ImageName.networkError
+        view.image = Constants.Image.networkError
         view.tintColor = Constants.Color.subTextColor
         view.contentMode = .scaleAspectFit
         return view

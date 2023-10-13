@@ -98,7 +98,7 @@ final class InfoViewController: BaseViewController {
     }
     
     
-    func updateSnapShot() {
+    private func updateSnapShot() {
         var snapShot = NSDiffableDataSourceSnapshot<Int, Record>()
         snapShot.appendSections([0])
         

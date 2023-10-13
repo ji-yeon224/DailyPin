@@ -27,7 +27,7 @@ final class CustomAnnotationView: BaseAnnotationView {
     let imageView = {
         let view = UIImageView()
         view.backgroundColor = .clear
-        view.image = Image.ImageName.starImage
+        view.image = Constants.Image.starImage
         view.contentMode = .scaleAspectFit
         view.tintColor = Constants.Color.pinColor
         view.layer.cornerRadius = view.frame.width / 2
