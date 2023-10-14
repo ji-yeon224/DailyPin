@@ -78,9 +78,9 @@ final class MainMapView: BaseView {
 
 // map
 extension MainMapView {
-    func setRegion(center: CLLocationCoordinate2D){
+    func setRegion(center: CLLocationCoordinate2D, _ span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.03)){
         
-        let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        let region = MKCoordinateRegion(center: center, span: span)
         mapView.setRegion(region, animated: true)
         mapView.showsUserLocation = true
         
@@ -91,8 +91,8 @@ extension MainMapView {
     }
     
     func setOneAnnotation(annotation: SelectAnnotation) {
-        let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
-        mapView.setRegion(region, animated: true)
+        
+        setRegion(center: annotation.coordinate)
         mapView.addAnnotation(annotation)
     }
     

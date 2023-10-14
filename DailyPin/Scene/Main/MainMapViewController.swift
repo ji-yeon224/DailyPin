@@ -123,6 +123,10 @@ final class MainMapViewController: BaseViewController {
             self.mainView.fpc.dismiss(animated: true)
         }
         
+        if !mainView.mapView.selectedAnnotations.isEmpty {
+            mainView.mapView.deselectAnnotation(mainView.mapView.selectedAnnotations.first, animated: true)
+        }
+        
         deleteSearchAnnotation()
         
         vc.selectLocationHandler = { value in
@@ -133,7 +137,6 @@ final class MainMapViewController: BaseViewController {
             if let searchAnnotation = self.searchAnnotation {
                 self.mainView.setOneAnnotation(annotation: searchAnnotation)
             }
-            
             
             DispatchQueue.main.async {
                 self.mainView.setFloatingPanel(data: value)
@@ -179,8 +182,10 @@ extension MainMapViewController: MapViewProtocol {
         guard let place = viewModel.getPlaceData(id: annotation.placeID) else {
             return
         }
+        
+        
         let coord = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
-        mainView.setRegion(center: coord)
+        mainView.setRegion(center: coord, mainView.mapView.region.span)
         mainView.setFloatingPanel(data: viewModel.convertPlaceToPlaceElement(place: place))
         present(self.mainView.fpc, animated: true)
         infoViewOn = true
