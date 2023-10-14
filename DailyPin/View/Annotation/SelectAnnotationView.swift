@@ -27,7 +27,7 @@ final class SelectAnnotationView: BaseAnnotationView {
         view.backgroundColor = .clear
         view.image = Constants.Image.selectPin
         view.contentMode = .scaleAspectFit
-        view.tintColor = .darkGray
+        view.tintColor = Constants.Color.subColor
         view.layer.cornerRadius = view.frame.width / 2
         view.clipsToBounds = true
         return view

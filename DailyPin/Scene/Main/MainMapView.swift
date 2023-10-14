@@ -78,9 +78,14 @@ final class MainMapView: BaseView {
 
 // map
 extension MainMapView {
-    func setRegion(center: CLLocationCoordinate2D, _ span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.03)){
+    func setRegion(center: CLLocationCoordinate2D, _ span: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.004 )){
         
-        let region = MKCoordinateRegion(center: center, span: span)
+        var checkSpan = span
+        if span.longitudeDelta > 0.05 && span.longitudeDelta > 0.03 {
+            checkSpan = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.03)
+        }
+        print(mapView.region.span)
+        let region = MKCoordinateRegion(center: center, span: checkSpan)
         mapView.setRegion(region, animated: true)
         mapView.showsUserLocation = true
         
@@ -156,13 +161,27 @@ extension MainMapView: MKMapViewDelegate {
         } else if annotation.isKind(of: CustomAnnotation.self) {
             if let annotation = annotation as? CustomAnnotation {
                 annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
-                
+                annotationView?.clusteringIdentifier = "cluster"
             }
+            
         }
         
-       
-        
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
+        var customAnnotations: [CustomAnnotation] = []
+        for anot in memberAnnotations {
+            if let anot = anot as? CustomAnnotation {
+                customAnnotations.append(anot)
+            }
+            
+        }
+        
+        let cluster = MKClusterAnnotation(memberAnnotations: customAnnotations)
+        cluster.title = "+\(customAnnotations.count)"
+        cluster.subtitle = ""
+        return cluster
     }
     
 }
