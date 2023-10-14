@@ -11,14 +11,14 @@ import Alamofire
 enum Router: URLRequestConvertible {
     
     case place(query: String, langCode: LangCode, location: (Double, Double))
-    case geocoding
+    case geocoding(lat: Double, lng: Double)
     
     private var baseURL: URL {
         switch self {
         case .place:
             return URL(string: "https://places.googleapis.com/v1/places:searchText")!
         case .geocoding:
-            return URL(string: "")!
+            return URL(string: "https://maps.googleapis.com/maps/api/geocode/json")!
         }
     }
     
@@ -30,7 +30,7 @@ enum Router: URLRequestConvertible {
                     "Content-Type": "application/json"
             ]
         case .geocoding:
-            return ["X-Goog-Api-Key": "\(APIKey.googleKey)"]
+            return ["":""]
         }
     }
     
@@ -50,7 +50,18 @@ enum Router: URLRequestConvertible {
                                    languageCode: "\(langCode.rawValue)",
                                    locationBias: LocationBias(circle: Center(center: DetailLocation(latitude: location.0, longitude: location.1))))
         case .geocoding:
-            return ["": ""]
+            //let latlng = "\(lat),\(lng)"
+            return ["":""]
+        }
+    }
+    
+    private var query: [String: String] {
+        switch self {
+        case .place:
+            return ["":""]
+        case .geocoding(let lat, let lng):
+            let latlng = "\(lat),\(lng)"
+            return ["key": "\(APIKey.googleKey)", "latlng":"\(latlng)", "language": "ko"]
         }
     }
     
@@ -62,18 +73,26 @@ enum Router: URLRequestConvertible {
         request.headers = header
         request.method = method
 
-        let encoder = JSONEncoder()
-        let paramters = parameter
         
-        let jsonData: Data
-        do {
-            jsonData = try encoder.encode(paramters)
-        } catch {
-            throw InvalidError.invalidQuery
+        
+        switch self {
+        case .place:
+            let encoder = JSONEncoder()
+            let paramters = parameter
+            let jsonData: Data
+            do {
+                jsonData = try encoder.encode(paramters)
+            } catch {
+                throw InvalidError.invalidQuery
+            }
+            request.httpBody = jsonData
+        case .geocoding:
+            request = try URLEncodedFormParameterEncoder(destination: .queryString).encode(query, into: request)
+            
+            
         }
         
-        
-        request.httpBody = jsonData
+        //print(request)
         
         return request
     }

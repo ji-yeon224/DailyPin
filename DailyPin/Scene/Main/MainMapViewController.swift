@@ -57,13 +57,57 @@ final class MainMapViewController: BaseViewController {
     
     override func configureUI() {
         super.configureUI()
-        mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped(_ :)))
+        setButtonAction()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped))
         mainView.mapView.addGestureRecognizer(tapGesture)
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressMap(_ :)))
+        longPressGesture.minimumPressDuration = 1
+        longPressGesture.delaysTouchesBegan = true
+        
+        mainView.mapView.addGestureRecognizer(longPressGesture)
+        
+    }
+    
+    @objc private func longPressMap(_ sender: UILongPressGestureRecognizer) {
+        let location: CGPoint = sender.location(in: self.mainView.mapView)
+        let mapPoint: CLLocationCoordinate2D = self.mainView.mapView.convert(location, toCoordinateFrom: self.mainView.mapView)
+        print(mapPoint)
+        if sender.state == .ended {
+            showAlertWithCancel(title: "", message: "이 장소에 기록을 등록하시겠어요?") {
+                self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) {
+                    self.presentRecordView()
+                } failCompletion: {
+                    self.showToastMessage(message: "위치 정보를 가져오지 못했습니다. 다시 시도해주세요.")
+                }
+                
+                
+                
+            } cancelHandler: {
+                return
+            }
+
+            
+
+        }
+        
+    }
+    
+    func presentRecordView() {
+        let vc = RecordViewController()
+        vc.location = self.viewModel.selectedLocation
+        vc.record = nil
+        vc.editMode = true
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        nav.modalTransitionStyle = .crossDissolve
+        self.present(nav, animated: true)
+    }
+    
+    private func setButtonAction() {
+        mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
         mainView.searchButton.addTarget(self, action: #selector(searchViewTransition), for: .touchUpInside)
         mainView.calendarButton.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
     }
-    
     
     @objc private func getChangeNotification(notification: NSNotification) {
         
@@ -103,7 +147,7 @@ final class MainMapViewController: BaseViewController {
         present(nav, animated: true)
     }
     
-    @objc private func mapViewTapped(_ sender: UITapGestureRecognizer) {
+    @objc private func mapViewTapped() {
         
         if infoViewOn {
             mainView.fpc.dismiss(animated: true)

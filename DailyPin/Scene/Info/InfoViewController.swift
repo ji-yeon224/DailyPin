@@ -79,7 +79,7 @@ final class InfoViewController: BaseViewController {
                 
                 return
             }
-            self.mainView.titleLabel.text = place.displayName.placeName
+            self.mainView.titleLabel.text = place.placeName.placeName
             self.mainView.addressLabel.text = place.formattedAddress
             
             do {

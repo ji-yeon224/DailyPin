@@ -117,7 +117,7 @@ final class SearchView: BaseView {
     private func configureDataSource() {
         
         let cellRegistration = UICollectionView.CellRegistration<SearchCollectionViewCell, PlaceElement> { cell, indexPath, itemIdentifier in
-            cell.title.text = itemIdentifier.displayName.placeName
+            cell.title.text = itemIdentifier.placeName.placeName
             cell.address.text = itemIdentifier.formattedAddress
             
         }

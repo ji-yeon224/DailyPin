@@ -29,4 +29,40 @@ final class GoogleNetwork {
         
     }
     
+    func requestGeocoder(api: Router, completion: @escaping (Result<Geocoding, AFError>) -> Void) {
+        
+        AF.request(api).responseDecodable(of: Geocoding.self) { response in
+            print(api.urlRequest)
+            switch response.result {
+            case .success(let data): completion(.success(data)); print(data)
+            case .failure(let error):
+//                let status = response.response?.statusCode ?? 500
+//                guard let error = NetworkError(rawValue: status) else { return }
+                let status = response.response?.statusCode ?? 500
+                print(status)
+                completion(.failure(error))
+            }
+        }
+        
+    }
+    
+    func requestGeocoder(lat: Double, lng: Double, completion: @escaping (Result<Geocoding, AFError>) -> Void) {
+        
+        let url = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDXn1mwRgnOnvqX_gs7eC-Sc5LJAplX9HQ&language=ko&latlng=\(lat),\(lng)"
+        
+        AF.request(url, method: .get).responseDecodable(of: Geocoding.self) { response in
+            
+            switch response.result {
+            case .success(let data): completion(.success(data))
+            case .failure(let error): completion(.failure(error))
+            }
+            
+            guard let value = response.value else { return }
+            //print(value)
+            
+        }
+        
+    }
+
+    
 }

@@ -137,8 +137,8 @@ extension CalendarViewController: RecordCollectionViewProtocol {
     private func convertToStruct(_ item: Place) -> PlaceElement {
         
         let location = Location(latitude: item.latitude, longitude: item.longitude)
-        let displayName = DisplayName(placeName: item.placeName)
+        let displayName = PlaceName(placeName: item.placeName)
         
-        return PlaceElement(id: item.placeId, formattedAddress: item.address, location: location, displayName: displayName)
+        return PlaceElement(id: item.placeId, formattedAddress: item.address, location: location, placeName: displayName)
     }
 }
