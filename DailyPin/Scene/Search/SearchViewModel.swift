@@ -21,6 +21,7 @@ final class SearchViewModel {
                 if success.places.count == 0 {
                     print("결과 없음")
                 }
+                
                 self.searchResult.value = success
             case .failure(let failure):
                 self.resultError.value = failure.localizedDescription

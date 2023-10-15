@@ -25,7 +25,7 @@ final class MainMapViewModel {
                 self.placeInfo = data.results[0]
                 self.convertToPlaceElement(placeInfo: self.placeInfo, lat: lat, lng: lng)
                 completion()
-            case .failure(let _):
+            case .failure(_):
                 failCompletion()
             }
         }
@@ -35,9 +35,9 @@ final class MainMapViewModel {
         
         let location = Location(latitude: lat, longitude: lng)
         let name = "\(placeInfo.addressComponents[1].longName) \(placeInfo.addressComponents[0].longName)"
-        let placeName = PlaceName(placeName: name)
+        let placeName = DisplayName(placeName: name)
         
-        selectedLocation = PlaceElement(id: placeInfo.placeID, formattedAddress: placeInfo.address, location: location, placeName: placeName)
+        selectedLocation = PlaceElement(id: placeInfo.placeID, formattedAddress: placeInfo.address, location: location, displayName: placeName)
         
     }
     
@@ -73,7 +73,7 @@ final class MainMapViewModel {
     }
     
     func convertPlaceToPlaceElement(place: Place) -> PlaceElement {
-        return PlaceElement(id: place.placeId, formattedAddress: place.address, location: Location(latitude: place.latitude, longitude: place.longitude), placeName: PlaceName(placeName: place.placeName))
+        return PlaceElement(id: place.placeId, formattedAddress: place.address, location: Location(latitude: place.latitude, longitude: place.longitude), displayName: DisplayName(placeName: place.placeName))
     }
     
     

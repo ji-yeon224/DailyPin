@@ -16,11 +16,13 @@ struct Search: Decodable, Hashable {
 struct PlaceElement: Decodable, Hashable {
     let id, formattedAddress: String
     let location: Location
-    let placeName: PlaceName
+    let displayName: DisplayName
+    
+   
 }
 
 // MARK: - DisplayName
-struct PlaceName: Decodable, Hashable {
+struct DisplayName: Decodable, Hashable {
     let placeName: String
     //let languageCode: LanguageCode
     

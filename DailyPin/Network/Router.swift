@@ -49,21 +49,13 @@ enum Router: URLRequestConvertible {
             return SearchParameter(textQuery: "\(query)",
                                    languageCode: "\(langCode.rawValue)",
                                    locationBias: LocationBias(circle: Center(center: DetailLocation(latitude: location.0, longitude: location.1))))
-        case .geocoding:
-            //let latlng = "\(lat),\(lng)"
-            return ["":""]
-        }
-    }
-    
-    private var query: [String: String] {
-        switch self {
-        case .place:
-            return ["":""]
         case .geocoding(let lat, let lng):
             let latlng = "\(lat),\(lng)"
             return ["key": "\(APIKey.googleKey)", "latlng":"\(latlng)", "language": "ko"]
         }
     }
+    
+
     
     
     func asURLRequest() throws -> URLRequest {
@@ -73,26 +65,27 @@ enum Router: URLRequestConvertible {
         request.headers = header
         request.method = method
 
-        
-        
-        switch self {
-        case .place:
-            let encoder = JSONEncoder()
-            let paramters = parameter
-            let jsonData: Data
-            do {
-                jsonData = try encoder.encode(paramters)
-            } catch {
-                throw InvalidError.invalidQuery
-            }
-            request.httpBody = jsonData
-        case .geocoding:
-            request = try URLEncodedFormParameterEncoder(destination: .queryString).encode(query, into: request)
-            
-            
+        let encoder = JSONEncoder()
+        let paramters = parameter
+        let jsonData: Data
+        do {
+            jsonData = try encoder.encode(paramters)
+        } catch {
+            throw InvalidError.invalidQuery
         }
+        request.httpBody = jsonData
         
-        //print(request)
+        
+//        switch self {
+//        case .place:
+//
+//        case .geocoding:
+//            request = try URLEncodedFormParameterEncoder(destination: .queryString).encode(query, into: request)
+//
+//
+//        }
+        
+        print(request)
         
         return request
     }

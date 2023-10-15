@@ -31,7 +31,7 @@ final class RecordViewController: BaseViewController {
             dismiss(animated: true)
             return
         }
-        title = location.placeName.placeName
+        title = location.displayName.placeName
         
     }
     
@@ -188,7 +188,7 @@ final class RecordViewController: BaseViewController {
             throw InvalidError.noExistData
         }
         
-        let place = Place(placeId: data.id, address: data.formattedAddress, placeName: data.placeName.placeName, latitude: data.location.latitude, longitude: data.location.longitude)
+        let place = Place(placeId: data.id, address: data.formattedAddress, placeName: data.displayName.placeName, latitude: data.location.latitude, longitude: data.location.longitude)
         
         
         

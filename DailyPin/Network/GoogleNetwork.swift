@@ -19,10 +19,13 @@ final class GoogleNetwork {
         
         AF.request(api).responseDecodable(of: Search.self) { response in
             switch response.result {
-            case .success(let data): completion(.success(data))
+            case .success(let data):
+                print(data)
+                completion(.success(data))
             case .failure(_):
                 let status = response.response?.statusCode ?? 500
                 guard let error = NetworkError(rawValue: status) else { return }
+                print(status)
                 completion(.failure(error))
             }
         }
@@ -32,7 +35,7 @@ final class GoogleNetwork {
     func requestGeocoder(api: Router, completion: @escaping (Result<Geocoding, AFError>) -> Void) {
         
         AF.request(api).responseDecodable(of: Geocoding.self) { response in
-            print(api.urlRequest)
+            
             switch response.result {
             case .success(let data): completion(.success(data)); print(data)
             case .failure(let error):
