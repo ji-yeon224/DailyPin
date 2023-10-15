@@ -80,6 +80,7 @@
 		CEB5ECFA2AD0595E00BC6143 /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */; };
 		CEB5ECFE2AD05F1100BC6143 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5ECFD2AD05F1100BC6143 /* RecordViewModel.swift */; };
 		CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */; };
+		CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */; };
 		CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */; };
 		CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */; };
 		CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */; };
@@ -156,6 +157,7 @@
 		CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepository.swift; sourceTree = "<group>"; };
 		CEB5ECFD2AD05F1100BC6143 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
 		CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewProtocol.swift; sourceTree = "<group>"; };
+		CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPanelController+Extension.swift"; sourceTree = "<group>"; };
 		CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarProtocol.swift; sourceTree = "<group>"; };
 		CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				CEB390AD2ACF0DB200E4B2AC /* UIScrollView.swift */,
 				CEB390B92ACFDF4C00E4B2AC /* DateFormatter.swift */,
 				CE3541D52AD5313F00773CD3 /* NSNotification.Name.swift */,
+				CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				CE3DF81D2AC52C2E00653CE1 /* SearchView.swift in Sources */,
 				CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */,
 				CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */,
+				CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */,
 				CE3DF7FC2AC2B39D00653CE1 /* BaseView.swift in Sources */,
 				CEB5ECFE2AD05F1100BC6143 /* RecordViewModel.swift in Sources */,
 				CE52CB7B2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift in Sources */,

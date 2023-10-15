@@ -120,6 +120,7 @@ extension MainMapView {
         fpc.set(contentViewController: contentVC)
         fpc.view.frame = contentVC.view.bounds
         fpc.layout = FloatingPanelCustomLayout()
+        fpc.changePanelStyle()
         fpc.invalidateLayout()
     }
     
