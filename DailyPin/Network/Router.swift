@@ -49,6 +49,15 @@ enum Router: URLRequestConvertible {
             return SearchParameter(textQuery: "\(query)",
                                    languageCode: "\(langCode.rawValue)",
                                    locationBias: LocationBias(circle: Center(center: DetailLocation(latitude: location.0, longitude: location.1))))
+            
+        case .geocoding: return ["":""]
+        }
+    }
+    
+    private var query: [String: String] {
+        switch self {
+        case .place:
+            return ["":""]
         case .geocoding(let lat, let lng):
             let latlng = "\(lat),\(lng)"
             return ["key": "\(APIKey.googleKey)", "latlng":"\(latlng)", "language": "ko"]
@@ -61,19 +70,36 @@ enum Router: URLRequestConvertible {
     func asURLRequest() throws -> URLRequest {
         let url = baseURL
         
-        var request = URLRequest(url: url)
+        var urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)!
+        
+         if method == .get {
+            //print(parameter)
+            var queries = [URLQueryItem]()
+            for (name, value) in query {
+                let encodedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .afURLQueryAllowed)
+                let queryItem = URLQueryItem(name: name, value: encodedValue)
+                queries.append(queryItem)
+            }
+            
+             urlComponent.percentEncodedQueryItems = queries
+        }
+
+        
+        var request = URLRequest(url: urlComponent.url!)
         request.headers = header
         request.method = method
-
-        let encoder = JSONEncoder()
-        let paramters = parameter
-        let jsonData: Data
-        do {
-            jsonData = try encoder.encode(paramters)
-        } catch {
-            throw InvalidError.invalidQuery
+        
+        if method == .post {
+            let encoder = JSONEncoder()
+            let paramters = parameter
+            let jsonData: Data
+            do {
+                jsonData = try encoder.encode(paramters)
+            } catch {
+                throw InvalidError.invalidQuery
+            }
+            request.httpBody = jsonData
         }
-        request.httpBody = jsonData
         
         
 //        switch self {
@@ -84,7 +110,6 @@ enum Router: URLRequestConvertible {
 //
 //
 //        }
-        
         print(request)
         
         return request

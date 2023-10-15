@@ -20,12 +20,10 @@ final class GoogleNetwork {
         AF.request(api).responseDecodable(of: Search.self) { response in
             switch response.result {
             case .success(let data):
-                print(data)
                 completion(.success(data))
             case .failure(_):
                 let status = response.response?.statusCode ?? 500
                 guard let error = NetworkError(rawValue: status) else { return }
-                print(status)
                 completion(.failure(error))
             }
         }
