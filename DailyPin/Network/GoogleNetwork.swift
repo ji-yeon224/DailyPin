@@ -47,7 +47,7 @@ final class GoogleNetwork {
         
     }
     
-    func requestGeocoder(lat: Double, lng: Double, completion: @escaping (Result<Geocoding, AFError>) -> Void) {
+    func requestGeocoder(lat: Double, lng: Double, completion: @escaping (Result<Geocoding, NetworkError>) -> Void) {
         
         let url = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDXn1mwRgnOnvqX_gs7eC-Sc5LJAplX9HQ&language=ko&latlng=\(lat),\(lng)"
         
@@ -55,11 +55,12 @@ final class GoogleNetwork {
             
             switch response.result {
             case .success(let data): completion(.success(data))
-            case .failure(let error): completion(.failure(error))
+            case .failure(_):
+                let status = response.response?.statusCode ?? 500
+                guard let error = NetworkError(rawValue: status) else { return }
+                completion(.failure(error))
             }
             
-            guard let value = response.value else { return }
-            //print(value)
             
         }
         

@@ -18,15 +18,15 @@ final class MainMapViewModel {
     var selectedLocation: PlaceElement? = nil
     
     
-    func requestSelectedLocation(lat: Double, lng: Double, completion: @escaping(() -> Void), failCompletion: @escaping(() -> Void) ) {
+    func requestSelectedLocation(lat: Double, lng: Double, completion: @escaping(() -> Void), failCompletion: @escaping((NetworkError) -> Void) ) {
         GoogleNetwork.shared.requestGeocoder(lat: lat, lng: lng) { response in
             switch response {
             case .success(let data):
                 self.placeInfo = data.results[0]
                 self.convertToPlaceElement(placeInfo: self.placeInfo, lat: lat, lng: lng)
                 completion()
-            case .failure(_):
-                failCompletion()
+            case .failure(let error):
+                failCompletion(error)
             }
         }
     }

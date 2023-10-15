@@ -95,8 +95,8 @@ final class MainMapViewController: BaseViewController {
                 }
                 self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) {
                     self.presentRecordView()
-                } failCompletion: {
-                    self.showToastMessage(message: "위치 정보를 가져오지 못했습니다. 다시 시도해주세요.")
+                } failCompletion: { error in
+                    self.showToastMessage(message: error.errorDescription ?? "문제가 발생하였습니다.")
                 }
                 
                 
