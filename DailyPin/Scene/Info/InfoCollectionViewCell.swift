@@ -20,7 +20,7 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
     
     private var image = {
         var view = UIImageView()
-        view.image = Constants.Image.mappin
+        view.image = Constants.Image.mappinFill
         view.backgroundColor = .clear
         view.tintColor = Constants.Color.mainColor
         

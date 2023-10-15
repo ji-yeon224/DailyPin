@@ -18,7 +18,7 @@ final class RecordView: BaseView {
     private let stackView = {
         let view = UIStackView()
         view.axis = .vertical
-        view.distribution = .fill
+        view.distribution = .fillProportionally
         view.alignment = .fill
         view.spacing = 10
         
@@ -39,12 +39,13 @@ final class RecordView: BaseView {
     }()
     
     private let titleView = UIView()
+    private let addressView = UIView()
     private let dateView = UIView()
     
     
     private let titleImage = {
         let view = UIImageView()
-        view.image = UIImage(systemName: "mappin.circle")
+        view.image = Constants.Image.mappin
         view.tintColor = Constants.Color.mainColor
         return view
     }()
@@ -55,12 +56,36 @@ final class RecordView: BaseView {
         view.textColor = Constants.Color.basicText
         view.tintColor = Constants.Color.mainColor
         view.contentVerticalAlignment = .center
+        
+        return view
+    }()
+    
+    var titleLabel = {
+        let view = UILabel()
+        view.textColor = Constants.Color.basicText
+        view.numberOfLines = 0
+        view.font = .systemFont(ofSize: 15)
+        return view
+    }()
+    
+    private let addressImageView = {
+        let view = UIImageView()
+        view.image = Constants.Image.selectPin
+        view.tintColor = Constants.Color.mainColor
+        return view
+    }()
+    
+    let addressLabel = {
+        let view = UILabel()
+        view.font = .systemFont(ofSize: 13)
+        view.textColor = Constants.Color.subTextColor
+        view.numberOfLines = 0
         return view
     }()
     
     private let dateImage = {
         let view = UIImageView()
-        view.image = UIImage(systemName: "calendar")
+        view.image = Constants.Image.calendar
         view.tintColor = Constants.Color.mainColor
         return view
     }()
@@ -104,6 +129,9 @@ final class RecordView: BaseView {
         
         titleView.addSubview(titleImage)
         titleView.addSubview(titleTextField)
+        titleView.addSubview(titleLabel)
+        addressView.addSubview(addressImageView)
+        addressView.addSubview(addressLabel)
         dateView.addSubview(dateImage)
         dateView.addSubview(datePickerView)
         dateView.addSubview(dateLabel)
@@ -123,9 +151,11 @@ final class RecordView: BaseView {
     
     private func stackViewConfiguration() {
         stackView.addArrangedSubview(titleView)
+        stackView.addArrangedSubview(addressView)
         stackView.addArrangedSubview(dateView)
         stackView.addArrangedSubview(memoTextView)
         stackView.addArrangedSubview(bottomView)
+        
     }
     
     override func setConstraints() {
@@ -155,6 +185,23 @@ final class RecordView: BaseView {
             make.height.equalTo(titleView)
         }
         
+        titleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(titleImage.snp.trailing).offset(15)
+            make.trailing.equalTo(titleView)
+            make.height.equalTo(titleView)
+        }
+        
+        addressImageView.snp.makeConstraints { make in
+            make.leading.equalTo(addressView)
+            make.centerY.equalTo(addressView)
+            make.width.equalTo(addressView).multipliedBy(0.08)
+            make.height.equalTo(titleImage.snp.width).multipliedBy(1.0)
+        }
+        addressLabel.snp.makeConstraints { make in
+            make.leading.equalTo(addressImageView.snp.trailing).offset(15)
+            make.trailing.equalTo(addressView)
+            make.height.equalTo(addressView)
+        }
         
         dateImage.snp.makeConstraints { make in
             make.leading.equalTo(dateView)
@@ -192,6 +239,9 @@ final class RecordView: BaseView {
         titleView.snp.makeConstraints { make in
             make.height.equalTo(44)
         }
+        addressView.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
         
         dateView.snp.makeConstraints { make in
             make.height.equalTo(44)
@@ -204,11 +254,13 @@ final class RecordView: BaseView {
     }
     
     func setEditMode() {
-        titleTextField.isUserInteractionEnabled = true
+        //titleTextField.isUserInteractionEnabled = true
+        memoTextView.isHidden = false
         memoTextView.isEditable = true
         dateLabel.isHidden = true
         datePickerView.isHidden = false
-        
+        //titleTextField.isHidden = false
+        setTitleLabel(true)
         if let memo = memoTextView.text, !memo.isEmpty {
             placeHolderLabel.isHidden = true
         } else {
@@ -218,11 +270,23 @@ final class RecordView: BaseView {
     }
     
     func setReadMode() {
-        titleTextField.isUserInteractionEnabled = false
+        //titleTextField.isUserInteractionEnabled = false
         memoTextView.isEditable = false
         dateLabel.isHidden = false
         datePickerView.isHidden = true
         placeHolderLabel.isHidden = true
+        titleTextField.isHidden = true
+        //titleLabel.isHidden = false
+        
+        if let memo = memoTextView.text, memo.isEmpty || memoTextView.text == nil {
+            memoTextView.isHidden = true
+        }
+        setTitleLabel(false)
+    }
+    
+    func setTitleLabel(_ ishidden: Bool) {
+        titleLabel.isHidden = ishidden
+        titleTextField.isHidden = !ishidden
     }
    
     

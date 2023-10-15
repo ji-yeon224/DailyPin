@@ -12,7 +12,8 @@ extension Constants {
     
     enum Image {
         static let star = UIImage(systemName: "star.circle.fill")
-        static let mappin = UIImage(systemName: "mappin.circle.fill")
+        static let mappin = UIImage(systemName: "mappin.circle")
+        static let mappinFill = UIImage(systemName: "mappin.circle.fill")
         static let networkError = UIImage(systemName: "wifi.exclamationmark")
         static let menuButton = UIImage(systemName: "ellipsis.circle")
         static let backButton = UIImage(systemName: "chevron.backward")

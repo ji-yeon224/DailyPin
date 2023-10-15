@@ -49,6 +49,11 @@ final class RecordViewController: BaseViewController {
     
     private func setData() {
         
+        if let location = location {
+            mainView.addressLabel.text = location.formattedAddress
+        }
+        
+        
         guard let record = record else {
             return
         }
@@ -58,6 +63,8 @@ final class RecordViewController: BaseViewController {
         mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
         mainView.memoTextView.text = record.memo
         mainView.placeHolderLabel.isHidden = true
+        mainView.setReadMode()
+        mainView.titleLabel.text = record.title
         
         
     }
