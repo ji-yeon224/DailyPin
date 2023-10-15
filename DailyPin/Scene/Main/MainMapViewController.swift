@@ -41,10 +41,15 @@ final class MainMapViewController: BaseViewController {
         mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
         mainView.mapView.register(SelectAnnotationView.self, forAnnotationViewWithReuseIdentifier: SelectAnnotationView.identifier)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: Notification.Name.databaseChange, object: nil)
+        notificationObserver()
         
         viewModel.getAllPlaceAnnotation()
         bindData()
+    }
+    
+    private func notificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: Notification.Name.databaseChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getNetworkNotification), name: Notification.Name.networkConnect, object: nil)
     }
     
     private func bindData() {
@@ -68,17 +73,32 @@ final class MainMapViewController: BaseViewController {
         
     }
     
+    @objc private func getNetworkNotification() {
+        DispatchQueue.main.async {
+            self.showOKAlert(title: "네트워크 연결 오류", message: "네트워크 연결을 확인해주세요.") {
+                
+            }
+        }
+        
+    }
+    
     @objc private func longPressMap(_ sender: UILongPressGestureRecognizer) {
         let location: CGPoint = sender.location(in: self.mainView.mapView)
         let mapPoint: CLLocationCoordinate2D = self.mainView.mapView.convert(location, toCoordinateFrom: self.mainView.mapView)
         print(mapPoint)
         if sender.state == .ended {
             showAlertWithCancel(title: "", message: "이 장소에 기록을 등록하시겠어요?") {
+                if !NetworkMonitor.shared.isConnected {
+                    self.getNetworkNotification()
+                    return
+                    
+                }
                 self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) {
                     self.presentRecordView()
                 } failCompletion: {
                     self.showToastMessage(message: "위치 정보를 가져오지 못했습니다. 다시 시도해주세요.")
                 }
+                
                 
                 
                 
