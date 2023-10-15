@@ -77,7 +77,7 @@ final class RecordViewController: BaseViewController {
         
         editMode.toggle()
         saveRecord()
-       
+        
     }
     
     private func saveRecord() {
@@ -132,6 +132,7 @@ final class RecordViewController: BaseViewController {
             let newRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
             do {
                 try placeRepository.updateRecordList(record: newRecord, place: place)
+                self.record = newRecord
             } catch let error {
                 showOKAlert(title: "", message: error.localizedDescription) { }
                 return
@@ -141,7 +142,30 @@ final class RecordViewController: BaseViewController {
         
         NotificationCenter.default.post(name: Notification.Name.updateCell, object: nil)
         setNavRightButton()
+        
     }
+    
+    private func savePlace() throws -> Place {
+        guard let data = location else {
+            
+            throw InvalidError.noExistData
+        }
+        
+        let place = Place(placeId: data.id, address: data.formattedAddress, placeName: data.displayName.placeName, latitude: data.location.latitude, longitude: data.location.longitude)
+        
+        
+        
+        do {
+            try placeRepository.createItem(place)
+            showToastMessage(message: "저장 완료!")
+            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["changeType": "save"])
+            
+            return place
+        } catch {
+            throw DataBaseError.createError
+        }
+    }
+    
     
     private func deleteRecord() {
         guard let deleteRecord = record else {
@@ -189,25 +213,6 @@ final class RecordViewController: BaseViewController {
         }
     }
     
-    private func savePlace() throws -> Place {
-        guard let data = location else {
-            
-            throw InvalidError.noExistData
-        }
-        
-        let place = Place(placeId: data.id, address: data.formattedAddress, placeName: data.displayName.placeName, latitude: data.location.latitude, longitude: data.location.longitude)
-        
-        
-        
-        do {
-            try placeRepository.createItem(place)
-            showToastMessage(message: "저장 완료!")
-            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["changeType": "save"])
-            return place
-        } catch {
-            throw DataBaseError.createError
-        }
-    }
     
     
     
@@ -233,7 +238,7 @@ extension RecordViewController {
             
             setMenuButton()
             mainView.setReadMode()
-            
+            setData()
         }
     }
     

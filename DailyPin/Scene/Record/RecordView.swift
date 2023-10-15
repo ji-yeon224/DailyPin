@@ -254,12 +254,9 @@ final class RecordView: BaseView {
     }
     
     func setEditMode() {
-        //titleTextField.isUserInteractionEnabled = true
         memoTextView.isHidden = false
         memoTextView.isEditable = true
-        dateLabel.isHidden = true
-        datePickerView.isHidden = false
-        //titleTextField.isHidden = false
+        setPickerView()
         setTitleLabel(true)
         if let memo = memoTextView.text, !memo.isEmpty {
             placeHolderLabel.isHidden = true
@@ -270,13 +267,10 @@ final class RecordView: BaseView {
     }
     
     func setReadMode() {
-        //titleTextField.isUserInteractionEnabled = false
         memoTextView.isEditable = false
-        dateLabel.isHidden = false
-        datePickerView.isHidden = true
+        setDateLabel()
         placeHolderLabel.isHidden = true
         titleTextField.isHidden = true
-        //titleLabel.isHidden = false
         
         if let memo = memoTextView.text, memo.isEmpty || memoTextView.text == nil {
             memoTextView.isHidden = true
@@ -284,22 +278,20 @@ final class RecordView: BaseView {
         setTitleLabel(false)
     }
     
-    func setTitleLabel(_ ishidden: Bool) {
+    private func setTitleLabel(_ ishidden: Bool) {
         titleLabel.isHidden = ishidden
         titleTextField.isHidden = !ishidden
     }
    
     
-    func setDateLabel() {
+    private func setDateLabel() {
         dateLabel.isHidden = false
         datePickerView.isHidden = true
-        
     }
     
     func setPickerView() {
         dateLabel.isHidden = true
         datePickerView.isHidden = false
-        
     }
     
     func isEmptyText() -> Bool {
