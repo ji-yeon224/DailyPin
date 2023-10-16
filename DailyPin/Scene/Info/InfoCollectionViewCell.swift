@@ -9,6 +9,18 @@ import UIKit
 
 final class InfoCollectionViewCell: BaseCollectionViewCell {
     
+    private lazy var stackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.distribution = .fillProportionally
+        view.alignment = .fill
+        view.spacing = 10
+        
+        //view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: .zero, right: 20)
+        view.isLayoutMarginsRelativeArrangement = true
+        return view
+    }()
+    
     var titleLabel = {
         let view = UILabel()
         view.textColor = Constants.Color.basicText
@@ -50,8 +62,11 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
         super.configureUI()
         contentView.backgroundColor = Constants.Color.background
         contentView.addSubview(image)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(address)
+        contentView.addSubview(stackView)
+//        contentView.addSubview(titleLabel)
+//        contentView.addSubview(address)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(address)
         contentView.addSubview(dateLabel)
         setShadow()
     }
@@ -67,31 +82,23 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
     
     override func setConstraints() {
         
+       
+        
         image.snp.makeConstraints { make in
             make.leading.equalTo(contentView).offset(10)
             make.centerY.equalTo(contentView)
             make.size.equalTo(30)
         }
         
-        titleLabel.snp.makeConstraints { make in
-//            make.centerY.equalTo(contentView).offset(-6)
-//            make.leading.equalTo(image.snp.trailing).offset(10)
-//            make.trailing.equalTo(contentView).offset(-20)
-            make.centerY.equalTo(contentView).offset(-6)
-            //make.top.equalTo(contentView).offset(8)
+        stackView.snp.makeConstraints { make in
+            make.centerY.equalTo(contentView)
             make.leading.equalTo(image.snp.trailing).offset(10)
             make.trailing.equalTo(contentView).offset(-20)
-            
         }
-        address.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(8)
-            make.leading.equalTo(image.snp.trailing).offset(10)
-            make.trailing.equalTo(contentView).offset(-20)
-            
-        }
+
         
         dateLabel.snp.makeConstraints { make in
-            make.top.equalTo(address.snp.bottom).offset(8)
+            make.top.equalTo(stackView.snp.bottom).offset(8)
             make.bottom.greaterThanOrEqualTo(contentView).offset(-5)
             make.trailing.equalTo(contentView).offset(-10)
             make.leading.greaterThanOrEqualTo(contentView).offset(50)

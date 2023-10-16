@@ -133,12 +133,7 @@ final class InfoView: BaseView {
         errorView.isHidden = error
         collectionView.isHidden = !error
     }
-    
-//    func configureHidden(collection: Bool, error: Bool) {
-//
-//        collectionView.isHidden = collection
-//        errorView.isHidden = error
-//    }
+
     
     func configureErrorView(image: UIImage?, description: String) {
         
@@ -157,7 +152,6 @@ final class InfoView: BaseView {
         
         addButton.snp.makeConstraints { make in
             make.top.trailing.equalTo(uiView).inset(35)
-            //make.leading.equalTo(titleLabel.snp.trailing)
             make.width.equalTo(uiView.snp.width).multipliedBy(0.08)
             make.height.equalTo(addButton.snp.width)
         }
@@ -191,7 +185,8 @@ extension InfoView {
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 10
         let layout = UICollectionViewCompositionalLayout(section: section)
-        layout.configuration.interSectionSpacing = 5
+        layout.configuration.interSectionSpacing = 10
+        
         
         return layout
     }

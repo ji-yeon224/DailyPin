@@ -34,7 +34,7 @@ final class CalendarView: BaseView {
     // 이전 달로 이동 버튼
     private let prevButton = {
         let view = UIButton()
-        view.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        view.setImage(Constants.Image.leftButton, for: .normal)
         view.tintColor = Constants.Color.basicText
         return view
     }()
@@ -42,14 +42,14 @@ final class CalendarView: BaseView {
     // 다음 달로 이동 버튼
     private let nextButton = {
         let view = UIButton()
-        view.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        view.setImage(Constants.Image.rightButton, for: .normal)
         view.tintColor = Constants.Color.basicText
         return view
     }()
     
     private let returnTodayButton = {
         let view = UIButton()
-        view.setImage(UIImage(systemName: "gobackward"), for: .normal)
+        view.setImage(Constants.Image.returnToday, for: .normal)
         view.tintColor = Constants.Color.basicText
         return view
     }()
@@ -88,7 +88,7 @@ final class CalendarView: BaseView {
         
         returnTodayButton.snp.makeConstraints { make in
             make.centerY.equalTo(calendarView.calendarHeaderView).multipliedBy(1.1)
-            make.trailing.equalTo(calendarView.calendarHeaderView.snp.trailing).inset(30)
+            make.trailing.equalTo(calendarView.calendarHeaderView.snp.trailing).inset(15)
             
         }
         
@@ -148,12 +148,12 @@ extension CalendarView: UICollectionViewDelegate  {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: estimatedHeight)
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 3, bottom: 0, trailing: 3)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: estimatedHeight)
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        
+        section.interGroupSpacing = 10
         let layout = UICollectionViewCompositionalLayout(section: section)
         layout.configuration.interSectionSpacing = 5
         
