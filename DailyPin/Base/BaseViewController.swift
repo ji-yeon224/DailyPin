@@ -43,8 +43,9 @@ class BaseViewController: UIViewController {
         let cancel = UIAlertAction(title: "cancelText".localized(), style: .destructive) { _ in
             cancelHandler?()
         }
-        alert.addAction(ok)
         alert.addAction(cancel)
+        alert.addAction(ok)
+        
         
         present(alert, animated: true)
     }

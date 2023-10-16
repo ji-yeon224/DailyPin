@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class AlertMapViewController : UIViewController{
+final class AlertMapViewController : UIViewController{
     var cood: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
     
   override func viewDidLoad() {
@@ -21,7 +21,7 @@ class AlertMapViewController : UIViewController{
       //표시할 위치
       let pos = CLLocationCoordinate2D(latitude: cood.latitude, longitude: cood.longitude)
         
-      let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+      let span = MKCoordinateSpan(latitudeDelta: 0.0025, longitudeDelta: 0.0025)
         
       //3.지도 영역을 정의
       let region = MKCoordinateRegion(center: pos, span: span)

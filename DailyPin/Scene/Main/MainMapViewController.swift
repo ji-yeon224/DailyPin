@@ -47,6 +47,8 @@ final class MainMapViewController: BaseViewController {
         bindData()
         
         
+        present(mainView.showMapAlert(cood: defaultLoaction), animated: true)
+        
     }
     
     private func notificationObserver() {
@@ -88,30 +90,22 @@ final class MainMapViewController: BaseViewController {
     @objc private func longPressMap(_ sender: UILongPressGestureRecognizer) {
         let location: CGPoint = sender.location(in: self.mainView.mapView)
         let mapPoint: CLLocationCoordinate2D = self.mainView.mapView.convert(location, toCoordinateFrom: self.mainView.mapView)
-        print(mapPoint)
+        
         if sender.state == .ended {
-            showAlertWithCancel(title: "", message: "이 장소에 기록을 등록하시겠어요?") {
+            
+            showAlertMap(cood: mapPoint) {
                 if !NetworkMonitor.shared.isConnected {
                     self.getNetworkNotification()
                     return
-                    
                 }
-                
                 self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) {
                     self.presentRecordView()
                 } failCompletion: { error in
                     self.showToastMessage(message: error.errorDescription ?? "문제가 발생하였습니다.")
                 }
-                
-                
-                
-                
             } cancelHandler: {
                 return
             }
-
-            
-
         }
         
     }
@@ -234,6 +228,27 @@ final class MainMapViewController: BaseViewController {
             self.searchAnnotation = nil
         }
         
+    }
+    
+    // alert 지도
+    private func showAlertMap(cood: CLLocationCoordinate2D, okHandler: (() -> Void)?, cancelHandler: (() -> Void)?) {
+        let alert = UIAlertController(title: nil, message: "이 장소에 기록을 등록하시겠어요?", preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "okText".localized(), style: .default) { _ in
+            okHandler?()
+        }
+        let cancel = UIAlertAction(title: "cancelText".localized(), style: .destructive) { _ in
+            cancelHandler?()
+        }
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        
+        let contentVC = AlertMapViewController()
+        contentVC.cood = cood
+        
+        alert.setValue(contentVC, forKey: "contentViewController")
+        
+        present(alert, animated: true)
     }
     
     

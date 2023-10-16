@@ -84,7 +84,7 @@ extension MainMapView {
         if span.longitudeDelta > 0.05 && span.longitudeDelta > 0.03 {
             checkSpan = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.03)
         }
-        print(mapView.region.span)
+        
         let region = MKCoordinateRegion(center: center, span: checkSpan)
         mapView.setRegion(region, animated: true)
         mapView.showsUserLocation = true
@@ -123,6 +123,8 @@ extension MainMapView {
         fpc.changePanelStyle()
         fpc.invalidateLayout()
     }
+    
+    
     
     func showMapAlert(cood: CLLocationCoordinate2D) -> UIAlertController {
         
