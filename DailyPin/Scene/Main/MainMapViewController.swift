@@ -92,20 +92,24 @@ final class MainMapViewController: BaseViewController {
         let mapPoint: CLLocationCoordinate2D = self.mainView.mapView.convert(location, toCoordinateFrom: self.mainView.mapView)
         
         if sender.state == .ended {
-            
-            showAlertMap(cood: mapPoint) {
-                if !NetworkMonitor.shared.isConnected {
-                    self.getNetworkNotification()
-                    return
-                }
-                self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) {
-                    self.presentRecordView()
-                } failCompletion: { error in
-                    self.showToastMessage(message: error.errorDescription ?? "문제가 발생하였습니다.")
-                }
-            } cancelHandler: {
+            if !NetworkMonitor.shared.isConnected {
+                self.getNetworkNotification()
                 return
             }
+            self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) { address in
+                
+                self.showAlertMap(address: address, cood: mapPoint) {
+                    self.presentRecordView()
+                } cancelHandler: {
+                    return
+                }
+                
+                
+            } failCompletion: { error in
+                self.showToastMessage(message: error.errorDescription ?? "문제가 발생하였습니다.")
+            }
+            
+            
         }
         
     }
@@ -231,8 +235,8 @@ final class MainMapViewController: BaseViewController {
     }
     
     // alert 지도
-    private func showAlertMap(cood: CLLocationCoordinate2D, okHandler: (() -> Void)?, cancelHandler: (() -> Void)?) {
-        let alert = UIAlertController(title: nil, message: "이 장소에 기록을 등록하시겠어요?", preferredStyle: .alert)
+    private func showAlertMap(address: String, cood: CLLocationCoordinate2D, okHandler: (() -> Void)?, cancelHandler: (() -> Void)?) {
+        let alert = UIAlertController(title: "이 장소에 기록을 등록하시겠어요?", message: address, preferredStyle: .alert)
         
         let ok = UIAlertAction(title: "okText".localized(), style: .default) { _ in
             okHandler?()
