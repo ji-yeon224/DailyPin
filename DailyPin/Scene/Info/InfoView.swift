@@ -14,7 +14,7 @@ final class InfoView: BaseView {
     var dataSource: UICollectionViewDiffableDataSource<Int, Record>!
     weak var collectionViewDelegate: RecordCollectionViewProtocol?
     
-    private let uiView = UIView()
+    private lazy var uiView = UIView()
     
     var titleLabel = {
         let view = UILabel()
@@ -89,14 +89,15 @@ final class InfoView: BaseView {
         uiView.backgroundColor = Constants.Color.background
         uiView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(5)
-            make.height.equalTo(100)
+            make.height.equalTo(150)
+            
         }
         
         setUIVIewContentsConstraints()
         
         collectionView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.top.equalTo(uiView.snp.bottom).offset(50)
+            make.top.equalTo(uiView.snp.bottom).offset(30)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
         
@@ -177,15 +178,18 @@ extension InfoView {
     
     private func collectionViewLayout() -> UICollectionViewLayout {
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(70))
+        let screenWidth = UIScreen.main.bounds.width
+        let estimatedHeight = NSCollectionLayoutDimension.estimated(screenWidth)
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: estimatedHeight)
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(80))
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 3, bottom: 0, trailing: 3)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: estimatedHeight)
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        
+        section.interGroupSpacing = 10
         let layout = UICollectionViewCompositionalLayout(section: section)
         layout.configuration.interSectionSpacing = 5
         
@@ -197,7 +201,7 @@ extension InfoView {
         let cellRegistration = UICollectionView.CellRegistration<InfoCollectionViewCell, Record> { cell, indexPath, itemIdentifier in
             cell.titleLabel.text = itemIdentifier.title
             cell.dateLabel.text = DateFormatter.convertDate(date: itemIdentifier.date)
-            
+            cell.address.isHidden = true
             
         }
         

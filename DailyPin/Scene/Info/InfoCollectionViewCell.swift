@@ -14,7 +14,15 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
         view.textColor = Constants.Color.basicText
         view.textAlignment = .left
         view.font = .systemFont(ofSize: 15, weight: .bold)
-        view.numberOfLines = 1
+        view.numberOfLines = 0
+        return view
+    }()
+    
+    var address = {
+        let view = UILabel()
+        view.font = .systemFont(ofSize: 13)
+        view.textColor = Constants.Color.subTextColor
+        view.numberOfLines = 0
         return view
     }()
     
@@ -43,6 +51,7 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
         contentView.backgroundColor = Constants.Color.background
         contentView.addSubview(image)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(address)
         contentView.addSubview(dateLabel)
         setShadow()
     }
@@ -64,18 +73,31 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
             make.size.equalTo(30)
         }
         
-        dateLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(contentView).offset(-5)
-            make.trailing.equalTo(contentView).offset(-10)
-            make.leading.greaterThanOrEqualTo(contentView).offset(50)
-        }
-        
         titleLabel.snp.makeConstraints { make in
+//            make.centerY.equalTo(contentView).offset(-6)
+//            make.leading.equalTo(image.snp.trailing).offset(10)
+//            make.trailing.equalTo(contentView).offset(-20)
             make.centerY.equalTo(contentView).offset(-6)
+            //make.top.equalTo(contentView).offset(8)
             make.leading.equalTo(image.snp.trailing).offset(10)
             make.trailing.equalTo(contentView).offset(-20)
             
         }
+        address.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.leading.equalTo(image.snp.trailing).offset(10)
+            make.trailing.equalTo(contentView).offset(-20)
+            
+        }
+        
+        dateLabel.snp.makeConstraints { make in
+            make.top.equalTo(address.snp.bottom).offset(8)
+            make.bottom.greaterThanOrEqualTo(contentView).offset(-5)
+            make.trailing.equalTo(contentView).offset(-10)
+            make.leading.greaterThanOrEqualTo(contentView).offset(50)
+        }
+        
+        
         
     }
     

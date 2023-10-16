@@ -142,11 +142,14 @@ extension CalendarView: UICollectionViewDelegate  {
     
     private func collectionViewLayout() -> UICollectionViewLayout {
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(95))
+        let screenWidth = UIScreen.main.bounds.width
+        let estimatedHeight = NSCollectionLayoutDimension.estimated(screenWidth)
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: estimatedHeight)
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 3, bottom: 3, trailing: 3)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: estimatedHeight)
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
@@ -160,6 +163,7 @@ extension CalendarView: UICollectionViewDelegate  {
     private func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<InfoCollectionViewCell, Record> { cell, indexPath, itemIdentifier in
             cell.titleLabel.text = itemIdentifier.title
+            cell.address.text = itemIdentifier.placeInfo[0].address
             cell.dateLabel.text = DateFormatter.convertDate(date: itemIdentifier.date)
             
             
