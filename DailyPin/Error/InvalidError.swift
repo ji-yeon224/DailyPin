@@ -19,13 +19,13 @@ extension InvalidError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidInput:
-            return "유효하지 않은 입력 값입니다."
+            return "invalid_invalidInput".localized()
         case .emptyQuery:
-            return "검색어를 입력하세요."
+            return "invalid_emtyQuery".localized()
         case .invalidQuery:
-            return "검색 요청에 문제가 발생하였습니다."
+            return "invalid_invalidQuery".localized()
         case .noExistData:
-            return "데이터에 문제가 발생하였습니다."
+            return "invalid_noExistData".localized()
         }
     
     }

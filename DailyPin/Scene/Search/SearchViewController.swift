@@ -76,7 +76,7 @@ final class SearchViewController: BaseViewController {
         
         if NetworkMonitor.shared.isConnected {
             self.mainView.configureHidden(collection: false, error: true)
-            self.mainView.configureErrorView(image: Constants.Image.networkError, description: "네트워크 연결을 확인해주세요!")
+            self.mainView.configureErrorView(image: Constants.Image.networkError, description: "network_connectError".localized())
         } else {
             self.mainView.configureHidden(collection: true, error: false)
         }
@@ -101,7 +101,7 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text?.trimmingCharacters(in: .whitespaces), !query.isEmpty else {
-            mainView.configureErrorView(image: Constants.Image.noData, description: "검색 결과가 없습니다.")
+            mainView.configureErrorView(image: Constants.Image.noData, description: "error_emptySearchResult".localized())
             mainView.configureHidden(collection: true, error: false)
             return
         }

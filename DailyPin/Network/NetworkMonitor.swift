@@ -41,6 +41,5 @@ final class NetworkMonitor {
         monitor.cancel()
     }
 
-    // Network 연결 타입
     
 }

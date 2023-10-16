@@ -112,12 +112,12 @@ extension CalendarViewController: FSCalendarProtocol {
 extension CalendarViewController: RecordCollectionViewProtocol {
     func didSelectRecordItem(item: Record?) {
         guard let item = item else {
-            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { }
+            showOKAlert(title: "", message: "alert_dateLoadError".localized()) { }
             return
         }
         
         guard let place = item.placeInfo.first else {
-            showOKAlert(title: "", message: "위치를 로드하는데 문제가 발생하였습니다.") { }
+            showOKAlert(title: "", message: "alert_locationLoadError".localized()) { }
             return
         }
         

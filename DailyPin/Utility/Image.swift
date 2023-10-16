@@ -27,6 +27,8 @@ extension Constants {
         static let leftButton = UIImage(systemName: "chevron.left")
         static let rightButton = UIImage(systemName: "chevron.right")
         
+        
+        
         static let selectPin = UIImage(named: "baseline_place_white_24pt")
         static let pushPin = UIImage(named: "PushPin")
         static let starImage = UIImage(named: "star")

@@ -47,8 +47,6 @@ final class MainMapViewController: BaseViewController {
         bindData()
         
         
-        present(mainView.showMapAlert(cood: defaultLoaction), animated: true)
-        
     }
     
     private func notificationObserver() {
@@ -80,7 +78,7 @@ final class MainMapViewController: BaseViewController {
     
     @objc private func getNetworkNotification() {
         DispatchQueue.main.async {
-            self.showOKAlert(title: "네트워크 연결 오류", message: "네트워크 연결을 확인해주세요.") {
+            self.showOKAlert(title: "network_connectErrorTitle".localized(), message: "network_connectError".localized()) {
                 
             }
         }
@@ -106,7 +104,7 @@ final class MainMapViewController: BaseViewController {
                 
                 
             } failCompletion: { error in
-                self.showToastMessage(message: error.errorDescription ?? "문제가 발생하였습니다.")
+                self.showToastMessage(message: error.errorDescription ?? "toast_errorAlert".localized())
             }
             
             
@@ -236,7 +234,7 @@ final class MainMapViewController: BaseViewController {
     
     // alert 지도
     private func showAlertMap(address: String, cood: CLLocationCoordinate2D, okHandler: (() -> Void)?, cancelHandler: (() -> Void)?) {
-        let alert = UIAlertController(title: "이 장소에 기록을 등록하시겠어요?", message: address, preferredStyle: .alert)
+        let alert = UIAlertController(title: "alert_addRecordTitle".localized(), message: address, preferredStyle: .alert)
         
         let ok = UIAlertAction(title: "okText".localized(), style: .default) { _ in
             okHandler?()

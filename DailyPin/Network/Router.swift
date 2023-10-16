@@ -73,7 +73,6 @@ enum Router: URLRequestConvertible {
         var urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         
          if method == .get {
-            //print(parameter)
             var queries = [URLQueryItem]()
             for (name, value) in query {
                 let encodedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .afURLQueryAllowed)
@@ -100,17 +99,6 @@ enum Router: URLRequestConvertible {
             }
             request.httpBody = jsonData
         }
-        
-        
-//        switch self {
-//        case .place:
-//
-//        case .geocoding:
-//            request = try URLEncodedFormParameterEncoder(destination: .queryString).encode(query, into: request)
-//
-//
-//        }
-        print(request)
         
         return request
     }

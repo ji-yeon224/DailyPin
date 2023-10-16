@@ -14,7 +14,7 @@ class SearchButton: BaseUIButton {
         backgroundColor = Constants.Color.background
         setTitleColor(Constants.Color.placeholderColor, for: .normal)
         contentHorizontalAlignment = .leading
-        setTitle("  장소를 검색하세요.", for: .normal)
+        setTitle("searchPlaceholder".localized(), for: .normal)
         titleLabel?.font = .systemFont(ofSize: 13)
         layer.cornerRadius = Constants.Design.cornerRadius
     }

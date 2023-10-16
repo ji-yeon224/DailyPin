@@ -96,7 +96,7 @@ final class RecordView: BaseView {
         view.datePickerMode = .dateAndTime
         view.preferredDatePickerStyle = .compact
         view.backgroundColor = Constants.Color.background
-        view.locale = Locale(identifier: "ko-KR")
+        view.locale = Locale(identifier: "language".localized())
         view.tintColor = Constants.Color.mainColor
         
         

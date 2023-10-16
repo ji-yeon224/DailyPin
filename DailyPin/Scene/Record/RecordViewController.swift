@@ -12,7 +12,6 @@ final class RecordViewController: BaseViewController {
     private let mainView = RecordView()
     private let recordRepository = RecordRepository()
     private let placeRepository = PlaceRepository()
-    private let viewModel = RecordViewModel()
     
     var location: PlaceElement?
     var record: Record?
@@ -89,12 +88,12 @@ final class RecordViewController: BaseViewController {
         
         
         guard let title = mainView.titleTextField.text else {
-            showToastMessage(message: "제목을 입력해주세요!")
+            showToastMessage(message: "toast_titleIsEmpty".localized())
             return
         }
         
         guard !title.trimmingCharacters(in: .whitespaces).isEmpty else {
-            showToastMessage(message: "제목을 입력해주세요!")
+            showToastMessage(message: "toast_titleIsEmpty".localized())
             return
         }
         
@@ -157,7 +156,7 @@ final class RecordViewController: BaseViewController {
         
         do {
             try placeRepository.createItem(place)
-            showToastMessage(message: "저장 완료!")
+            showToastMessage(message: "toast_saveComplete".localized())
             NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["changeType": "save"])
             
             return place
@@ -172,7 +171,7 @@ final class RecordViewController: BaseViewController {
             return
         }
         
-        showAlertWithCancel(title: "삭제하기", message: "기록을 정말 삭제하시겠습니까?") {
+        showAlertWithCancel(title: "alert_deleteTitle".localized(), message: "alert_deleteMessage".localized()) {
             do {
                 try self.recordRepository.deleteItem(deleteRecord)
                 self.dismiss(animated: true)
@@ -280,7 +279,7 @@ extension RecordViewController {
         if editMode {
            
             if !mainView.isEmptyText() {
-                okDesctructiveAlert(title: "작성 중입니다!", message: "정말로 나가시겠어요?\n 작성 중인 내용은 저장되지 않습니다!") {
+                okDesctructiveAlert(title: "alert_alertEditModeTitle".localized(), message: "alert_alertEditModeMessage".localized()) {
                     
                     self.dismiss(animated: true)
                 } cancelHandler: {

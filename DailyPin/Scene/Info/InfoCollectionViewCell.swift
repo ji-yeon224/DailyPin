@@ -16,7 +16,6 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
         view.alignment = .fill
         view.spacing = 10
         
-        //view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: .zero, right: 20)
         view.isLayoutMarginsRelativeArrangement = true
         return view
     }()
@@ -63,8 +62,6 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
         contentView.backgroundColor = Constants.Color.background
         contentView.addSubview(image)
         contentView.addSubview(stackView)
-//        contentView.addSubview(titleLabel)
-//        contentView.addSubview(address)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(address)
         contentView.addSubview(dateLabel)

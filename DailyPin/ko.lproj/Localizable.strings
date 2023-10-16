@@ -14,13 +14,36 @@
 "location_Restricted" = "위치 서비스 사용이 불가능합니다.";
 "locationServicesEnabled" = "위치 서비스가 꺼져있습니다.";
 
+// toastAlert
 "toast_errorAlert" = "문제가 발생하였습니다. 다시 시도해주세요.";
 "toast_searchInputError" = "검색어를 입력해주세요.";
+"toast_titleIsEmpty" = "제목을 입력해주세요!";
+"toast_saveComplete" = "저장 완료!";
+"toase_recordLoadError" = "기록을 로딩하는데 문제가 발생하였습니다.";
+
+// CRUD
+"alert_deleteTitle" = "삭제하기";
+"alert_deleteMessage" = "기록을 정말 삭제하시겠습니까?";
+"alert_alertEditModeTitle" = "작성 중입니다!";
+"alert_alertEditModeMessage" = "정말로 나가시겠어요?\n 작성 중인 내용은 저장되지 않습니다!";
+"alert_addRecordTitle" = "이 장소에 기록을 등록하시겠어요?";
 
 // Error
+"alert_dateLoadError" = "데이터 로딩에 문제가 발생하였습니다.";
+"alert_locationLoadError" = "위치 로딩에 문제가 발생하였습니다.";
+
 "network_emptyResult" = "검색 결과가 없습니다.";
 "network_wrongREquest" = "잘못된 요청입니다.";
 "network_invalidServer" = "네트워크 오류가 발생하였습니다.";
+"network_connectErrorTitle" = "네트워크 연결 오류";
+"network_connectError" = "네트워크 연결을 확인해주세요!";
+
+"invalid_invalidInput" = "유효하지 않은 입력 값입니다.";
+"invalid_emtyQuery" = "검색어를 입력하세요.";
+"invalid_invalidQuery" = "검색 요청에 문제가 발생하였습니다.";
+"invalid_noExistData" = "데이터에 문제가 발생하였습니다";
+
+"error_emptySearchResult" = "검색 결과가 없습니다.";
 
 // record view - placeholder
 "record_writeRecord" = "장소 기록을 남겨보세요!";

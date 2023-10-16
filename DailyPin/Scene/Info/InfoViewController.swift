@@ -85,14 +85,13 @@ final class InfoViewController: BaseViewController {
             do {
                 try self.viewModel.getRecordList()
             } catch {
-                print("error")
+                self.showToastMessage(message: "toase_recordLoadError".localized())
             }
             
             
         }
         
         viewModel.recordList.bind { data in
-           //print("data", data)
             guard data != nil else {
                 self.mainView.errorViewHidden(error: false)
                 return
@@ -126,7 +125,7 @@ final class InfoViewController: BaseViewController {
 extension InfoViewController: RecordCollectionViewProtocol {
     func didSelectRecordItem(item: Record?) {
         guard let item = item else {
-            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { }
+            showOKAlert(title: "", message: "alert_dateLoadError".localized()) { }
             return
         }
         
