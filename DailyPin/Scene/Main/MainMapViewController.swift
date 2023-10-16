@@ -45,11 +45,13 @@ final class MainMapViewController: BaseViewController {
         
         viewModel.getAllPlaceAnnotation()
         bindData()
+        
+        
     }
     
     private func notificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: Notification.Name.databaseChange, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(getNetworkNotification), name: Notification.Name.networkConnect, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(getNetworkNotification), name: Notification.Name.networkConnect, object: nil)
     }
     
     private func bindData() {
@@ -73,6 +75,7 @@ final class MainMapViewController: BaseViewController {
         
     }
     
+    
     @objc private func getNetworkNotification() {
         DispatchQueue.main.async {
             self.showOKAlert(title: "네트워크 연결 오류", message: "네트워크 연결을 확인해주세요.") {
@@ -93,6 +96,7 @@ final class MainMapViewController: BaseViewController {
                     return
                     
                 }
+                
                 self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) {
                     self.presentRecordView()
                 } failCompletion: { error in

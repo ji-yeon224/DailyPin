@@ -30,7 +30,7 @@ enum Router: URLRequestConvertible {
                     "Content-Type": "application/json"
             ]
         case .geocoding:
-            return ["":""]
+            return ["Content-Type": "application/json"]
         }
     }
     

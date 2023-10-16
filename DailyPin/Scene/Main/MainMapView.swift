@@ -124,6 +124,28 @@ extension MainMapView {
         fpc.invalidateLayout()
     }
     
+    func showMapAlert(cood: CLLocationCoordinate2D) -> UIAlertController {
+        
+        let alert = UIAlertController(title: nil, message: "여기가 맞습니까?", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        
+        //컨텐츠 뷰 영역에 들어갈 뷰 컨트롤러를 생성하고, 알림창에 등록한다.
+        let contentVC = AlertMapViewController()
+        contentVC.cood = cood
+        //뷰 컨트롤러에 맵킷 뷰를 추가한다.
+        let mapKitView = MKMapView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        contentVC.view = mapKitView
+        contentVC.preferredContentSize.height = 200
+        
+        alert.setValue(contentVC, forKey: "contentViewController")
+        return alert
+    }
+    
 }
 
 extension MainMapView: MKMapViewDelegate {

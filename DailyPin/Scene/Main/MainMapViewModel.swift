@@ -17,9 +17,9 @@ final class MainMapViewModel {
     private var placeInfo: PlaceInfo = PlaceInfo(addressComponents: [], address: "", placeID: "")
     var selectedLocation: PlaceElement? = nil
     
-    
     func requestSelectedLocation(lat: Double, lng: Double, completion: @escaping(() -> Void), failCompletion: @escaping((NetworkError) -> Void) ) {
-        GoogleNetwork.shared.requestGeocoder(lat: lat, lng: lng) { response in
+        
+        GoogleNetwork.shared.requestGeocoder(api: .geocoding(lat: lat, lng: lng)) { response in
             switch response {
             case .success(let data):
                 self.placeInfo = data.results[0]
@@ -29,7 +29,10 @@ final class MainMapViewModel {
                 failCompletion(error)
             }
         }
+        
     }
+    
+
     
     private func convertToPlaceElement(placeInfo: PlaceInfo, lat: Double, lng: Double) {
         

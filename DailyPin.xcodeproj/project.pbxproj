@@ -83,6 +83,7 @@
 		CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */; };
 		CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */; };
 		CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */; };
+		CEE694932ADCFD5300FDE8E6 /* AlertMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE694922ADCFD5300FDE8E6 /* AlertMapViewController.swift */; };
 		CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +161,7 @@
 		CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPanelController+Extension.swift"; sourceTree = "<group>"; };
 		CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarProtocol.swift; sourceTree = "<group>"; };
+		CEE694922ADCFD5300FDE8E6 /* AlertMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMapViewController.swift; sourceTree = "<group>"; };
 		CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -259,6 +261,7 @@
 				CE3DF8002AC2B5B100653CE1 /* MainMapViewController.swift */,
 				CE3DF8022AC2B5BA00653CE1 /* MainMapView.swift */,
 				CE4DF9142ACBD5C500546526 /* MainMapViewModel.swift */,
+				CEE694922ADCFD5300FDE8E6 /* AlertMapViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				CE52CB752AC71B47007AD7F8 /* InvalidError.swift in Sources */,
 				CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */,
 				CE9B0E982ACB04DB008A0694 /* AddButton.swift in Sources */,
+				CEE694932ADCFD5300FDE8E6 /* AlertMapViewController.swift in Sources */,
 				CE814A612AD594FB00068854 /* CalendarView.swift in Sources */,
 				CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */,
 				CE52CB702AC7186F007AD7F8 /* LangCode.swift in Sources */,
