@@ -23,7 +23,10 @@ class CustomCalendarView: FSCalendar {
     
     private func configure() {
      
-        locale = Locale(identifier: "ko_KR")
+        
+        guard let languageCode = Locale.current.languageCode else { return }
+        
+        locale = Locale(identifier: languageCode)
         scrollEnabled = true
         
         headerHeight = 55

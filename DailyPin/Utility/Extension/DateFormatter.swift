@@ -10,26 +10,28 @@ import Foundation
 
 extension DateFormatter {
     
+    
+    
     static let format = {
         let format = DateFormatter()
-        format.locale = Locale(identifier: "ko_KR")
+        format.locale = Locale(identifier: Locale.current.languageCode ?? "ko_KR")
+        format.timeZone = TimeZone(identifier: TimeZone.current.identifier)
         format.dateFormat = "yyyy-MM-dd hh:mm a"
-        format.timeZone = TimeZone(abbreviation: "KST")
         return format
     }()
     
     static let monthFormat = {
         let format = DateFormatter()
-        format.locale = Locale(identifier: "ko_KR")
-        format.timeZone = TimeZone(abbreviation: "KST")
+        format.locale = Locale(identifier: Locale.current.languageCode ?? "ko_KR")
+        format.timeZone = TimeZone(identifier: TimeZone.current.identifier)
         format.dateFormat = "yyyy.MM"
         return format
     }()
     
     static let formatDate = {
         let form = DateFormatter()
-        format.locale = Locale(identifier: "ko_KR")
-        format.timeZone = TimeZone(abbreviation: "KST")
+        format.locale = Locale(identifier: Locale.current.languageCode ?? "ko_KR")
+        format.timeZone = TimeZone(identifier: TimeZone.current.identifier)
         form.dateFormat = "yyyy-MM-dd"
         return form
         
