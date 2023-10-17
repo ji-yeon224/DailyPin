@@ -9,6 +9,8 @@ import UIKit
 
 final class RecordView: BaseView {
     
+    weak var textFieldDelegate: TextFieldProtocol?
+    
     private let scrollView = {
         let view = UIScrollView()
         view.updateContentView()
@@ -51,13 +53,14 @@ final class RecordView: BaseView {
         return view
     }()
     
-    var titleTextField = {
+    lazy var titleTextField = {
         let view = UITextField()
         view.placeholder = "record_writeTitle".localized()
         view.font = UIFont(name: "NanumGothic", size: 15)
         view.textColor = Constants.Color.basicText
         view.tintColor = Constants.Color.mainColor
         view.contentVerticalAlignment = .center
+        view.delegate = self
         
         return view
     }()
@@ -315,6 +318,7 @@ final class RecordView: BaseView {
     
 }
 
+
 extension RecordView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         
@@ -347,7 +351,18 @@ extension RecordView: UITextViewDelegate {
 extension RecordView: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return false
+        
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        guard textField.text!.count < 20 else {
+            textFieldDelegate?.shouldChangeCharactersIn()
+            return false
+        }
+        return true
     }
     
 }

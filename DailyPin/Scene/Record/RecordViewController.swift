@@ -43,7 +43,7 @@ final class RecordViewController: BaseViewController {
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedView(_:)))
         view.addGestureRecognizer(tapGestureRecognizer)
-        
+        mainView.textFieldDelegate = self
     }
     
     private func setData() {
@@ -297,5 +297,14 @@ extension RecordViewController {
 
         
     }
+    
+}
+
+extension RecordViewController: TextFieldProtocol {
+    func shouldChangeCharactersIn() {
+        showToastMessage(message: "20글자 이내로 작성해주세요.")
+    }
+    
+    
     
 }

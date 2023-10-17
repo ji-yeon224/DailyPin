@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE2951EA2ADEA96E00EE2571 /* NanumGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */; };
 		CE2951EB2ADEA96E00EE2571 /* NanumGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */; };
+		CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */; };
 		CE32459A2AC8FAF500582FC5 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = CE3245992AC8FAF500582FC5 /* Toast */; };
 		CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32459B2AC9682200582FC5 /* InfoViewController.swift */; };
 		CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32459E2AC9683300582FC5 /* InfoView.swift */; };
@@ -91,6 +92,7 @@
 /* Begin PBXFileReference section */
 		CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Regular.ttf"; sourceTree = "<group>"; };
 		CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Bold.ttf"; sourceTree = "<group>"; };
+		CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldProtocol.swift; sourceTree = "<group>"; };
 		CE32459B2AC9682200582FC5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		CE32459E2AC9683300582FC5 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		CE3541D52AD5313F00773CD3 /* NSNotification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotification.Name.swift; sourceTree = "<group>"; };
@@ -185,6 +187,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE2951EC2ADEE7A500EE2571 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				CE9A16B92AD2CCBB0051BE23 /* RecordCollectionViewProtocol.swift */,
+				CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */,
+				CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */,
+				CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */,
+				CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		CE32459D2AC9682700582FC5 /* Info */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,13 +223,10 @@
 		CE3DF7EB2AC17CE500653CE1 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				CE2951EC2ADEE7A500EE2571 /* Protocol */,
 				CE3DF80C2AC2D24100653CE1 /* Extension */,
 				CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */,
-				CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */,
 				CE9A16B42AD28F0D0051BE23 /* Image.swift */,
-				CE9A16B92AD2CCBB0051BE23 /* RecordCollectionViewProtocol.swift */,
-				CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */,
-				CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -529,6 +540,7 @@
 				CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */,
 				CE52CB772AC7B454007AD7F8 /* NetworkError.swift in Sources */,
 				CEB390BA2ACFDF4C00E4B2AC /* DateFormatter.swift in Sources */,
+				CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */,
 				CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */,
 				CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */,
 				CE3DF7FA2AC2B1BB00653CE1 /* BaseViewController.swift in Sources */,
