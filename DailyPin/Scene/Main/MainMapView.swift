@@ -21,14 +21,6 @@ final class MainMapView: BaseView {
         view.delegate = self
         return view
     }()
-    let searchBarView = {
-        let view = UIView()
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = .zero
-        view.layer.shadowOpacity = 0.3
-        view.layer.shadowRadius = 1
-        return view
-    }()
     
     let searchButton = SearchButton()
     

@@ -16,9 +16,10 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
         view.alignment = .fill
         view.spacing = 10
         
-        view.isLayoutMarginsRelativeArrangement = true
         return view
     }()
+    
+    
     
     var titleLabel = {
         let view = UILabel()
@@ -69,12 +70,13 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
     }
     
     func setShadow() {
-        contentView.layer.cornerRadius = 10
+        contentView.layer.cornerRadius = 5
         contentView.layer.shadowColor = UIColor.black.cgColor
         contentView.layer.shadowOffset = .zero // 정면 빛
         contentView.layer.shadowRadius = 2 //그림자 퍼짐의 정도
-        contentView.layer.shadowOpacity = 0.1 //그림자 불투명도 0~1사이
+        contentView.layer.shadowOpacity = 0.2 //그림자 불투명도 0~1사이
         contentView.clipsToBounds = false
+        contentView.layer.masksToBounds = false
     }
     
     override func setConstraints() {
@@ -96,7 +98,7 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
         
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(stackView.snp.bottom).offset(8)
-            make.bottom.greaterThanOrEqualTo(contentView).offset(-5)
+            make.bottom.equalTo(contentView).offset(-5)
             make.trailing.equalTo(contentView).offset(-10)
             make.leading.greaterThanOrEqualTo(contentView).offset(50)
         }

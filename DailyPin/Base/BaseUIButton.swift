@@ -24,10 +24,13 @@ class BaseUIButton: UIButton {
     }
     
     private func setShadow() {
+        layer.cornerRadius = Constants.Design.cornerRadius
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = .zero
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 1
+        layer.shouldRasterize = true
+        
     }
     
     

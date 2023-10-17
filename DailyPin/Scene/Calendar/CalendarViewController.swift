@@ -27,6 +27,7 @@ final class CalendarViewController: BaseViewController {
         viewModel.filterDate(convertDate(selectedDate))
         updateSnapShot()
         mainView.setDefaultSelectDate(selectedDate)
+        mainView.collectionView.collectionViewLayout.invalidateLayout()
     }
     
     private func bindData() {

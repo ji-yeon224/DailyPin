@@ -17,6 +17,7 @@ class SearchButton: BaseUIButton {
         setTitle("searchPlaceholder".localized(), for: .normal)
         titleLabel?.font = .systemFont(ofSize: 13)
         layer.cornerRadius = Constants.Design.cornerRadius
+        
     }
     
     

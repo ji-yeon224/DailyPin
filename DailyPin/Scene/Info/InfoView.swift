@@ -39,7 +39,7 @@ final class InfoView: BaseView {
     lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         view.backgroundColor = Constants.Color.background
-        
+        view.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
         view.delegate = self 
         return view
     }()
@@ -172,14 +172,11 @@ extension InfoView {
     
     private func collectionViewLayout() -> UICollectionViewLayout {
         
-        let screenWidth = UIScreen.main.bounds.width
-        let estimatedHeight = NSCollectionLayoutDimension.estimated(screenWidth)
-        
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: estimatedHeight)
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 3, bottom: 0, trailing: 3)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: estimatedHeight)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
@@ -197,7 +194,7 @@ extension InfoView {
             cell.titleLabel.text = itemIdentifier.title
             cell.dateLabel.text = DateFormatter.convertDate(date: itemIdentifier.date)
             cell.address.isHidden = true
-            
+            cell.layoutIfNeeded()
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in

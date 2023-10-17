@@ -20,6 +20,8 @@ final class CustomAnnotationView: BaseAnnotationView {
         view.layer.shadowOffset = .zero // 정면 빛
         view.layer.shadowRadius = 1 //그림자 퍼짐의 정도
         view.layer.shadowOpacity = 0.5 //그림자 불투명도 0~1사이
+        view.layer.shouldRasterize = true
+//        view.layer.shadowPath = UIBezierPath(roundedRect: view.bounds, cornerRadius: view.layer.cornerRadius).cgPath
         view.clipsToBounds = false
         return view
     }()

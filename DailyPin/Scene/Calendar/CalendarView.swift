@@ -25,6 +25,7 @@ final class CalendarView: BaseView {
     
     lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+        view.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
         view.backgroundColor = Constants.Color.background
         view.delegate = self
         return view
@@ -50,6 +51,7 @@ final class CalendarView: BaseView {
     private let returnTodayButton = {
         let view = UIButton()
         view.setImage(Constants.Image.returnToday, for: .normal)
+        let image = Constants.Image.returnToday?.withRenderingMode(.alwaysTemplate)
         view.tintColor = Constants.Color.basicText
         return view
     }()
@@ -71,7 +73,7 @@ final class CalendarView: BaseView {
         calendarView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(safeAreaLayoutGuide)
-            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
+            make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(safeAreaLayoutGuide).multipliedBy(0.5)
             
         }
@@ -89,6 +91,7 @@ final class CalendarView: BaseView {
         returnTodayButton.snp.makeConstraints { make in
             make.centerY.equalTo(calendarView.calendarHeaderView).multipliedBy(1.1)
             make.trailing.equalTo(calendarView.calendarHeaderView.snp.trailing).inset(15)
+            make.size.equalTo(20)
             
         }
         
@@ -142,20 +145,17 @@ extension CalendarView: UICollectionViewDelegate  {
     
     private func collectionViewLayout() -> UICollectionViewLayout {
         
-        let screenWidth = UIScreen.main.bounds.width
-        let estimatedHeight = NSCollectionLayoutDimension.estimated(screenWidth)
-        
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: estimatedHeight)
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(150))
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 3, bottom: 0, trailing: 3)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: estimatedHeight)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(150))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 10
         let layout = UICollectionViewCompositionalLayout(section: section)
-        layout.configuration.interSectionSpacing = 5
+        
         
         return layout
     }
@@ -165,7 +165,7 @@ extension CalendarView: UICollectionViewDelegate  {
             cell.titleLabel.text = itemIdentifier.title
             cell.address.text = itemIdentifier.placeInfo[0].address
             cell.dateLabel.text = DateFormatter.convertDate(date: itemIdentifier.date)
-            
+            cell.layoutIfNeeded()
             
         }
         
