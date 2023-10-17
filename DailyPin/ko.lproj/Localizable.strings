@@ -23,10 +23,10 @@
 
 // CRUD
 "alert_deleteTitle" = "삭제하기";
-"alert_deleteMessage" = "기록을 정말 삭제하시겠습니까?";
-"alert_alertEditModeTitle" = "작성 중입니다!";
+"alert_deleteMessage" = "기록을 정말 삭제 하시겠습니까?";
+"alert_alertEditModeTitle" = "아직 작성 중인 기록이 있습니다.";
 "alert_alertEditModeMessage" = "정말로 나가시겠어요?\n 작성 중인 내용은 저장되지 않습니다!";
-"alert_addRecordTitle" = "이 장소에 기록을 등록하시겠어요?";
+"alert_addRecordTitle" = "이 장소에 기록을 등록 하시겠어요?";
 
 // Error
 "alert_dateLoadError" = "데이터 로딩에 문제가 발생하였습니다.";
@@ -41,7 +41,7 @@
 "invalid_invalidInput" = "유효하지 않은 입력 값입니다.";
 "invalid_emtyQuery" = "검색어를 입력하세요.";
 "invalid_invalidQuery" = "검색 요청에 문제가 발생하였습니다.";
-"invalid_noExistData" = "데이터에 문제가 발생하였습니다";
+"invalid_noExistData" = "데이터에 문제가 발생하였습니다.";
 
 "error_emptySearchResult" = "검색 결과가 없습니다.";
 

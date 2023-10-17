@@ -6,6 +6,51 @@
   
 */
 
-"searchPlaceholder" = "Search Place";
+"searchPlaceholder" = " Search Place";
 "okText" = "OK";
 "cancelText" = "Cancel";
+"locationAlertTitle" = "Using Location Information";
+"location_denied" = "Location service not available. Please turn on the location service under 'Settings > Privacy & Security' on the device.";
+"location_Restricted" = "Location service unavailable.";
+"locationServicesEnabled" = "Location service is turned off.";
+
+// toastAlert
+"toast_errorAlert" = "A problem has occurred. Please try again.";
+"toast_searchInputError" = "Please enter a search word";
+"toast_titleIsEmpty" = "Please enter a title!";
+"toast_saveComplete" = "Save Complete!";
+"toase_recordLoadError" = "There was a problem loading the record.";
+
+// CRUD
+"alert_deleteTitle" = "Delete";
+"alert_deleteMessage" = "Are you sure you want to delete the history?";
+"alert_alertEditModeTitle" = "There is still a record being created.";
+"alert_alertEditModeMessage" = "The content you are writing will not be saved!";
+"alert_addRecordTitle" = "Would you like to register your records here?";
+
+// Error
+"alert_dateLoadError" = "There was a problem loading the data.";
+"alert_locationLoadError" = "There was a problem loading the location.";
+
+"network_emptyResult" = "No search results.";
+"network_wrongREquest" = "Invalid request.";
+"network_invalidServer" = "A network error has occurred.";
+"network_connectErrorTitle" = "Network Connection Error";
+"network_connectError" = "Please check the network connection!";
+
+"invalid_invalidInput" = "Invalid input value.";
+"invalid_emtyQuery" = "Please enter a search term.";
+"invalid_invalidQuery" = "There was a problem with the search request.";
+"invalid_noExistData" = "There is a problem with the data.";
+
+"error_emptySearchResult" = "No search results.";
+
+// record view - placeholder
+"record_writeRecord" = "Keep a record of the place!";
+"record_writeTitle" = "Please enter a title.";
+
+"saveButton" = "Save";
+"editButton" = "Edit";
+"deleteButton" = "Delete";
+
+
