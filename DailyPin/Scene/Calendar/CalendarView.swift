@@ -124,7 +124,7 @@ final class CalendarView: BaseView {
     }
     
     // 달 이동 로직
-    private func moveMonth(next: Bool) {
+    func moveMonth(next: Bool) {
         var dateComponents = DateComponents()
         dateComponents.month = next ? 1 : -1
         self.currentPage = Calendar.current.date(byAdding: dateComponents, to: self.currentPage)!
@@ -196,8 +196,8 @@ extension CalendarView: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDele
     }
    
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        let currentMonth = DateFormatter.convertMonth(date: calendar.currentPage)
-        calendarDelegate?.calendarCurrentPageDidChange(date: currentMonth)
+        setDefaultSelectDate(calendar.currentPage)
+        calendarDelegate?.calendarCurrentPageDidChange(date: calendar.currentPage)
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
@@ -227,6 +227,8 @@ extension CalendarView: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDele
         let data = calendarDelegate?.numberOfEventsFor(date: date) ?? 0
         return data
     }
+    
+    
     
     
 }

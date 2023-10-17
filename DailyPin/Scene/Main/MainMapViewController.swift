@@ -47,6 +47,8 @@ final class MainMapViewController: BaseViewController {
         bindData()
         
         
+        
+        
     }
     
     private func notificationObserver() {

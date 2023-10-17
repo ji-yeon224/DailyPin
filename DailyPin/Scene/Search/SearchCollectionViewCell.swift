@@ -12,7 +12,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     var title = {
         let view = UILabel()
         view.textColor = Constants.Color.basicText
-        view.font = .systemFont(ofSize: 15, weight: .bold)
+        view.font = UIFont(name: "NanumGothicBold", size: 16)
         return view
     }()
     private var image = {
@@ -26,7 +26,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     var address = {
         let view = UILabel()
-        view.font = .systemFont(ofSize: 13)
+        view.font = UIFont(name: "NanumGothic", size: 13)
         view.textColor = Constants.Color.basicText
         view.numberOfLines = 0
         return view

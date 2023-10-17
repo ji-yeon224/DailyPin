@@ -47,7 +47,7 @@ final class SearchView: BaseView {
         let view = UILabel()
         view.backgroundColor = .clear
         view.textColor = Constants.Color.subTextColor
-        view.font = .systemFont(ofSize: 18)
+        view.font = UIFont(name: "NanumGothic", size: 18)
         view.textAlignment = .center
         view.numberOfLines = 0
         

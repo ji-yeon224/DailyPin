@@ -19,39 +19,35 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
         return view
     }()
     
-    
+    private let uiview = {
+        let view = UIView()
+        view.backgroundColor = Constants.Color.infoCellColor
+        return view
+    }()
     
     var titleLabel = {
         let view = UILabel()
         view.textColor = Constants.Color.basicText
         view.textAlignment = .left
-        view.font = .systemFont(ofSize: 15, weight: .bold)
+        view.font = UIFont(name: "NanumGothicBold", size: 16)
         view.numberOfLines = 0
         return view
     }()
     
     var address = {
         let view = UILabel()
-        view.font = .systemFont(ofSize: 13)
+        view.font = UIFont(name: "NanumGothic", size: 13)
         view.textColor = Constants.Color.subTextColor
         view.numberOfLines = 0
         return view
     }()
     
-    private var image = {
-        var view = UIImageView()
-        view.image = Constants.Image.mappinFill
-        view.backgroundColor = .clear
-        view.tintColor = Constants.Color.mainColor
-        
-        return view
-    }()
     
     var dateLabel = {
         let view = UILabel()
         view.textColor = Constants.Color.subTextColor
         view.textAlignment = .left
-        view.font = .systemFont(ofSize: 12)
+        view.font = UIFont(name: "NanumGothic", size: 12)
         
         return view
     }()
@@ -61,7 +57,7 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
     override func configureUI() {
         super.configureUI()
         contentView.backgroundColor = Constants.Color.background
-        contentView.addSubview(image)
+        contentView.addSubview(uiview)
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(address)
@@ -70,7 +66,7 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
     }
     
     func setShadow() {
-        contentView.layer.cornerRadius = 5
+        contentView.layer.cornerRadius = 8
         contentView.layer.shadowColor = UIColor.black.cgColor
         contentView.layer.shadowOffset = .zero // 정면 빛
         contentView.layer.shadowRadius = 2 //그림자 퍼짐의 정도
@@ -81,17 +77,16 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
     
     override func setConstraints() {
         
-       
-        
-        image.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).offset(10)
-            make.centerY.equalTo(contentView)
-            make.size.equalTo(30)
+        uiview.snp.makeConstraints { make in
+            make.verticalEdges.equalTo(contentView).inset(10)
+            make.leading.equalTo(contentView).offset(8)
+            make.width.equalTo(5)
         }
+        
         
         stackView.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
-            make.leading.equalTo(image.snp.trailing).offset(10)
+            make.leading.equalTo(uiview.snp.trailing).offset(16)
             make.trailing.equalTo(contentView).offset(-20)
         }
 
@@ -100,7 +95,7 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
             make.top.equalTo(stackView.snp.bottom).offset(8)
             make.bottom.equalTo(contentView).offset(-5)
             make.trailing.equalTo(contentView).offset(-10)
-            make.leading.greaterThanOrEqualTo(contentView).offset(50)
+            make.leading.greaterThanOrEqualTo(uiview.snp.trailing).offset(50)
         }
         
         

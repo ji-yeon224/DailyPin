@@ -15,7 +15,7 @@ class SearchButton: BaseUIButton {
         setTitleColor(Constants.Color.placeholderColor, for: .normal)
         contentHorizontalAlignment = .leading
         setTitle("searchPlaceholder".localized(), for: .normal)
-        titleLabel?.font = .systemFont(ofSize: 13)
+        titleLabel?.font = UIFont(name: "NanumGothic", size: 13)
         layer.cornerRadius = Constants.Design.cornerRadius
         
     }

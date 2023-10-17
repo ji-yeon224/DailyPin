@@ -32,7 +32,8 @@ final class RecordView: BaseView {
     let placeHolderLabel = {
         let view = UILabel()
         view.textColor = Constants.Color.placeholderColor
-        view.font = .systemFont(ofSize: 15)
+        //view.font = .systemFont(ofSize: 15)
+        view.font = UIFont(name: "NanumGothic", size: 15)
         view.text = "record_writeRecord".localized()
         view.textAlignment = .left
         return view
@@ -53,6 +54,7 @@ final class RecordView: BaseView {
     var titleTextField = {
         let view = UITextField()
         view.placeholder = "record_writeTitle".localized()
+        view.font = UIFont(name: "NanumGothic", size: 15)
         view.textColor = Constants.Color.basicText
         view.tintColor = Constants.Color.mainColor
         view.contentVerticalAlignment = .center
@@ -63,8 +65,8 @@ final class RecordView: BaseView {
     var titleLabel = {
         let view = UILabel()
         view.textColor = Constants.Color.basicText
+        view.font = UIFont(name: "NanumGothic", size: 15)
         view.numberOfLines = 0
-        view.font = .systemFont(ofSize: 15)
         return view
     }()
     
@@ -77,7 +79,7 @@ final class RecordView: BaseView {
     
     let addressLabel = {
         let view = UILabel()
-        view.font = .systemFont(ofSize: 13)
+        view.font = UIFont(name: "NanumGothic", size: 13)
         view.textColor = Constants.Color.subTextColor
         view.numberOfLines = 0
         return view
@@ -107,7 +109,7 @@ final class RecordView: BaseView {
     
     var dateLabel = {
         let view = UILabel()
-        view.font = .systemFont(ofSize: 13)
+        view.font = UIFont(name: "NanumGothic", size: 15)
         view.textColor = Constants.Color.basicText
         
         return view
@@ -118,6 +120,7 @@ final class RecordView: BaseView {
     lazy var memoTextView = {
         let view = MemoTextView()
         view.delegate = self
+        view.font = UIFont(name: "NanumGothic", size: 15)
         return view
     }()
     

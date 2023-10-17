@@ -103,8 +103,11 @@ extension CalendarViewController: FSCalendarProtocol {
         return 0
     }
     
-    func calendarCurrentPageDidChange(date: String) {
-        viewModel.getRecords(date: date)
+    func calendarCurrentPageDidChange(date: Date) {
+        let currentMonth = DateFormatter.convertMonth(date: date)
+        viewModel.getRecords(date: currentMonth)
+        viewModel.filterDate(convertDate(date))
+        selectedDate = date
         
     }
     
@@ -142,4 +145,6 @@ extension CalendarViewController: RecordCollectionViewProtocol {
         
         return PlaceElement(id: item.placeId, formattedAddress: item.address, location: location, displayName: displayName)
     }
+    
+    
 }

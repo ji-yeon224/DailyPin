@@ -19,8 +19,8 @@ final class InfoView: BaseView {
     var titleLabel = {
         let view = UILabel()
         view.textColor = Constants.Color.basicText
+        view.font = UIFont(name: "NanumGothic", size: 23)
         view.numberOfLines = 1
-        view.font = .systemFont(ofSize: 23)
         return view
     }()
     
@@ -28,7 +28,7 @@ final class InfoView: BaseView {
         let view = UILabel()
         view.textColor = Constants.Color.subTextColor
         view.numberOfLines = 1
-        view.font = .systemFont(ofSize: 13)
+        view.font = UIFont(name: "NanumGothic", size: 13)
         
         return view
     }()
@@ -39,7 +39,7 @@ final class InfoView: BaseView {
     lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         view.backgroundColor = Constants.Color.background
-        view.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
+        view.contentInset = .init(top: 10, left: 0, bottom: 0, right: 0)
         view.delegate = self 
         return view
     }()
@@ -63,7 +63,7 @@ final class InfoView: BaseView {
         let view = UILabel()
         view.backgroundColor = .clear
         view.textColor = Constants.Color.subTextColor
-        view.font = .systemFont(ofSize: 18)
+        view.font = UIFont(name: "NanumGothic", size: 18)
         view.textAlignment = .center
         view.numberOfLines = 0
         
@@ -89,15 +89,15 @@ final class InfoView: BaseView {
         uiView.backgroundColor = Constants.Color.background
         uiView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(5)
-            make.height.equalTo(150)
+            make.height.equalTo(130)
             
         }
         
         setUIVIewContentsConstraints()
         
         collectionView.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(20)
-            make.top.equalTo(uiView.snp.bottom).offset(30)
+            make.horizontalEdges.equalToSuperview().inset(10)
+            make.top.equalTo(uiView.snp.bottom).offset(20)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
         
