@@ -41,7 +41,7 @@ final class SelectAnnotationView: BaseAnnotationView {
     
     override func setConstraints() {
         backView.snp.makeConstraints { make in
-            make.size.equalTo(50)
+            make.size.equalTo(55)
         }
         imageView.snp.makeConstraints { make in
             make.edges.equalTo(backView).inset(5)
@@ -59,7 +59,7 @@ final class SelectAnnotationView: BaseAnnotationView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        bounds.size = CGSize(width: 50, height: 50)
+        bounds.size = CGSize(width: 55, height: 55)
         centerOffset = CGPoint(x: 0, y: bounds.size.width / 2)
     }
     

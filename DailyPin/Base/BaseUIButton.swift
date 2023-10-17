@@ -30,6 +30,7 @@ class BaseUIButton: UIButton {
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 1
         layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
         
     }
     

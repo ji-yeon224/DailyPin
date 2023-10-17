@@ -128,7 +128,7 @@ extension MainMapView: MKMapViewDelegate {
         
         guard let view = view as? CustomAnnotationView else { return }
         view.imageView.image = Constants.Image.selectPin
-        view.imageView.tintColor = Constants.Color.selectPinColor
+        view.imageView.tintColor = Constants.Color.subColor
         
         mapViewDelegate?.didSelect(annotation: annotation)
     }
