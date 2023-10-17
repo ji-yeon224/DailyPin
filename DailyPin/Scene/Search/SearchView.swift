@@ -54,6 +54,12 @@ final class SearchView: BaseView {
         return view
     }()
     
+    private let googleImage = {
+        let view = UIImageView()
+        view.image = Constants.Image.google
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
 
     var dataSource: UICollectionViewDiffableDataSource<Int, PlaceElement>!
     
@@ -61,6 +67,7 @@ final class SearchView: BaseView {
         super.configureUI()
         
         addSubview(collectionView)
+        addSubview(googleImage)
         addSubview(errorView)
         errorView.addSubview(errorImage)
         errorView.addSubview(errorLabel)
@@ -72,6 +79,11 @@ final class SearchView: BaseView {
     override func setConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        googleImage.snp.makeConstraints { make in
+            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.leading.equalToSuperview()
+            
         }
         setErrorViewConstraints()
     }

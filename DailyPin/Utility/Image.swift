@@ -32,6 +32,7 @@ extension Constants {
         static let selectPin = UIImage(named: "baseline_place_white_24pt")
         static let pushPin = UIImage(named: "PushPin")
         static let starImage = UIImage(named: "star")
+        static let google = UIImage(named: "Google")
         
         
         
