@@ -36,11 +36,11 @@ class CustomCalendarView: FSCalendar {
         appearance.headerDateFormat = "YYYY.MM"
         appearance.headerTitleColor = Constants.Color.basicText
         
-        appearance.weekdayFont = .systemFont(ofSize: 12)
+        appearance.weekdayFont = UIFont(name: "NanumGothic", size: 12)
         appearance.weekdayTextColor = Constants.Color.basicText
         
         //appearance.titleTodayColor = .white
-        appearance.titleFont = .systemFont(ofSize: 16)
+        appearance.titleFont = UIFont(name: "NanumGothic", size: 13)
         appearance.todayColor = Constants.Color.subColor
         
         placeholderType = .none
