@@ -12,6 +12,7 @@ final class RecordViewController: BaseViewController {
     private let mainView = RecordView()
     private let recordRepository = RecordRepository()
     private let placeRepository = PlaceRepository()
+    private let viewModel = RecordViewModel()
     
     var location: PlaceElement?
     var record: Record?
@@ -79,13 +80,23 @@ final class RecordViewController: BaseViewController {
         
     }
     
+    
     private func saveRecord() {
+        
         
         guard let data = location else {
             showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
             return
         }
         
+        var place: Place
+        
+        do {
+            place = try viewModel.getPlace(data)
+        } catch let error {
+            showOKAlert(title: "", message: error.localizedDescription) { }
+            return
+        }
         
         guard let title = mainView.titleTextField.text else {
             showToastMessage(message: "toast_titleIsEmpty".localized())
@@ -96,28 +107,7 @@ final class RecordViewController: BaseViewController {
             showToastMessage(message: "toast_titleIsEmpty".localized())
             return
         }
-        
-        
-        var place: Place
-        if placeRepository.isExistPlace(id: data.id) {
-            do {
-                place = try placeRepository.searchItemByID(data.id)
-            } catch let error {
-                showOKAlert(title: "", message: error.localizedDescription) { }
-                return
-            }
-        } else {
-            do {
-                place = try savePlace()
-                
-            } catch let error {
-                showOKAlert(title: "", message: error.localizedDescription) { }
-                return
-            }
-            
-        }
-        
-        
+  
         
         if let record = record { // 기존 데이터 수정 시
             do {
@@ -144,6 +134,8 @@ final class RecordViewController: BaseViewController {
         
     }
     
+    
+    // viewmodel save place -------
     private func savePlace() throws -> Place {
         guard let data = location else {
             
@@ -164,6 +156,8 @@ final class RecordViewController: BaseViewController {
             throw DataBaseError.createError
         }
     }
+    
+    //-------------
     
     
     private func deleteRecord() {

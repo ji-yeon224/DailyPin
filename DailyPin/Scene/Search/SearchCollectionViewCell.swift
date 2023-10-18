@@ -12,7 +12,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     var title = {
         let view = UILabel()
         view.textColor = Constants.Color.basicText
-        view.font = UIFont(name: "NanumGothicBold", size: 16)
+        view.font = UIFont(name: "NanumGothicBold", size: 14)
         return view
     }()
     private var image = {
@@ -26,7 +26,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     var address = {
         let view = UILabel()
-        view.font = UIFont(name: "NanumGothic", size: 13)
+        view.font = UIFont(name: "NanumGothic", size: 11)
         view.textColor = Constants.Color.basicText
         view.numberOfLines = 0
         return view
@@ -43,7 +43,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         image.snp.makeConstraints { make in
             make.leading.equalTo(contentView).offset(10)
             make.centerY.equalTo(contentView)
-            make.size.equalTo(30)
+            make.size.equalTo(20)
         }
         
         title.snp.makeConstraints { make in
