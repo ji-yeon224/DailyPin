@@ -7,8 +7,7 @@
 
 import Foundation
 
-enum Mode: String { // localized key
-    case save = "saveButton"
-    case edit = "editButton"
-    case delete = "deleteButton"
+enum Mode: String {
+    case read
+    case edit
 }

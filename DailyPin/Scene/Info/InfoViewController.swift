@@ -61,7 +61,7 @@ final class InfoViewController: BaseViewController {
         let vc = RecordViewController()
         vc.location = viewModel.place.value
         vc.record = nil
-        vc.editMode = true
+        vc.mode = .edit
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         nav.modalTransitionStyle = .crossDissolve
@@ -132,7 +132,7 @@ extension InfoViewController: RecordCollectionViewProtocol {
         let vc = RecordViewController()
         vc.record = item
         vc.location = viewModel.place.value
-        vc.editMode = false
+        vc.mode = .read
         
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen

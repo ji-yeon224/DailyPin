@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+
 final class RecordViewController: BaseViewController {
     
     private let mainView = RecordView()
@@ -18,7 +20,8 @@ final class RecordViewController: BaseViewController {
     var record: Record?
     var savedPlace: Place?
     
-    var editMode: Bool = false // 읽기모드
+    //var editMode: Bool = false // 읽기모드
+    var mode: Mode = .read
     
     override func loadView() {
         self.view = mainView
@@ -75,7 +78,8 @@ final class RecordViewController: BaseViewController {
     
     @objc private func saveButtonTapped() {
         
-        editMode.toggle()
+        //editMode.toggle()
+        mode = .read
         saveRecord()
         
     }
@@ -107,8 +111,23 @@ final class RecordViewController: BaseViewController {
             showToastMessage(message: "toast_titleIsEmpty".localized())
             return
         }
-  
         
+//        var saveRecord: Record
+//        if let record = record {
+//            saveRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+//        } else {
+//            saveRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+//        }
+//
+//        do {
+//            try viewModel.saveRecord(record: saveRecord)
+//            self.record = saveRecord
+//        } catch {
+//            showOKAlert(title: "", message: error.localizedDescription) { }
+//            return
+//        }
+  
+        //---------
         if let record = record { // 기존 데이터 수정 시
             do {
                 let updateRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
@@ -126,8 +145,9 @@ final class RecordViewController: BaseViewController {
                 showOKAlert(title: "", message: error.localizedDescription) { }
                 return
             }
-            
+
         }
+        //--------
         
         NotificationCenter.default.post(name: Notification.Name.updateCell, object: nil)
         setNavRightButton()
@@ -198,20 +218,30 @@ extension RecordViewController {
     }
     
     private func setNavRightButton() {
-        if editMode { // 편집모드
+        
+        switch mode {
+        case .edit:
             setSaveButton()
             mainView.setEditMode()
-            
-        } else { // 저장 버튼 클릭
-            
+        case .read:
             setMenuButton()
             mainView.setReadMode()
             setData()
         }
+//        if editMode { // 편집모드
+//            setSaveButton()
+//            mainView.setEditMode()
+//
+//        } else { // 저장 버튼 클릭
+//
+//            setMenuButton()
+//            mainView.setReadMode()
+//            setData()
+//        }
     }
     
     private func setSaveButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: Mode.save.rawValue.localized(), style: .plain, target: self, action: #selector(saveButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "saveButton".localized(), style: .plain, target: self, action: #selector(saveButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = Constants.Color.basicText
         
     }
@@ -219,13 +249,13 @@ extension RecordViewController {
     private func setMenuButton() {
         var menuItems: [UIAction] = []
         
-        let editAction = UIAction(title: Mode.edit.rawValue.localized()) { action in
-            self.editMode = true
+        let editAction = UIAction(title: "editButton".localized()) { action in
+            self.mode = .edit
             self.mainView.setPickerView()
             self.mainView.datePickerView.date = self.record?.date ?? Date()
             self.setNavRightButton()
         }
-        let deleteAction = UIAction(title: Mode.delete.rawValue.localized()) { action in
+        let deleteAction = UIAction(title: "deleteButton".localized()) { action in
             self.deleteRecord()
             
             
@@ -245,8 +275,8 @@ extension RecordViewController {
     
     @objc private func backButtonTapped() {
         
-        if editMode {
-           
+        switch mode {
+        case .edit:
             if !mainView.isEmptyText() {
                 okDesctructiveAlert(title: "alert_alertEditModeTitle".localized(), message: "alert_alertEditModeMessage".localized()) {
                     
@@ -257,13 +287,28 @@ extension RecordViewController {
             } else {
                 dismiss(animated: true)
             }
-           
-        } else {
+            
+        case .read:
             dismiss(animated: true)
+            
         }
         
-        
-
+//        if editMode {
+//
+//            if !mainView.isEmptyText() {
+//                okDesctructiveAlert(title: "alert_alertEditModeTitle".localized(), message: "alert_alertEditModeMessage".localized()) {
+//
+//                    self.dismiss(animated: true)
+//                } cancelHandler: {
+//
+//                }
+//            } else {
+//                dismiss(animated: true)
+//            }
+//
+//        } else {
+//            dismiss(animated: true)
+//        }
         
     }
     

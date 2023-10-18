@@ -10,11 +10,16 @@ import Foundation
 final class RecordViewModel {
     
     private let placeRepository = PlaceRepository()
+    private let recordRepository = RecordRepository()
     
     
-    func saveRecord(record: Record?) {
+    func saveRecord(record: Record) throws {
         
-        
+        do {
+            try recordRepository.updateRecord(id: record.objectID, record)
+        } catch {
+            throw error
+        }
         
     }
     

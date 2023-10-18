@@ -128,7 +128,7 @@ extension CalendarViewController: RecordCollectionViewProtocol {
         let vc = RecordViewController()
         vc.record = item
         vc.location = convertToStruct(place)
-        vc.editMode = false
+        vc.mode = .read
         
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen

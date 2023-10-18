@@ -118,7 +118,7 @@ final class MainMapViewController: BaseViewController {
         let vc = RecordViewController()
         vc.location = self.viewModel.selectedLocation
         vc.record = nil
-        vc.editMode = true
+        vc.mode = .edit
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         nav.modalTransitionStyle = .crossDissolve
