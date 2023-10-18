@@ -228,16 +228,6 @@ extension RecordViewController {
             mainView.setReadMode()
             setData()
         }
-//        if editMode { // 편집모드
-//            setSaveButton()
-//            mainView.setEditMode()
-//
-//        } else { // 저장 버튼 클릭
-//
-//            setMenuButton()
-//            mainView.setReadMode()
-//            setData()
-//        }
     }
     
     private func setSaveButton() {
@@ -292,23 +282,6 @@ extension RecordViewController {
             dismiss(animated: true)
             
         }
-        
-//        if editMode {
-//
-//            if !mainView.isEmptyText() {
-//                okDesctructiveAlert(title: "alert_alertEditModeTitle".localized(), message: "alert_alertEditModeMessage".localized()) {
-//
-//                    self.dismiss(animated: true)
-//                } cancelHandler: {
-//
-//                }
-//            } else {
-//                dismiss(animated: true)
-//            }
-//
-//        } else {
-//            dismiss(animated: true)
-//        }
         
     }
     
