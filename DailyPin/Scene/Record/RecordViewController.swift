@@ -133,32 +133,7 @@ final class RecordViewController: BaseViewController {
         setNavRightButton()
         
     }
-    
-    
-    // viewmodel save place -------
-    private func savePlace() throws -> Place {
-        guard let data = location else {
-            
-            throw InvalidError.noExistData
-        }
-        
-        let place = Place(placeId: data.id, address: data.formattedAddress, placeName: data.displayName.placeName, latitude: data.location.latitude, longitude: data.location.longitude)
-        
-        
-        
-        do {
-            try placeRepository.createItem(place)
-            showToastMessage(message: "toast_saveComplete".localized())
-            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["changeType": "save"])
-            
-            return place
-        } catch {
-            throw DataBaseError.createError
-        }
-    }
-    
-    //-------------
-    
+ 
     
     private func deleteRecord() {
         guard let deleteRecord = record else {
