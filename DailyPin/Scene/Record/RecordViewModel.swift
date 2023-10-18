@@ -13,16 +13,6 @@ final class RecordViewModel {
     private let recordRepository = RecordRepository()
     
     
-    func saveRecord(record: Record) throws {
-        
-        do {
-            try recordRepository.updateRecord(id: record.objectID, record)
-        } catch {
-            throw error
-        }
-        
-    }
-    
     
     // 기존에 저장된 장소가 있다면 읽어오기, 없으면 장소 새로 저장하기(savePlace)
     func getPlace(_ data: PlaceElement) throws -> Place {
@@ -65,6 +55,27 @@ final class RecordViewModel {
             throw DataBaseError.createError
         }
         
+    }
+    
+    func deletePlace(id: String) throws {
+        if placeRepository.getRecordListCount(id: id) == 0 {
+            
+            var deletePlace: Place
+            do {
+                deletePlace = try placeRepository.searchItemByID(id)
+                
+            } catch {
+                throw error
+            }
+            
+            do {
+                try placeRepository.deleteItem(deletePlace)
+            } catch {
+                throw error
+            }
+            
+            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["changeType": "delete"])
+        }
     }
     
     

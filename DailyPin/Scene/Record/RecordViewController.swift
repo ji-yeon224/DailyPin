@@ -78,7 +78,6 @@ final class RecordViewController: BaseViewController {
     
     @objc private func saveButtonTapped() {
         
-        //editMode.toggle()
         mode = .read
         saveRecord()
         
@@ -112,21 +111,6 @@ final class RecordViewController: BaseViewController {
             return
         }
         
-//        var saveRecord: Record
-//        if let record = record {
-//            saveRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
-//        } else {
-//            saveRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
-//        }
-//
-//        do {
-//            try viewModel.saveRecord(record: saveRecord)
-//            self.record = saveRecord
-//        } catch {
-//            showOKAlert(title: "", message: error.localizedDescription) { }
-//            return
-//        }
-  
         //---------
         if let record = record { // 기존 데이터 수정 시
             do {
@@ -179,25 +163,11 @@ final class RecordViewController: BaseViewController {
     }
     private func deletePlace() {
         guard let location = location else { return }
-        if placeRepository.getRecordListCount(id: location.id) == 0 {
-            
-            var deletePlace: Place
-            do {
-                deletePlace = try placeRepository.searchItemByID(location.id)
-                
-            } catch let error {
-                self.showOKAlert(title: "", message: error.localizedDescription) {  }
-                return
-            }
-            
-            do {
-                try placeRepository.deleteItem(deletePlace)
-            } catch let error {
-                self.showOKAlert(title: "", message: error.localizedDescription) {  }
-                return
-            }
-            
-            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["changeType": "delete"])
+        do {
+            try viewModel.deletePlace(id: location.id)
+        } catch {
+            self.showOKAlert(title: "", message: error.localizedDescription) {  }
+            return
         }
     }
     
