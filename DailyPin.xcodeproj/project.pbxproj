@@ -82,6 +82,8 @@
 		CEB390BA2ACFDF4C00E4B2AC /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390B92ACFDF4C00E4B2AC /* DateFormatter.swift */; };
 		CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390BB2ACFF89300E4B2AC /* Record.swift */; };
 		CEB5ECFA2AD0595E00BC6143 /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */; };
+		CEBAB9022AE01B69008AF9C8 /* GowunBatang-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB9012AE01B69008AF9C8 /* GowunBatang-Bold.ttf */; };
+		CEBAB9042AE01B71008AF9C8 /* GowunBatang-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */; };
 		CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */; };
 		CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */; };
 		CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */; };
@@ -163,6 +165,8 @@
 		CEB390B92ACFDF4C00E4B2AC /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CEB390BB2ACFF89300E4B2AC /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepository.swift; sourceTree = "<group>"; };
+		CEBAB9012AE01B69008AF9C8 /* GowunBatang-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Bold.ttf"; sourceTree = "<group>"; };
+		CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Regular.ttf"; sourceTree = "<group>"; };
 		CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewProtocol.swift; sourceTree = "<group>"; };
 		CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPanelController+Extension.swift"; sourceTree = "<group>"; };
 		CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
@@ -389,8 +393,7 @@
 		CEB00FBF2AC030BF001E7BB0 /* DailyPin */ = {
 			isa = PBXGroup;
 			children = (
-				CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */,
-				CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */,
+				CEBAB9002AE01B4F008AF9C8 /* Font */,
 				CE52CB732AC71B36007AD7F8 /* Error */,
 				CE3DF7FF2AC2B59900653CE1 /* Model */,
 				CE3DF7FE2AC2B59100653CE1 /* Network */,
@@ -421,6 +424,17 @@
 				CE2951EF2ADFAFCD00EE2571 /* RecordViewModel.swift */,
 			);
 			path = Record;
+			sourceTree = "<group>";
+		};
+		CEBAB9002AE01B4F008AF9C8 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */,
+				CEBAB9012AE01B69008AF9C8 /* GowunBatang-Bold.ttf */,
+				CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */,
+				CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -505,8 +519,10 @@
 				CE2951EB2ADEA96E00EE2571 /* NanumGothic-Bold.ttf in Resources */,
 				CEB00FCD2AC030C0001E7BB0 /* LaunchScreen.storyboard in Resources */,
 				CEB00FCA2AC030C0001E7BB0 /* Assets.xcassets in Resources */,
+				CEBAB9022AE01B69008AF9C8 /* GowunBatang-Bold.ttf in Resources */,
 				CEB00FC82AC030BF001E7BB0 /* Main.storyboard in Resources */,
 				CE2951EA2ADEA96E00EE2571 /* NanumGothic-Regular.ttf in Resources */,
+				CEBAB9042AE01B71008AF9C8 /* GowunBatang-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
