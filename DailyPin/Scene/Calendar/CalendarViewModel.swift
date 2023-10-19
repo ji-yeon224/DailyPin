@@ -29,7 +29,7 @@ final class CalendarViewModel {
             dateSet.insert(calendar.startOfDay(for: $0.date))
         }
         recordDateList.value.append(contentsOf: dateSet)
-
+        
     }
     
     func filterDate(_ date: String) {

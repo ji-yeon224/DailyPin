@@ -53,16 +53,28 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
     }()
     
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.layer.masksToBounds = false
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOpacity = 0.1
+        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        contentView.layer.shadowRadius = 3
+        contentView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height), cornerRadius: 8).cgPath
+        
+    }
     
     override func configureUI() {
         super.configureUI()
         contentView.backgroundColor = Constants.Color.background
+        contentView.layer.cornerRadius = 8
         contentView.addSubview(uiview)
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(address)
         contentView.addSubview(dateLabel)
-        setShadow()
+        //setShadow()
     }
     
     func setShadow() {

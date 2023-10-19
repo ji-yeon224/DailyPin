@@ -15,13 +15,7 @@ final class CustomAnnotationView: BaseAnnotationView {
     
     let backView = {
         let view = UIView()
-        view.backgroundColor = .clear
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = .zero // 정면 빛
-        view.layer.shadowRadius = 1 //그림자 퍼짐의 정도
-        view.layer.shadowOpacity = 0.5 //그림자 불투명도 0~1사이
-        view.layer.shouldRasterize = true
-//        view.layer.shadowPath = UIBezierPath(roundedRect: view.bounds, cornerRadius: view.layer.cornerRadius).cgPath
+        view.backgroundColor = .white
         view.clipsToBounds = false
         return view
     }()
@@ -48,10 +42,10 @@ final class CustomAnnotationView: BaseAnnotationView {
     
     override func setConstraints() {
         backView.snp.makeConstraints { make in
-            make.size.equalTo(40)
+            make.size.equalTo(25)
         }
         imageView.snp.makeConstraints { make in
-            make.edges.equalTo(backView).inset(5)
+            make.edges.equalTo(backView)
         }
     }
     
@@ -67,8 +61,16 @@ final class CustomAnnotationView: BaseAnnotationView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        bounds.size = CGSize(width: 40, height: 40)
+        bounds.size = CGSize(width: 25, height: 25)
         centerOffset = CGPoint(x: 0, y: bounds.size.width / 2)
+        
+        backView.layer.cornerRadius = backView.frame.size.width / 2
+        backView.layer.shadowColor = UIColor.black.cgColor
+        backView.layer.shadowOpacity = 0.4
+        backView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        backView.layer.shadowRadius = 1
+        backView.layer.shadowPath = UIBezierPath(arcCenter: CGPoint(x: backView.bounds.width/2, y: backView.bounds.height/2), radius: backView.bounds.width / 2, startAngle: 0, endAngle: 2 * .pi, clockwise: true).cgPath
+        
     }
     
 }
