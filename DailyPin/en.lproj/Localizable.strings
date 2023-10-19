@@ -19,6 +19,7 @@
 "toast_searchInputError" = "Please enter a search word";
 "toast_titleIsEmpty" = "Please enter a title!";
 "toast_saveComplete" = "Save Complete!";
+"toast_editComplete" = "Edit Complete!";
 "toase_recordLoadError" = "There was a problem loading the record.";
 
 // CRUD

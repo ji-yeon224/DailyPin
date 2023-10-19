@@ -19,6 +19,7 @@
 "toast_searchInputError" = "검색어를 입력해주세요.";
 "toast_titleIsEmpty" = "제목을 입력해주세요!";
 "toast_saveComplete" = "저장 완료!";
+"toast_editComplete" = "수정 완료!";
 "toase_recordLoadError" = "기록을 로딩하는데 문제가 발생하였습니다.";
 
 // CRUD

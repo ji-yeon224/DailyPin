@@ -20,7 +20,6 @@ final class RecordViewController: BaseViewController {
     var record: Record?
     var savedPlace: Place?
     
-    //var editMode: Bool = false // 읽기모드
     var mode: Mode = .read
     
     override func loadView() {
@@ -116,6 +115,7 @@ final class RecordViewController: BaseViewController {
             do {
                 let updateRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
                 try recordRepository.updateRecord(id: record.objectID, updateRecord)
+                showToastMessage(message: "toast_editComplete".localized())
             } catch let error {
                 showOKAlert(title: "", message: error.localizedDescription) { }
                 return
@@ -125,6 +125,7 @@ final class RecordViewController: BaseViewController {
             do {
                 try placeRepository.updateRecordList(record: newRecord, place: place)
                 self.record = newRecord
+                showToastMessage(message: "toast_saveComplete".localized())
             } catch let error {
                 showOKAlert(title: "", message: error.localizedDescription) { }
                 return
