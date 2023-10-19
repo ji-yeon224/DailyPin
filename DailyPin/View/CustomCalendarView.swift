@@ -29,7 +29,7 @@ class CustomCalendarView: FSCalendar {
         locale = Locale(identifier: languageCode)
         scrollEnabled = true
         
-        headerHeight = 55
+        headerHeight = 30
         appearance.headerMinimumDissolvedAlpha = 0.0
         //appearance.subtitleOffset = CGPoint(x: 0, y: 4)
         

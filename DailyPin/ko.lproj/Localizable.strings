@@ -47,7 +47,7 @@
 "error_emptySearchResult" = "검색 결과가 없습니다.";
 
 // record view - placeholder
-"record_writeRecord" = "장소 기록을 남겨보세요!";
+"record_writeRecord" = "메모를 남겨보세요!";
 "record_writeTitle" = "제목을 입력하세요.";
 
 "saveButton" = "저장";

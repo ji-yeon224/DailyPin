@@ -15,6 +15,7 @@ final class RecordViewController: BaseViewController {
     private let recordRepository = RecordRepository()
     private let placeRepository = PlaceRepository()
     private let viewModel = RecordViewModel()
+    var longPressHandler: (() -> Void)?
     
     var location: PlaceElement?
     var record: Record?
@@ -33,7 +34,8 @@ final class RecordViewController: BaseViewController {
             dismiss(animated: true)
             return
         }
-        title = location.displayName.placeName
+        //title = location.displayName.placeName
+        
         
     }
     
@@ -53,6 +55,7 @@ final class RecordViewController: BaseViewController {
         
         if let location = location {
             mainView.addressLabel.text = location.formattedAddress
+            mainView.titleTextField.text = location.displayName.placeName
         }
         
         
@@ -79,6 +82,8 @@ final class RecordViewController: BaseViewController {
         
         mode = .read
         saveRecord()
+        dismiss(animated: true)
+        longPressHandler?()
         
     }
     

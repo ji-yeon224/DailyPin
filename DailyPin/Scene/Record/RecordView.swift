@@ -103,8 +103,6 @@ final class RecordView: BaseView {
         view.backgroundColor = Constants.Color.background
         view.locale = Locale(identifier: Locale.current.languageCode ?? "ko_KR")
         view.tintColor = Constants.Color.mainColor
-        
-        
         return view
     }()
     

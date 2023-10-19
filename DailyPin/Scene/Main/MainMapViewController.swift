@@ -69,7 +69,7 @@ final class MainMapViewController: BaseViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped))
         mainView.mapView.addGestureRecognizer(tapGesture)
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressMap(_ :)))
-        longPressGesture.minimumPressDuration = 1
+        longPressGesture.minimumPressDuration = 0.5
         longPressGesture.delaysTouchesBegan = true
         
         mainView.mapView.addGestureRecognizer(longPressGesture)
@@ -95,10 +95,28 @@ final class MainMapViewController: BaseViewController {
                 self.getNetworkNotification()
                 return
             }
-            self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) { address in
+            self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) { place in
                 
-                self.showAlertMap(address: address, cood: mapPoint) {
-                    self.presentRecordView()
+                self.showAlertMap(address: place.formattedAddress, cood: mapPoint) {
+                    
+                    let vc = RecordViewController()
+                    vc.location = self.viewModel.selectedLocation
+                    vc.record = nil
+                    vc.mode = .edit
+                    vc.longPressHandler = {
+                        DispatchQueue.main.async {
+                            self.mainView.setRegion(center: mapPoint, self.mainView.mapView.region.span)
+                            self.mainView.setFloatingPanel(data: place)
+                            self.present(self.mainView.fpc, animated: true)
+                            self.infoViewOn = true
+                        }
+                    }
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    nav.modalTransitionStyle = .crossDissolve
+                    self.present(nav, animated: true)
+                    
+                    
                 } cancelHandler: {
                     return
                 }
@@ -113,16 +131,6 @@ final class MainMapViewController: BaseViewController {
         
     }
     
-    func presentRecordView() {
-        let vc = RecordViewController()
-        vc.location = self.viewModel.selectedLocation
-        vc.record = nil
-        vc.mode = .edit
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        nav.modalTransitionStyle = .crossDissolve
-        self.present(nav, animated: true)
-    }
     
     private func setButtonAction() {
         mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)

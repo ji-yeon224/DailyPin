@@ -47,7 +47,7 @@
 "error_emptySearchResult" = "No search results.";
 
 // record view - placeholder
-"record_writeRecord" = "Keep a record of the place!";
+"record_writeRecord" = "Write a note!";
 "record_writeTitle" = "Please enter a title.";
 
 "saveButton" = "Save";

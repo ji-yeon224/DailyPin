@@ -17,14 +17,14 @@ final class MainMapViewModel {
     private var placeInfo: PlaceInfo = PlaceInfo(addressComponents: [], address: "", placeID: "")
     var selectedLocation: PlaceElement? = nil
     
-    func requestSelectedLocation(lat: Double, lng: Double, completion: @escaping((String) -> Void), failCompletion: @escaping((NetworkError) -> Void) ) {
+    func requestSelectedLocation(lat: Double, lng: Double, completion: @escaping((PlaceElement) -> Void), failCompletion: @escaping((NetworkError) -> Void) ) {
         
         GoogleNetwork.shared.requestGeocoder(api: .geocoding(lat: lat, lng: lng)) { response in
             switch response {
             case .success(let data):
                 self.placeInfo = data.results[0]
                 self.convertToPlaceElement(placeInfo: self.placeInfo, lat: lat, lng: lng)
-                completion(self.placeInfo.address)
+                completion(self.selectedLocation!)
             case .failure(let error):
                 failCompletion(error)
             }
