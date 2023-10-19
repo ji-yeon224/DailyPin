@@ -25,6 +25,7 @@ final class RecordViewController: BaseViewController {
     
     override func loadView() {
         self.view = mainView
+        viewModel.currentRecord = record
     }
     
     override func viewDidLoad() {
@@ -34,9 +35,17 @@ final class RecordViewController: BaseViewController {
             dismiss(animated: true)
             return
         }
-        //title = location.displayName.placeName
         
         
+    }
+    
+    func bindData() {
+        viewModel.errorDescription.bind { data in
+            if let message = data {
+                self.showOKAlert(title: "", message: message) { }
+            }
+            
+        }
     }
     
     
@@ -59,7 +68,7 @@ final class RecordViewController: BaseViewController {
         }
         
         
-        guard let record = record else {
+        guard let record = viewModel.currentRecord else {
             return
         }
         
@@ -91,19 +100,11 @@ final class RecordViewController: BaseViewController {
     private func saveRecord() {
         
         
-        guard let data = location else {
+        guard let location = location else {
             showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
             return
         }
         
-        var place: Place
-        
-        do {
-            place = try viewModel.getPlace(data)
-        } catch let error {
-            showOKAlert(title: "", message: error.localizedDescription) { }
-            return
-        }
         
         guard let title = mainView.titleTextField.text else {
             showToastMessage(message: "toast_titleIsEmpty".localized())
@@ -115,29 +116,13 @@ final class RecordViewController: BaseViewController {
             return
         }
         
-        //---------
-        if let record = record { // 기존 데이터 수정 시
-            do {
-                let updateRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
-                try recordRepository.updateRecord(id: record.objectID, updateRecord)
-                showToastMessage(message: "toast_editComplete".localized())
-            } catch let error {
-                showOKAlert(title: "", message: error.localizedDescription) { }
-                return
-            }
+        if let record = viewModel.currentRecord {
+            let updateRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+            viewModel.updateRecord(updateRecord)
         } else {
             let newRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
-            do {
-                try placeRepository.updateRecordList(record: newRecord, place: place)
-                self.record = newRecord
-                showToastMessage(message: "toast_saveComplete".localized())
-            } catch let error {
-                showOKAlert(title: "", message: error.localizedDescription) { }
-                return
-            }
-
+            viewModel.createRecord(record: newRecord, location: location)
         }
-        //--------
         
         NotificationCenter.default.post(name: Notification.Name.updateCell, object: nil)
         setNavRightButton()
@@ -169,12 +154,8 @@ final class RecordViewController: BaseViewController {
     }
     private func deletePlace() {
         guard let location = location else { return }
-        do {
-            try viewModel.deletePlace(id: location.id)
-        } catch {
-            self.showOKAlert(title: "", message: error.localizedDescription) {  }
-            return
-        }
+        viewModel.deletePlace(id: location.id)
+        
     }
     
     
