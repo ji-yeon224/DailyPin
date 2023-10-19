@@ -13,6 +13,7 @@ final class RecordViewModel {
     private let recordRepository = RecordRepository()
     var errorDescription: Observable<String?> = Observable(nil)
     var currentRecord: Record? = nil
+    var currentLocation: PlaceElement? = nil
     
     // 기존에 저장된 장소가 있다면 읽어오기, 없으면 장소 새로 저장하기(savePlace)
     func getPlace(_ data: PlaceElement) -> Place? {
@@ -61,16 +62,25 @@ final class RecordViewModel {
     }
     
     func updateRecord(_ record: Record) {
+        guard let currentRecord = currentRecord else {
+            errorDescription.value = InvalidError.noExistData.errorDescription
+            return
+        }
         do {
-            try recordRepository.updateRecord(id: record.objectID, record)
-            currentRecord = record
+            try recordRepository.updateRecord(id: currentRecord.objectID, record)
+            self.currentRecord = record
         } catch {
             errorDescription.value = error.localizedDescription
-            currentRecord = nil
+            self.currentRecord = nil
         }
     }
     
-    func createRecord(record: Record, location: PlaceElement) {
+    func createRecord(_ record: Record) {
+        
+        guard let location = currentLocation else {
+            errorDescription.value = InvalidError.noExistData.errorDescription
+            return
+        }
         
         guard let place = getPlace(location) else {
             return
@@ -81,6 +91,17 @@ final class RecordViewModel {
             currentRecord = record
         } catch {
             errorDescription.value = error.localizedDescription
+        }
+    }
+    
+    func deleteRecord(record: Record) throws {
+        
+        
+        do {
+            try recordRepository.deleteItem(record)
+            NotificationCenter.default.post(name: Notification.Name.updateCell, object: nil)
+        } catch {
+            throw error
         }
     }
     

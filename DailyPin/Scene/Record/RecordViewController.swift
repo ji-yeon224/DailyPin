@@ -12,30 +12,30 @@ import UIKit
 final class RecordViewController: BaseViewController {
     
     private let mainView = RecordView()
-    private let recordRepository = RecordRepository()
-    private let placeRepository = PlaceRepository()
     private let viewModel = RecordViewModel()
     var longPressHandler: (() -> Void)?
     
     var location: PlaceElement?
     var record: Record?
-    var savedPlace: Place?
     
     var mode: Mode = .read
     
     override func loadView() {
         self.view = mainView
-        viewModel.currentRecord = record
+        
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let location = location else {
+        guard let _ = location else {
             dismiss(animated: true)
             return
         }
-        
+        viewModel.currentRecord = record
+        viewModel.currentLocation = location
+        setData()
         
     }
     
@@ -52,7 +52,7 @@ final class RecordViewController: BaseViewController {
     
     override func configureUI() {
         super.configureUI()
-        setData()
+        
         configNavigationBar()
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedView(_:)))
@@ -62,7 +62,7 @@ final class RecordViewController: BaseViewController {
     
     private func setData() {
         
-        if let location = location {
+        if let location = viewModel.currentLocation {
             mainView.addressLabel.text = location.formattedAddress
             mainView.titleTextField.text = location.displayName.placeName
         }
@@ -100,7 +100,7 @@ final class RecordViewController: BaseViewController {
     private func saveRecord() {
         
         
-        guard let location = location else {
+        guard let _ = viewModel.currentLocation else {
             showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
             return
         }
@@ -116,12 +116,12 @@ final class RecordViewController: BaseViewController {
             return
         }
         
-        if let record = viewModel.currentRecord {
+        if let _ = viewModel.currentRecord {
             let updateRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
             viewModel.updateRecord(updateRecord)
         } else {
             let newRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
-            viewModel.createRecord(record: newRecord, location: location)
+            viewModel.createRecord(newRecord)
         }
         
         NotificationCenter.default.post(name: Notification.Name.updateCell, object: nil)
@@ -136,30 +136,25 @@ final class RecordViewController: BaseViewController {
         }
         
         showAlertWithCancel(title: "alert_deleteTitle".localized(), message: "alert_deleteMessage".localized()) {
+
             do {
-                try self.recordRepository.deleteItem(deleteRecord)
+                try self.viewModel.deleteRecord(record: deleteRecord)
                 self.dismiss(animated: true)
-            } catch let error {
-                self.showOKAlert(title: "", message: error.localizedDescription) { }
+            } catch {
+                self.viewModel.errorDescription.value = error.localizedDescription
+                return
             }
             self.deletePlace()
-            NotificationCenter.default.post(name: Notification.Name.updateCell, object: nil)
-            
         } cancelHandler: {
             return
         }
         
-
-        
     }
     private func deletePlace() {
-        guard let location = location else { return }
+        guard let location = viewModel.currentLocation else { return }
         viewModel.deletePlace(id: location.id)
         
     }
-    
-    
-    
     
 }
 
