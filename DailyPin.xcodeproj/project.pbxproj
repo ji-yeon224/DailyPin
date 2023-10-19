@@ -86,7 +86,6 @@
 		CEBAB9042AE01B71008AF9C8 /* GowunBatang-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */; };
 		CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */; };
 		CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */; };
-		CECDBDE42AE17C7C001ED2C6 /* AnnotationBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDBDE32AE17C7B001ED2C6 /* AnnotationBackView.swift */; };
 		CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */; };
 		CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */; };
 		CEE694932ADCFD5300FDE8E6 /* AlertMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE694922ADCFD5300FDE8E6 /* AlertMapViewController.swift */; };
@@ -170,7 +169,6 @@
 		CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Regular.ttf"; sourceTree = "<group>"; };
 		CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewProtocol.swift; sourceTree = "<group>"; };
 		CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPanelController+Extension.swift"; sourceTree = "<group>"; };
-		CECDBDE32AE17C7B001ED2C6 /* AnnotationBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationBackView.swift; sourceTree = "<group>"; };
 		CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarProtocol.swift; sourceTree = "<group>"; };
 		CEE694922ADCFD5300FDE8E6 /* AlertMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMapViewController.swift; sourceTree = "<group>"; };
@@ -362,7 +360,6 @@
 				CE9A16B72AD2BE240051BE23 /* CustomAnnotationView.swift */,
 				CE546CD52AD44DB900C0392B /* SelectAnnotationView.swift */,
 				CE546CD72AD44F2200C0392B /* SelectAnnotation.swift */,
-				CECDBDE32AE17C7B001ED2C6 /* AnnotationBackView.swift */,
 			);
 			path = Annotation;
 			sourceTree = "<group>";
@@ -563,7 +560,6 @@
 				CE52CB772AC7B454007AD7F8 /* NetworkError.swift in Sources */,
 				CEB390BA2ACFDF4C00E4B2AC /* DateFormatter.swift in Sources */,
 				CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */,
-				CECDBDE42AE17C7C001ED2C6 /* AnnotationBackView.swift in Sources */,
 				CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */,
 				CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */,
 				CE2951F02ADFAFCD00EE2571 /* RecordViewModel.swift in Sources */,

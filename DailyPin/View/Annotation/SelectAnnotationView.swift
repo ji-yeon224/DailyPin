@@ -60,7 +60,7 @@ final class SelectAnnotationView: BaseAnnotationView {
     override func layoutSubviews() {
         super.layoutSubviews()
         bounds.size = CGSize(width: 55, height: 55)
-        centerOffset = CGPoint(x: 0, y: bounds.size.width / 2)
+        centerOffset = CGPoint(x: 0, y: 0)
     }
     
 }

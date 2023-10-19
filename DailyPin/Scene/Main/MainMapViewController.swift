@@ -211,6 +211,7 @@ final class MainMapViewController: BaseViewController {
                 self.mainView.setOneAnnotation(annotation: searchAnnotation)
             }
             
+            
             DispatchQueue.main.async {
                 self.mainView.setFloatingPanel(data: value)
                 self.present(self.mainView.fpc, animated: true)

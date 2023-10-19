@@ -127,7 +127,6 @@ extension MainMapView: MKMapViewDelegate {
         }
         
         guard let view = view as? CustomAnnotationView else { return }
-        view.imageView.image = Constants.Image.selectPin
         view.imageView.tintColor = Constants.Color.subColor
         
         mapViewDelegate?.didSelect(annotation: annotation)
@@ -150,12 +149,14 @@ extension MainMapView: MKMapViewDelegate {
         if annotation.isKind(of: SelectAnnotation.self) {
             if let annotation = annotation as? SelectAnnotation {
                 annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: SelectAnnotationView.identifier, for: annotation)
+                annotationView?.displayPriority = .defaultHigh
                 
             }
         } else if annotation.isKind(of: CustomAnnotation.self) {
             if let annotation = annotation as? CustomAnnotation {
                 annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
                 annotationView?.clusteringIdentifier = "cluster"
+                annotationView?.displayPriority = .defaultLow
             }
             
         }
