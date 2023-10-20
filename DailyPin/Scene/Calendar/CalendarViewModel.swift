@@ -16,7 +16,7 @@ final class CalendarViewModel {
     let recordFileterByDate: Observable<[Record]> = Observable([])
     private var dateSet: Set<Date> = []
     
-    func getRecords(date: String) {
+    func getRecords(date: Date) {
         let data = recordRepository.filterItemByMonth(date)
         recordFilterByMonth.value = data
         

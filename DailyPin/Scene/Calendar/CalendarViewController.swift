@@ -14,6 +14,7 @@ final class CalendarViewController: BaseViewController {
     private var dateList: [Date] = []
     private var selectedDate = Date()
     
+    
     override func loadView() {
         self.view = mainView
         
@@ -29,6 +30,8 @@ final class CalendarViewController: BaseViewController {
         updateSnapShot()
         mainView.setDefaultSelectDate(selectedDate)
         mainView.collectionView.collectionViewLayout.invalidateLayout()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +56,7 @@ final class CalendarViewController: BaseViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
         
-        let date = DateFormatter.convertMonth(date: mainView.currentPage)
+        let date = mainView.calendarView.currentPage
         viewModel.getRecords(date: date)
         
         NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: Notification.Name.updateCell, object: nil)
@@ -61,8 +64,7 @@ final class CalendarViewController: BaseViewController {
     }
     
     @objc private func getChangeNotification(notification: NSNotification) {
-        let currentMonth = DateFormatter.convertMonth(date: mainView.calendarView.currentPage)
-        viewModel.getRecords(date: currentMonth)
+        viewModel.getRecords(date: mainView.calendarView.currentPage)
         viewModel.filterDate(convertDate(selectedDate))
         mainView.calendarView.reloadData()
     }
@@ -112,8 +114,7 @@ extension CalendarViewController: FSCalendarProtocol {
     }
     
     func calendarCurrentPageDidChange(date: Date) {
-        let currentMonth = DateFormatter.convertMonth(date: date)
-        viewModel.getRecords(date: currentMonth)
+        viewModel.getRecords(date: mainView.calendarView.currentPage)
         viewModel.filterDate(convertDate(date))
         selectedDate = date
         

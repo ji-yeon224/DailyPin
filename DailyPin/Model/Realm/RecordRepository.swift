@@ -79,17 +79,15 @@ final class RecordRepository {
     }
     
     // 전달한 달의 데이터 리스트를 반환
-    func filterItemByMonth(_ date: String) -> [Record] {
+    func filterItemByMonth(_ date: Date) -> [Record] {
         
-        
-        let result = realm.objects(Record.self).sorted(byKeyPath: "date", ascending: true).filter {
-            let dateString = DateFormatter.convertMonth(date: $0.date)
-            return dateString == date
-        }
+        let max = Calendar.current.date(byAdding: .month, value: 1, to: date)!
+        let result = realm.objects(Record.self).sorted(byKeyPath: "date", ascending: true).filter(
+            NSPredicate(format: "date >= %@ AND date < %@", date as NSDate, max as NSDate )
+            
+        )
         
         return Array(result)
-        
     }
-    
-    
+
 }
