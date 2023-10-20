@@ -20,6 +20,7 @@ final class Constants {
         static let eventColor = UIColor(named: "EventColor")
         static let cellBackgroundColor = UIColor(named: "CellBackgroundColor")
         static let infoCellColor = UIColor(named: "InfoCell")
+        static let subBackgroundColor = UIColor(named: "SubBackgroundColor")
         static let tintColor = UIColor.black
         static let subTextColor = UIColor.lightGray
         static let borderColor = UIColor.lightGray

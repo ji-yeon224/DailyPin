@@ -21,6 +21,7 @@ final class CalendarViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = false
         bindData()
         mainView.calendarDelegate = self
         mainView.collectionViewDelegate = self
@@ -28,6 +29,11 @@ final class CalendarViewController: BaseViewController {
         updateSnapShot()
         mainView.setDefaultSelectDate(selectedDate)
         mainView.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     private func bindData() {
@@ -43,6 +49,7 @@ final class CalendarViewController: BaseViewController {
     
     override func configureUI() {
         super.configureUI()
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
         
@@ -61,7 +68,8 @@ final class CalendarViewController: BaseViewController {
     }
     
     @objc private func backButtonTapped() {
-        dismiss(animated: true)
+        //dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     private func updateSnapShot() {
@@ -129,12 +137,11 @@ extension CalendarViewController: RecordCollectionViewProtocol {
         vc.record = item
         vc.location = convertToStruct(place)
         vc.mode = .read
-        
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
         nav.modalTransitionStyle = .crossDissolve
-
         present(nav, animated: true)
+        
 
     }
     

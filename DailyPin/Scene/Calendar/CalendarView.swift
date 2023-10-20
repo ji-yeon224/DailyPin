@@ -32,22 +32,6 @@ final class CalendarView: BaseView {
     }()
     
     
-    // 이전 달로 이동 버튼
-    private let prevButton = {
-        let view = UIButton()
-        view.setImage(Constants.Image.leftButton, for: .normal)
-        view.tintColor = Constants.Color.basicText
-        return view
-    }()
-    
-    // 다음 달로 이동 버튼
-    private let nextButton = {
-        let view = UIButton()
-        view.setImage(Constants.Image.rightButton, for: .normal)
-        view.tintColor = Constants.Color.basicText
-        return view
-    }()
-    
     private let returnTodayButton = {
         let view = UIButton()
         view.setImage(Constants.Image.returnToday, for: .normal)
@@ -58,11 +42,9 @@ final class CalendarView: BaseView {
     
     override func configureUI() {
         super.configureUI()
-        addSubview(calendarView)
-        addSubview(prevButton)
-        addSubview(nextButton)
-        addSubview(returnTodayButton)
-        addSubview(collectionView)
+        [calendarView, returnTodayButton, collectionView].forEach{
+            addSubview($0)
+        }
         configureDataSource()
         setAction()
     }
@@ -77,17 +59,6 @@ final class CalendarView: BaseView {
             make.height.equalTo(safeAreaLayoutGuide).multipliedBy(0.5)
             
         }
-        
-        prevButton.snp.makeConstraints { make in
-            make.centerY.equalTo(calendarView.calendarHeaderView).multipliedBy(1.1)
-            make.leading.equalTo(calendarView.calendarHeaderView.snp.leading).inset(100)
-        }
-        
-        nextButton.snp.makeConstraints { make in
-            make.centerY.equalTo(calendarView.calendarHeaderView).multipliedBy(1.1)
-            make.trailing.equalTo(calendarView.calendarHeaderView.snp.trailing).inset(100)
-        }
-        
         returnTodayButton.snp.makeConstraints { make in
             make.centerY.equalTo(calendarView.calendarHeaderView).multipliedBy(1.1)
             make.trailing.equalTo(calendarView.calendarHeaderView.snp.trailing).inset(15)
@@ -105,10 +76,6 @@ final class CalendarView: BaseView {
     }
     
     private func setAction() {
-        [prevButton, nextButton].forEach {
-            $0.addTarget(self, action: #selector(moveMonthButtonDidTap(sender:)), for: .touchUpInside)
-        }
-        
         returnTodayButton.addTarget(self, action: #selector(returnButtonTapped), for: .touchUpInside)
         
     }
@@ -117,10 +84,6 @@ final class CalendarView: BaseView {
         calendarView.setCurrentPage(Date(), animated: true)
         setDefaultSelectDate(Date())
         calendarDelegate?.returnButtonTapped()
-    }
-    
-    @objc private func moveMonthButtonDidTap(sender: UIButton) {
-        moveMonth(next: sender == nextButton)
     }
     
     // 달 이동 로직

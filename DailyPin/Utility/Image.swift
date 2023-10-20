@@ -26,7 +26,7 @@ extension Constants {
         static let backButton = UIImage(systemName: "chevron.backward")
         static let leftButton = UIImage(systemName: "chevron.left")
         static let rightButton = UIImage(systemName: "chevron.right")
-        
+        static let xmark = UIImage(systemName: "xmark")
         
         
         static let selectPin = UIImage(named: "baseline_place_white_24pt")

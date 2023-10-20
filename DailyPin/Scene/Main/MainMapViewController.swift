@@ -38,6 +38,7 @@ final class MainMapViewController: BaseViewController {
         checkDeviceLocationAuthorization()
         mainView.mapViewDelegate = self
         
+        
         mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
         mainView.mapView.register(SelectAnnotationView.self, forAnnotationViewWithReuseIdentifier: SelectAnnotationView.identifier)
         
@@ -48,7 +49,11 @@ final class MainMapViewController: BaseViewController {
         
         
         
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     private func notificationObserver() {
@@ -170,10 +175,11 @@ final class MainMapViewController: BaseViewController {
         }
         
         let vc = CalendarViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        nav.modalTransitionStyle = .crossDissolve
-        present(nav, animated: true)
+        //let nav = UINavigationController(rootViewController: vc)
+        navigationController?.pushViewController(vc, animated: true)
+//        nav.modalPresentationStyle = .fullScreen
+//        nav.modalTransitionStyle = .crossDissolve
+//        present(nav, animated: true)
     }
     
     @objc private func mapViewTapped() {
@@ -282,6 +288,7 @@ extension MainMapViewController: MapViewProtocol {
         let coord = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
         mainView.setRegion(center: coord, mainView.mapView.region.span)
         mainView.setFloatingPanel(data: viewModel.convertPlaceToPlaceElement(place: place))
+        //navigationController?.pushViewController(self.mainView.fpc, animated: true)
         present(self.mainView.fpc, animated: true)
         infoViewOn = true
         

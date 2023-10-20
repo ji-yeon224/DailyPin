@@ -31,15 +31,15 @@ class CustomCalendarView: FSCalendar {
         
         headerHeight = 30
         appearance.headerMinimumDissolvedAlpha = 0.0
-        //appearance.subtitleOffset = CGPoint(x: 0, y: 4)
+        
         
         appearance.headerDateFormat = "YYYY.MM"
         appearance.headerTitleColor = Constants.Color.basicText
+        appearance.headerTitleFont = UIFont(name: "NanumGothicBold", size: 15)
         
         appearance.weekdayFont = UIFont(name: "NanumGothic", size: 12)
         appearance.weekdayTextColor = Constants.Color.basicText
         
-        //appearance.titleTodayColor = .white
         appearance.titleFont = UIFont(name: "NanumGothic", size: 13)
         appearance.todayColor = Constants.Color.subColor
         
