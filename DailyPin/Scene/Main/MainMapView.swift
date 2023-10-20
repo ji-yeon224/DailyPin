@@ -30,9 +30,9 @@ final class MainMapView: BaseView {
     
     override func configureUI() {
         addSubview(mapView)
-        mapView.addSubview(searchButton)
-        mapView.addSubview(calendarButton)
-        mapView.addSubview(currentLocation)
+        [searchButton, calendarButton, currentLocation].forEach {
+            mapView.addSubview($0)
+        }
         
     }
     

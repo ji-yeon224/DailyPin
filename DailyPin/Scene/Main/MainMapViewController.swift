@@ -175,11 +175,7 @@ final class MainMapViewController: BaseViewController {
         }
         
         let vc = CalendarViewController()
-        //let nav = UINavigationController(rootViewController: vc)
         navigationController?.pushViewController(vc, animated: true)
-//        nav.modalPresentationStyle = .fullScreen
-//        nav.modalTransitionStyle = .crossDissolve
-//        present(nav, animated: true)
     }
     
     @objc private func mapViewTapped() {
@@ -320,7 +316,7 @@ extension MainMapViewController {
     private func checkCurrentLocationAuthorization(status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined: // 사용자가 권한 설정 여부를 선택 안함
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest // 정확도
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters // 정확도
             locationManager.requestWhenInUseAuthorization() // 인증 요청
         case .restricted: // 위치 서비스 사용 권한이 없음
             showOKAlert(title: "locationAlertTitle".localized(), message: "location_Restricted".localized()) {
@@ -330,6 +326,7 @@ extension MainMapViewController {
             showRequestLocationServiceAlert()
         case .authorizedAlways: break
         case .authorizedWhenInUse:
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.startUpdatingLocation()
         @unknown default: break
         }
@@ -341,7 +338,7 @@ extension MainMapViewController {
         showAlertWithCancel(title: "locationAlertTitle".localized(), message: "location_denied".localized()) {
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         } cancelHandler: {
-            // toast
+            self.showOKAlert(title: "", message: "location_Restricted".localized()) { }
         }
         
         self.mainView.setRegion(center: self.defaultLoaction)
