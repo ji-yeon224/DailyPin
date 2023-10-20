@@ -9,10 +9,6 @@
 		<string>NanumGothic-Regular.ttf</string>
 		<string>NanumGothic-Bold.ttf</string>
 	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>NSLocationWhenInUseUsageDescription</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

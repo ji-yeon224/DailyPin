@@ -26,9 +26,7 @@ final class InfoViewController: BaseViewController {
         
         do {
             try viewModel.getRecordList()
-            mainView.errorViewHidden(error: true)
         } catch {
-            mainView.errorViewHidden(error: false)
             return
         }
         
@@ -38,9 +36,7 @@ final class InfoViewController: BaseViewController {
     @objc private func getChangeNotification(notification: NSNotification) {
         do {
             try viewModel.getRecordList()
-            mainView.errorViewHidden(error: true)
         } catch {
-            mainView.errorViewHidden(error: false)
             return
         }
         
@@ -93,11 +89,9 @@ final class InfoViewController: BaseViewController {
         
         viewModel.recordList.bind { data in
             guard data != nil else {
-                self.mainView.errorViewHidden(error: false)
                 return
             }
             
-            self.mainView.errorViewHidden(error: true)
             self.updateSnapShot()
             
         }
@@ -110,11 +104,9 @@ final class InfoViewController: BaseViewController {
         snapShot.appendSections([0])
         
         guard let records = viewModel.recordList.value else {
-            mainView.errorViewHidden(error: false)
             return
         }
         
-        mainView.errorViewHidden(error: true)
         snapShot.appendItems(records)
         mainView.dataSource.apply(snapShot)
     }

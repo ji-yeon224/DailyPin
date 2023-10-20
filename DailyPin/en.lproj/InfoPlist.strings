@@ -6,4 +6,4 @@
   
 */
 
-NSLocationWhenInUseUsageDescription = "Permission is required to locate the user.";
+NSLocationWhenInUseUsageDescription = "Location privileges are required to determine the user's current location.";

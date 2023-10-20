@@ -44,31 +44,6 @@ final class InfoView: BaseView {
         return view
     }()
     
-    private let errorView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        view.isHidden = true
-        return view
-    }()
-    
-    private let errorImage = {
-        let view = UIImageView()
-        view.tintColor = Constants.Color.subTextColor
-        view.contentMode = .scaleAspectFit
-        view.image = Constants.Image.warning
-        return view
-    }()
-    
-    private let errorLabel = {
-        let view = UILabel()
-        view.backgroundColor = .clear
-        view.textColor = Constants.Color.subTextColor
-        view.font = UIFont(name: "NanumGothic", size: 18)
-        view.textAlignment = .center
-        view.numberOfLines = 0
-        
-        return view
-    }()
     
     
     
@@ -79,9 +54,6 @@ final class InfoView: BaseView {
         uiView.addSubview(addButton)
         uiView.addSubview(addressLabel)
         addSubview(collectionView)
-        addSubview(errorView)
-        errorView.addSubview(errorImage)
-        errorView.addSubview(errorLabel)
         configureDataSource()
     }
     
@@ -101,45 +73,14 @@ final class InfoView: BaseView {
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
         
-        setErrorViewConstraints()
-        
-    }
-    
-    private func setErrorViewConstraints() {
-        errorView.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(20)
-            make.top.equalTo(uiView.snp.bottom).offset(50)
-            make.height.equalTo(50)
-            
-        }
-        errorImage.snp.makeConstraints { make in
-            make.top.equalTo(errorView)
-            make.centerX.equalTo(errorView)
-            make.width.equalTo(errorView.snp.width).multipliedBy(0.3)
-            make.height.equalTo(errorImage.snp.width)
-            
-        }
-        
-        errorLabel.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(errorView)
-            make.top.equalTo(errorImage.snp.bottom).offset(10)
-            make.bottom.greaterThanOrEqualTo(errorView).offset(10)
-        }
         
         
     }
     
-    func errorViewHidden(error: Bool) {
-        errorView.isHidden = error
-        collectionView.isHidden = !error
-    }
+    
 
     
-    func configureErrorView(image: UIImage?, description: String) {
-        
-        errorImage.image = image ?? Constants.Image.warning
-        errorLabel.text = description
-    }
+   
     
     private func setUIVIewContentsConstraints() {
         titleLabel.snp.makeConstraints { make in
@@ -151,8 +92,9 @@ final class InfoView: BaseView {
         }
         
         addButton.snp.makeConstraints { make in
-            make.top.trailing.equalTo(uiView).inset(35)
-            make.width.equalTo(uiView.snp.width).multipliedBy(0.08)
+            make.top.equalTo(uiView).inset(37)
+            make.trailing.equalTo(uiView).inset(20)
+            make.width.equalTo(uiView.snp.width).multipliedBy(0.07)
             make.height.equalTo(addButton.snp.width)
         }
         

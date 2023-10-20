@@ -156,7 +156,7 @@ extension MainMapView: MKMapViewDelegate {
             if let annotation = annotation as? CustomAnnotation {
                 annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
                 //annotationView?.clusteringIdentifier = "cluster"
-                annotationView?.displayPriority = .required
+                annotationView?.displayPriority = .defaultLow
             }
             
         }

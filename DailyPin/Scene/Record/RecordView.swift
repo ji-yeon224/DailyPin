@@ -278,6 +278,8 @@ final class RecordView: BaseView {
         
         if let memo = memoTextView.text, memo.isEmpty || memoTextView.text == nil {
             memoTextView.isHidden = true
+        } else {
+            memoTextView.isHidden = false
         }
         setTitleLabel(false)
     }
