@@ -26,7 +26,7 @@ final class CalendarViewController: BaseViewController {
         bindData()
         mainView.calendarDelegate = self
         mainView.collectionViewDelegate = self
-        viewModel.filterDate(convertDate(selectedDate))
+        viewModel.filterDate(selectedDate)
         updateSnapShot()
         mainView.setDefaultSelectDate(selectedDate)
         mainView.collectionView.collectionViewLayout.invalidateLayout()
@@ -43,6 +43,7 @@ final class CalendarViewController: BaseViewController {
         
         viewModel.recordDateList.bind { data in
             self.dateList = data
+            print("bind", data)
         }
         
         viewModel.recordFileterByDate.bind { data in
@@ -64,13 +65,13 @@ final class CalendarViewController: BaseViewController {
     }
     
     @objc private func getChangeNotification(notification: NSNotification) {
+        
         viewModel.getRecords(date: mainView.calendarView.currentPage)
-        viewModel.filterDate(convertDate(selectedDate))
+        viewModel.filterDate(selectedDate)
         mainView.calendarView.reloadData()
     }
     
     @objc private func backButtonTapped() {
-        //dismiss(animated: true)
         navigationController?.popViewController(animated: true)
     }
     
@@ -92,17 +93,17 @@ final class CalendarViewController: BaseViewController {
 extension CalendarViewController: FSCalendarProtocol {
     
     func returnButtonTapped() {
-        viewModel.filterDate(convertDate(Date()))
+        viewModel.filterDate(Date())
         selectedDate = Date()
     }
     
     func moveCalendar(date: Date) {
-        viewModel.filterDate(convertDate(date))
+        viewModel.filterDate(date)
         selectedDate = date
     }
     
     func didSelectDate(date: Date) {
-        viewModel.filterDate(convertDate(date))
+        viewModel.filterDate(date)
         selectedDate = date
     }
     
@@ -114,9 +115,11 @@ extension CalendarViewController: FSCalendarProtocol {
     }
     
     func calendarCurrentPageDidChange(date: Date) {
+        let currentMonth = DateFormatter.convertMonth(date: date)
         viewModel.getRecords(date: mainView.calendarView.currentPage)
-        viewModel.filterDate(convertDate(date))
+        viewModel.filterDate(date)
         selectedDate = date
+        mainView.calendarView.reloadData()
         
     }
     

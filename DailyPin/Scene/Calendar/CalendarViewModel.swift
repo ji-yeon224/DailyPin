@@ -25,19 +25,17 @@ final class CalendarViewModel {
         recordDateList.value.removeAll()
         dateSet.removeAll()
         data.forEach {
-            
             dateSet.insert(calendar.startOfDay(for: $0.date))
         }
         recordDateList.value.append(contentsOf: dateSet)
         
     }
     
-    func filterDate(_ date: String) {
+    func filterDate(_ date: Date) {
+        let calendar = Calendar.current
+        let selectedDate = calendar.startOfDay(for: date)
         recordFileterByDate.value.removeAll()
-        recordFileterByDate.value.append(contentsOf: recordFilterByMonth.value.filter{
-            DateFormatter.convertCalendarDate(date: $0.date) == date
-        })
-        
+        recordFileterByDate.value.append(contentsOf: recordRepository.filterItemByDay(selectedDate))
     }
     
     
