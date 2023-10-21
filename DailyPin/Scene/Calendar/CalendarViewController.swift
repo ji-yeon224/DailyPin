@@ -43,7 +43,6 @@ final class CalendarViewController: BaseViewController {
         
         viewModel.recordDateList.bind { data in
             self.dateList = data
-            print("bind", data)
         }
         
         viewModel.recordFileterByDate.bind { data in
@@ -115,7 +114,6 @@ extension CalendarViewController: FSCalendarProtocol {
     }
     
     func calendarCurrentPageDidChange(date: Date) {
-        let currentMonth = DateFormatter.convertMonth(date: date)
         viewModel.getRecords(date: mainView.calendarView.currentPage)
         viewModel.filterDate(date)
         selectedDate = date

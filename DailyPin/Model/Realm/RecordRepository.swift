@@ -89,6 +89,18 @@ final class RecordRepository {
         return Array(result)
     }
     
+    func filterItemByMonthOnlyDate(_ date: Date) -> [Date] {
+        let last = Calendar.current.date(byAdding: .month, value: 1, to: date)!
+        let result = realm.objects(Record.self).sorted(byKeyPath: "date", ascending: true).filter(
+            NSPredicate(format: "date >= %@ AND date < %@", date as NSDate, last as NSDate )
+
+        ).map {
+            $0.date
+        }
+
+        return Array(result)
+    }
+    
     func filterItemByDay(_ date: Date) -> [Record] {
         let max = Calendar.current.date(byAdding: .day, value: 1, to: date)!
         let result = realm.objects(Record.self).sorted(byKeyPath: "date", ascending: false).filter(
