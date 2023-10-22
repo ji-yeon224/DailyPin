@@ -81,12 +81,7 @@ final class MainMapViewModel {
     }
     
     
-    func getAllPlaceData() -> [Place] {
-        print(placeRepository.getFileLocation())
-        return placeRepository.fetch()
-        
-        
-    }
+    
     
     
     
