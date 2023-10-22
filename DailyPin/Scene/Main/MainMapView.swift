@@ -125,7 +125,7 @@ extension MainMapView {
         fpc.invalidateLayout()
     }
    
-    func setPlaceFloatingPanel() {
+    func setPlaceFloatingPanel(data: [Place]) {
         placeFpc.surfaceView.insetsLayoutMarginsFromSafeArea = true
         placeFpc.set(contentViewController: placeVC)
         placeFpc.view.frame = placeVC.view.bounds

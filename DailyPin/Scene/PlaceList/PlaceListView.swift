@@ -30,9 +30,36 @@ final class PlaceListView: BaseView {
         return view
     }()
     
+    private let placeHolderView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    private let placeHolderImageView = {
+        let view = UIImageView()
+        view.image = Constants.Image.noPlaceList
+        view.contentMode = .scaleAspectFit
+        view.tintColor = Constants.Color.placeholderColor
+        return view
+    }()
+    
+    private let placeHolderLabel = {
+        let view = UILabel()
+        view.text = "아직 저장된 장소가 없습니다.\n 장소 기록을 등록해 보세요!"
+        view.font =  UIFont(name: "NanumGothic", size: 18)
+        view.textColor = Constants.Color.placeholderColor
+        view.numberOfLines = 2
+        view.textAlignment = .center
+        return view
+    }()
+    
     override func configureUI() {
-        [titleLabel, collectionView].forEach {
+        [titleLabel, collectionView, placeHolderView].forEach {
             addSubview($0)
+        }
+        [placeHolderImageView, placeHolderLabel].forEach {
+            placeHolderView.addSubview($0)
         }
         configureDataSource()
     }
@@ -49,8 +76,34 @@ final class PlaceListView: BaseView {
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
+        
+        placeHolderView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
+            make.height.equalTo(100)
+        }
+        setPlaceHolderConstraints()
     }
     
+    private func setPlaceHolderConstraints() {
+        placeHolderImageView.snp.makeConstraints { make in
+            make.top.equalTo(placeHolderView).offset(10)
+            make.centerX.equalTo(placeHolderView)
+            make.width.equalTo(placeHolderView.snp.width).multipliedBy(0.15)
+            make.height.equalTo(placeHolderImageView.snp.width).multipliedBy(1)
+        }
+        placeHolderLabel.snp.makeConstraints { make in
+            make.top.equalTo(placeHolderImageView.snp.bottom).offset(10)
+            make.centerX.equalTo(placeHolderView)
+            make.horizontalEdges.equalTo(placeHolderView).inset(30)
+            make.bottom.greaterThanOrEqualTo(placeHolderView.snp.bottom).offset(-20)
+        }
+    }
+    
+    func setPlaceHolder(_ data: Bool) {
+        placeHolderView.isHidden = data
+        collectionView.isHidden = !data
+    }
     
 }
 

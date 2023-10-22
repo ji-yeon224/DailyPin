@@ -15,7 +15,7 @@ final class PlaceListViewModel {
     
     func getAllPlaceData() {
         placeList.value.removeAll()
-        placeList.value = placeRepository.fetch()
+        placeList.value.append(contentsOf: placeRepository.fetch())
     }
     
 }

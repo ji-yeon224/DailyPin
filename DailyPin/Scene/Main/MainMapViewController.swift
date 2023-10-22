@@ -153,7 +153,7 @@ final class MainMapViewController: BaseViewController {
         }
         
         if !listViewOn {
-            mainView.setPlaceFloatingPanel()
+            mainView.setPlaceFloatingPanel(data: viewModel.getAllPlaceData())
             listViewOn = true
             present(self.mainView.placeFpc, animated: true)
         }

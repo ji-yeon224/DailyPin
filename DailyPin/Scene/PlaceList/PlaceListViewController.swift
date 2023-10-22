@@ -21,17 +21,29 @@ final class PlaceListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bindData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getAllPlaceData()
     }
     
     override func configureUI() {
         super.configureUI()
-        viewModel.getAllPlaceData()
-        bindData()
+        
+        
     }
     
     func bindData() {
+        
         viewModel.placeList.bind { data in
+            
+            if data.count == 0 {
+                self.mainView.setPlaceHolder(false)
+            } else {
+                self.mainView.setPlaceHolder(true)
+            }
             self.updateSnapShot()
         }
     }
@@ -39,7 +51,6 @@ final class PlaceListViewController: BaseViewController {
     func updateSnapShot() {
         var snapShot = NSDiffableDataSourceSnapshot<Int, Place>()
         snapShot.appendSections([0])
-        guard !viewModel.placeList.value.isEmpty else { return }
         snapShot.appendItems(viewModel.placeList.value)
         mainView.dataSource.apply(snapShot)
     }
