@@ -182,6 +182,13 @@ extension MainMapView: MKMapViewDelegate {
         return annotationView
     }
     
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        let userView = mapView.view(for: mapView.userLocation)
+        userView?.isUserInteractionEnabled = false
+        userView?.isEnabled = false
+        userView?.canShowCallout = false
+    }
+    
 //    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
 //        var customAnnotations: [CustomAnnotation] = []
 //        for anot in memberAnnotations {
