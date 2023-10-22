@@ -20,7 +20,7 @@ final class SearchView: BaseView {
         view.tintColor = Constants.Color.mainColor
         return view
     }()
-    lazy var collectionView = {
+    private lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         view.keyboardDismissMode = .onDrag
         view.backgroundColor = Constants.Color.background

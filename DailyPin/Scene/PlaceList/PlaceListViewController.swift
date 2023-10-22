@@ -10,7 +10,7 @@ import UIKit
 final class PlaceListViewController: BaseViewController {
     
     private let mainView = PlaceListView()
-    let viewModel = PlaceListViewModel()
+    private let viewModel = PlaceListViewModel()
     
     var placeListDelegate: PlaceListProtocol?
     
@@ -35,7 +35,7 @@ final class PlaceListViewController: BaseViewController {
         
     }
     
-    func bindData() {
+    private func bindData() {
         
         viewModel.placeList.bind { data in
             
@@ -48,7 +48,7 @@ final class PlaceListViewController: BaseViewController {
         }
     }
     
-    func updateSnapShot() {
+    private func updateSnapShot() {
         var snapShot = NSDiffableDataSourceSnapshot<Int, Place>()
         snapShot.appendSections([0])
         snapShot.appendItems(viewModel.placeList.value)

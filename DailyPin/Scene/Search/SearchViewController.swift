@@ -88,7 +88,7 @@ final class SearchViewController: BaseViewController {
     }
     
     
-    func updateSnapShot() {
+    private func updateSnapShot() {
         var snapShot = NSDiffableDataSourceSnapshot<Int, PlaceElement>()
         snapShot.appendSections([0])
         snapShot.appendItems(viewModel.searchResult.value.places)

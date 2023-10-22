@@ -228,7 +228,6 @@
 				CE32459B2AC9682200582FC5 /* InfoViewController.swift */,
 				CE32459E2AC9683300582FC5 /* InfoView.swift */,
 				CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */,
-				CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -282,6 +281,7 @@
 		CE3DF7F82AC2B0F100653CE1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CE4ED8312AE544D500E1F80F /* Cell */,
 				CE9A16B62AD2BE0F0051BE23 /* Annotation */,
 				CE9B0E962ACB04C5008A0694 /* Button */,
 				CE3DF8132AC330DB00653CE1 /* MyLocationButton.swift */,
@@ -345,7 +345,6 @@
 				CE3DF81C2AC52C2E00653CE1 /* SearchView.swift */,
 				CE3DF81E2AC52C3B00653CE1 /* SearchViewController.swift */,
 				CE52CB712AC7197C007AD7F8 /* SearchViewModel.swift */,
-				CE52CB7A2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -359,6 +358,15 @@
 				CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */,
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		CE4ED8312AE544D500E1F80F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CE52CB7A2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift */,
+				CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		CE52CB732AC71B36007AD7F8 /* Error */ = {

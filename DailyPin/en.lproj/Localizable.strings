@@ -7,6 +7,8 @@
 */
 
 "searchPlaceholder" = " Search Place";
+"myRecord" = "My Place";
+"placeHolder_noPlaceList" = "No places are saved yet.\n Register a place record!";
 "okText" = "OK";
 "cancelText" = "Cancel";
 "locationAlertTitle" = "Using Location Information";

@@ -39,7 +39,7 @@ final class RecordViewController: BaseViewController {
         
     }
     
-    func bindData() {
+    private func bindData() {
         viewModel.errorDescription.bind { data in
             if let message = data {
                 self.showOKAlert(title: "", message: message) { }

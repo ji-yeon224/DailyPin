@@ -15,14 +15,14 @@ final class PlaceListView: BaseView {
     
     private let titleLabel = {
         let view = UILabel()
-        view.text = "나의 장소"
+        view.text = "myRecord".localized()
         view.font = UIFont(name: "NanumGothicBold", size: 16)
         view.numberOfLines = 1
         view.textColor = Constants.Color.basicText
         return view
     }()
     
-    lazy var collectionView = {
+    private lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         view.backgroundColor = Constants.Color.background
         view.contentInset = .init(top: 10, left: 0, bottom: 0, right: 0)
@@ -46,7 +46,7 @@ final class PlaceListView: BaseView {
     
     private let placeHolderLabel = {
         let view = UILabel()
-        view.text = "아직 저장된 장소가 없습니다.\n 장소 기록을 등록해 보세요!"
+        view.text = "placeHolder_noPlaceList".localized()
         view.font =  UIFont(name: "NanumGothic", size: 18)
         view.textColor = Constants.Color.placeholderColor
         view.numberOfLines = 2
