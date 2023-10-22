@@ -16,6 +16,7 @@ final class MainMapViewModel {
     let annotations: Observable<[CustomAnnotation]> = Observable([])
     private var placeInfo: PlaceInfo = PlaceInfo(addressComponents: [], address: "", placeID: "")
     var selectedLocation: PlaceElement? = nil
+    var placeList: [Place]? = nil
     
     func requestSelectedLocation(lat: Double, lng: Double, completion: @escaping((PlaceElement) -> Void), failCompletion: @escaping((NetworkError) -> Void) ) {
         
@@ -80,7 +81,12 @@ final class MainMapViewModel {
     }
     
     
-    
+    func getAllPlaceData() -> [Place] {
+        
+        return placeRepository.fetch()
+        
+        
+    }
     
     
     

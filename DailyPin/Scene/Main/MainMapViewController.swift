@@ -141,6 +141,12 @@ final class MainMapViewController: BaseViewController {
         mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
         mainView.searchButton.addTarget(self, action: #selector(searchViewTransition), for: .touchUpInside)
         mainView.calendarButton.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
+        mainView.placeListButton.addTarget(self, action: #selector(placeListButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func placeListButtonTapped() {
+        mainView.setPlaceFloatingPanel()
+        present(self.mainView.fpc, animated: true)
     }
     
     @objc private func getChangeNotification(notification: NSNotification) {

@@ -13,6 +13,7 @@ final class MainMapView: BaseView {
     
     let fpc = FloatingPanelController()
     let contentVC = InfoViewController()
+    //let placeVC
     weak var mapViewDelegate: MapViewProtocol?
 
     lazy var mapView = {
@@ -26,11 +27,12 @@ final class MainMapView: BaseView {
     
     let calendarButton = CalendarButton()
     let currentLocation = MyLocationButton()
+    let placeListButton = PlaceListButton()
     
     
     override func configureUI() {
         addSubview(mapView)
-        [searchButton, calendarButton, currentLocation].forEach {
+        [searchButton, calendarButton, placeListButton, currentLocation].forEach {
             mapView.addSubview($0)
         }
         
@@ -55,7 +57,12 @@ final class MainMapView: BaseView {
             make.width.equalTo(calendarButton.snp.height).multipliedBy(1)
         }
         
-        
+        placeListButton.snp.makeConstraints { make in
+            make.top.equalTo(calendarButton.snp.bottom).offset(20)
+            make.trailing.equalTo(mapView).inset(15)
+            make.height.equalTo(40)
+            make.width.equalTo(placeListButton.snp.height).multipliedBy(1)
+        }
         
         currentLocation.snp.makeConstraints { make in
             make.trailing.equalTo(mapView).inset(20)
@@ -116,7 +123,14 @@ extension MainMapView {
         fpc.invalidateLayout()
     }
    
-    
+    func setPlaceFloatingPanel() {
+        let placeVC = PlaceListViewController()
+        fpc.set(contentViewController: placeVC)
+        fpc.view.frame = placeVC.view.bounds
+        fpc.layout = FloatingPanelCustomLayout()
+        fpc.changePanelStyle()
+        fpc.invalidateLayout()
+    }
 }
 
 extension MainMapView: MKMapViewDelegate {

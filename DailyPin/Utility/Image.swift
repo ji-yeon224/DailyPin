@@ -21,6 +21,7 @@ extension Constants {
         static let plus = UIImage(systemName: "plus")
         static let noData = UIImage(systemName: "person.fill.questionmark")
         static let warning = UIImage(systemName: "exclamationmark.bubble")
+        static let placeList = UIImage(systemName: "list.bullet")
         static let returnToday = UIImage(named: "todayCalendar")
         
         static let backButton = UIImage(systemName: "chevron.backward")

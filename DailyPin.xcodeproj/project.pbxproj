@@ -52,11 +52,15 @@
 		CE546CD42AD44CCE00C0392B /* BaseAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE546CD32AD44CCD00C0392B /* BaseAnnotationView.swift */; };
 		CE546CD62AD44DB900C0392B /* SelectAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE546CD52AD44DB900C0392B /* SelectAnnotationView.swift */; };
 		CE546CD82AD44F2200C0392B /* SelectAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE546CD72AD44F2200C0392B /* SelectAnnotation.swift */; };
+		CE64D03D2AE4C8DD004AA477 /* PlaceListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64D03C2AE4C8DD004AA477 /* PlaceListButton.swift */; };
 		CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */; };
 		CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5E2AD594EF00068854 /* CalendarViewController.swift */; };
 		CE814A612AD594FB00068854 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A602AD594FB00068854 /* CalendarView.swift */; };
 		CE814A642AD59D1B00068854 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = CE814A632AD59D1B00068854 /* FSCalendar */; };
 		CE814A662AD59D4900068854 /* CustomCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A652AD59D4900068854 /* CustomCalendarView.swift */; };
+		CE90EEC52AE4CD7B0034C03B /* PlaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90EEC42AE4CD7B0034C03B /* PlaceListViewController.swift */; };
+		CE90EEC72AE4CD820034C03B /* PlaceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90EEC62AE4CD820034C03B /* PlaceListView.swift */; };
+		CE90EEC92AE4CD8B0034C03B /* PlaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90EEC82AE4CD8B0034C03B /* PlaceListViewModel.swift */; };
 		CE9A16B32AD2897E0051BE23 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A16B22AD2897E0051BE23 /* CustomAnnotation.swift */; };
 		CE9A16B52AD28F0D0051BE23 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A16B42AD28F0D0051BE23 /* Image.swift */; };
 		CE9A16B82AD2BE240051BE23 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A16B72AD2BE240051BE23 /* CustomAnnotationView.swift */; };
@@ -138,10 +142,14 @@
 		CE546CD32AD44CCD00C0392B /* BaseAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAnnotationView.swift; sourceTree = "<group>"; };
 		CE546CD52AD44DB900C0392B /* SelectAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAnnotationView.swift; sourceTree = "<group>"; };
 		CE546CD72AD44F2200C0392B /* SelectAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAnnotation.swift; sourceTree = "<group>"; };
+		CE64D03C2AE4C8DD004AA477 /* PlaceListButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListButton.swift; sourceTree = "<group>"; };
 		CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		CE814A5E2AD594EF00068854 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		CE814A602AD594FB00068854 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		CE814A652AD59D4900068854 /* CustomCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalendarView.swift; sourceTree = "<group>"; };
+		CE90EEC42AE4CD7B0034C03B /* PlaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewController.swift; sourceTree = "<group>"; };
+		CE90EEC62AE4CD820034C03B /* PlaceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListView.swift; sourceTree = "<group>"; };
+		CE90EEC82AE4CD8B0034C03B /* PlaceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewModel.swift; sourceTree = "<group>"; };
 		CE9A16B22AD2897E0051BE23 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		CE9A16B42AD28F0D0051BE23 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		CE9A16B72AD2BE240051BE23 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
@@ -258,6 +266,7 @@
 		CE3DF7F72AC2B0C500653CE1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				CE90EEC32AE4CD6E0034C03B /* PlaceList */,
 				CE3541D72AD541B900773CD3 /* Calendar */,
 				CEB390A82ACEF4E200E4B2AC /* Record */,
 				CE32459D2AC9682700582FC5 /* Info */,
@@ -359,6 +368,16 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		CE90EEC32AE4CD6E0034C03B /* PlaceList */ = {
+			isa = PBXGroup;
+			children = (
+				CE90EEC42AE4CD7B0034C03B /* PlaceListViewController.swift */,
+				CE90EEC62AE4CD820034C03B /* PlaceListView.swift */,
+				CE90EEC82AE4CD8B0034C03B /* PlaceListViewModel.swift */,
+			);
+			path = PlaceList;
+			sourceTree = "<group>";
+		};
 		CE9A16B62AD2BE0F0051BE23 /* Annotation */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +395,7 @@
 				CE9B0E942ACA95D7008A0694 /* SearchButton.swift */,
 				CE3DF8112AC3300500653CE1 /* CalendarButton.swift */,
 				CE9B0E972ACB04DB008A0694 /* AddButton.swift */,
+				CE64D03C2AE4C8DD004AA477 /* PlaceListButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -588,8 +608,10 @@
 				CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */,
 				CE52CB702AC7186F007AD7F8 /* LangCode.swift in Sources */,
 				CE3DF8012AC2B5B100653CE1 /* MainMapViewController.swift in Sources */,
+				CE90EEC92AE4CD8B0034C03B /* PlaceListViewModel.swift in Sources */,
 				CE3DF80E2AC2D25600653CE1 /* String+Extension.swift in Sources */,
 				CE546CD42AD44CCE00C0392B /* BaseAnnotationView.swift in Sources */,
+				CE90EEC52AE4CD7B0034C03B /* PlaceListViewController.swift in Sources */,
 				CEB3373A2ADA9CE20027D90E /* Geocoding.swift in Sources */,
 				CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */,
 				CEB390AC2ACEF50800E4B2AC /* RecordView.swift in Sources */,
@@ -604,6 +626,7 @@
 				CE814A662AD59D4900068854 /* CustomCalendarView.swift in Sources */,
 				CE3DF8032AC2B5BA00653CE1 /* MainMapView.swift in Sources */,
 				CE546CD62AD44DB900C0392B /* SelectAnnotationView.swift in Sources */,
+				CE64D03D2AE4C8DD004AA477 /* PlaceListButton.swift in Sources */,
 				CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */,
 				CE9A16B32AD2897E0051BE23 /* CustomAnnotation.swift in Sources */,
 				CE52CB682AC5ADBB007AD7F8 /* GoogleNetwork.swift in Sources */,
@@ -628,6 +651,7 @@
 				CE52CB7B2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift in Sources */,
 				CEB390B42ACFCD4600E4B2AC /* MemoTextView.swift in Sources */,
 				CE52CB6A2AC5AE17007AD7F8 /* Search.swift in Sources */,
+				CE90EEC72AE4CD820034C03B /* PlaceListView.swift in Sources */,
 				CE4DF9152ACBD5C500546526 /* MainMapViewModel.swift in Sources */,
 				CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */,
 				CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */,
