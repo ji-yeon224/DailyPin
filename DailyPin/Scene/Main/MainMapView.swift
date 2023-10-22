@@ -12,8 +12,9 @@ import FloatingPanel
 final class MainMapView: BaseView {
     
     let fpc = FloatingPanelController()
+    let placeFpc = FloatingPanelController()
     let contentVC = InfoViewController()
-    //let placeVC
+    let placeVC = PlaceListViewController()
     weak var mapViewDelegate: MapViewProtocol?
 
     lazy var mapView = {
@@ -115,6 +116,7 @@ extension MainMapView {
 extension MainMapView {
     
     func setFloatingPanel(data: PlaceElement) {
+        fpc.surfaceView.insetsLayoutMarginsFromSafeArea = true
         contentVC.viewModel.place.value = data
         fpc.set(contentViewController: contentVC)
         fpc.view.frame = contentVC.view.bounds
@@ -124,12 +126,12 @@ extension MainMapView {
     }
    
     func setPlaceFloatingPanel() {
-        let placeVC = PlaceListViewController()
-        fpc.set(contentViewController: placeVC)
-        fpc.view.frame = placeVC.view.bounds
-        fpc.layout = FloatingPanelCustomLayout()
-        fpc.changePanelStyle()
-        fpc.invalidateLayout()
+        placeFpc.surfaceView.insetsLayoutMarginsFromSafeArea = true
+        placeFpc.set(contentViewController: placeVC)
+        placeFpc.view.frame = placeVC.view.bounds
+        placeFpc.layout = FloatingPanelCustomLayout()
+        placeFpc.changePanelStyle()
+        placeFpc.invalidateLayout()
     }
 }
 

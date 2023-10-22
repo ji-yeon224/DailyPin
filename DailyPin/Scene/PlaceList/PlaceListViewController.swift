@@ -12,7 +12,7 @@ final class PlaceListViewController: BaseViewController {
     private let mainView = PlaceListView()
     let viewModel = PlaceListViewModel()
     
-    var selectLocationHandler: ((PlaceElement) -> Void)?
+    var placeListDelegate: PlaceListProtocol?
     
     override func loadView() {
         self.view = mainView
@@ -53,7 +53,7 @@ extension PlaceListViewController: PlaceCollectionViewProtocol {
             return
         }
         
-        selectLocationHandler?(viewModel.convertPlaceToPlaceElement(place: item))
+        placeListDelegate?.setPlaceLoaction(data: item)
         dismiss(animated: true)
         
         

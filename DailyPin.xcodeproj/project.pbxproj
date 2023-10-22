@@ -70,6 +70,7 @@
 		CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */; };
 		CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E942ACA95D7008A0694 /* SearchButton.swift */; };
 		CE9B0E982ACB04DB008A0694 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E972ACB04DB008A0694 /* AddButton.swift */; };
+		CEA4458C2AE4DD100000A57F /* PlaceListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */; };
 		CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */; };
 		CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */; };
 		CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC42AC030BF001E7BB0 /* ViewController.swift */; };
@@ -158,6 +159,7 @@
 		CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		CE9B0E942ACA95D7008A0694 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		CE9B0E972ACB04DB008A0694 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListProtocol.swift; sourceTree = "<group>"; };
 		CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */,
 				CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */,
 				CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */,
+				CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 				CE546CD82AD44F2200C0392B /* SelectAnnotation.swift in Sources */,
 				CE4DF90D2ACBBC3E00546526 /* Place.swift in Sources */,
 				CE4DF9112ACBC63200546526 /* PlaceRepository.swift in Sources */,
+				CEA4458C2AE4DD100000A57F /* PlaceListProtocol.swift in Sources */,
 				CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */,
 				CE3DF81F2AC52C3B00653CE1 /* SearchViewController.swift in Sources */,
 				CE9B0E8D2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift in Sources */,
