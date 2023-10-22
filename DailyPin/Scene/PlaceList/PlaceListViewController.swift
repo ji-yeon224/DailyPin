@@ -9,7 +9,7 @@ import UIKit
 
 final class PlaceListViewController: BaseViewController {
     
-    private let mainView = PlaceListView()
+    let mainView = PlaceListView()
     private let viewModel = PlaceListViewModel()
     
     var placeListDelegate: PlaceListProtocol?

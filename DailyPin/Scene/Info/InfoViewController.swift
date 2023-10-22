@@ -10,7 +10,7 @@ import UIKit
 
 final class InfoViewController: BaseViewController {
     
-    private let mainView = InfoView()
+    let mainView = InfoView()
     let viewModel = InfoViewModel()
     private let repository = PlaceRepository()
     

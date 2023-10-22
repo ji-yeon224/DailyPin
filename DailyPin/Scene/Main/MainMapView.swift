@@ -119,6 +119,7 @@ extension MainMapView {
         fpc.surfaceView.insetsLayoutMarginsFromSafeArea = true
         contentVC.viewModel.place.value = data
         fpc.set(contentViewController: contentVC)
+        fpc.track(scrollView: contentVC.mainView.collectionView)
         fpc.view.frame = contentVC.view.bounds
         fpc.layout = FloatingPanelCustomLayout()
         fpc.changePanelStyle()
@@ -129,6 +130,7 @@ extension MainMapView {
         placeFpc.surfaceView.insetsLayoutMarginsFromSafeArea = true
         placeFpc.set(contentViewController: placeVC)
         placeFpc.view.frame = placeVC.view.bounds
+        placeFpc.track(scrollView: placeVC.mainView.collectionView)
         placeFpc.layout = FloatingPanelCustomLayout()
         placeFpc.changePanelStyle()
         placeFpc.invalidateLayout()

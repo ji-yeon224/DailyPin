@@ -22,7 +22,7 @@ final class PlaceListView: BaseView {
         return view
     }()
     
-    private lazy var collectionView = {
+    lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         view.backgroundColor = Constants.Color.background
         view.contentInset = .init(top: 10, left: 0, bottom: 0, right: 0)
