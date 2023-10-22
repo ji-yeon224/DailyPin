@@ -64,7 +64,7 @@ final class RecordViewController: BaseViewController {
         
         if let location = viewModel.currentLocation {
             mainView.addressLabel.text = location.formattedAddress
-            mainView.titleTextField.text = location.displayName.placeName
+            mainView.titleTextField.placeholder = location.displayName.placeName
         }
         
         
@@ -74,6 +74,7 @@ final class RecordViewController: BaseViewController {
         
         
         mainView.titleTextField.text = record.title
+        mainView.titleTextField.placeholder = record.title
         mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
         mainView.memoTextView.text = record.memo
         mainView.placeHolderLabel.isHidden = true
@@ -105,22 +106,19 @@ final class RecordViewController: BaseViewController {
             return
         }
         
+        guard let location = viewModel.currentLocation else { return }
         
-        guard let title = mainView.titleTextField.text else {
-            showToastMessage(message: "toast_titleIsEmpty".localized())
-            return
-        }
+        var title = mainView.titleTextField.text?.trimmingCharacters(in: .whitespaces) ?? location.displayName.placeName
         
-        guard !title.trimmingCharacters(in: .whitespaces).isEmpty else {
-            showToastMessage(message: "toast_titleIsEmpty".localized())
-            return
+        if title.isEmpty {
+            title = location.displayName.placeName
         }
         
         if let _ = viewModel.currentRecord {
-            let updateRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+            let updateRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
             viewModel.updateRecord(updateRecord)
         } else {
-            let newRecord = Record(title: title.trimmingCharacters(in: .whitespaces), date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+            let newRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
             viewModel.createRecord(newRecord)
         }
         

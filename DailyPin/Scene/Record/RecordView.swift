@@ -34,7 +34,6 @@ final class RecordView: BaseView {
     let placeHolderLabel = {
         let view = UILabel()
         view.textColor = Constants.Color.placeholderColor
-        //view.font = .systemFont(ofSize: 15)
         view.font = UIFont(name: "NanumGothic", size: 15)
         view.text = "record_writeRecord".localized()
         view.textAlignment = .left
@@ -55,7 +54,6 @@ final class RecordView: BaseView {
     
     lazy var titleTextField = {
         let view = UITextField()
-        view.placeholder = "record_writeTitle".localized()
         view.font = UIFont(name: "NanumGothic", size: 15)
         view.textColor = Constants.Color.basicText
         view.tintColor = Constants.Color.mainColor
