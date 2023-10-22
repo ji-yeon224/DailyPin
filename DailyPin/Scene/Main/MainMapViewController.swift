@@ -186,10 +186,7 @@ final class MainMapViewController: BaseViewController {
     
     @objc private func calendarButtonTapped() {
         
-        if infoViewOn {
-            mainView.fpc.dismiss(animated: true)
-            infoViewOn.toggle()
-        }
+        dismissFloatingViews()
         
         let vc = CalendarViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -300,8 +297,11 @@ extension MainMapViewController: PlaceListProtocol {
             listViewOn.toggle()
         }
         
-        let coord = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
-        mainView.setRegion(center: coord, mainView.mapView.region.span)
+        let center = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
+        searchAnnotation = SelectAnnotation(placeID: data.placeId, coordinate: center)
+        if let searchAnnotation = self.searchAnnotation {
+            self.mainView.setOneAnnotation(annotation: searchAnnotation)
+        }
         mainView.setFloatingPanel(data: viewModel.convertPlaceToPlaceElement(place: data))
         present(self.mainView.fpc, animated: true)
         infoViewOn = true
@@ -315,7 +315,6 @@ extension MainMapViewController: PlaceListProtocol {
 
 extension MainMapViewController: MapViewProtocol {
     func didSelect(annotation: CustomAnnotation) {
-        
         dismissFloatingViews()
         
         // InfoView Present
