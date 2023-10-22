@@ -19,6 +19,7 @@ final class MainMapViewController: BaseViewController {
     private let defaultLoaction = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
     
     private var infoViewOn: Bool = false
+    private var listViewOn: Bool = false
     private let repository = PlaceRepository()
     private var allData: [Place]?
     
@@ -37,7 +38,7 @@ final class MainMapViewController: BaseViewController {
         locationManager.delegate = self 
         checkDeviceLocationAuthorization()
         mainView.mapViewDelegate = self
-        
+        mainView.placeVC.placeListDelegate = self
         
         mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
         mainView.mapView.register(SelectAnnotationView.self, forAnnotationViewWithReuseIdentifier: SelectAnnotationView.identifier)
@@ -141,6 +142,22 @@ final class MainMapViewController: BaseViewController {
         mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
         mainView.searchButton.addTarget(self, action: #selector(searchViewTransition), for: .touchUpInside)
         mainView.calendarButton.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
+        mainView.placeListButton.addTarget(self, action: #selector(placeListButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func placeListButtonTapped() {
+        
+        if infoViewOn {
+            mainView.fpc.dismiss(animated: true)
+            infoViewOn.toggle()
+        }
+        
+        if !listViewOn {
+            mainView.setPlaceFloatingPanel()
+            listViewOn = true
+            present(self.mainView.placeFpc, animated: true)
+        }
+        
     }
     
     @objc private func getChangeNotification(notification: NSNotification) {
@@ -169,10 +186,7 @@ final class MainMapViewController: BaseViewController {
     
     @objc private func calendarButtonTapped() {
         
-        if infoViewOn {
-            mainView.fpc.dismiss(animated: true)
-            infoViewOn.toggle()
-        }
+        dismissFloatingViews()
         
         let vc = CalendarViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -180,10 +194,7 @@ final class MainMapViewController: BaseViewController {
     
     @objc private func mapViewTapped() {
         
-        if infoViewOn {
-            mainView.fpc.dismiss(animated: true)
-            infoViewOn.toggle()
-        }
+        dismissFloatingViews()
         
         deleteSearchAnnotation()
        
@@ -193,10 +204,8 @@ final class MainMapViewController: BaseViewController {
     
     @objc private func searchViewTransition() {
         let vc = SearchViewController()
-        if infoViewOn == true {
-            infoViewOn = false
-            self.mainView.fpc.dismiss(animated: true)
-        }
+        
+        dismissFloatingViews()
         
         if !mainView.mapView.selectedAnnotations.isEmpty {
             mainView.mapView.deselectAnnotation(mainView.mapView.selectedAnnotations.first, animated: true)
@@ -265,15 +274,48 @@ final class MainMapViewController: BaseViewController {
         present(alert, animated: true)
     }
     
+    // floating view 모두 dismiss 
+    private func dismissFloatingViews() {
+        if infoViewOn == true {
+            infoViewOn = false
+            self.mainView.fpc.dismiss(animated: true)
+        }
+        
+        if listViewOn == true {
+            listViewOn = false
+            self.mainView.placeFpc.dismiss(animated: true)
+        }
+    }
+    
+    
+}
+
+extension MainMapViewController: PlaceListProtocol {
+    func setPlaceLoaction(data: Place) {
+        if listViewOn {
+            mainView.placeFpc.dismiss(animated: true)
+            listViewOn.toggle()
+        }
+        
+        let center = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
+        searchAnnotation = SelectAnnotation(placeID: data.placeId, coordinate: center)
+        if let searchAnnotation = self.searchAnnotation {
+            self.mainView.setOneAnnotation(annotation: searchAnnotation)
+        }
+        mainView.setFloatingPanel(data: viewModel.convertPlaceToPlaceElement(place: data))
+        present(self.mainView.fpc, animated: true)
+        infoViewOn = true
+        
+        
+        
+    }
+    
     
 }
 
 extension MainMapViewController: MapViewProtocol {
     func didSelect(annotation: CustomAnnotation) {
-        if infoViewOn {
-            mainView.fpc.dismiss(animated: true)
-            infoViewOn.toggle()
-        }
+        dismissFloatingViews()
         
         // InfoView Present
         guard let place = viewModel.getPlaceData(id: annotation.placeID) else {

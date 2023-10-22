@@ -11,3 +11,8 @@ protocol CollectionViewProtocol: AnyObject {
     func didSelectPlaceItem(item: PlaceElement?)
     
 }
+
+protocol PlaceCollectionViewProtocol: AnyObject {
+    func didSelectPlaceItem(item: Place?)
+    
+}
