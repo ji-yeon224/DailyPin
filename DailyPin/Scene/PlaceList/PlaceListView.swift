@@ -47,7 +47,7 @@ final class PlaceListView: BaseView {
     private let placeHolderLabel = {
         let view = UILabel()
         view.text = "placeHolder_noPlaceList".localized()
-        view.font =  UIFont(name: "NanumGothic", size: 18)
+        view.font =  UIFont(name: "NanumGothic", size: 14)
         view.textColor = Constants.Color.placeholderColor
         view.numberOfLines = 2
         view.textAlignment = .center
@@ -78,7 +78,7 @@ final class PlaceListView: BaseView {
         }
         
         placeHolderView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
             make.height.equalTo(100)
         }
@@ -89,7 +89,7 @@ final class PlaceListView: BaseView {
         placeHolderImageView.snp.makeConstraints { make in
             make.top.equalTo(placeHolderView).offset(10)
             make.centerX.equalTo(placeHolderView)
-            make.width.equalTo(placeHolderView.snp.width).multipliedBy(0.15)
+            make.width.equalTo(placeHolderView.snp.width).multipliedBy(0.1)
             make.height.equalTo(placeHolderImageView.snp.width).multipliedBy(1)
         }
         placeHolderLabel.snp.makeConstraints { make in

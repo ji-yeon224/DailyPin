@@ -66,8 +66,8 @@ final class MainMapView: BaseView {
         }
         
         currentLocation.snp.makeConstraints { make in
-            make.trailing.equalTo(mapView).inset(20)
-            make.bottom.equalTo(safeAreaLayoutGuide).offset(-30)
+            make.trailing.equalTo(mapView).inset(30)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-40)
             make.size.equalTo(40)
         }
         
@@ -180,6 +180,13 @@ extension MainMapView: MKMapViewDelegate {
         }
         
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        let userView = mapView.view(for: mapView.userLocation)
+        userView?.isUserInteractionEnabled = false
+        userView?.isEnabled = false
+        userView?.canShowCallout = false
     }
     
 //    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
