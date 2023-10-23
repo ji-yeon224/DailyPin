@@ -201,6 +201,7 @@ extension RecordViewController {
             self.mainView.setPickerView()
             self.mainView.datePickerView.date = self.record?.date ?? Date()
             self.setNavRightButton()
+            self.mainView.titleTextField.becomeFirstResponder()
         }
         let deleteAction = UIAction(title: "deleteButton".localized()) { action in
             self.deleteRecord()
