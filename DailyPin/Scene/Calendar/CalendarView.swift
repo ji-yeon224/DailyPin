@@ -33,11 +33,11 @@ final class CalendarView: BaseView {
     
     
     private let returnTodayButton = {
-        let view = UIButton()
-        view.setTitle("today".localized(), for: .normal)
-        view.setTitleColor(Constants.Color.basicText, for: .normal)
-        view.titleLabel?.font = UIFont(name: "NanumGothic", size: 13)
-        view.backgroundColor = Constants.Color.background
+        let view = ReturnTodayButton()
+//        view.setTitle("today".localized(), for: .normal)
+//        view.setTitleColor(Constants.Color.basicText, for: .normal)
+//        view.titleLabel?.font = UIFont(name: "NanumGothic", size: 13)
+//        view.backgroundColor = Constants.Color.background
         return view
     }()
     
@@ -61,9 +61,9 @@ final class CalendarView: BaseView {
             
         }
         returnTodayButton.snp.makeConstraints { make in
-            make.top.equalTo(calendarView.calendarHeaderView.snp.top)
+            make.centerY.equalTo(calendarView.calendarHeaderView)
             make.trailing.equalTo(calendarView.calendarHeaderView.snp.trailing).inset(10)
-            make.height.equalTo(30)
+            make.height.equalTo(25)
             make.width.equalTo(40)
             
         }
