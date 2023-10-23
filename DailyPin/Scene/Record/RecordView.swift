@@ -81,7 +81,7 @@ final class RecordView: BaseView {
     let addressLabel = {
         let view = UILabel()
         view.font = UIFont(name: "NanumGothic", size: 13)
-        view.textColor = Constants.Color.subTextColor
+        view.textColor = Constants.Color.basicText
         view.numberOfLines = 0
         return view
     }()

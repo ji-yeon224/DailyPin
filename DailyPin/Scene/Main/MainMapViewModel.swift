@@ -38,7 +38,14 @@ final class MainMapViewModel {
     private func convertToPlaceElement(placeInfo: PlaceInfo, lat: Double, lng: Double) {
         
         let location = Location(latitude: lat, longitude: lng)
-        let name = "\(placeInfo.addressComponents[1].longName) \(placeInfo.addressComponents[0].longName)"
+        let addressCompnents = placeInfo.addressComponents
+        var name: String = ""
+        if placeInfo.addressComponents.count < 2 {
+            name = "\(addressCompnents[0].longName)"
+        } else {
+            name = "\(addressCompnents[1].longName) \(addressCompnents[0].longName)"
+        }
+        
         let placeName = DisplayName(placeName: name)
         
         selectedLocation = PlaceElement(id: placeInfo.placeID, formattedAddress: placeInfo.address, location: location, displayName: placeName)
