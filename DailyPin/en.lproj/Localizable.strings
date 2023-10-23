@@ -11,6 +11,7 @@
 "placeHolder_noPlaceList" = "No places are saved yet.\n Register a place record!";
 "okText" = "OK";
 "cancelText" = "Cancel";
+"today" = "Today";
 "locationAlertTitle" = "Using Location Information";
 "location_denied" = "Location service not available. Please turn on the location service under 'Settings > Privacy & Security' on the device.";
 "location_Restricted" = "Location service unavailable.";

@@ -97,6 +97,9 @@ final class MainMapViewController: BaseViewController {
         let mapPoint: CLLocationCoordinate2D = self.mainView.mapView.convert(location, toCoordinateFrom: self.mainView.mapView)
         
         if sender.state == .began {
+            
+            dismissFloatingViews()
+            
             if !NetworkMonitor.shared.isConnected {
                 self.getNetworkNotification()
                 return
