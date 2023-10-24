@@ -39,7 +39,7 @@ final class InfoView: BaseView {
     lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         view.backgroundColor = Constants.Color.background
-        view.contentInset = .init(top: 50, left: 0, bottom: 0, right: 0)
+        view.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
         view.delegate = self 
         return view
     }()

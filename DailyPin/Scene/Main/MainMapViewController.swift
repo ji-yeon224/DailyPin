@@ -196,11 +196,9 @@ final class MainMapViewController: BaseViewController {
     }
     
     @objc private func mapViewTapped() {
-        
         dismissFloatingViews()
-        
         deleteSearchAnnotation()
-       
+        mainView.deSelectedAnnotation()
         
     }
     

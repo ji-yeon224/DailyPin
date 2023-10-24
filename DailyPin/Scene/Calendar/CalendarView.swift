@@ -32,14 +32,7 @@ final class CalendarView: BaseView {
     }()
     
     
-    private let returnTodayButton = {
-        let view = ReturnTodayButton()
-//        view.setTitle("today".localized(), for: .normal)
-//        view.setTitleColor(Constants.Color.basicText, for: .normal)
-//        view.titleLabel?.font = UIFont(name: "NanumGothic", size: 13)
-//        view.backgroundColor = Constants.Color.background
-        return view
-    }()
+    private let returnTodayButton = ReturnTodayButton()
     
     override func configureUI() {
         super.configureUI()

@@ -36,7 +36,8 @@ final class MainMapView: BaseView {
         [searchButton, calendarButton, placeListButton, currentLocation].forEach {
             mapView.addSubview($0)
         }
-        
+        fpc.delegate = self
+        placeFpc.delegate = self
     }
     
     
@@ -107,6 +108,15 @@ extension MainMapView {
     
     func removeAllCustomAnnotation(annotations: [CustomAnnotation]) {
         mapView.removeAnnotations(annotations)
+    }
+    
+    func deSelectedAnnotation() {
+        
+        if mapView.selectedAnnotations.count > 0 {
+            guard let annotation = mapView.selectedAnnotations.first else { return }
+            mapView.deselectAnnotation(annotation, animated: true)
+        }
+        
     }
     
    
@@ -203,5 +213,19 @@ extension MainMapView: MKMapViewDelegate {
 //        cluster.subtitle = ""
 //        return cluster
 //    }
+    
+}
+
+
+extension MainMapView: FloatingPanelControllerDelegate {
+    
+    func floatingPanelWillBeginAttracting(_ fpc: FloatingPanelController, to state: FloatingPanelState) {
+        if state == FloatingPanelState.tip {
+            fpc.dismiss(animated: true, completion: nil)
+            deSelectedAnnotation()
+            
+        }
+    }
+    
     
 }

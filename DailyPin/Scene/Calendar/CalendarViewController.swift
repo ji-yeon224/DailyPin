@@ -137,7 +137,7 @@ extension CalendarViewController: RecordCollectionViewProtocol {
         
         let vc = RecordViewController()
         vc.record = item
-        vc.location = convertToStruct(place)
+        vc.location = viewModel.convertToStruct(place)
         vc.mode = .read
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
@@ -147,13 +147,7 @@ extension CalendarViewController: RecordCollectionViewProtocol {
 
     }
     
-    private func convertToStruct(_ item: Place) -> PlaceElement {
-        
-        let location = Location(latitude: item.latitude, longitude: item.longitude)
-        let displayName = DisplayName(placeName: item.placeName)
-        
-        return PlaceElement(id: item.placeId, formattedAddress: item.address, location: location, displayName: displayName)
-    }
+    
     
     
 }
