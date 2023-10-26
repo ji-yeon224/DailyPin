@@ -42,6 +42,12 @@ final class RecordViewController: BaseViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     private func bindData() {
         viewModel.errorDescription.bind { data in
             if let message = data {
@@ -107,6 +113,7 @@ final class RecordViewController: BaseViewController {
         mainView.titleTextField.placeholder = record.title
         mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
         mainView.setLineSpacing(text: record.memo)
+        //mainView.memoTextView.text = record.memo
         mainView.placeHolderLabel.isHidden = true
         mainView.setReadMode()
         mainView.titleLabel.text = record.title
