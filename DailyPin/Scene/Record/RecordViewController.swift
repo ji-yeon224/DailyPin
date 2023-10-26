@@ -37,6 +37,9 @@ final class RecordViewController: BaseViewController {
         viewModel.currentLocation = location
         setData()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
     private func bindData() {
@@ -58,7 +61,34 @@ final class RecordViewController: BaseViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedView(_:)))
         view.addGestureRecognizer(tapGestureRecognizer)
         mainView.textFieldDelegate = self
+        
+        
+
     }
+    
+    
+    @objc func keyboardWillShow(notification:NSNotification) {
+
+        guard let userInfo = notification.userInfo else { return }
+        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+
+        var contentInset:UIEdgeInsets = mainView.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height + 20
+        mainView.scrollView.contentInset = contentInset
+        mainView.scrollView.scrollIndicatorInsets = mainView.scrollView.contentInset
+        
+        UIView.animate(withDuration: 0.3,
+                               animations: { self.view.layoutIfNeeded()},
+                               completion: nil)
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification) {
+
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        mainView.scrollView.contentInset = contentInset
+    }
+    
     
     private func setData() {
         

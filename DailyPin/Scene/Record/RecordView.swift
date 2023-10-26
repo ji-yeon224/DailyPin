@@ -11,7 +11,7 @@ final class RecordView: BaseView {
     
     weak var textFieldDelegate: TextFieldProtocol?
     
-    private let scrollView = {
+    let scrollView = {
         let view = UIScrollView()
         view.updateContentView()
         return view
@@ -20,7 +20,7 @@ final class RecordView: BaseView {
     private let stackView = {
         let view = UIStackView()
         view.axis = .vertical
-        view.distribution = .fillProportionally
+        view.distribution = .fill
         view.alignment = .fill
         view.spacing = 10
         
@@ -156,19 +156,17 @@ final class RecordView: BaseView {
         stackView.addArrangedSubview(addressView)
         stackView.addArrangedSubview(dateView)
         stackView.addArrangedSubview(memoTextView)
-        stackView.addArrangedSubview(bottomView)
         
     }
     
     override func setConstraints() {
         
         scrollView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
-            make.bottom.equalTo(keyboardLayoutGuide.snp.top).offset(10)
+            make.edges.equalTo(safeAreaLayoutGuide)
         }
+        
         stackView.snp.makeConstraints { make in
-            make.verticalEdges.equalTo(scrollView)
-            make.width.equalTo(scrollView)
+            make.edges.equalTo(scrollView)
         }
         
         setStackViewConstraints()
@@ -239,20 +237,19 @@ final class RecordView: BaseView {
     private func setStackViewConstraints() {
         
         titleView.snp.makeConstraints { make in
+            make.width.equalTo(scrollView.snp.width).inset(20)
             make.height.equalTo(44)
         }
         addressView.snp.makeConstraints { make in
+            make.width.equalTo(scrollView.snp.width).inset(20)
             make.height.equalTo(50)
         }
         
         dateView.snp.makeConstraints { make in
+            make.width.equalTo(scrollView.snp.width).inset(20)
             make.height.equalTo(44)
         }
         
-        bottomView.snp.makeConstraints { make in
-            make.height.equalTo(40)
-            make.bottom.equalTo(stackView)
-        }
     }
     
     func setEditMode() {
