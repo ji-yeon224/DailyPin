@@ -106,7 +106,7 @@ final class RecordViewController: BaseViewController {
         mainView.titleTextField.text = record.title
         mainView.titleTextField.placeholder = record.title
         mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
-        mainView.memoTextView.text = record.memo
+        mainView.setLineSpacing(text: record.memo)
         mainView.placeHolderLabel.isHidden = true
         mainView.setReadMode()
         mainView.titleLabel.text = record.title

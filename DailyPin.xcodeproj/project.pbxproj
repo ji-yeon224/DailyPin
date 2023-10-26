@@ -88,6 +88,7 @@
 		CEB390BA2ACFDF4C00E4B2AC /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390B92ACFDF4C00E4B2AC /* DateFormatter.swift */; };
 		CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390BB2ACFF89300E4B2AC /* Record.swift */; };
 		CEB5ECFA2AD0595E00BC6143 /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */; };
+		CEB8805E2AEA3EDE00560583 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB8805D2AEA3EDE00560583 /* UITextView+Extension.swift */; };
 		CEBAB9022AE01B69008AF9C8 /* GowunBatang-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB9012AE01B69008AF9C8 /* GowunBatang-Bold.ttf */; };
 		CEBAB9042AE01B71008AF9C8 /* GowunBatang-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */; };
 		CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */; };
@@ -180,6 +181,7 @@
 		CEB390B92ACFDF4C00E4B2AC /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CEB390BB2ACFF89300E4B2AC /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepository.swift; sourceTree = "<group>"; };
+		CEB8805D2AEA3EDE00560583 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		CEBAB9012AE01B69008AF9C8 /* GowunBatang-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Bold.ttf"; sourceTree = "<group>"; };
 		CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Regular.ttf"; sourceTree = "<group>"; };
 		CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewProtocol.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				CEB390B92ACFDF4C00E4B2AC /* DateFormatter.swift */,
 				CE3541D52AD5313F00773CD3 /* NSNotification.Name.swift */,
 				CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */,
+				CEB8805D2AEA3EDE00560583 /* UITextView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -648,6 +651,7 @@
 				CE52CB792AC7D302007AD7F8 /* BaseCollectionViewCell.swift in Sources */,
 				CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */,
 				CE3DF8122AC3300500653CE1 /* CalendarButton.swift in Sources */,
+				CEB8805E2AEA3EDE00560583 /* UITextView+Extension.swift in Sources */,
 				CE3541D62AD5313F00773CD3 /* NSNotification.Name.swift in Sources */,
 				CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */,
 				CE546CD82AD44F2200C0392B /* SelectAnnotation.swift in Sources */,

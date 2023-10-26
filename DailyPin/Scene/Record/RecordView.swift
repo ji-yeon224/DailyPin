@@ -120,6 +120,7 @@ final class RecordView: BaseView {
         let view = MemoTextView()
         view.delegate = self
         view.font = UIFont(name: "NanumGothic", size: 15)
+        
         return view
     }()
     
@@ -323,6 +324,7 @@ extension RecordView: UITextViewDelegate {
             placeHolderLabel.isHidden = true
         }
         
+        setLineSpacing(text: textView.text)
         let size = CGSize(width: stackView.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
         
@@ -339,6 +341,20 @@ extension RecordView: UITextViewDelegate {
         }
         
         scrollView.updateContentView()
+    }
+    
+    func setLineSpacing(text: String?) {
+        guard let text = text else {
+            return
+        }
+        let attrString = NSMutableAttributedString(string: text)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+        let range = (text as NSString).range(of: text)
+        let font = UIFont(name: "NanumGothic", size: 15) ?? .systemFont(ofSize: 15)
+        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+        attrString.addAttribute(.font, value: font, range: range)
+        memoTextView.attributedText = attrString
     }
     
 }
