@@ -11,6 +11,7 @@
 		CE2951EB2ADEA96E00EE2571 /* NanumGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */; };
 		CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */; };
 		CE2951F02ADFAFCD00EE2571 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2951EF2ADFAFCD00EE2571 /* RecordViewModel.swift */; };
+		CE3015C42AEB5ACB00BA3AAA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE3015C32AEB5ACB00BA3AAA /* Settings.bundle */; };
 		CE32459A2AC8FAF500582FC5 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = CE3245992AC8FAF500582FC5 /* Toast */; };
 		CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32459B2AC9682200582FC5 /* InfoViewController.swift */; };
 		CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32459E2AC9683300582FC5 /* InfoView.swift */; };
@@ -106,6 +107,7 @@
 		CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Bold.ttf"; sourceTree = "<group>"; };
 		CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldProtocol.swift; sourceTree = "<group>"; };
 		CE2951EF2ADFAFCD00EE2571 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		CE3015C32AEB5ACB00BA3AAA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CE32459B2AC9682200582FC5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		CE32459E2AC9683300582FC5 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		CE3541D52AD5313F00773CD3 /* NSNotification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotification.Name.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 		CEB00FB42AC030BF001E7BB0 = {
 			isa = PBXGroup;
 			children = (
+				CE3015C32AEB5ACB00BA3AAA /* Settings.bundle */,
 				CEB00FBF2AC030BF001E7BB0 /* DailyPin */,
 				CEB00FBE2AC030BF001E7BB0 /* Products */,
 			);
@@ -562,6 +565,7 @@
 				CE3DF8082AC2C34400653CE1 /* InfoPlist.strings in Resources */,
 				CE3DF7EA2AC1602D00653CE1 /* .gitignore in Resources */,
 				CE2951EB2ADEA96E00EE2571 /* NanumGothic-Bold.ttf in Resources */,
+				CE3015C42AEB5ACB00BA3AAA /* Settings.bundle in Resources */,
 				CEB00FCD2AC030C0001E7BB0 /* LaunchScreen.storyboard in Resources */,
 				CEB00FCA2AC030C0001E7BB0 /* Assets.xcassets in Resources */,
 				CEBAB9022AE01B69008AF9C8 /* GowunBatang-Bold.ttf in Resources */,

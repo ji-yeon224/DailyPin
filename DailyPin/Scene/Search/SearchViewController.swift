@@ -57,14 +57,14 @@ final class SearchViewController: BaseViewController {
     
     private func bindData() {
         
-        viewModel.searchResult.bind { data in
-            self.updateSnapShot()
+        viewModel.searchResult.bind { [weak self] data in
+            self?.updateSnapShot()
         }
         
-        viewModel.resultError.bind { data in
+        viewModel.resultError.bind { [weak self] data in
             guard let data = data else { return }
-            self.viewModel.removeSearchResult()
-            self.showToastMessage(message: data)
+            self?.viewModel.removeSearchResult()
+            self?.showToastMessage(message: data)
         }
     }
     
