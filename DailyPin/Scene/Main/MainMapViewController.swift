@@ -58,7 +58,7 @@ final class MainMapViewController: BaseViewController {
     }
     
     private func notificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: Notification.Name.databaseChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: .databaseChange, object: nil)
     }
     
     private func bindData() {

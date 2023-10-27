@@ -159,7 +159,7 @@ final class RecordViewController: BaseViewController {
             viewModel.createRecord(newRecord)
         }
         
-        NotificationCenter.default.post(name: Notification.Name.updateCell, object: nil)
+        NotificationCenter.default.post(name: .updateCell, object: nil)
         setNavRightButton()
         
     }

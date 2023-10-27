@@ -22,22 +22,30 @@ final class CalendarViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = false
-        bindData()
+        
         mainView.calendarDelegate = self
         mainView.collectionViewDelegate = self
+        
+        navigationController?.navigationBar.isHidden = false
+        bindData()
         viewModel.filterDate(selectedDate)
         updateSnapShot()
-        mainView.setDefaultSelectDate(selectedDate)
-        mainView.collectionView.collectionViewLayout.invalidateLayout()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: .updateCell, object: nil)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .updateCell, object: nil)
+    }
+    
     
     private func bindData() {
         
@@ -59,7 +67,11 @@ final class CalendarViewController: BaseViewController {
         let date = mainView.calendarView.currentPage
         viewModel.getRecords(date: date)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: Notification.Name.updateCell, object: nil)
+        
+        
+        
+        mainView.setDefaultSelectDate(selectedDate)
+        mainView.collectionView.collectionViewLayout.invalidateLayout()
         
     }
     

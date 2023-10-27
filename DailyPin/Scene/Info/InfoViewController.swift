@@ -30,7 +30,12 @@ final class InfoViewController: BaseViewController {
             return
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: Notification.Name.updateCell, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: .updateCell, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .updateCell, object: nil)
     }
     
     @objc private func getChangeNotification(notification: NSNotification) {
@@ -59,7 +64,7 @@ final class InfoViewController: BaseViewController {
         vc.record = nil
         vc.mode = .edit
         let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
+        nav.modalPresentationStyle = .overFullScreen
         nav.modalTransitionStyle = .crossDissolve
         present(nav, animated: true)
         

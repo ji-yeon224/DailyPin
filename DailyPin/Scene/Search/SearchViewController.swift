@@ -36,6 +36,11 @@ final class SearchViewController: BaseViewController {
        
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .networkConnect, object: nil)
+    }
+    
     @objc private func networkConfiguration(notification: NSNotification) {
         
         guard let userInfo = notification.userInfo else { return }

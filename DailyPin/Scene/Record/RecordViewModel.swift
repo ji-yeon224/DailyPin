@@ -51,7 +51,7 @@ final class RecordViewModel {
         
         do {
             try placeRepository.createItem(place)
-            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["changeType": "save"])
+            NotificationCenter.default.post(name: .databaseChange, object: nil, userInfo: ["changeType": "save"])
             
             return place
         } catch {
@@ -99,7 +99,7 @@ final class RecordViewModel {
         
         do {
             try recordRepository.deleteItem(record)
-            NotificationCenter.default.post(name: Notification.Name.updateCell, object: nil)
+            NotificationCenter.default.post(name: .updateCell, object: nil)
         } catch {
             throw error
         }
@@ -124,7 +124,7 @@ final class RecordViewModel {
                 return
             }
             
-            NotificationCenter.default.post(name: Notification.Name.databaseChange, object: nil, userInfo: ["changeType": "delete"])
+            NotificationCenter.default.post(name: .databaseChange, object: nil, userInfo: ["changeType": "delete"])
         }
     }
     
