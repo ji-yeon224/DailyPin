@@ -30,6 +30,11 @@ final class InfoViewController: BaseViewController {
             return
         }
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: .updateCell, object: nil)
     }
     
@@ -49,6 +54,7 @@ final class InfoViewController: BaseViewController {
     }
     
     override func configureUI() {
+        super.configureUI()
         mainView.addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
         
         

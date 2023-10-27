@@ -68,8 +68,8 @@ final class InfoView: BaseView {
         setUIVIewContentsConstraints()
         
         collectionView.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(10)
-            make.top.equalTo(uiView.snp.bottom).offset(20)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(10)
+            make.top.equalTo(uiView.snp.bottom)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
         
@@ -114,11 +114,11 @@ extension InfoView {
     
     private func collectionViewLayout() -> UICollectionViewLayout {
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(150))
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 3, bottom: 0, trailing: 3)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(150))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
