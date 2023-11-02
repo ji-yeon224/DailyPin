@@ -33,6 +33,10 @@ final class InfoViewController: BaseViewController {
         
     }
     
+    deinit {
+        print("infovc deinit")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: .updateCell, object: nil)
@@ -78,7 +82,8 @@ final class InfoViewController: BaseViewController {
     
     private func bindData() {
         
-        viewModel.place.bind { data in
+        viewModel.place.bind { [weak self] data in
+            guard let self = self else { return }
             guard let place = data else {
                 self.showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) {
                     self.dismiss(animated: true)
@@ -98,12 +103,12 @@ final class InfoViewController: BaseViewController {
             
         }
         
-        viewModel.recordList.bind { data in
+        viewModel.recordList.bind { [weak self] data in
             guard data != nil else {
                 return
             }
             
-            self.updateSnapShot()
+            self?.updateSnapShot()
             
         }
         

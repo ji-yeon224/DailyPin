@@ -9,12 +9,24 @@ import UIKit
 import MapKit
 import FloatingPanel
 
+enum FloatingType {
+    case place, info
+    
+    var viewcontroller: UIViewController {
+        switch self {
+        case .place:
+            return PlaceListViewController()
+        case .info:
+            return InfoViewController()
+        }
+    }
+}
+
 final class MainMapView: BaseView {
     
-    let fpc = FloatingPanelController()
-    let placeFpc = FloatingPanelController()
-    let contentVC = InfoViewController()
-    let placeVC = PlaceListViewController()
+    var fpc1: FloatingPanelController?
+    var cntVC: UIViewController?
+    weak var placeListDelegate: PlaceListProtocol?
     weak var mapViewDelegate: MapViewProtocol?
 
     lazy var mapView = {
@@ -36,8 +48,7 @@ final class MainMapView: BaseView {
         [searchButton, calendarButton, placeListButton, currentLocation].forEach {
             mapView.addSubview($0)
         }
-        fpc.delegate = self
-        placeFpc.delegate = self
+        fpc1?.delegate = self
     }
     
     
@@ -125,26 +136,40 @@ extension MainMapView {
 
 extension MainMapView {
     
-    func setFloatingPanel(data: PlaceElement) {
+    func setFloatingViewTransition (type: FloatingType, _ data: PlaceElement?) {
+        fpc1 = FloatingPanelController()
+        guard let fpc = fpc1 else { return }
         fpc.surfaceView.insetsLayoutMarginsFromSafeArea = true
-        contentVC.viewModel.place.value = data
-        fpc.set(contentViewController: contentVC)
-        fpc.track(scrollView: contentVC.mainView.collectionView)
-        fpc.view.frame = contentVC.view.bounds
+        cntVC = type.viewcontroller
+        
+        switch type {
+        case .place:
+            guard let cntVC =  cntVC as? PlaceListViewController else { return }
+            fpc.track(scrollView: cntVC.mainView.collectionView)
+            fpc.view.frame = cntVC.view.bounds
+            cntVC.placeListDelegate = self
+            
+        case .info:
+            guard let cntVC = cntVC as? InfoViewController else { return }
+            //guard let data = data as? PlaceElement else { return }
+            guard let data = data else { return }
+            cntVC.viewModel.place.value = data
+            
+            
+            fpc.track(scrollView: cntVC.mainView.collectionView)
+            fpc.view.frame = cntVC.view.bounds
+            
+        }
+        
+        fpc.set(contentViewController: cntVC)
+        
         fpc.layout = FloatingPanelCustomLayout()
         fpc.changePanelStyle()
         fpc.invalidateLayout()
+        self.fpc1 = fpc
+        
     }
    
-    func setPlaceFloatingPanel() {
-        placeFpc.surfaceView.insetsLayoutMarginsFromSafeArea = true
-        placeFpc.set(contentViewController: placeVC)
-        placeFpc.view.frame = placeVC.view.bounds
-        placeFpc.track(scrollView: placeVC.mainView.collectionView)
-        placeFpc.layout = FloatingPanelCustomLayout()
-        placeFpc.changePanelStyle()
-        placeFpc.invalidateLayout()
-    }
 }
 
 extension MainMapView: MKMapViewDelegate {
@@ -177,14 +202,14 @@ extension MainMapView: MKMapViewDelegate {
         if annotation.isKind(of: SelectAnnotation.self) {
             if let annotation = annotation as? SelectAnnotation {
                 annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: SelectAnnotationView.identifier, for: annotation)
-                annotationView?.displayPriority = .defaultHigh
+                annotationView?.displayPriority = .required
                 
             }
         } else if annotation.isKind(of: CustomAnnotation.self) {
             if let annotation = annotation as? CustomAnnotation {
                 annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
                 //annotationView?.clusteringIdentifier = "cluster"
-                annotationView?.displayPriority = .defaultLow
+                annotationView?.displayPriority = .required
             }
             
         }
@@ -227,5 +252,13 @@ extension MainMapView: FloatingPanelControllerDelegate {
         }
     }
     
+    
+}
+
+extension MainMapView: PlaceListProtocol {
+    
+    func setPlaceLoaction(data: Place) {
+        placeListDelegate?.setPlaceLoaction(data: data)
+    }
     
 }

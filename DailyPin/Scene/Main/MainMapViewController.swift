@@ -38,7 +38,7 @@ final class MainMapViewController: BaseViewController {
         locationManager.delegate = self 
         checkDeviceLocationAuthorization()
         mainView.mapViewDelegate = self
-        mainView.placeVC.placeListDelegate = self
+        mainView.placeListDelegate = self
         
         mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
         mainView.mapView.register(SelectAnnotationView.self, forAnnotationViewWithReuseIdentifier: SelectAnnotationView.identifier)
@@ -104,7 +104,9 @@ final class MainMapViewController: BaseViewController {
                 self.getNetworkNotification()
                 return
             }
-            self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) { place in
+            self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) { [weak self] place in
+                
+                guard let self = self else { return }
                 
                 self.showAlertMap(address: place.formattedAddress, cood: mapPoint) {
                     
@@ -115,8 +117,10 @@ final class MainMapViewController: BaseViewController {
                     vc.longPressHandler = {
                         DispatchQueue.main.async {
                             self.mainView.setRegion(center: mapPoint, self.mainView.mapView.region.span)
-                            self.mainView.setFloatingPanel(data: place)
-                            self.present(self.mainView.fpc, animated: true)
+                            //self.mainView.setFloatingPanel(data: place)
+                            self.mainView.setFloatingViewTransition(type: .info, place)
+                            guard let fpc = self.mainView.fpc1 else { return }
+                            self.present(fpc, animated: true)
                             self.infoViewOn = true
                         }
                     }
@@ -150,15 +154,22 @@ final class MainMapViewController: BaseViewController {
     
     @objc private func placeListButtonTapped() {
         
+        deleteSearchAnnotation()
+        
         if infoViewOn {
-            mainView.fpc.dismiss(animated: true)
+            guard let fpc = mainView.fpc1 else { return }
+            fpc.dismiss(animated: true)
+            mainView.fpc1 = nil
             infoViewOn.toggle()
         }
         
+        //
         if !listViewOn {
-            mainView.setPlaceFloatingPanel()
+            //mainView.setPlaceFloatingPanel()
+            mainView.setFloatingViewTransition(type: .place, nil)
+            guard let fpc = mainView.fpc1 else { return }
             listViewOn = true
-            present(self.mainView.placeFpc, animated: true)
+            present(fpc, animated: true)
         }
         
     }
@@ -173,7 +184,8 @@ final class MainMapViewController: BaseViewController {
                 deleteSearchAnnotation()
             } else {
                 if infoViewOn {
-                    mainView.fpc.dismiss(animated: true)
+                    guard let fpc = mainView.fpc1 else { return }
+                    fpc.dismiss(animated: true)
                     infoViewOn.toggle()
                 }
                 deleteSearchAnnotation()
@@ -225,8 +237,10 @@ final class MainMapViewController: BaseViewController {
             
             
             DispatchQueue.main.async {
-                self.mainView.setFloatingPanel(data: value)
-                self.present(self.mainView.fpc, animated: true)
+                //self.mainView.setFloatingPanel(data: value)
+                self.mainView.setFloatingViewTransition(type: .info, value)
+                guard let fpc = self.mainView.fpc1 else { return }
+                self.present(fpc, animated: true)
                 self.infoViewOn = true
             }
             
@@ -279,12 +293,15 @@ final class MainMapViewController: BaseViewController {
     private func dismissFloatingViews() {
         if infoViewOn == true {
             infoViewOn = false
-            self.mainView.fpc.dismiss(animated: true)
+            guard let fpc = self.mainView.fpc1 else { return }
+            fpc.dismiss(animated: true)
         }
         
         if listViewOn == true {
             listViewOn = false
-            self.mainView.placeFpc.dismiss(animated: true)
+            guard let fpc = self.mainView.fpc1 else { return }
+            fpc.dismiss(animated: true)
+            //self.mainView.placeFpc.dismiss(animated: true)
         }
     }
     
@@ -294,7 +311,9 @@ final class MainMapViewController: BaseViewController {
 extension MainMapViewController: PlaceListProtocol {
     func setPlaceLoaction(data: Place) {
         if listViewOn {
-            mainView.placeFpc.dismiss(animated: true)
+            //mainView.placeFpc.dismiss(animated: true)
+            guard let fpc = mainView.fpc1 else { return }
+            fpc.dismiss(animated: true)
             listViewOn.toggle()
         }
         
@@ -303,9 +322,12 @@ extension MainMapViewController: PlaceListProtocol {
         if let searchAnnotation = self.searchAnnotation {
             self.mainView.setOneAnnotation(annotation: searchAnnotation)
         }
-        mainView.setFloatingPanel(data: viewModel.convertPlaceToPlaceElement(place: data))
-        present(self.mainView.fpc, animated: true)
+        
+        mainView.setFloatingViewTransition(type: .info, viewModel.convertPlaceToPlaceElement(place: data))
+        guard let fpc = self.mainView.fpc1 else { return }
         infoViewOn = true
+        present(fpc, animated: true)
+        
         
         
         
@@ -326,9 +348,11 @@ extension MainMapViewController: MapViewProtocol {
         
         let coord = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
         mainView.setRegion(center: coord, mainView.mapView.region.span)
-        mainView.setFloatingPanel(data: viewModel.convertPlaceToPlaceElement(place: place))
+        //mainView.setFloatingPanel(data: viewModel.convertPlaceToPlaceElement(place: place))
         //navigationController?.pushViewController(self.mainView.fpc, animated: true)
-        present(self.mainView.fpc, animated: true)
+        mainView.setFloatingViewTransition(type: .info, viewModel.convertPlaceToPlaceElement(place: place))
+        guard let fpc = self.mainView.fpc1 else { return }
+        present(fpc, animated: true)
         infoViewOn = true
         
     }

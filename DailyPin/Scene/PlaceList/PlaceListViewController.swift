@@ -63,7 +63,6 @@ extension PlaceListViewController: PlaceCollectionViewProtocol {
             showToastMessage(message: "toast_errorAlert".localized())
             return
         }
-        
         placeListDelegate?.setPlaceLoaction(data: item)
         dismiss(animated: true)
         
