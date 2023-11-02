@@ -226,7 +226,10 @@ final class MainMapViewController: BaseViewController {
         
         deleteSearchAnnotation()
         
-        vc.selectLocationHandler = { value in
+        vc.selectLocationHandler = { [weak self] value in
+            
+            guard let self = self else { return }
+            
             let center = CLLocationCoordinate2D(latitude: value.location.latitude, longitude: value.location.longitude)
             
             

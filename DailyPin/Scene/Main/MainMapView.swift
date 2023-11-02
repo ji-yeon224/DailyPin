@@ -9,19 +9,6 @@ import UIKit
 import MapKit
 import FloatingPanel
 
-enum FloatingType {
-    case place, info
-    
-    var viewcontroller: UIViewController {
-        switch self {
-        case .place:
-            return PlaceListViewController()
-        case .info:
-            return InfoViewController()
-        }
-    }
-}
-
 final class MainMapView: BaseView {
     
     var fpc1: FloatingPanelController?

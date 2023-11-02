@@ -24,6 +24,10 @@ final class PlaceListViewController: BaseViewController {
         bindData()
     }
     
+    deinit {
+        print("placelistvc deinit")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.getAllPlaceData()

@@ -73,6 +73,7 @@
 		CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E942ACA95D7008A0694 /* SearchButton.swift */; };
 		CE9B0E982ACB04DB008A0694 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E972ACB04DB008A0694 /* AddButton.swift */; };
 		CEA32E3F2AF38787001B5619 /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA32E3E2AF38787001B5619 /* GenericProtocol.swift */; };
+		CEA32E412AF394D9001B5619 /* FloatingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA32E402AF394D9001B5619 /* FloatingType.swift */; };
 		CEA4458C2AE4DD100000A57F /* PlaceListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */; };
 		CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */; };
 		CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC22AC030BF001E7BB0 /* SceneDelegate.swift */; };
@@ -165,6 +166,7 @@
 		CE9B0E942ACA95D7008A0694 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		CE9B0E972ACB04DB008A0694 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		CEA32E3E2AF38787001B5619 /* GenericProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocol.swift; sourceTree = "<group>"; };
+		CEA32E402AF394D9001B5619 /* FloatingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingType.swift; sourceTree = "<group>"; };
 		CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListProtocol.swift; sourceTree = "<group>"; };
 		CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				CE3DF8022AC2B5BA00653CE1 /* MainMapView.swift */,
 				CE4DF9142ACBD5C500546526 /* MainMapViewModel.swift */,
 				CEE694922ADCFD5300FDE8E6 /* AlertMapViewController.swift */,
+				CEA32E402AF394D9001B5619 /* FloatingType.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				CE4DF9132ACBC6BB00546526 /* DatabaseError.swift in Sources */,
 				CE52CB752AC71B47007AD7F8 /* InvalidError.swift in Sources */,
 				CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */,
+				CEA32E412AF394D9001B5619 /* FloatingType.swift in Sources */,
 				CE9B0E982ACB04DB008A0694 /* AddButton.swift in Sources */,
 				CEE694932ADCFD5300FDE8E6 /* AlertMapViewController.swift in Sources */,
 				CE814A612AD594FB00068854 /* CalendarView.swift in Sources */,
