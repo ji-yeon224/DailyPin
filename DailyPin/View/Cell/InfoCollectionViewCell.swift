@@ -26,29 +26,22 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
     }()
     
     var titleLabel = {
-        let view = UILabel()
-        view.textColor = Constants.Color.basicText
+        let view = BoldLabel(size: 16, lines: 0)
         view.textAlignment = .left
-        view.font = UIFont(name: "NanumGothicBold", size: 16)
-        view.numberOfLines = 0
         return view
     }()
     
     var address = {
-        let view = UILabel()
-        view.font = UIFont(name: "NanumGothic", size: 13)
+        let view = PlainLabel(size: 13, lines: 0)
         view.textColor = Constants.Color.subTextColor
-        view.numberOfLines = 0
         return view
     }()
     
     
     var dateLabel = {
-        let view = UILabel()
+        let view = PlainLabel(size: 12, lines: 1)
         view.textColor = Constants.Color.subTextColor
         view.textAlignment = .left
-        view.font = UIFont(name: "NanumGothic", size: 12)
-        
         return view
     }()
     

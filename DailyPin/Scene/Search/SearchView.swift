@@ -43,14 +43,12 @@ final class SearchView: BaseView {
         return view
     }()
     
+    
     private let errorLabel = {
-        let view = UILabel()
+        let view = PlainLabel(size: 18, lines: 0)
         view.backgroundColor = .clear
         view.textColor = Constants.Color.subTextColor
-        view.font = UIFont(name: "NanumGothic", size: 18)
         view.textAlignment = .center
-        view.numberOfLines = 0
-        
         return view
     }()
     

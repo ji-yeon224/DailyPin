@@ -29,6 +29,8 @@ final class Constants {
     
     enum Design {
         static let cornerRadius: CGFloat = 10
+        static let plainFont: String = "NanumGothic"
+        static let boldFont: String = "NanumGothicBold"
     }
     
     

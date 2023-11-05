@@ -16,20 +16,11 @@ final class InfoView: BaseView {
     
     private lazy var uiView = UIView()
     
-    var titleLabel = {
-        let view = UILabel()
-        view.textColor = Constants.Color.basicText
-        view.font = UIFont(name: "NanumGothic", size: 23)
-        view.numberOfLines = 1
-        return view
-    }()
+    var titleLabel = PlainLabel(size: 23, lines: 1)
     
     var addressLabel = {
-        let view = UILabel()
+        let view = PlainLabel(size: 13, lines: 1)
         view.textColor = Constants.Color.subTextColor
-        view.numberOfLines = 1
-        view.font = UIFont(name: "NanumGothic", size: 13)
-        
         return view
     }()
 

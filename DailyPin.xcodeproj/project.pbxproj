@@ -81,6 +81,8 @@
 		CEB00FC82AC030BF001E7BB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FC62AC030BF001E7BB0 /* Main.storyboard */; };
 		CEB00FCA2AC030C0001E7BB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FC92AC030C0001E7BB0 /* Assets.xcassets */; };
 		CEB00FCD2AC030C0001E7BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FCB2AC030C0001E7BB0 /* LaunchScreen.storyboard */; };
+		CEB1AE5D2AF7E8070086DEA9 /* PlainLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1AE5C2AF7E8070086DEA9 /* PlainLabel.swift */; };
+		CEB1AE5F2AF7EA560086DEA9 /* BoldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */; };
 		CEB3373A2ADA9CE20027D90E /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB337392ADA9CE20027D90E /* Geocoding.swift */; };
 		CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390A62ACE840600E4B2AC /* SearchParameter.swift */; };
 		CEB390AA2ACEF50100E4B2AC /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390A92ACEF50100E4B2AC /* RecordViewController.swift */; };
@@ -176,6 +178,8 @@
 		CEB00FC92AC030C0001E7BB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEB00FCC2AC030C0001E7BB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEB00FCE2AC030C0001E7BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEB1AE5C2AF7E8070086DEA9 /* PlainLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainLabel.swift; sourceTree = "<group>"; };
+		CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoldLabel.swift; sourceTree = "<group>"; };
 		CEB337392ADA9CE20027D90E /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		CEB390A62ACE840600E4B2AC /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
 		CEB390A92ACEF50100E4B2AC /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
@@ -297,6 +301,8 @@
 				CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */,
 				CEB390B32ACFCD4600E4B2AC /* MemoTextView.swift */,
 				CE814A652AD59D4900068854 /* CustomCalendarView.swift */,
+				CEB1AE5C2AF7E8070086DEA9 /* PlainLabel.swift */,
+				CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -643,6 +649,7 @@
 				CEB390AC2ACEF50800E4B2AC /* RecordView.swift in Sources */,
 				CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */,
 				CE52CB772AC7B454007AD7F8 /* NetworkError.swift in Sources */,
+				CEB1AE5D2AF7E8070086DEA9 /* PlainLabel.swift in Sources */,
 				CEB390BA2ACFDF4C00E4B2AC /* DateFormatter.swift in Sources */,
 				CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */,
 				CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */,
@@ -672,6 +679,7 @@
 				CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */,
 				CE3DF81D2AC52C2E00653CE1 /* SearchView.swift in Sources */,
 				CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */,
+				CEB1AE5F2AF7EA560086DEA9 /* BoldLabel.swift in Sources */,
 				CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */,
 				CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */,
 				CE3DF7FC2AC2B39D00653CE1 /* BaseView.swift in Sources */,

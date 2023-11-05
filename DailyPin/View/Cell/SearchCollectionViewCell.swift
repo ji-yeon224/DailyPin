@@ -9,12 +9,9 @@ import UIKit
 
 final class SearchCollectionViewCell: BaseCollectionViewCell {
     
-    var title = {
-        let view = UILabel()
-        view.textColor = Constants.Color.basicText
-        view.font = UIFont(name: "NanumGothicBold", size: 14)
-        return view
-    }()
+    var title = BoldLabel(size: 14, lines: 1)
+    var address = PlainLabel(size: 11, lines: 0)
+    
     private var image = {
         var view = UIImageView()
         view.image = Constants.Image.mappinFill
@@ -24,13 +21,8 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         return view
     }()
     
-    var address = {
-        let view = UILabel()
-        view.font = UIFont(name: "NanumGothic", size: 11)
-        view.textColor = Constants.Color.basicText
-        view.numberOfLines = 0
-        return view
-    }()
+    
+    
     
     override func configureUI() {
         super.configureUI()

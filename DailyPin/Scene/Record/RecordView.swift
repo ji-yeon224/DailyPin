@@ -63,13 +63,7 @@ final class RecordView: BaseView {
         return view
     }()
     
-    var titleLabel = {
-        let view = UILabel()
-        view.textColor = Constants.Color.basicText
-        view.font = UIFont(name: "NanumGothic", size: 15)
-        view.numberOfLines = 0
-        return view
-    }()
+    var titleLabel = PlainLabel(size: 15, lines: 0)
     
     private let addressImageView = {
         let view = UIImageView()
@@ -78,13 +72,7 @@ final class RecordView: BaseView {
         return view
     }()
     
-    let addressLabel = {
-        let view = UILabel()
-        view.font = UIFont(name: "NanumGothic", size: 13)
-        view.textColor = Constants.Color.basicText
-        view.numberOfLines = 0
-        return view
-    }()
+    let addressLabel = PlainLabel(size: 13, lines: 0)
     
     private let dateImage = {
         let view = UIImageView()
@@ -105,14 +93,7 @@ final class RecordView: BaseView {
     }()
     
 
-    
-    var dateLabel = {
-        let view = UILabel()
-        view.font = UIFont(name: "NanumGothic", size: 15)
-        view.textColor = Constants.Color.basicText
-        
-        return view
-    }()
+    var dateLabel = PlainLabel(size: 15, lines: 1)
     
     private let bottomView = UIView()
     

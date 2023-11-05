@@ -14,11 +14,8 @@ final class PlaceListView: BaseView {
     weak var collectionViewDelegate: PlaceCollectionViewProtocol?
     
     private let titleLabel = {
-        let view = UILabel()
+        let view = BoldLabel(size: 16, lines: 1)
         view.text = "myRecord".localized()
-        view.font = UIFont(name: "NanumGothicBold", size: 16)
-        view.numberOfLines = 1
-        view.textColor = Constants.Color.basicText
         return view
     }()
     
@@ -45,11 +42,9 @@ final class PlaceListView: BaseView {
     }()
     
     private let placeHolderLabel = {
-        let view = UILabel()
+        let view = PlainLabel(size: 14, lines: 2)
         view.text = "placeHolder_noPlaceList".localized()
-        view.font =  UIFont(name: "NanumGothic", size: 14)
         view.textColor = Constants.Color.placeholderColor
-        view.numberOfLines = 2
         view.textAlignment = .center
         return view
     }()
