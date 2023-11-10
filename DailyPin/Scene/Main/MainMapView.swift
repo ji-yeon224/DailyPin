@@ -110,10 +110,11 @@ extension MainMapView {
     
     func deSelectedAnnotation() {
         
-        if mapView.selectedAnnotations.count > 0 {
-            guard let annotation = mapView.selectedAnnotations.first else { return }
-            mapView.deselectAnnotation(annotation, animated: true)
+        let selectedAnnotations = mapView.selectedAnnotations
+        for annotation in selectedAnnotations {
+            mapView.deselectAnnotation(annotation, animated: false)
         }
+        
         
     }
     

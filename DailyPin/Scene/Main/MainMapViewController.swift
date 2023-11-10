@@ -155,6 +155,7 @@ final class MainMapViewController: BaseViewController {
     @objc private func placeListButtonTapped() {
         
         deleteSearchAnnotation()
+        mainView.deSelectedAnnotation()
         
         if infoViewOn {
             guard let fpc = mainView.fpc1 else { return }
@@ -202,6 +203,7 @@ final class MainMapViewController: BaseViewController {
     @objc private func calendarButtonTapped() {
         
         dismissFloatingViews()
+        mainView.deSelectedAnnotation()
         
         let vc = CalendarViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -304,7 +306,7 @@ final class MainMapViewController: BaseViewController {
             listViewOn = false
             guard let fpc = self.mainView.fpc1 else { return }
             fpc.dismiss(animated: true)
-            //self.mainView.placeFpc.dismiss(animated: true)
+            
         }
     }
     
