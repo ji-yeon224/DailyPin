@@ -1,10 +1,12 @@
 
+<img src="https://github.com/ji-yeon224/DailyPin/assets/69784492/b0901f18-f381-45a2-ba90-fdb579c7bc21.png"  width="150" height="150"/>
 
-![[DailyPin1.png|150]]
-# DailyPin - 장소 일기
+# DailyPin - 장소 일기 
 
 
-![[DailyPin-ScreenShot1.png|800]]
+
+![](https://github.com/ji-yeon224/DailyPin/assets/69784492/371edf62-1854-4f81-a184-c61ff2ee8497)
+
 [🔗 앱스토어 바로가기](https://apps.apple.com/kr/app/dailypin-%EC%9E%A5%EC%86%8C%EC%9D%BC%EA%B8%B0/id6470025950)
 
 
@@ -110,7 +112,8 @@ private func bindData() {
 - view에 그림자를 넣었을 때 디버그 창에서 그림자 렌더링에 많은 비용이 든다는 오류 발생
 - UIBezierPath로 그림자를 view의 크기에 맞게 생성 후 layoutSubView()내에서 shadowPath 값으로 지정하여 해결함
 
-![[Pasted image 20231111142454.png]]
+![Pasted image 20231111142454](https://github.com/ji-yeon224/DailyPin/assets/69784492/b518764a-f8a0-45b7-a995-27a4ee5aa875)
+
 
 ```swift
 private func shadow() {
@@ -128,10 +131,12 @@ private func shadow() {
 - Geocoding API 연동 시 Router 패턴을 적용하여 구현하는 중 http load failed 오류가 발생하였다.
 - HTTPHeaders에 Content-Type에 대한 설정을 하지 않아 파라미터 값이 정상적으로 전송되지 않았기 때문에 `application/json` 을 header 값에 추가하여 해결하였다.
 
-![[Pasted image 20231111142522.png]]
+![Pasted image 20231111142522](https://github.com/ji-yeon224/DailyPin/assets/69784492/c7153a90-5cfb-4dd6-85ed-e4d3468decc6)
+
 
 
 ## ✍🏻  회고
+[🔗 회고](https://iwntberich.tistory.com/84)
 
 - 첫 앱을 출시를 하기 위해 개발하면서 생각보다 고려해야 할 요소가 굉장히 많다는 것을 새삼 깨달았다. 생각보다 고려해야 할 예외 사항들이 많았다. 다양한 예외처리를 구현하고, 화면 전환 시 값 전달과 업데이트 등 깊게 생각해야 할 요소들이 많았다.
 - 기획 단계에서 내가 매우 부족했음을 깨달았다. UI 구성도 잘 떠오르지 않아서 대략적인 스토리보드만 그렸더니 계속해서 수정하는 일이 발생했고, 필요한 기능이지만 기획 단계에서 놓쳐버린 기능들도 많았다.
