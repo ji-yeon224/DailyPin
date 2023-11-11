@@ -268,6 +268,7 @@ final class MainMapViewController: BaseViewController {
     private func deleteSearchAnnotation() {
         if let searchAnnotation = searchAnnotation {
             mainView.removeOneAnnotation(annotation: searchAnnotation)
+            
             self.searchAnnotation = nil
         }
         

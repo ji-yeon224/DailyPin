@@ -63,14 +63,18 @@ final class CustomAnnotationView: BaseAnnotationView {
         super.layoutSubviews()
         bounds.size = CGSize(width: 25, height: 25)
         centerOffset = CGPoint(x: 0, y: bounds.size.width / 2)
+        shadow()
         
+        
+    }
+    
+    private func shadow() {
         backView.layer.cornerRadius = backView.frame.size.width / 2
         backView.layer.shadowColor = UIColor.black.cgColor
         backView.layer.shadowOpacity = 0.4
         backView.layer.shadowOffset = CGSize(width: 0, height: 0)
         backView.layer.shadowRadius = 1
         backView.layer.shadowPath = UIBezierPath(arcCenter: CGPoint(x: backView.bounds.width/2, y: backView.bounds.height/2), radius: backView.bounds.width / 2, startAngle: 0, endAngle: 2 * .pi, clockwise: true).cgPath
-        
     }
     
 }

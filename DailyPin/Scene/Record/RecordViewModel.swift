@@ -11,7 +11,9 @@ final class RecordViewModel {
     
     private let placeRepository = PlaceRepository()
     private let recordRepository = RecordRepository()
+    
     var errorDescription: Observable<String?> = Observable(nil)
+    
     var currentRecord: Record? = nil
     var currentLocation: PlaceElement? = nil
     
@@ -27,12 +29,6 @@ final class RecordViewModel {
             }
         } else { // 기존에 저장된 데이터가 없으면 저장해서 리턴
             return savePlace(data)
-//            do {
-//                return try savePlace(data)
-//            } catch let error {
-//                throw error
-//            }
-            
         }
         
         
