@@ -109,8 +109,8 @@ private func bindData() {
 
 ### 그림자 렌더링 이슈
 
-- view에 그림자를 넣었을 때 디버그 창에서 그림자 렌더링에 많은 비용이 든다는 오류 발생
-- UIBezierPath로 그림자를 view의 크기에 맞게 생성 후 layoutSubView()내에서 shadowPath 값으로 지정하여 해결함
+- view에 그림자를 넣었을 때 디버그 창에서 그림자 렌더링에 많은 비용이 들기 때문에 `shadowPath`를 변경하라는 내용의 경고가 나타났다.
+- `UIBezierPath`로 그림자를 view의 크기에 맞게 생성 후 `layoutSubView()`내에서 shadowPath 값으로 지정하여 해결하였다.
 
 ![Pasted image 20231111142454](https://github.com/ji-yeon224/DailyPin/assets/69784492/b518764a-f8a0-45b7-a995-27a4ee5aa875)
 
