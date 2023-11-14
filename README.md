@@ -25,14 +25,15 @@
 ## 기술스택
 - MVVM
 - UIKit, MapKit
+- Alamofire, Codable
+- Realm
 - SnapKit, Autolayout
 - DiffableDataSource, CompositionalLayout
 - Firebase
 	- Google Crashlythics
 	- Push Notification
-- Alamofire, Codable
-- Realm
 - FSCalendar, FloatingPanel, Toast
+- Google Place API
 
 ## 프로젝트 목표
 - DiffableDataSource와 CompositionalLayout을 이용하여 CollectionView 구현
@@ -46,7 +47,7 @@
 ### Compositional Layout 셀 동적 높이
 
 - 내부 컨텐츠의 높이에 따라 동적으로 높이를 조절하도록 estimated를 사용하였는데, estimated로 정확한 높이 계산이 되지 않아 잘 적용이 안되었다.
-- View의 Drawing Cycle을 고려하여 데이터가 셀에 삽입된 후 `layoutIfNeeded()`를 호출하여 레이아웃 업데이트를 요청하여 해결하였다.
+- **View의 Drawing Cycle**을 고려하여 데이터가 셀에 삽입된 후 `layoutIfNeeded()`를 호출하여 레이아웃 업데이트를 요청하여 해결하였다.
 
 ```swift
 private func configureDataSource() {
