@@ -12,7 +12,7 @@ final class RecordViewModel {
     private let placeRepository = PlaceRepository()
     private let recordRepository = RecordRepository()
     
-    var errorDescription: Observable<String?> = Observable(nil)
+    
     
     var currentRecord: Record? = nil
     var currentLocation: PlaceElement? = nil
@@ -34,7 +34,8 @@ final class RecordViewModel {
         
     }
     
-    // 새로운 장소 저장
+    var errorDescription: Observable<String?> = Observable(nil)
+    
     func savePlace(_ location: PlaceElement?) -> Place? {
         
         guard let data = location else {
