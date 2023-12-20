@@ -25,16 +25,20 @@ final class RecordViewModel {
     struct Input {
         let createRecord: PublishRelay<Record>
         let updateRecord: PublishRelay<Record>
+        let deleteRecord: PublishRelay<Record>
     }
     
     struct Output {
         let successCreate: PublishRelay<String>
         let errorMsg: PublishRelay<String>
+        let successDelete: PublishRelay<(String, Bool)>
     }
     
     func transform(input: Input) -> Output {
         let errorMsg = PublishRelay<String>()
         let successMsg = PublishRelay<String>()
+        let successDelete = PublishRelay<(String, Bool)>()
+        let deletePlace = PublishRelay<String>()
         
         input.createRecord
             .bind(with: self) { owner, value in
@@ -42,6 +46,7 @@ final class RecordViewModel {
                     errorMsg.accept(InvalidError.noExistData.localizedDescription)
                     return
                 }
+                
                 guard let place = owner.getPlace(location) else {
                     return
                 }
@@ -51,6 +56,7 @@ final class RecordViewModel {
                     owner.currentRecord = value
                     successMsg.accept("저장을 완료하였습니다.")
                 } catch {
+                    print("error")
                     errorMsg.accept(error.localizedDescription)
                 }
                 
@@ -65,17 +71,67 @@ final class RecordViewModel {
                 }
                 do {
                     try owner.recordRepository.updateRecord(id: currentRecord.objectID, value)
-                    self.currentRecord = value
+                    owner.currentRecord = value
+                    
                     successMsg.accept("수정을 완료하였습니다.")
                 } catch {
                     errorMsg.accept(error.localizedDescription)
-                    self.currentRecord = nil
+//                    self.currentRecord = nil
                 }
             }
             .disposed(by: disposeBag)
         
-        return Output(successCreate: successMsg, errorMsg: errorMsg)
+        input.deleteRecord
+            .bind(with: self) { owner, value in
+                do {
+                    try owner.recordRepository.deleteItem(value)
+                    guard let location = owner.currentLocation else {
+                        return
+                    }
+                    deletePlace.accept(location.id)
+                    
+                } catch {
+                    errorMsg.accept(error.localizedDescription)
+                }
+                
+                
+            }
+            .disposed(by: disposeBag)
+        
+        deletePlace
+            .bind(with: self) { owner, value in
+                var refresh = false
+                if owner.placeRepository.getRecordListCount(id: value) == 0 {
+                    var deletePlace: Place
+                    do {
+                        deletePlace = try owner.placeRepository.searchItemByID(value)
+                    } catch {
+                        errorMsg.accept(error.localizedDescription)
+                        return
+                    }
+                    
+                    do {
+                        try owner.placeRepository.deleteItem(deletePlace)
+                    } catch {
+                        errorMsg.accept(error.localizedDescription)
+                        return
+                    }
+                    
+                    refresh = true
+                }
+                successDelete.accept(("삭제를 완료하였습니다.", refresh))
+                
+            }
+            .disposed(by: disposeBag)
+        
+        return Output(
+            successCreate: successMsg,
+            errorMsg: errorMsg,
+            successDelete: successDelete
+        )
     }
+    
+    
     
     
     // 기존에 저장된 장소가 있다면 읽어오기, 없으면 장소 새로 저장하기(savePlace)
@@ -154,40 +210,40 @@ final class RecordViewModel {
 //        }
 //    }
     
-    func deleteRecord(record: Record) throws {
-        
-        
-        do {
-            try recordRepository.deleteItem(record)
-            NotificationCenter.default.post(name: .updateCell, object: nil)
-        } catch {
-            throw error
-        }
-    }
-    
-    func deletePlace(id: String) {
-        if placeRepository.getRecordListCount(id: id) == 0 {
-            
-            var deletePlace: Place
-            do {
-                deletePlace = try placeRepository.searchItemByID(id)
-                
-            } catch {
-                errorDescription.value = error.localizedDescription
-                return
-            }
-            
-            do {
-                try placeRepository.deleteItem(deletePlace)
-            } catch {
-                errorDescription.value = error.localizedDescription
-                return
-            }
-            
-            NotificationCenter.default.post(name: .databaseChange, object: nil, userInfo: ["changeType": "delete"])
-        }
-    }
-    
+//    func deleteRecord(record: Record) throws {
+//        
+//        
+//        do {
+//            try recordRepository.deleteItem(record)
+//            NotificationCenter.default.post(name: .updateCell, object: nil)
+//        } catch {
+//            throw error
+//        }
+//    }
+//    
+//    func deletePlace(id: String) {
+//        if placeRepository.getRecordListCount(id: id) == 0 {
+//            
+//            var deletePlace: Place
+//            do {
+//                deletePlace = try placeRepository.searchItemByID(id)
+//                
+//            } catch {
+//                errorDescription.value = error.localizedDescription
+//                return
+//            }
+//            
+//            do {
+//                try placeRepository.deleteItem(deletePlace)
+//            } catch {
+//                errorDescription.value = error.localizedDescription
+//                return
+//            }
+//            
+//            NotificationCenter.default.post(name: .databaseChange, object: nil, userInfo: ["changeType": "delete"])
+//        }
+//    }
+//    
     
     
 }

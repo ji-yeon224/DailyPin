@@ -17,6 +17,7 @@ final class RecordViewController: BaseViewController {
     private let backButtonTap = PublishRelay<Bool>()
     private let modeType = PublishRelay<Mode>()
     private let saveButton = PublishRelay<Bool>()
+    private let deleteButton = PublishRelay<Bool>()
     
     private let mainView = RecordView()
     private let viewModel = RecordViewModel()
@@ -85,10 +86,12 @@ final class RecordViewController: BaseViewController {
         
         let createRecord = PublishRelay<Record>()
         let updateRecord = PublishRelay<Record>()
+        let deleteRecord = PublishRelay<Record>()
         
         let input = RecordViewModel.Input(
             createRecord: createRecord,
-            updateRecord: updateRecord
+            updateRecord: updateRecord,
+            deleteRecord: deleteRecord
         )
         let output = viewModel.transform(input: input)
         
@@ -96,7 +99,7 @@ final class RecordViewController: BaseViewController {
         
         saveButton
             .bind(with: self) { owner, _ in
-                
+                owner.view.endEditing(true)
                 guard let newData = owner.getSaveRecordData() else {
                     owner.showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
                     return
@@ -104,14 +107,11 @@ final class RecordViewController: BaseViewController {
                 
                 // 기존 데이터가 있는지 여부 o -> 편집 / x -> 새로 작성
                 if let _ = owner.record { // update
-                    createRecord.accept(newData)
+                    updateRecord.accept(newData)
                     
                 } else { // create
-                    updateRecord.accept(newData)
+                    createRecord.accept(newData)
                 }
-                
-                
-                
             }
             .disposed(by: disposeBag)
         
@@ -120,17 +120,54 @@ final class RecordViewController: BaseViewController {
                 owner.showOKAlert(title: "저장", message: value) {
                     
                     NotificationCenter.default.post(name: .updateCell, object: nil)
-                    owner.modeType.accept(.read)
-                    
+//                    owner.modeType.accept(.read)
+                    owner.dismiss(animated: true)
                 }
                 
+            }
+            .disposed(by: disposeBag)
+        
+        deleteButton
+            .bind(with: self) { owner, value in
+                guard let record = owner.viewModel.currentRecord else {
+                    owner.showOKAlert(title: "", message: "기록을 찾을 수 없습니다.") { }
+                    return
+                }
+                owner.showAlertWithCancel(title: "alert_deleteTitle".localized(), message: "alert_deleteMessage".localized()) {
+                    deleteRecord.accept(record)
+                } cancelHandler: {  }
+            }
+            .disposed(by: disposeBag)
+        
+        output.successDelete
+            .bind(with: self) { owner, value in
+                let (msg, refresh) = value
+                
+                owner.showOKAlert(title: "삭제", message: msg) {
+                    NotificationCenter.default.post(name: .updateCell, object: nil)
+                    owner.dismiss(animated: true)
+                    
+                    if refresh {
+                        NotificationCenter.default.post(name: .databaseChange, object: nil, userInfo: ["changeType": "delete"])
+                    }
+                    
+                }
+               
+               
+                
+            }
+            .disposed(by: disposeBag)
+        
+        output.errorMsg
+            .bind(with: self) { owner, value in
+                owner.showOKAlert(title: "", message: value) { }
             }
             .disposed(by: disposeBag)
         
         
     }
     
-    func bindUI() {
+    private func bindUI() {
         
         modeType
             .bind(with: self) { owner, value in
@@ -174,12 +211,7 @@ final class RecordViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.errorDescription.bind { data in
-            if let message = data {
-                self.showOKAlert(title: "", message: message) { }
-            }
-            
-        }
+        
         
         navigationItem.leftBarButtonItem?.rx.tap
             .withLatestFrom(modeType)
@@ -200,11 +232,6 @@ final class RecordViewController: BaseViewController {
             .disposed(by: disposeBag)
         
     }
-    
-    
-    
-    
-    
     
     
     private func setData() {
@@ -238,7 +265,7 @@ final class RecordViewController: BaseViewController {
     
     private func getSaveRecordData() -> Record? {
         guard let location = location else {
-//            showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
+
             return nil
         }
         
@@ -282,38 +309,38 @@ final class RecordViewController: BaseViewController {
     }
  
     
-    private func deleteRecord() {
-        guard let deleteRecord = record else {
-            return
-        }
-        
-        showAlertWithCancel(title: "alert_deleteTitle".localized(), message: "alert_deleteMessage".localized()) {
-
-            do {
-                try self.viewModel.deleteRecord(record: deleteRecord)
-                self.dismiss(animated: true)
-            } catch {
-                self.viewModel.errorDescription.value = error.localizedDescription
-                return
-            }
-            self.deletePlace()
-        } cancelHandler: {
-            return
-        }
-        
-    }
-    private func deletePlace() {
-        guard let location = viewModel.currentLocation else { return }
-        viewModel.deletePlace(id: location.id)
-        
-    }
+//    private func deleteRecord() {
+//        guard let deleteRecord = record else {
+//            return
+//        }
+//        
+//        showAlertWithCancel(title: "alert_deleteTitle".localized(), message: "alert_deleteMessage".localized()) {
+//
+//            do {
+//                try self.viewModel.deleteRecord(record: deleteRecord)
+//                self.dismiss(animated: true)
+//            } catch {
+//                self.viewModel.errorDescription.value = error.localizedDescription
+//                return
+//            }
+//            self.deletePlace()
+//        } cancelHandler: {
+//            return
+//        }
+//        
+//    }
+//    private func deletePlace() {
+//        guard let location = viewModel.currentLocation else { return }
+//        viewModel.deletePlace(id: location.id)
+//        
+//    }
     
 }
 
 // config action
 extension RecordViewController {
     
-    @objc func keyboardWillShow(notification:NSNotification) {
+    @objc private func keyboardWillShow(notification:NSNotification) {
 
         guard let userInfo = notification.userInfo else { return }
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
@@ -329,7 +356,7 @@ extension RecordViewController {
                                completion: nil)
     }
 
-    @objc func keyboardWillHide(notification:NSNotification) {
+    @objc private func keyboardWillHide(notification:NSNotification) {
 
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         mainView.scrollView.contentInset = contentInset
@@ -379,8 +406,8 @@ extension RecordViewController {
             
         }
         let deleteAction = UIAction(title: "deleteButton".localized()) { action in
-            self.deleteRecord()
-            
+//            self.deleteRecord()
+            self.deleteButton.accept(true)
             
         }
         menuItems.append(editAction)
