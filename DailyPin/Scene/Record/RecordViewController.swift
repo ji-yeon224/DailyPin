@@ -6,10 +6,13 @@
 //
 
 import UIKit
-
+import RxSwift
+import RxCocoa
 
 
 final class RecordViewController: BaseViewController {
+    
+    private let disposeBag = DisposeBag()
     
     private let mainView = RecordView()
     private let viewModel = RecordViewModel()
@@ -36,7 +39,7 @@ final class RecordViewController: BaseViewController {
         viewModel.currentRecord = record
         viewModel.currentLocation = location
         setData()
-        
+        bind()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         
@@ -57,6 +60,30 @@ final class RecordViewController: BaseViewController {
         }
     }
     
+    private func bind() {
+        
+        mainView.datePickerView.rx.date.changed
+            .bind(with: self) { owner, value in
+                owner.mainView.dateLabel.text = DateFormatter.convertDate(date: value)
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.memoTextView.rx.text.changed
+            .bind(with: self) { owner, value in
+                
+                owner.mainView.placeHolderLabel.isHidden = value != ""
+//                owner.mainView.setLineSpacing(text: value)
+                if let text = value {
+                    owner.mainView.memoTextView.attributedText = text.setLineSpacing()
+                }
+                
+                owner.mainView.scrollView.updateContentView()
+                
+                
+            }
+            .disposed(by: disposeBag)
+        
+    }
     
     
     override func configureUI() {
@@ -112,7 +139,8 @@ final class RecordViewController: BaseViewController {
         mainView.titleTextField.text = record.title
         mainView.titleTextField.placeholder = record.title
         mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
-        mainView.setLineSpacing(text: record.memo)
+//        mainView.setLineSpacing(text: record.memo)
+        mainView.memoTextView.attributedText = record.memo?.setLineSpacing()
         //mainView.memoTextView.text = record.memo
         mainView.placeHolderLabel.isHidden = true
         mainView.setReadMode()

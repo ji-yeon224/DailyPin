@@ -106,6 +106,8 @@
 		CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */; };
 		CEE694932ADCFD5300FDE8E6 /* AlertMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE694922ADCFD5300FDE8E6 /* AlertMapViewController.swift */; };
 		CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF4298C2AD14DB500A9ED50 /* InfoCollectionViewCell.swift */; };
+		CEF61E592B32CF3700A24BE3 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CEF61E582B32CF3700A24BE3 /* RxCocoa */; };
+		CEF61E5B2B32CF3700A24BE3 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CEF61E5A2B32CF3700A24BE3 /* RxSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -212,9 +214,11 @@
 			files = (
 				CE4DF90A2ACBB6AF00546526 /* RealmSwift in Frameworks */,
 				CE32459A2AC8FAF500582FC5 /* Toast in Frameworks */,
+				CEF61E592B32CF3700A24BE3 /* RxCocoa in Frameworks */,
 				CE3EA89F2AFE55B000628B07 /* FirebaseMessaging in Frameworks */,
 				CE9B0E8B2ACA6A0A008A0694 /* FloatingPanel in Frameworks */,
 				CE3DF8222AC53E5700653CE1 /* SnapKit in Frameworks */,
+				CEF61E5B2B32CF3700A24BE3 /* RxSwift in Frameworks */,
 				CE3DF8252AC53E6300653CE1 /* Alamofire in Frameworks */,
 				CE814A642AD59D1B00068854 /* FSCalendar in Frameworks */,
 				CE3EA89D2AFE55B000628B07 /* FirebaseCrashlytics in Frameworks */,
@@ -528,6 +532,8 @@
 				CE3EA89A2AFE55B000628B07 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				CE3EA89C2AFE55B000628B07 /* FirebaseCrashlytics */,
 				CE3EA89E2AFE55B000628B07 /* FirebaseMessaging */,
+				CEF61E582B32CF3700A24BE3 /* RxCocoa */,
+				CEF61E5A2B32CF3700A24BE3 /* RxSwift */,
 			);
 			productName = DailyPin;
 			productReference = CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */;
@@ -566,6 +572,7 @@
 				CE4DF9062ACBB6AF00546526 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				CE814A622AD59D1B00068854 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				CE3EA8992AFE55B000628B07 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CEF61E572B32CF3700A24BE3 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = CEB00FBE2AC030BF001E7BB0 /* Products */;
 			projectDirPath = "";
@@ -1015,6 +1022,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		CEF61E572B32CF3700A24BE3 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1067,6 +1082,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE9B0E892ACA6A0A008A0694 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
 			productName = FloatingPanel;
+		};
+		CEF61E582B32CF3700A24BE3 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEF61E572B32CF3700A24BE3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		CEF61E5A2B32CF3700A24BE3 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEF61E572B32CF3700A24BE3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
