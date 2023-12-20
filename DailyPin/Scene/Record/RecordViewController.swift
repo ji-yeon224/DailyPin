@@ -22,15 +22,13 @@ final class RecordViewController: BaseViewController {
     private let viewModel = RecordViewModel()
     var longPressHandler: (() -> Void)?
     
-    var location: PlaceElement?
-    var record: Record?
+    private var location: PlaceElement?
+    private var record: Record?
     
-    var mode: Mode = .read
+    private var mode: Mode = .read
     
     override func loadView() {
         self.view = mainView
-        
-        
     }
     
     init(mode: Mode, record: Record?, location: PlaceElement?) {
@@ -40,6 +38,7 @@ final class RecordViewController: BaseViewController {
         self.location = location
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -54,9 +53,11 @@ final class RecordViewController: BaseViewController {
         viewModel.currentRecord = record
         viewModel.currentLocation = location
         
+        setNavLeftButton()
         bind()
         
         modeType.accept(mode)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         
@@ -68,17 +69,8 @@ final class RecordViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    private func bindData() {
-        viewModel.errorDescription.bind { data in
-            if let message = data {
-                self.showOKAlert(title: "", message: message) { }
-            }
-            
-        }
-    }
     
     private func bind() {
-        
         
         modeType
             .bind(with: self) { owner, value in
@@ -127,7 +119,12 @@ final class RecordViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        
+        viewModel.errorDescription.bind { data in
+            if let message = data {
+                self.showOKAlert(title: "", message: message) { }
+            }
+            
+        }
         
         navigationItem.leftBarButtonItem?.rx.tap
             .withLatestFrom(modeType)
@@ -153,8 +150,8 @@ final class RecordViewController: BaseViewController {
     override func configureUI() {
         super.configureUI()
         
-        configNavigationBar()
         
+       
         view.rx.tapGesture()
             .when(.recognized)
             .bind(with: self) { owner, _ in
@@ -207,6 +204,7 @@ final class RecordViewController: BaseViewController {
         
         if let memo = record.memo {
             mainView.memoTextView.attributedText = memo.setLineSpacing()
+            mainView.memoTextView.isHidden = false
         } else {
             mainView.memoTextView.isHidden = true
         }
@@ -291,12 +289,6 @@ final class RecordViewController: BaseViewController {
 // nav
 extension RecordViewController {
     
-    private func configNavigationBar() {
-        
-        setNavRightButton()
-        setNavLeftButton()
-        
-    }
     
     private func setNavLeftButton() {
         
@@ -314,7 +306,6 @@ extension RecordViewController {
         case .read:
             setMenuButton()
             mainView.setReadMode()
-            setData()
         }
     }
     
