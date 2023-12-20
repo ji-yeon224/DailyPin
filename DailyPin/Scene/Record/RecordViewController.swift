@@ -13,6 +13,7 @@ import RxCocoa
 final class RecordViewController: BaseViewController {
     
     private let disposeBag = DisposeBag()
+    private let backButtonTap = PublishRelay<Bool>()
     
     private let mainView = RecordView()
     private let viewModel = RecordViewModel()
@@ -70,16 +71,37 @@ final class RecordViewController: BaseViewController {
         
         mainView.memoTextView.rx.text.changed
             .bind(with: self) { owner, value in
-                
                 owner.mainView.placeHolderLabel.isHidden = value != ""
-//                owner.mainView.setLineSpacing(text: value)
                 if let text = value {
                     owner.mainView.memoTextView.attributedText = text.setLineSpacing()
                 }
-                
                 owner.mainView.scrollView.updateContentView()
-                
-                
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.titleTextField.rx.text.changed
+            .withLatestFrom(mainView.titleTextField.rx.text.orEmpty)
+            .bind(with: self) { owner, value in
+                if value.count >= 20 {
+                    owner.showToastMessage(message: "20글자 이내로 작성해주세요.")
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        navigationItem.leftBarButtonItem?.rx.tap
+            .bind(with: self) { owner, _ in
+                switch owner.mode {
+                case .edit:
+                    if !owner.mainView.isEmptyText() {
+                        owner.okDesctructiveAlert(title: "alert_alertEditModeTitle".localized(), message: "alert_alertEditModeMessage".localized()) {
+                            owner.dismiss(animated: true)
+                        } cancelHandler: {  }
+                    } else {
+                        owner.dismiss(animated: true)
+                    }
+                case .read:
+                    owner.dismiss(animated: true)
+                }
             }
             .disposed(by: disposeBag)
         
@@ -93,7 +115,7 @@ final class RecordViewController: BaseViewController {
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedView(_:)))
         view.addGestureRecognizer(tapGestureRecognizer)
-        mainView.textFieldDelegate = self
+        
         
         
 
@@ -234,7 +256,7 @@ extension RecordViewController {
     
     private func setNavLeftButton() {
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.xmark, style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.xmark, style: .plain, target: self, action: nil)
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
         
     }
@@ -286,35 +308,40 @@ extension RecordViewController {
     }
     
     
-    @objc private func backButtonTapped() {
-        
-        switch mode {
-        case .edit:
-            if !mainView.isEmptyText() {
-                okDesctructiveAlert(title: "alert_alertEditModeTitle".localized(), message: "alert_alertEditModeMessage".localized()) {
-                    
-                    self.dismiss(animated: true)
-                } cancelHandler: {
-                    
-                }
-            } else {
-                dismiss(animated: true)
-            }
-            
-        case .read:
-            dismiss(animated: true)
-            
-        }
-        
-    }
+//    @objc private func backButtonTapped() {
+//        
+//        switch mode {
+//        case .edit:
+//            if !mainView.isEmptyText() {
+//                okDesctructiveAlert(title: "alert_alertEditModeTitle".localized(), message: "alert_alertEditModeMessage".localized()) {
+//                    
+//                    self.dismiss(animated: true)
+//                } cancelHandler: {
+//                    
+//                }
+//            } else {
+//                dismiss(animated: true)
+//            }
+//            
+//        case .read:
+//            dismiss(animated: true)
+//            
+//        }
+//        
+//    }
+//    
+    
     
 }
 
-extension RecordViewController: TextFieldProtocol {
-    func shouldChangeCharactersIn() {
-        showToastMessage(message: "20글자 이내로 작성해주세요.")
-    }
-    
-    
-    
-}
+
+
+//
+//extension RecordViewController: TextFieldProtocol {
+//    func shouldChangeCharactersIn() {
+//        showToastMessage(message: "20글자 이내로 작성해주세요.")
+//    }
+//    
+//    
+//    
+//}
