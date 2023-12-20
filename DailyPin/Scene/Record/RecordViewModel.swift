@@ -6,16 +6,45 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 final class RecordViewModel {
     
     private let placeRepository = PlaceRepository()
     private let recordRepository = RecordRepository()
     
-    
+    private let disposeBag = DisposeBag()
+    private let successMsg = PublishRelay<String>()
+    private let errorMsg = PublishRelay<String>()
     
     var currentRecord: Record? = nil
     var currentLocation: PlaceElement? = nil
+    
+    
+    struct Input {
+        let createRecord: PublishRelay<Record>
+//        let updateRecord: PublishRelay<Bool>
+    }
+    
+    struct Output {
+        let successCreate: PublishRelay<String>
+        let errorMsg: PublishRelay<String>
+    }
+    
+    func transform(input: Input) -> Output {
+        
+        
+        input.createRecord
+            .bind(with: self) { owner, value in
+                owner.createRecord(value)
+                
+            }
+            .disposed(by: disposeBag)
+        
+        return Output(successCreate: successMsg, errorMsg: errorMsg)
+    }
+    
     
     // 기존에 저장된 장소가 있다면 읽어오기, 없으면 장소 새로 저장하기(savePlace)
     func getPlace(_ data: PlaceElement) -> Place? {
@@ -86,8 +115,10 @@ final class RecordViewModel {
         do {
             try placeRepository.updateRecordList(record: record, place: place)
             currentRecord = record
+            self.successMsg.accept("저장을 완료하였습니다.")
         } catch {
             errorDescription.value = error.localizedDescription
+            errorMsg.accept(error.localizedDescription)
         }
     }
     

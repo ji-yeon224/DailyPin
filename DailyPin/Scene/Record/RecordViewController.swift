@@ -54,6 +54,7 @@ final class RecordViewController: BaseViewController {
         viewModel.currentLocation = location
         
         setNavLeftButton()
+        bindUI()
         bind()
         
         modeType.accept(mode)
@@ -67,11 +68,48 @@ final class RecordViewController: BaseViewController {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        longPressHandler?()
     }
     
     
     private func bind() {
         
+        let createRecord = PublishRelay<Record>()
+        
+        let input = RecordViewModel.Input(createRecord: createRecord)
+        let output = viewModel.transform(input: input)
+        
+        
+        
+        saveButton
+            .bind(with: self) { owner, _ in
+                
+//                owner.saveRecord()
+                if let record = owner.getSaveRecordData() {
+                    createRecord.accept(record)
+                } else {
+                    owner.showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
+                }
+                
+                
+            }
+            .disposed(by: disposeBag)
+        
+        output.successCreate
+            .bind(with: self) { owner, value in
+                owner.showOKAlert(title: "저장", message: value) {
+                    
+                    NotificationCenter.default.post(name: .updateCell, object: nil)
+                    owner.modeType.accept(.read)
+                    
+                }
+                
+            }
+            .disposed(by: disposeBag)
+        
+    }
+    
+    func bindUI() {
         modeType
             .bind(with: self) { owner, value in
                 owner.setNavRightButton(mode: value)
@@ -82,15 +120,8 @@ final class RecordViewController: BaseViewController {
                     owner.mainView.setPickerView()
                     owner.mainView.datePickerView.date = owner.record?.date ?? Date()
                     owner.mainView.titleTextField.becomeFirstResponder()
+                    owner.setData()
                 }
-            }
-            .disposed(by: disposeBag)
-        
-        saveButton
-            .bind(with: self) { owner, _ in
-                owner.longPressHandler?()
-                owner.saveRecord()
-                
             }
             .disposed(by: disposeBag)
         
@@ -187,7 +218,7 @@ final class RecordViewController: BaseViewController {
     
     private func setData() {
         
-        if let location = viewModel.currentLocation {
+        if let location = location {
             mainView.addressLabel.text = location.formattedAddress
             mainView.titleTextField.placeholder = location.displayName.placeName
         }
@@ -197,34 +228,38 @@ final class RecordViewController: BaseViewController {
             return
         }
         
-        mainView.setReadMode()
+        
         mainView.titleTextField.text = record.title
         mainView.titleTextField.placeholder = record.title
         mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
         
         if let memo = record.memo {
+            
             mainView.memoTextView.attributedText = memo.setLineSpacing()
-            mainView.memoTextView.isHidden = false
-        } else {
-            mainView.memoTextView.isHidden = true
         }
         
         
         mainView.placeHolderLabel.isHidden = true
         
         mainView.titleLabel.text = record.title
-        
+        mainView.setReadMode()
         
     }
     
-//    private func configByMode(mode: Mode) {
-//        switch mode {
-//        case .edit:
-//        case .read:
-//        }
-//    }
-    
-    
+    private func getSaveRecordData() -> Record? {
+        guard let location = location else {
+//            showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
+            return nil
+        }
+        
+        var title = mainView.titleTextField.text?.trimmingCharacters(in: .whitespaces) ?? location.displayName.placeName
+        
+        if title.isEmpty {
+            title = location.displayName.placeName
+        }
+        
+        return Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+    }
     
     private func saveRecord() {
         
@@ -317,11 +352,6 @@ extension RecordViewController {
     
     @objc private func saveButtonTapped() {
         saveButton.accept(true)
-//        mode = .read
-//        modeType.accept(.read)
-//        saveRecord()
-//        dismiss(animated: true)
-//        longPressHandler?()
         
     }
     
@@ -331,10 +361,7 @@ extension RecordViewController {
         let editAction = UIAction(title: "editButton".localized()) { action in
             self.mode = .edit
             self.modeType.accept(.edit)
-//            self.mainView.setPickerView()
-//            self.mainView.datePickerView.date = self.record?.date ?? Date()
-//            self.setNavRightButton()
-//            self.mainView.titleTextField.becomeFirstResponder()
+            
         }
         let deleteAction = UIAction(title: "deleteButton".localized()) { action in
             self.deleteRecord()
@@ -353,41 +380,9 @@ extension RecordViewController {
         
     }
     
-    
-//    @objc private func backButtonTapped() {
-//        
-//        switch mode {
-//        case .edit:
-//            if !mainView.isEmptyText() {
-//                okDesctructiveAlert(title: "alert_alertEditModeTitle".localized(), message: "alert_alertEditModeMessage".localized()) {
-//                    
-//                    self.dismiss(animated: true)
-//                } cancelHandler: {
-//                    
-//                }
-//            } else {
-//                dismiss(animated: true)
-//            }
-//            
-//        case .read:
-//            dismiss(animated: true)
-//            
-//        }
-//        
-//    }
-//    
+ 
     
     
 }
 
 
-
-//
-//extension RecordViewController: TextFieldProtocol {
-//    func shouldChangeCharactersIn() {
-//        showToastMessage(message: "20글자 이내로 작성해주세요.")
-//    }
-//    
-//    
-//    
-//}
