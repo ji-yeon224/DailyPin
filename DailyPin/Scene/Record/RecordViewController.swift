@@ -71,6 +71,15 @@ final class RecordViewController: BaseViewController {
         longPressHandler?()
     }
     
+    override func configureUI() {
+        super.configureUI()
+        view.rx.tapGesture()
+            .when(.recognized)
+            .bind(with: self) { owner, _ in
+                owner.view.endEditing(true)
+            }
+            .disposed(by: disposeBag)
+    }
     
     private func bind() {
         
@@ -178,42 +187,9 @@ final class RecordViewController: BaseViewController {
     }
     
     
-    override func configureUI() {
-        super.configureUI()
-        
-        
-       
-        view.rx.tapGesture()
-            .when(.recognized)
-            .bind(with: self) { owner, _ in
-                owner.view.endEditing(true)
-            }
-            .disposed(by: disposeBag)
-
-    }
     
     
-    @objc func keyboardWillShow(notification:NSNotification) {
-
-        guard let userInfo = notification.userInfo else { return }
-        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-
-        var contentInset:UIEdgeInsets = mainView.scrollView.contentInset
-        contentInset.bottom = keyboardFrame.size.height + 20
-        mainView.scrollView.contentInset = contentInset
-        mainView.scrollView.scrollIndicatorInsets = mainView.scrollView.contentInset
-        
-        UIView.animate(withDuration: 0.3,
-                               animations: { self.view.layoutIfNeeded()},
-                               completion: nil)
-    }
-
-    @objc func keyboardWillHide(notification:NSNotification) {
-
-        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
-        mainView.scrollView.contentInset = contentInset
-    }
+    
     
     
     private func setData() {
@@ -281,8 +257,8 @@ final class RecordViewController: BaseViewController {
             let updateRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
             viewModel.updateRecord(updateRecord)
         } else {
-            let newRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
-            viewModel.createRecord(newRecord)
+//            let newRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+//            viewModel.createRecord(newRecord)
         }
         
         NotificationCenter.default.post(name: .updateCell, object: nil)
@@ -320,6 +296,31 @@ final class RecordViewController: BaseViewController {
     
 }
 
+// config action
+extension RecordViewController {
+    
+    @objc func keyboardWillShow(notification:NSNotification) {
+
+        guard let userInfo = notification.userInfo else { return }
+        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+
+        var contentInset:UIEdgeInsets = mainView.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height + 20
+        mainView.scrollView.contentInset = contentInset
+        mainView.scrollView.scrollIndicatorInsets = mainView.scrollView.contentInset
+        
+        UIView.animate(withDuration: 0.3,
+                               animations: { self.view.layoutIfNeeded()},
+                               completion: nil)
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification) {
+
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        mainView.scrollView.contentInset = contentInset
+    }
+}
 
 // nav
 extension RecordViewController {

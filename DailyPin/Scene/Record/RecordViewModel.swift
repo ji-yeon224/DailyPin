@@ -15,8 +15,8 @@ final class RecordViewModel {
     private let recordRepository = RecordRepository()
     
     private let disposeBag = DisposeBag()
-    private let successMsg = PublishRelay<String>()
-    private let errorMsg = PublishRelay<String>()
+    
+    
     
     var currentRecord: Record? = nil
     var currentLocation: PlaceElement? = nil
@@ -33,11 +33,26 @@ final class RecordViewModel {
     }
     
     func transform(input: Input) -> Output {
-        
+        let errorMsg = PublishRelay<String>()
+        let successMsg = PublishRelay<String>()
         
         input.createRecord
             .bind(with: self) { owner, value in
-                owner.createRecord(value)
+                guard let location = owner.currentLocation else {
+                    errorMsg.accept(InvalidError.noExistData.localizedDescription)
+                    return
+                }
+                guard let place = owner.getPlace(location) else {
+                    return
+                }
+                
+                do {
+                    try owner.placeRepository.updateRecordList(record: value, place: place)
+                    owner.currentRecord = value
+                    successMsg.accept("저장을 완료하였습니다.")
+                } catch {
+                    errorMsg.accept(error.localizedDescription)
+                }
                 
             }
             .disposed(by: disposeBag)
@@ -101,26 +116,26 @@ final class RecordViewModel {
         }
     }
     
-    func createRecord(_ record: Record) {
-        
-        guard let location = currentLocation else {
-            errorDescription.value = InvalidError.noExistData.errorDescription
-            return
-        }
-        
-        guard let place = getPlace(location) else {
-            return
-        }
-        
-        do {
-            try placeRepository.updateRecordList(record: record, place: place)
-            currentRecord = record
-            self.successMsg.accept("저장을 완료하였습니다.")
-        } catch {
-            errorDescription.value = error.localizedDescription
-            errorMsg.accept(error.localizedDescription)
-        }
-    }
+//    private func createRecord(_ record: Record) {
+//        
+//        guard let location = currentLocation else {
+//            errorDescription.value = InvalidError.noExistData.errorDescription
+//            return
+//        }
+//        
+//        guard let place = getPlace(location) else {
+//            return
+//        }
+//        
+//        do {
+//            try placeRepository.updateRecordList(record: record, place: place)
+//            currentRecord = record
+//            self.successMsg.accept("저장을 완료하였습니다.")
+//        } catch {
+//            errorDescription.value = error.localizedDescription
+//            errorMsg.accept(error.localizedDescription)
+//        }
+//    }
     
     func deleteRecord(record: Record) throws {
         
