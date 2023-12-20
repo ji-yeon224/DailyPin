@@ -84,8 +84,12 @@ final class RecordViewController: BaseViewController {
     private func bind() {
         
         let createRecord = PublishRelay<Record>()
+        let updateRecord = PublishRelay<Record>()
         
-        let input = RecordViewModel.Input(createRecord: createRecord)
+        let input = RecordViewModel.Input(
+            createRecord: createRecord,
+            updateRecord: updateRecord
+        )
         let output = viewModel.transform(input: input)
         
         
@@ -93,12 +97,19 @@ final class RecordViewController: BaseViewController {
         saveButton
             .bind(with: self) { owner, _ in
                 
-//                owner.saveRecord()
-                if let record = owner.getSaveRecordData() {
-                    createRecord.accept(record)
-                } else {
+                guard let newData = owner.getSaveRecordData() else {
                     owner.showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
+                    return
                 }
+                
+                // 기존 데이터가 있는지 여부 o -> 편집 / x -> 새로 작성
+                if let _ = owner.record { // update
+                    createRecord.accept(newData)
+                    
+                } else { // create
+                    updateRecord.accept(newData)
+                }
+                
                 
                 
             }
@@ -116,19 +127,23 @@ final class RecordViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        
     }
     
     func bindUI() {
+        
         modeType
             .bind(with: self) { owner, value in
                 owner.setNavRightButton(mode: value)
                 switch value {
                 case .read:
                     owner.setData()
+                    owner.mainView.setReadMode()
                 case .edit:
                     owner.mainView.setPickerView()
                     owner.mainView.datePickerView.date = owner.record?.date ?? Date()
                     owner.mainView.titleTextField.becomeFirstResponder()
+                    owner.mainView.setEditMode()
                     owner.setData()
                 }
             }
@@ -218,7 +233,6 @@ final class RecordViewController: BaseViewController {
         mainView.placeHolderLabel.isHidden = true
         
         mainView.titleLabel.text = record.title
-        mainView.setReadMode()
         
     }
     
@@ -338,10 +352,10 @@ extension RecordViewController {
         switch mode {
         case .edit:
             setSaveButton()
-            mainView.setEditMode()
+//            mainView.setEditMode()
         case .read:
             setMenuButton()
-            mainView.setReadMode()
+//            mainView.setReadMode()
         }
     }
     
@@ -361,7 +375,7 @@ extension RecordViewController {
         
         let editAction = UIAction(title: "editButton".localized()) { action in
             self.mode = .edit
-            self.modeType.accept(.edit)
+            self.modeType.accept(self.mode)
             
         }
         let deleteAction = UIAction(title: "deleteButton".localized()) { action in

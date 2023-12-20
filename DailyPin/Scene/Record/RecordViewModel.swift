@@ -24,7 +24,7 @@ final class RecordViewModel {
     
     struct Input {
         let createRecord: PublishRelay<Record>
-//        let updateRecord: PublishRelay<Bool>
+        let updateRecord: PublishRelay<Record>
     }
     
     struct Output {
@@ -54,6 +54,23 @@ final class RecordViewModel {
                     errorMsg.accept(error.localizedDescription)
                 }
                 
+            }
+            .disposed(by: disposeBag)
+        
+        input.updateRecord
+            .bind(with: self) { owner, value in
+                guard let currentRecord = owner.currentRecord else {
+                    errorMsg.accept(InvalidError.noExistData.localizedDescription)
+                    return
+                }
+                do {
+                    try owner.recordRepository.updateRecord(id: currentRecord.objectID, value)
+                    self.currentRecord = value
+                    successMsg.accept("수정을 완료하였습니다.")
+                } catch {
+                    errorMsg.accept(error.localizedDescription)
+                    self.currentRecord = nil
+                }
             }
             .disposed(by: disposeBag)
         
