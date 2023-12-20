@@ -8,12 +8,15 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxGesture
 
 
 final class RecordViewController: BaseViewController {
     
     private let disposeBag = DisposeBag()
     private let backButtonTap = PublishRelay<Bool>()
+    private let modeType = PublishRelay<Mode>()
+    private let saveButton = PublishRelay<Bool>()
     
     private let mainView = RecordView()
     private let viewModel = RecordViewModel()
@@ -30,6 +33,17 @@ final class RecordViewController: BaseViewController {
         
     }
     
+    init(mode: Mode, record: Record?, location: PlaceElement?) {
+        super.init(nibName: nil, bundle: nil)
+        self.mode = mode
+        self.record = record
+        self.location = location
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,8 +53,10 @@ final class RecordViewController: BaseViewController {
         }
         viewModel.currentRecord = record
         viewModel.currentLocation = location
-        setData()
+        
         bind()
+        
+        modeType.accept(mode)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         
@@ -62,6 +78,29 @@ final class RecordViewController: BaseViewController {
     }
     
     private func bind() {
+        
+        
+        modeType
+            .bind(with: self) { owner, value in
+                owner.setNavRightButton(mode: value)
+                switch value {
+                case .read:
+                    owner.setData()
+                case .edit:
+                    owner.mainView.setPickerView()
+                    owner.mainView.datePickerView.date = owner.record?.date ?? Date()
+                    owner.mainView.titleTextField.becomeFirstResponder()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        saveButton
+            .bind(with: self) { owner, _ in
+                owner.longPressHandler?()
+                owner.saveRecord()
+                
+            }
+            .disposed(by: disposeBag)
         
         mainView.datePickerView.rx.date.changed
             .bind(with: self) { owner, value in
@@ -88,9 +127,12 @@ final class RecordViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        
+        
         navigationItem.leftBarButtonItem?.rx.tap
-            .bind(with: self) { owner, _ in
-                switch owner.mode {
+            .withLatestFrom(modeType)
+            .bind(with: self) { owner, value in
+                switch value {
                 case .edit:
                     if !owner.mainView.isEmptyText() {
                         owner.okDesctructiveAlert(title: "alert_alertEditModeTitle".localized(), message: "alert_alertEditModeMessage".localized()) {
@@ -113,11 +155,12 @@ final class RecordViewController: BaseViewController {
         
         configNavigationBar()
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedView(_:)))
-        view.addGestureRecognizer(tapGestureRecognizer)
-        
-        
-        
+        view.rx.tapGesture()
+            .when(.recognized)
+            .bind(with: self) { owner, _ in
+                owner.view.endEditing(true)
+            }
+            .disposed(by: disposeBag)
 
     }
     
@@ -157,32 +200,32 @@ final class RecordViewController: BaseViewController {
             return
         }
         
-        
+        mainView.setReadMode()
         mainView.titleTextField.text = record.title
         mainView.titleTextField.placeholder = record.title
         mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
-//        mainView.setLineSpacing(text: record.memo)
-        mainView.memoTextView.attributedText = record.memo?.setLineSpacing()
-        //mainView.memoTextView.text = record.memo
+        
+        if let memo = record.memo {
+            mainView.memoTextView.attributedText = memo.setLineSpacing()
+        } else {
+            mainView.memoTextView.isHidden = true
+        }
+        
+        
         mainView.placeHolderLabel.isHidden = true
-        mainView.setReadMode()
+        
         mainView.titleLabel.text = record.title
         
         
     }
     
-    @objc private func tappedView(_ sender: UITapGestureRecognizer) {
-        view.endEditing(true)
-    }
+//    private func configByMode(mode: Mode) {
+//        switch mode {
+//        case .edit:
+//        case .read:
+//        }
+//    }
     
-    @objc private func saveButtonTapped() {
-        
-        mode = .read
-        saveRecord()
-        dismiss(animated: true)
-        longPressHandler?()
-        
-    }
     
     
     private func saveRecord() {
@@ -210,7 +253,8 @@ final class RecordViewController: BaseViewController {
         }
         
         NotificationCenter.default.post(name: .updateCell, object: nil)
-        setNavRightButton()
+        modeType.accept(.read)
+//        setNavRightButton()
         
     }
  
@@ -261,7 +305,7 @@ extension RecordViewController {
         
     }
     
-    private func setNavRightButton() {
+    private func setNavRightButton(mode: Mode = .read) {
         
         switch mode {
         case .edit:
@@ -280,15 +324,26 @@ extension RecordViewController {
         
     }
     
+    @objc private func saveButtonTapped() {
+        saveButton.accept(true)
+//        mode = .read
+//        modeType.accept(.read)
+//        saveRecord()
+//        dismiss(animated: true)
+//        longPressHandler?()
+        
+    }
+    
     private func setMenuButton() {
         var menuItems: [UIAction] = []
         
         let editAction = UIAction(title: "editButton".localized()) { action in
             self.mode = .edit
-            self.mainView.setPickerView()
-            self.mainView.datePickerView.date = self.record?.date ?? Date()
-            self.setNavRightButton()
-            self.mainView.titleTextField.becomeFirstResponder()
+            self.modeType.accept(.edit)
+//            self.mainView.setPickerView()
+//            self.mainView.datePickerView.date = self.record?.date ?? Date()
+//            self.setNavRightButton()
+//            self.mainView.titleTextField.becomeFirstResponder()
         }
         let deleteAction = UIAction(title: "deleteButton".localized()) { action in
             self.deleteRecord()

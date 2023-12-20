@@ -110,10 +110,10 @@ final class MainMapViewController: BaseViewController {
                 
                 self.showAlertMap(address: place.formattedAddress, cood: mapPoint) {
                     
-                    let vc = RecordViewController()
-                    vc.location = self.viewModel.selectedLocation
-                    vc.record = nil
-                    vc.mode = .edit
+                    let vc = RecordViewController(mode: .edit, record: nil, location: self.viewModel.selectedLocation)
+//                    vc.location = self.viewModel.selectedLocation
+//                    vc.record = nil
+//                    vc.mode = .edit
                     vc.longPressHandler = {
                         DispatchQueue.main.async {
                             self.mainView.setRegion(center: mapPoint, self.mainView.mapView.region.span)

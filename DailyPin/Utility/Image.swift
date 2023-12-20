@@ -15,7 +15,7 @@ extension Constants {
         static let mappin = UIImage(systemName: "mappin.circle")
         static let mappinFill = UIImage(systemName: "mappin.circle.fill")
         static let networkError = UIImage(systemName: "wifi.exclamationmark")
-        static let menuButton =UIImage(systemName: "ellipsis")
+        static let menuButton = UIImage(systemName: "ellipsis")
         
         static let calendar = UIImage(systemName: "calendar")
         static let plus = UIImage(systemName: "plus")
