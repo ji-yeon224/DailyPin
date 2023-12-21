@@ -120,7 +120,7 @@ final class RecordViewController: BaseViewController {
                 owner.showOKAlert(title: "저장", message: value) {
                     
                     NotificationCenter.default.post(name: .updateCell, object: nil)
-//                    owner.modeType.accept(.read)
+                    
                     owner.dismiss(animated: true)
                 }
                 
@@ -152,8 +152,8 @@ final class RecordViewController: BaseViewController {
                     }
                     
                 }
-               
-               
+                
+                
                 
             }
             .disposed(by: disposeBag)
@@ -180,8 +180,8 @@ final class RecordViewController: BaseViewController {
                     owner.mainView.setPickerView()
                     owner.mainView.datePickerView.date = owner.record?.date ?? Date()
                     owner.mainView.titleTextField.becomeFirstResponder()
-                    owner.mainView.setEditMode()
                     owner.setData()
+                    owner.mainView.setEditMode()
                 }
             }
             .disposed(by: disposeBag)
@@ -265,7 +265,7 @@ final class RecordViewController: BaseViewController {
     
     private func getSaveRecordData() -> Record? {
         guard let location = location else {
-
+            
             return nil
         }
         
@@ -277,63 +277,6 @@ final class RecordViewController: BaseViewController {
         
         return Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
     }
-    
-    private func saveRecord() {
-        
-        
-        guard let _ = viewModel.currentLocation else {
-            showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
-            return
-        }
-        
-        guard let location = viewModel.currentLocation else { return }
-        
-        var title = mainView.titleTextField.text?.trimmingCharacters(in: .whitespaces) ?? location.displayName.placeName
-        
-        if title.isEmpty {
-            title = location.displayName.placeName
-        }
-        
-        if let _ = viewModel.currentRecord {
-            let updateRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
-            viewModel.updateRecord(updateRecord)
-        } else {
-//            let newRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
-//            viewModel.createRecord(newRecord)
-        }
-        
-        NotificationCenter.default.post(name: .updateCell, object: nil)
-        modeType.accept(.read)
-//        setNavRightButton()
-        
-    }
- 
-    
-//    private func deleteRecord() {
-//        guard let deleteRecord = record else {
-//            return
-//        }
-//        
-//        showAlertWithCancel(title: "alert_deleteTitle".localized(), message: "alert_deleteMessage".localized()) {
-//
-//            do {
-//                try self.viewModel.deleteRecord(record: deleteRecord)
-//                self.dismiss(animated: true)
-//            } catch {
-//                self.viewModel.errorDescription.value = error.localizedDescription
-//                return
-//            }
-//            self.deletePlace()
-//        } cancelHandler: {
-//            return
-//        }
-//        
-//    }
-//    private func deletePlace() {
-//        guard let location = viewModel.currentLocation else { return }
-//        viewModel.deletePlace(id: location.id)
-//        
-//    }
     
 }
 
@@ -379,10 +322,8 @@ extension RecordViewController {
         switch mode {
         case .edit:
             setSaveButton()
-//            mainView.setEditMode()
         case .read:
             setMenuButton()
-//            mainView.setReadMode()
         }
     }
     
@@ -406,7 +347,6 @@ extension RecordViewController {
             
         }
         let deleteAction = UIAction(title: "deleteButton".localized()) { action in
-//            self.deleteRecord()
             self.deleteButton.accept(true)
             
         }
