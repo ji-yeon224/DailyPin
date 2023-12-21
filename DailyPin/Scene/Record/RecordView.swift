@@ -9,7 +9,7 @@ import UIKit
 
 final class RecordView: BaseView {
     
-    weak var textFieldDelegate: TextFieldProtocol?
+    
     
     let scrollView = {
         let view = UIScrollView()
@@ -99,7 +99,7 @@ final class RecordView: BaseView {
     
     lazy var memoTextView = {
         let view = MemoTextView()
-        view.delegate = self
+//        view.delegate = self
         view.font = UIFont(name: "NanumGothic", size: 15)
         return view
     }()
@@ -122,14 +122,7 @@ final class RecordView: BaseView {
         
         memoTextView.addSubview(placeHolderLabel)
         
-        datePickerView.addTarget(self, action: #selector(dateChange), for: .valueChanged)
-    }
-    
-    @objc private func dateChange() {
-        
-        dateLabel.text = DateFormatter.convertDate(date: datePickerView.date)
-        
-        
+
     }
     
     private func stackViewConfiguration() {
@@ -295,50 +288,6 @@ final class RecordView: BaseView {
 }
 
 
-extension RecordView: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        
-        if textView.text == "" {
-            placeHolderLabel.isHidden = false
-        } else {
-            placeHolderLabel.isHidden = true
-        }
-        
-        setLineSpacing(text: textView.text)
-        let size = CGSize(width: stackView.frame.width, height: .infinity)
-        let estimatedSize = textView.sizeThatFits(size)
-        
-        textView.constraints.forEach { (constraint) in
-            
-            if estimatedSize.height <= 180 {
-                
-            }
-            else {
-                if constraint.firstAttribute == .height {
-                    constraint.constant = estimatedSize.height
-                }
-            }
-        }
-        
-        scrollView.updateContentView()
-    }
-    
-    func setLineSpacing(text: String?) {
-        guard let text = text else {
-            return
-        }
-        let attrString = NSMutableAttributedString(string: text)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 5
-        let range = (text as NSString).range(of: text)
-        let font = UIFont(name: "NanumGothic", size: 15) ?? .systemFont(ofSize: 15)
-        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
-        attrString.addAttribute(.font, value: font, range: range)
-        memoTextView.attributedText = attrString
-    }
-    
-}
-
 extension RecordView: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -350,7 +299,6 @@ extension RecordView: UITextFieldDelegate {
             }
         }
         guard textField.text!.count < 20 else {
-            textFieldDelegate?.shouldChangeCharactersIn()
             return false
         }
         return true

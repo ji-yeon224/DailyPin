@@ -69,10 +69,10 @@ final class InfoViewController: BaseViewController {
     @objc private func addButtonClicked() {
 
         
-        let vc = RecordViewController()
-        vc.location = viewModel.place.value
-        vc.record = nil
-        vc.mode = .edit
+        let vc = RecordViewController(mode: .edit, record: nil, location: viewModel.place.value)
+//        vc.location = viewModel.place.value
+//        vc.record = nil
+//        vc.mode = .edit
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
         nav.modalTransitionStyle = .crossDissolve
@@ -137,10 +137,10 @@ extension InfoViewController: RecordCollectionViewProtocol {
             return
         }
         
-        let vc = RecordViewController()
-        vc.record = item
-        vc.location = viewModel.place.value
-        vc.mode = .read
+        let vc = RecordViewController(mode: .read, record: item, location: viewModel.place.value)
+//        vc.record = item
+//        vc.location = viewModel.place.value
+//        vc.mode = .read
         
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen

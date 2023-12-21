@@ -6,24 +6,42 @@
 //
 
 import UIKit
-
+import RxSwift
+import RxCocoa
+import RxGesture
 
 
 final class RecordViewController: BaseViewController {
+    
+    private let disposeBag = DisposeBag()
+    private let backButtonTap = PublishRelay<Bool>()
+    private let modeType = PublishRelay<Mode>()
+    private let saveButton = PublishRelay<Bool>()
+    private let deleteButton = PublishRelay<Bool>()
     
     private let mainView = RecordView()
     private let viewModel = RecordViewModel()
     var longPressHandler: (() -> Void)?
     
-    var location: PlaceElement?
-    var record: Record?
+    private var location: PlaceElement?
+    private var record: Record?
     
-    var mode: Mode = .read
+    private var mode: Mode = .read
     
     override func loadView() {
         self.view = mainView
-        
-        
+    }
+    
+    init(mode: Mode, record: Record?, location: PlaceElement?) {
+        super.init(nibName: nil, bundle: nil)
+        self.mode = mode
+        self.record = record
+        self.location = location
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -35,7 +53,12 @@ final class RecordViewController: BaseViewController {
         }
         viewModel.currentRecord = record
         viewModel.currentLocation = location
-        setData()
+        
+        setNavLeftButton()
+        bindUI()
+        bind()
+        
+        modeType.accept(mode)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
@@ -46,34 +69,221 @@ final class RecordViewController: BaseViewController {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        longPressHandler?()
     }
-    
-    private func bindData() {
-        viewModel.errorDescription.bind { data in
-            if let message = data {
-                self.showOKAlert(title: "", message: message) { }
-            }
-            
-        }
-    }
-    
-    
     
     override func configureUI() {
         super.configureUI()
+        view.rx.tapGesture()
+            .when(.recognized)
+            .bind(with: self) { owner, _ in
+                owner.view.endEditing(true)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func bind() {
         
-        configNavigationBar()
+        let createRecord = PublishRelay<Record>()
+        let updateRecord = PublishRelay<Record>()
+        let deleteRecord = PublishRelay<Record>()
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedView(_:)))
-        view.addGestureRecognizer(tapGestureRecognizer)
-        mainView.textFieldDelegate = self
+        let input = RecordViewModel.Input(
+            createRecord: createRecord,
+            updateRecord: updateRecord,
+            deleteRecord: deleteRecord
+        )
+        let output = viewModel.transform(input: input)
         
         
-
+        
+        saveButton
+            .bind(with: self) { owner, _ in
+                owner.view.endEditing(true)
+                guard let newData = owner.getSaveRecordData() else {
+                    owner.showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
+                    return
+                }
+                
+                // 기존 데이터가 있는지 여부 o -> 편집 / x -> 새로 작성
+                if let _ = owner.record { // update
+                    updateRecord.accept(newData)
+                    
+                } else { // create
+                    createRecord.accept(newData)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        output.successCreate
+            .bind(with: self) { owner, value in
+                owner.showOKAlert(title: "저장", message: value) {
+                    
+                    NotificationCenter.default.post(name: .updateCell, object: nil)
+                    
+                    owner.dismiss(animated: true)
+                }
+                
+            }
+            .disposed(by: disposeBag)
+        
+        deleteButton
+            .bind(with: self) { owner, value in
+                guard let record = owner.viewModel.currentRecord else {
+                    owner.showOKAlert(title: "", message: "기록을 찾을 수 없습니다.") { }
+                    return
+                }
+                owner.showAlertWithCancel(title: "alert_deleteTitle".localized(), message: "alert_deleteMessage".localized()) {
+                    deleteRecord.accept(record)
+                } cancelHandler: {  }
+            }
+            .disposed(by: disposeBag)
+        
+        output.successDelete
+            .bind(with: self) { owner, value in
+                let (msg, refresh) = value
+                
+                owner.showOKAlert(title: "삭제", message: msg) {
+                    NotificationCenter.default.post(name: .updateCell, object: nil)
+                    owner.dismiss(animated: true)
+                    
+                    if refresh {
+                        NotificationCenter.default.post(name: .databaseChange, object: nil, userInfo: ["changeType": "delete"])
+                    }
+                    
+                }
+                
+                
+                
+            }
+            .disposed(by: disposeBag)
+        
+        output.errorMsg
+            .bind(with: self) { owner, value in
+                owner.showOKAlert(title: "", message: value) { }
+            }
+            .disposed(by: disposeBag)
+        
+        
+    }
+    
+    private func bindUI() {
+        
+        modeType
+            .bind(with: self) { owner, value in
+                owner.setNavRightButton(mode: value)
+                switch value {
+                case .read:
+                    owner.setData()
+                    owner.mainView.setReadMode()
+                case .edit:
+                    owner.mainView.setPickerView()
+                    owner.mainView.datePickerView.date = owner.record?.date ?? Date()
+                    owner.mainView.titleTextField.becomeFirstResponder()
+                    owner.setData()
+                    owner.mainView.setEditMode()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.datePickerView.rx.date.changed
+            .bind(with: self) { owner, value in
+                owner.mainView.dateLabel.text = DateFormatter.convertDate(date: value)
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.memoTextView.rx.text.changed
+            .bind(with: self) { owner, value in
+                owner.mainView.placeHolderLabel.isHidden = value != ""
+                if let text = value {
+                    owner.mainView.memoTextView.attributedText = text.setLineSpacing()
+                }
+                owner.mainView.scrollView.updateContentView()
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.titleTextField.rx.text.changed
+            .withLatestFrom(mainView.titleTextField.rx.text.orEmpty)
+            .bind(with: self) { owner, value in
+                if value.count >= 20 {
+                    owner.showToastMessage(message: "20글자 이내로 작성해주세요.")
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        
+        
+        navigationItem.leftBarButtonItem?.rx.tap
+            .withLatestFrom(modeType)
+            .bind(with: self) { owner, value in
+                switch value {
+                case .edit:
+                    if !owner.mainView.isEmptyText() {
+                        owner.okDesctructiveAlert(title: "alert_alertEditModeTitle".localized(), message: "alert_alertEditModeMessage".localized()) {
+                            owner.dismiss(animated: true)
+                        } cancelHandler: {  }
+                    } else {
+                        owner.dismiss(animated: true)
+                    }
+                case .read:
+                    owner.dismiss(animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
+        
     }
     
     
-    @objc func keyboardWillShow(notification:NSNotification) {
+    private func setData() {
+        
+        if let location = location {
+            mainView.addressLabel.text = location.formattedAddress
+            mainView.titleTextField.placeholder = location.displayName.placeName
+        }
+        
+        
+        guard let record = viewModel.currentRecord else {
+            return
+        }
+        
+        
+        mainView.titleTextField.text = record.title
+        mainView.titleTextField.placeholder = record.title
+        mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
+        
+        if let memo = record.memo {
+            
+            mainView.memoTextView.attributedText = memo.setLineSpacing()
+        }
+        
+        
+        mainView.placeHolderLabel.isHidden = true
+        
+        mainView.titleLabel.text = record.title
+        
+    }
+    
+    private func getSaveRecordData() -> Record? {
+        guard let location = location else {
+            
+            return nil
+        }
+        
+        var title = mainView.titleTextField.text?.trimmingCharacters(in: .whitespaces) ?? location.displayName.placeName
+        
+        if title.isEmpty {
+            title = location.displayName.placeName
+        }
+        
+        return Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
+    }
+    
+}
+
+// config action
+extension RecordViewController {
+    
+    @objc private func keyboardWillShow(notification:NSNotification) {
 
         guard let userInfo = notification.userInfo else { return }
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
@@ -89,138 +299,31 @@ final class RecordViewController: BaseViewController {
                                completion: nil)
     }
 
-    @objc func keyboardWillHide(notification:NSNotification) {
+    @objc private func keyboardWillHide(notification:NSNotification) {
 
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         mainView.scrollView.contentInset = contentInset
     }
-    
-    
-    private func setData() {
-        
-        if let location = viewModel.currentLocation {
-            mainView.addressLabel.text = location.formattedAddress
-            mainView.titleTextField.placeholder = location.displayName.placeName
-        }
-        
-        
-        guard let record = viewModel.currentRecord else {
-            return
-        }
-        
-        
-        mainView.titleTextField.text = record.title
-        mainView.titleTextField.placeholder = record.title
-        mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
-        mainView.setLineSpacing(text: record.memo)
-        //mainView.memoTextView.text = record.memo
-        mainView.placeHolderLabel.isHidden = true
-        mainView.setReadMode()
-        mainView.titleLabel.text = record.title
-        
-        
-    }
-    
-    @objc private func tappedView(_ sender: UITapGestureRecognizer) {
-        view.endEditing(true)
-    }
-    
-    @objc private func saveButtonTapped() {
-        
-        mode = .read
-        saveRecord()
-        dismiss(animated: true)
-        longPressHandler?()
-        
-    }
-    
-    
-    private func saveRecord() {
-        
-        
-        guard let _ = viewModel.currentLocation else {
-            showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
-            return
-        }
-        
-        guard let location = viewModel.currentLocation else { return }
-        
-        var title = mainView.titleTextField.text?.trimmingCharacters(in: .whitespaces) ?? location.displayName.placeName
-        
-        if title.isEmpty {
-            title = location.displayName.placeName
-        }
-        
-        if let _ = viewModel.currentRecord {
-            let updateRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
-            viewModel.updateRecord(updateRecord)
-        } else {
-            let newRecord = Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
-            viewModel.createRecord(newRecord)
-        }
-        
-        NotificationCenter.default.post(name: .updateCell, object: nil)
-        setNavRightButton()
-        
-    }
- 
-    
-    private func deleteRecord() {
-        guard let deleteRecord = record else {
-            return
-        }
-        
-        showAlertWithCancel(title: "alert_deleteTitle".localized(), message: "alert_deleteMessage".localized()) {
-
-            do {
-                try self.viewModel.deleteRecord(record: deleteRecord)
-                self.dismiss(animated: true)
-            } catch {
-                self.viewModel.errorDescription.value = error.localizedDescription
-                return
-            }
-            self.deletePlace()
-        } cancelHandler: {
-            return
-        }
-        
-    }
-    private func deletePlace() {
-        guard let location = viewModel.currentLocation else { return }
-        viewModel.deletePlace(id: location.id)
-        
-    }
-    
 }
-
 
 // nav
 extension RecordViewController {
     
-    private func configNavigationBar() {
-        
-        setNavRightButton()
-        setNavLeftButton()
-        
-    }
     
     private func setNavLeftButton() {
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.xmark, style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.xmark, style: .plain, target: self, action: nil)
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
         
     }
     
-    private func setNavRightButton() {
+    private func setNavRightButton(mode: Mode = .read) {
         
         switch mode {
         case .edit:
             setSaveButton()
-            mainView.setEditMode()
         case .read:
             setMenuButton()
-            mainView.setReadMode()
-            setData()
         }
     }
     
@@ -230,19 +333,21 @@ extension RecordViewController {
         
     }
     
+    @objc private func saveButtonTapped() {
+        saveButton.accept(true)
+        
+    }
+    
     private func setMenuButton() {
         var menuItems: [UIAction] = []
         
         let editAction = UIAction(title: "editButton".localized()) { action in
             self.mode = .edit
-            self.mainView.setPickerView()
-            self.mainView.datePickerView.date = self.record?.date ?? Date()
-            self.setNavRightButton()
-            self.mainView.titleTextField.becomeFirstResponder()
+            self.modeType.accept(self.mode)
+            
         }
         let deleteAction = UIAction(title: "deleteButton".localized()) { action in
-            self.deleteRecord()
-            
+            self.deleteButton.accept(true)
             
         }
         menuItems.append(editAction)
@@ -257,36 +362,9 @@ extension RecordViewController {
         
     }
     
+ 
     
-    @objc private func backButtonTapped() {
-        
-        switch mode {
-        case .edit:
-            if !mainView.isEmptyText() {
-                okDesctructiveAlert(title: "alert_alertEditModeTitle".localized(), message: "alert_alertEditModeMessage".localized()) {
-                    
-                    self.dismiss(animated: true)
-                } cancelHandler: {
-                    
-                }
-            } else {
-                dismiss(animated: true)
-            }
-            
-        case .read:
-            dismiss(animated: true)
-            
-        }
-        
-    }
     
 }
 
-extension RecordViewController: TextFieldProtocol {
-    func shouldChangeCharactersIn() {
-        showToastMessage(message: "20글자 이내로 작성해주세요.")
-    }
-    
-    
-    
-}
+
