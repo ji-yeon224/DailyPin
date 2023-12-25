@@ -23,18 +23,18 @@
 
 
 ## 기술스택
-- 'MVVM'
-- 'RxSwift', 'RxGesture'
-- 'UIKit', 'MapKit'
-- 'Alamofire', 'Codable'
-- 'Realm'
-- 'SnapKit', 'Autolayout'
-- 'DiffableDataSource', 'CompositionalLayout'
-- 'Firebase'
-	- 'Google Crashlythics'
-	- 'Push Notification'
-- 'FSCalendar', 'FloatingPanel', 'Toast'
-- 'Google Place API'
+- `MVVM`
+- `RxSwift`, `RxGesture`
+- `UIKit`, `MapKit`
+- `Alamofire`, `Codable`
+- `Realm`
+- `SnapKit`, `Autolayout`
+- `DiffableDataSource`, `CompositionalLayout`
+- `Firebase`
+	- `Google Crashlythics`
+	- `Push Notification`
+- `FSCalendar`, `FloatingPanel`, `Toast`
+- `Google Place API`
 
 ## 프로젝트 목표
 - DiffableDataSource와 CompositionalLayout을 이용하여 CollectionView 구현
