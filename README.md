@@ -31,7 +31,7 @@
 - `SnapKit`, `Autolayout`
 - `DiffableDataSource`, `CompositionalLayout`
 - `Firebase`
-	- `Google Crashlythics`
+	- `Google Crashlytics`
 	- `Push Notification`
 - `FSCalendar`, `FloatingPanel`, `Toast`
 - `Google Place API`
