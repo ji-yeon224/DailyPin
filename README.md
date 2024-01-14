@@ -45,6 +45,7 @@
 - API 통신 시 `Alamofire`와 `Router 패턴`을 적용하여 코드의 가독성을 높이고, 재사용성을 높임
 - `MVVM 패턴`을 통해 비즈니스 로직을 분리하여 ViewController의 역할을 줄임
 - UI 구현 시 비슷한 구조의 View들을 **모듈화** 하여 재사용성을 높임
+- `Localizing`을 통해 한국어와 영어 버전 대응
 
 </br>
 
