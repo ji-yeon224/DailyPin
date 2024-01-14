@@ -1,7 +1,7 @@
 
 <img src="https://github.com/ji-yeon224/DailyPin/assets/69784492/b0901f18-f381-45a2-ba90-fdb579c7bc21.png"  width="150" height="150"/>
 
-# DailyPin - 장소 일기 
+# 📍 DailyPin - 장소 일기 
 
 
 
@@ -9,20 +9,23 @@
 
 [🔗 앱스토어 바로가기](https://apps.apple.com/kr/app/dailypin-%EC%9E%A5%EC%86%8C%EC%9D%BC%EA%B8%B0/id6470025950)
 
+</br>
 
-## 프로젝트 
+## 🗓️ 프로젝트 
 - 개인 프로젝트
 - 2023.09.25 ~ 2323.10.25(4주)
 - 최소 지원 버전 iOS 15.0
+</br>
 
-## 핵심 기능
+## 📖 핵심 기능
 - 원하는 장소를 검색하여 지도에 위치를 보여주고 기록을 등록할 수 있습니다.
 - 원하는 위치를 지도에서 찾아 길게 탭하여 해당 위치에 기록을 등록할 수 있습니다.
 - 사용자가 등록한 위치 리스트를 볼 수 있고, 해당 위치에 등록되 기록을 볼 수 있습니다. 
 - 달력을 통해 날짜 별 기록을 볼 수 있습니다.
 
+</br>
 
-## 기술스택
+## 💻 기술스택
 - `MVVM`
 - `RxSwift`, `RxGesture`
 - `UIKit`, `MapKit`
@@ -35,15 +38,23 @@
 	- `Push Notification`
 - `FSCalendar`, `FloatingPanel`, `Toast`
 - `Google Place API`
+</br>
 
-## 프로젝트 목표
-- DiffableDataSource와 CompositionalLayout을 이용하여 CollectionView 구현
-- API 통신 시 Alamofire와 Router 패턴을 적용하여 코드의 가독성을 높이고, 재사용성을 높임
-- MVVM 패턴을 통해 비즈니스 로직을 분리하여 ViewController의 역할을 줄임
-- UI 구현 시 비슷한 구조의 View들을 모듈화 하여 재사용성을 높임
+## 💡 프로젝트 목표
+- `DiffableDataSource`와 `CompositionalLayout`을 이용하여 CollectionView 구현
+- API 통신 시 `Alamofire`와 `Router 패턴`을 적용하여 코드의 가독성을 높이고, 재사용성을 높임
+- `MVVM 패턴`을 통해 비즈니스 로직을 분리하여 ViewController의 역할을 줄임
+- UI 구현 시 비슷한 구조의 View들을 **모듈화** 하여 재사용성을 높임
 
+</br>
 
-## 트러블슈팅
+## 🚨 트러블슈팅
+
+### Google PlaceAPI 인덱스 에러로 App Crash Issue
+- Google PlaceAPI를 통해 지도에서 임의의 장소 정보를 선택하여 주소값을 응답받는 과정에서 주소 정보가 명확하지 않은 곳을 선택하였을 때 응답 값의 형식이 달라져 인덱스 에러가 발생하였고, 출시된 앱에서 비정상 종료가 되는 문제가 발생하였다.
+- `Firebase Crahlytics`를 통해 앱이 비정상 종료 지점을 파악하였고, 조건문을 통해 응답 값으로 받는 주소 배열의 길이에 따라 이름 설정 방식을 선택하여 해결하였다.
+
+<img src="https://github.com/ji-yeon224/DailyPin/assets/69784492/558bd631-54a5-480b-a688-f53f7b485c1d"  width="80%"/>
 
 ### Compositional Layout 셀 동적 높이
 
