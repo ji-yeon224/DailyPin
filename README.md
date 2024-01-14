@@ -54,7 +54,7 @@
 - Google PlaceAPI를 통해 지도에서 임의의 장소 정보를 선택하여 주소값을 응답받는 과정에서 주소 정보가 명확하지 않은 곳을 선택하였을 때 응답 값의 형식이 달라져 인덱스 에러가 발생하였고, 출시된 앱에서 비정상 종료가 되는 문제가 발생하였다.
 - `Firebase Crahlytics`를 통해 앱이 비정상 종료 지점을 파악하였고, 조건문을 통해 응답 값으로 받는 주소 배열의 길이에 따라 이름 설정 방식을 선택하여 해결하였다.
 
-<img src="https://github.com/ji-yeon224/DailyPin/assets/69784492/558bd631-54a5-480b-a688-f53f7b485c1d"  width="80%"/>
+<img src="https://github.com/ji-yeon224/DailyPin/assets/69784492/558bd631-54a5-480b-a688-f53f7b485c1d"  width="65%"/>
 
 ### Compositional Layout 셀 동적 높이
 
