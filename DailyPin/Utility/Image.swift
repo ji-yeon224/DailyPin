@@ -36,6 +36,7 @@ extension Constants {
         static let starImage = UIImage(named: "star")
         static let google = UIImage(named: "Google")
         
+        static let curLocation = UIImage(named: "CurrentLocation")
         
         
         

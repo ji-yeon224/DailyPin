@@ -65,9 +65,9 @@ final class MainMapView: BaseView {
         }
         
         currentLocation.snp.makeConstraints { make in
-            make.trailing.equalTo(mapView).inset(30)
-            make.bottom.equalTo(safeAreaLayoutGuide).offset(-40)
-            make.size.equalTo(40)
+            make.trailing.equalTo(mapView).inset(15)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-30)
+            make.size.equalTo(44)
         }
         
     }
