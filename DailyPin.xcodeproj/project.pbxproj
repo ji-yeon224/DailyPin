@@ -58,6 +58,11 @@
 		CE546CD62AD44DB900C0392B /* SelectAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE546CD52AD44DB900C0392B /* SelectAnnotationView.swift */; };
 		CE546CD82AD44F2200C0392B /* SelectAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE546CD72AD44F2200C0392B /* SelectAnnotation.swift */; };
 		CE64D03D2AE4C8DD004AA477 /* PlaceListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64D03C2AE4C8DD004AA477 /* PlaceListButton.swift */; };
+		CE6F36B12B96E553007AD6AB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B02B96E553007AD6AB /* Color.swift */; };
+		CE6F36B32B96E56D007AD6AB /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B22B96E56D007AD6AB /* Design.swift */; };
+		CE6F36B62B96E707007AD6AB /* CustomBasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */; };
+		CE6F36B82B96E737007AD6AB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B72B96E737007AD6AB /* Font.swift */; };
+		CE6F36BB2B96E8D7007AD6AB /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = CE6F36BA2B96E8D7007AD6AB /* Then */; };
 		CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */; };
 		CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5E2AD594EF00068854 /* CalendarViewController.swift */; };
 		CE814A612AD594FB00068854 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A602AD594FB00068854 /* CalendarView.swift */; };
@@ -158,6 +163,11 @@
 		CE546CD52AD44DB900C0392B /* SelectAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAnnotationView.swift; sourceTree = "<group>"; };
 		CE546CD72AD44F2200C0392B /* SelectAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAnnotation.swift; sourceTree = "<group>"; };
 		CE64D03C2AE4C8DD004AA477 /* PlaceListButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListButton.swift; sourceTree = "<group>"; };
+		CE6F36AE2B96E349007AD6AB /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
+		CE6F36B02B96E553007AD6AB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		CE6F36B22B96E56D007AD6AB /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
+		CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBasicLabel.swift; sourceTree = "<group>"; };
+		CE6F36B72B96E737007AD6AB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		CE814A5E2AD594EF00068854 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		CE814A602AD594FB00068854 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -216,6 +226,7 @@
 				CE4DF90A2ACBB6AF00546526 /* RealmSwift in Frameworks */,
 				CEF61E632B32DCFA00A24BE3 /* RxGesture in Frameworks */,
 				CE32459A2AC8FAF500582FC5 /* Toast in Frameworks */,
+				CE6F36BB2B96E8D7007AD6AB /* Then in Frameworks */,
 				CEF61E592B32CF3700A24BE3 /* RxCocoa in Frameworks */,
 				CE3EA89F2AFE55B000628B07 /* FirebaseMessaging in Frameworks */,
 				CE9B0E8B2ACA6A0A008A0694 /* FloatingPanel in Frameworks */,
@@ -269,10 +280,9 @@
 		CE3DF7EB2AC17CE500653CE1 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				CE6F36AF2B96E535007AD6AB /* Constants */,
 				CE2951EC2ADEE7A500EE2571 /* Protocol */,
 				CE3DF80C2AC2D24100653CE1 /* Extension */,
-				CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */,
-				CE9A16B42AD28F0D0051BE23 /* Image.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -305,6 +315,7 @@
 		CE3DF7F82AC2B0F100653CE1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CE6F36B42B96E6FA007AD6AB /* Custom */,
 				CE4ED8312AE544D500E1F80F /* Cell */,
 				CE9A16B62AD2BE0F0051BE23 /* Annotation */,
 				CE9B0E962ACB04C5008A0694 /* Button */,
@@ -406,6 +417,26 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		CE6F36AF2B96E535007AD6AB /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */,
+				CE9A16B42AD28F0D0051BE23 /* Image.swift */,
+				CE6F36B02B96E553007AD6AB /* Color.swift */,
+				CE6F36B22B96E56D007AD6AB /* Design.swift */,
+				CE6F36B72B96E737007AD6AB /* Font.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		CE6F36B42B96E6FA007AD6AB /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
 		CE90EEC32AE4CD6E0034C03B /* PlaceList */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,6 +533,7 @@
 				CEBAB9012AE01B69008AF9C8 /* GowunBatang-Bold.ttf */,
 				CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */,
 				CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */,
+				CE6F36AE2B96E349007AD6AB /* SF-Pro.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -537,6 +569,7 @@
 				CEF61E582B32CF3700A24BE3 /* RxCocoa */,
 				CEF61E5A2B32CF3700A24BE3 /* RxSwift */,
 				CEF61E622B32DCFA00A24BE3 /* RxGesture */,
+				CE6F36BA2B96E8D7007AD6AB /* Then */,
 			);
 			productName = DailyPin;
 			productReference = CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */;
@@ -577,6 +610,7 @@
 				CE3EA8992AFE55B000628B07 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				CEF61E572B32CF3700A24BE3 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				CEF61E612B32DCFA00A24BE3 /* XCRemoteSwiftPackageReference "RxGesture" */,
+				CE6F36B92B96E8D7007AD6AB /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			productRefGroup = CEB00FBE2AC030BF001E7BB0 /* Products */;
 			projectDirPath = "";
@@ -642,6 +676,7 @@
 			files = (
 				CE9A16BA2AD2CCBB0051BE23 /* RecordCollectionViewProtocol.swift in Sources */,
 				CE52CB722AC7197C007AD7F8 /* SearchViewModel.swift in Sources */,
+				CE6F36B12B96E553007AD6AB /* Color.swift in Sources */,
 				CE3DF8162AC3311400653CE1 /* BaseUIButton.swift in Sources */,
 				CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */,
 				CE52CB6C2AC5AED6007AD7F8 /* APIKey.swift in Sources */,
@@ -651,6 +686,7 @@
 				CE3DF8142AC330DB00653CE1 /* MyLocationButton.swift in Sources */,
 				CE9A16B52AD28F0D0051BE23 /* Image.swift in Sources */,
 				CE4DF9132ACBC6BB00546526 /* DatabaseError.swift in Sources */,
+				CE6F36B82B96E737007AD6AB /* Font.swift in Sources */,
 				CE52CB752AC71B47007AD7F8 /* InvalidError.swift in Sources */,
 				CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */,
 				CEA32E412AF394D9001B5619 /* FloatingType.swift in Sources */,
@@ -688,6 +724,7 @@
 				CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */,
 				CE3DF8122AC3300500653CE1 /* CalendarButton.swift in Sources */,
 				CE3541D62AD5313F00773CD3 /* NSNotification.Name.swift in Sources */,
+				CE6F36B62B96E707007AD6AB /* CustomBasicLabel.swift in Sources */,
 				CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */,
 				CE546CD82AD44F2200C0392B /* SelectAnnotation.swift in Sources */,
 				CE4DF90D2ACBBC3E00546526 /* Place.swift in Sources */,
@@ -714,6 +751,7 @@
 				CEB390AA2ACEF50100E4B2AC /* RecordViewController.swift in Sources */,
 				CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */,
 				CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */,
+				CE6F36B32B96E56D007AD6AB /* Design.swift in Sources */,
 				CEB5ECFA2AD0595E00BC6143 /* RecordRepository.swift in Sources */,
 				CE94E7892AE6A6600005B593 /* ReturnTodayButton.swift in Sources */,
 			);
@@ -1010,6 +1048,14 @@
 				kind = branch;
 			};
 		};
+		CE6F36B92B96E8D7007AD6AB /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		CE814A622AD59D1B00068854 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
@@ -1084,6 +1130,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE4DF9062ACBB6AF00546526 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		CE6F36BA2B96E8D7007AD6AB /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE6F36B92B96E8D7007AD6AB /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
 		};
 		CE814A632AD59D1B00068854 /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;

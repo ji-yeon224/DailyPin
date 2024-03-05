@@ -25,38 +25,27 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
         return view
     }()
     
-    var titleLabel = {
-        let view = BoldLabel(size: 16, lines: 0)
-        view.textAlignment = .left
-        return view
-    }()
-    
-    var address = {
-        let view = PlainLabel(size: 13, lines: 0)
-        view.textColor = Constants.Color.subTextColor
-        return view
-    }()
-    
-    
-    var dateLabel = {
-        let view = PlainLabel(size: 12, lines: 1)
-        view.textColor = Constants.Color.subTextColor
-        view.textAlignment = .left
-        return view
-    }()
-    
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        contentView.layer.masksToBounds = false
-        contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowOpacity = 0.1
-        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        contentView.layer.shadowRadius = 3
-        contentView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height), cornerRadius: 8).cgPath
-        
+    var titleLabel = CustomBasicLabel(text: "", fontType: Font.title2).then {
+        $0.textAlignment = .left
     }
+    
+    
+    var address = CustomBasicLabel(text: "", fontType: Font.body, color: Constants.Color.subTextColor)
+    
+    var dateLabel = CustomBasicLabel(text: "", fontType: Font.caption, color: Constants.Color.subTextColor)
+    
+    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        
+//        contentView.layer.masksToBounds = false
+//        contentView.layer.shadowColor = UIColor.black.cgColor
+//        contentView.layer.shadowOpacity = 0.1
+//        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
+//        contentView.layer.shadowRadius = 3
+//        contentView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height), cornerRadius: 8).cgPath
+//        
+//    }
     
     override func configureUI() {
         super.configureUI()

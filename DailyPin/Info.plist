@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>SF-Pro.ttf</string>
 		<string>GowunBatang-Regular.ttf</string>
 		<string>GowunBatang-Bold.ttf</string>
 		<string>NanumGothic-Regular.ttf</string>
