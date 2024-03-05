@@ -12,6 +12,7 @@ enum Font {
     case title2
     case bodyBold
     case body
+    case bodyLarge
     case caption
     case caption2
     case nanum
@@ -26,6 +27,8 @@ enum Font {
             return Constants.Design.bodyBold
         case .body:
             return Constants.Design.body
+        case .bodyLarge:
+            return Constants.Design.bodyLarge
         case .caption:
             return Constants.Design.caption
         case .caption2:

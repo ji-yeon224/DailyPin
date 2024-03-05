@@ -16,13 +16,16 @@ final class InfoView: BaseView {
     
     private lazy var uiView = UIView()
     
-    var titleLabel = PlainLabel(size: 23, lines: 1)
+//    var titleLabel = PlainLabel(size: 23, lines: 1)
+    var titleLabel = CustomBasicLabel(text: "", fontType: Font.bodyLarge)
     
-    var addressLabel = {
-        let view = PlainLabel(size: 13, lines: 1)
-        view.textColor = Constants.Color.subTextColor
-        return view
-    }()
+//    var addressLabel = {
+//        let view = PlainLabel(size: 13, lines: 1)
+//        view.textColor = Constants.Color.subTextColor
+//        return view
+//    }()
+    
+    var addressLabel = CustomBasicLabel(text: "", fontType: .body, color: Constants.Color.subTextColor)
 
     let addButton = AddButton()
 
