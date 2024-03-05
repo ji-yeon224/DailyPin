@@ -25,9 +25,9 @@ final class MainMapView: BaseView {
     
     let searchButton = SearchButton()
     
-    let calendarButton = CalendarButton()
-    let currentLocation = MyLocationButton()
-    let placeListButton = PlaceListButton()
+    let calendarButton = CustomImageButton(img: Constants.Image.calendarButton)
+    let currentLocation = CustomImageButton(img: Constants.Image.curLocation)
+    let placeListButton = CustomImageButton(img: Constants.Image.placeListButton)
     
     
     override func configureUI() {
@@ -53,15 +53,13 @@ final class MainMapView: BaseView {
             make.trailing.equalTo(mapView).inset(15)
             make.leading.equalTo(searchButton.snp.trailing).offset(10)
             make.top.equalTo(safeAreaLayoutGuide).offset(10)
-            make.height.equalTo(50)
-            make.width.equalTo(calendarButton.snp.height).multipliedBy(1)
+            make.size.equalTo(50)
         }
         
         placeListButton.snp.makeConstraints { make in
             make.top.equalTo(calendarButton.snp.bottom).offset(20)
             make.trailing.equalTo(mapView).inset(15)
-            make.height.equalTo(40)
-            make.width.equalTo(placeListButton.snp.height).multipliedBy(1)
+            make.size.equalTo(40)
         }
         
         currentLocation.snp.makeConstraints { make in

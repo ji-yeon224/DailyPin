@@ -37,8 +37,9 @@ extension Constants {
         static let google = UIImage(named: "Google")
         
         static let curLocation = UIImage(named: "CurrentLocation")
-        
-        
+        static let calendarButton = UIImage(named: "Calendar")
+        static let placeListButton = UIImage(named: "PlaceList")
+        static let addRecord = UIImage(named: "AddRecord")
         
     }
     
