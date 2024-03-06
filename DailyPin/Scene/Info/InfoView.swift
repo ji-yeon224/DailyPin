@@ -16,15 +16,11 @@ final class InfoView: BaseView {
     
     private lazy var uiView = UIView()
     
-    var titleLabel = PlainLabel(size: 23, lines: 1)
+    var titleLabel = CustomBasicLabel(text: "", fontType: Font.bodyLarge)
     
-    var addressLabel = {
-        let view = PlainLabel(size: 13, lines: 1)
-        view.textColor = Constants.Color.subTextColor
-        return view
-    }()
+    var addressLabel = CustomBasicLabel(text: "", fontType: .body, color: Constants.Color.subTextColor)
 
-    let addButton = AddButton()
+    let addButton = CustomImageButton(img: Constants.Image.addRecord)
 
     // 저장된 목록 보여주기 
     lazy var collectionView = {
@@ -85,14 +81,14 @@ final class InfoView: BaseView {
         addButton.snp.makeConstraints { make in
             make.top.equalTo(uiView).inset(37)
             make.trailing.equalTo(uiView).inset(20)
-            make.width.equalTo(uiView.snp.width).multipliedBy(0.07)
-            make.height.equalTo(addButton.snp.width)
+            make.size.equalTo(30)
+//            make.height.equalTo(addButton.snp.width)
         }
         
         addressLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.horizontalEdges.equalTo(uiView).inset(16)
-            make.height.equalTo(50)
+            make.height.equalTo(40)
         }
     }
     
