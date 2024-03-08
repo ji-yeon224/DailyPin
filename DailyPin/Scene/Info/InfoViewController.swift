@@ -69,7 +69,7 @@ final class InfoViewController: BaseViewController {
     @objc private func addButtonClicked() {
 
         
-        let vc = RecordViewController(mode: .edit, record: nil, location: viewModel.place.value)
+        let vc = RecordWriteViewController(mode: .create, record: nil, location: viewModel.place.value)//RecordViewController(mode: .edit, record: nil, location: viewModel.place.value)
 //        vc.location = viewModel.place.value
 //        vc.record = nil
 //        vc.mode = .edit

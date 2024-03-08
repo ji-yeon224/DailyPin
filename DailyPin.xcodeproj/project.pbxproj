@@ -72,6 +72,9 @@
 		CE83F4D32B9AB73900B067DC /* BasicImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83F4D22B9AB73900B067DC /* BasicImageView.swift */; };
 		CE83F4D52B9ABD7500B067DC /* RecordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83F4D42B9ABD7500B067DC /* RecordData.swift */; };
 		CE83F4DA2B9ADEA600B067DC /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE83F4D92B9ADEA600B067DC /* ReactorKit */; };
+		CE83F4E12B9AEFE300B067DC /* RecordWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83F4E02B9AEFE300B067DC /* RecordWriteViewController.swift */; };
+		CE83F4E32B9AEFE900B067DC /* RecordWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83F4E22B9AEFE900B067DC /* RecordWriteView.swift */; };
+		CE83F4E52B9AEFF000B067DC /* RecordWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83F4E42B9AEFF000B067DC /* RecordWriteViewModel.swift */; };
 		CE90EEC52AE4CD7B0034C03B /* PlaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90EEC42AE4CD7B0034C03B /* PlaceListViewController.swift */; };
 		CE90EEC72AE4CD820034C03B /* PlaceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90EEC62AE4CD820034C03B /* PlaceListView.swift */; };
 		CE90EEC92AE4CD8B0034C03B /* PlaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90EEC82AE4CD8B0034C03B /* PlaceListViewModel.swift */; };
@@ -178,6 +181,9 @@
 		CE83F4D02B9AB5F300B067DC /* RecordReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordReadView.swift; sourceTree = "<group>"; };
 		CE83F4D22B9AB73900B067DC /* BasicImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicImageView.swift; sourceTree = "<group>"; };
 		CE83F4D42B9ABD7500B067DC /* RecordData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordData.swift; sourceTree = "<group>"; };
+		CE83F4E02B9AEFE300B067DC /* RecordWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordWriteViewController.swift; sourceTree = "<group>"; };
+		CE83F4E22B9AEFE900B067DC /* RecordWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordWriteView.swift; sourceTree = "<group>"; };
+		CE83F4E42B9AEFF000B067DC /* RecordWriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordWriteViewModel.swift; sourceTree = "<group>"; };
 		CE90EEC42AE4CD7B0034C03B /* PlaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewController.swift; sourceTree = "<group>"; };
 		CE90EEC62AE4CD820034C03B /* PlaceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListView.swift; sourceTree = "<group>"; };
 		CE90EEC82AE4CD8B0034C03B /* PlaceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewModel.swift; sourceTree = "<group>"; };
@@ -456,6 +462,16 @@
 			path = Read;
 			sourceTree = "<group>";
 		};
+		CE83F4DF2B9AEFD900B067DC /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				CE83F4E02B9AEFE300B067DC /* RecordWriteViewController.swift */,
+				CE83F4E22B9AEFE900B067DC /* RecordWriteView.swift */,
+				CE83F4E42B9AEFF000B067DC /* RecordWriteViewModel.swift */,
+			);
+			path = Write;
+			sourceTree = "<group>";
+		};
 		CE90EEC32AE4CD6E0034C03B /* PlaceList */ = {
 			isa = PBXGroup;
 			children = (
@@ -526,6 +542,7 @@
 		CEB390A82ACEF4E200E4B2AC /* Record */ = {
 			isa = PBXGroup;
 			children = (
+				CE83F4DF2B9AEFD900B067DC /* Write */,
 				CE83F4CB2B9AB57700B067DC /* Read */,
 				CEB390A92ACEF50100E4B2AC /* RecordViewController.swift */,
 				CEB390AB2ACEF50800E4B2AC /* RecordView.swift */,
@@ -695,11 +712,13 @@
 				CEA32E3F2AF38787001B5619 /* GenericProtocol.swift in Sources */,
 				CE9A16B52AD28F0D0051BE23 /* Image.swift in Sources */,
 				CE83F4D52B9ABD7500B067DC /* RecordData.swift in Sources */,
+				CE83F4E12B9AEFE300B067DC /* RecordWriteViewController.swift in Sources */,
 				CE4DF9132ACBC6BB00546526 /* DatabaseError.swift in Sources */,
 				CE6F36B82B96E737007AD6AB /* Font.swift in Sources */,
 				CE52CB752AC71B47007AD7F8 /* InvalidError.swift in Sources */,
 				CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */,
 				CEA32E412AF394D9001B5619 /* FloatingType.swift in Sources */,
+				CE83F4E32B9AEFE900B067DC /* RecordWriteView.swift in Sources */,
 				CEE694932ADCFD5300FDE8E6 /* AlertMapViewController.swift in Sources */,
 				CE814A612AD594FB00068854 /* CalendarView.swift in Sources */,
 				CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */,
@@ -758,6 +777,7 @@
 				CE4DF9152ACBD5C500546526 /* MainMapViewModel.swift in Sources */,
 				CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */,
 				CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */,
+				CE83F4E52B9AEFF000B067DC /* RecordWriteViewModel.swift in Sources */,
 				CEB390B62ACFDC0C00E4B2AC /* RecordMode.swift in Sources */,
 				CEB390AA2ACEF50100E4B2AC /* RecordViewController.swift in Sources */,
 				CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */,

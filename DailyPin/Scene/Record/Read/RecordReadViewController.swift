@@ -59,6 +59,7 @@ final class RecordReadViewController: BaseViewController {
         if let memo = record.memo {
             mainView.memoTextView.attributedText = memo.setLineSpacing()
         }
+        mainView.setMemoTextView()
         
         
         

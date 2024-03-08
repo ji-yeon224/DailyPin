@@ -30,8 +30,8 @@ final class RecordReadViewModel {
         
         input.deleteRecord
             .bind(with: self) { owner, value in
-                var record = value.0
-                var location = value.1
+                let record = value.0
+                let location = value.1
                 do {
                     try owner.recordRepository.deleteItem(record)
                     
