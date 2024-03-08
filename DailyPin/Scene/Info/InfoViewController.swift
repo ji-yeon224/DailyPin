@@ -137,11 +137,11 @@ extension InfoViewController: RecordCollectionViewProtocol {
             return
         }
         
-        let vc = RecordViewController(mode: .read, record: item, location: viewModel.place.value)
+//        let vc = RecordViewController(mode: .read, record: item, location: viewModel.place.value)
 //        vc.record = item
 //        vc.location = viewModel.place.value
 //        vc.mode = .read
-        
+        let vc = RecordReadViewController(record: item, location: viewModel.place.value)
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
         nav.modalTransitionStyle = .crossDissolve

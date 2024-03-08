@@ -290,7 +290,7 @@ extension RecordViewController {
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
 
         var contentInset:UIEdgeInsets = mainView.scrollView.contentInset
-        contentInset.bottom = keyboardFrame.size.height + 20
+        contentInset.bottom = keyboardFrame.size.height + 80
         mainView.scrollView.contentInset = contentInset
         mainView.scrollView.scrollIndicatorInsets = mainView.scrollView.contentInset
         

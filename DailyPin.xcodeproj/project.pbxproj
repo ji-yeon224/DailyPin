@@ -66,6 +66,12 @@
 		CE814A612AD594FB00068854 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A602AD594FB00068854 /* CalendarView.swift */; };
 		CE814A642AD59D1B00068854 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = CE814A632AD59D1B00068854 /* FSCalendar */; };
 		CE814A662AD59D4900068854 /* CustomCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A652AD59D4900068854 /* CustomCalendarView.swift */; };
+		CE83F4CD2B9AB58D00B067DC /* RecordReadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83F4CC2B9AB58D00B067DC /* RecordReadViewController.swift */; };
+		CE83F4CF2B9AB59800B067DC /* RecordReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83F4CE2B9AB59800B067DC /* RecordReadViewModel.swift */; };
+		CE83F4D12B9AB5F300B067DC /* RecordReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83F4D02B9AB5F300B067DC /* RecordReadView.swift */; };
+		CE83F4D32B9AB73900B067DC /* BasicImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83F4D22B9AB73900B067DC /* BasicImageView.swift */; };
+		CE83F4D52B9ABD7500B067DC /* RecordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83F4D42B9ABD7500B067DC /* RecordData.swift */; };
+		CE83F4DA2B9ADEA600B067DC /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE83F4D92B9ADEA600B067DC /* ReactorKit */; };
 		CE90EEC52AE4CD7B0034C03B /* PlaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90EEC42AE4CD7B0034C03B /* PlaceListViewController.swift */; };
 		CE90EEC72AE4CD820034C03B /* PlaceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90EEC62AE4CD820034C03B /* PlaceListView.swift */; };
 		CE90EEC92AE4CD8B0034C03B /* PlaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE90EEC82AE4CD8B0034C03B /* PlaceListViewModel.swift */; };
@@ -167,6 +173,11 @@
 		CE814A5E2AD594EF00068854 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		CE814A602AD594FB00068854 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		CE814A652AD59D4900068854 /* CustomCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalendarView.swift; sourceTree = "<group>"; };
+		CE83F4CC2B9AB58D00B067DC /* RecordReadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordReadViewController.swift; sourceTree = "<group>"; };
+		CE83F4CE2B9AB59800B067DC /* RecordReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordReadViewModel.swift; sourceTree = "<group>"; };
+		CE83F4D02B9AB5F300B067DC /* RecordReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordReadView.swift; sourceTree = "<group>"; };
+		CE83F4D22B9AB73900B067DC /* BasicImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicImageView.swift; sourceTree = "<group>"; };
+		CE83F4D42B9ABD7500B067DC /* RecordData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordData.swift; sourceTree = "<group>"; };
 		CE90EEC42AE4CD7B0034C03B /* PlaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewController.swift; sourceTree = "<group>"; };
 		CE90EEC62AE4CD820034C03B /* PlaceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListView.swift; sourceTree = "<group>"; };
 		CE90EEC82AE4CD8B0034C03B /* PlaceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewModel.swift; sourceTree = "<group>"; };
@@ -230,6 +241,7 @@
 				CE814A642AD59D1B00068854 /* FSCalendar in Frameworks */,
 				CE3EA89D2AFE55B000628B07 /* FirebaseCrashlytics in Frameworks */,
 				CE4DF9082ACBB6AF00546526 /* Realm in Frameworks */,
+				CE83F4DA2B9ADEA600B067DC /* ReactorKit in Frameworks */,
 				CE3EA89B2AFE55B000628B07 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,6 +365,7 @@
 				CEB390A62ACE840600E4B2AC /* SearchParameter.swift */,
 				CEB390B52ACFDC0C00E4B2AC /* RecordMode.swift */,
 				CEB337392ADA9CE20027D90E /* Geocoding.swift */,
+				CE83F4D42B9ABD7500B067DC /* RecordData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -428,8 +441,19 @@
 				CE94E7882AE6A6600005B593 /* ReturnTodayButton.swift */,
 				CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */,
 				CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */,
+				CE83F4D22B9AB73900B067DC /* BasicImageView.swift */,
 			);
 			path = Custom;
+			sourceTree = "<group>";
+		};
+		CE83F4CB2B9AB57700B067DC /* Read */ = {
+			isa = PBXGroup;
+			children = (
+				CE83F4CC2B9AB58D00B067DC /* RecordReadViewController.swift */,
+				CE83F4CE2B9AB59800B067DC /* RecordReadViewModel.swift */,
+				CE83F4D02B9AB5F300B067DC /* RecordReadView.swift */,
+			);
+			path = Read;
 			sourceTree = "<group>";
 		};
 		CE90EEC32AE4CD6E0034C03B /* PlaceList */ = {
@@ -502,6 +526,7 @@
 		CEB390A82ACEF4E200E4B2AC /* Record */ = {
 			isa = PBXGroup;
 			children = (
+				CE83F4CB2B9AB57700B067DC /* Read */,
 				CEB390A92ACEF50100E4B2AC /* RecordViewController.swift */,
 				CEB390AB2ACEF50800E4B2AC /* RecordView.swift */,
 				CE2951EF2ADFAFCD00EE2571 /* RecordViewModel.swift */,
@@ -553,6 +578,7 @@
 				CEF61E5A2B32CF3700A24BE3 /* RxSwift */,
 				CEF61E622B32DCFA00A24BE3 /* RxGesture */,
 				CE6F36BA2B96E8D7007AD6AB /* Then */,
+				CE83F4D92B9ADEA600B067DC /* ReactorKit */,
 			);
 			productName = DailyPin;
 			productReference = CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */;
@@ -594,6 +620,7 @@
 				CEF61E572B32CF3700A24BE3 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				CEF61E612B32DCFA00A24BE3 /* XCRemoteSwiftPackageReference "RxGesture" */,
 				CE6F36B92B96E8D7007AD6AB /* XCRemoteSwiftPackageReference "Then" */,
+				CE83F4D82B9ADEA600B067DC /* XCRemoteSwiftPackageReference "ReactorKit" */,
 			);
 			productRefGroup = CEB00FBE2AC030BF001E7BB0 /* Products */;
 			projectDirPath = "";
@@ -667,6 +694,7 @@
 				CEB390AE2ACF0DB200E4B2AC /* UIScrollView.swift in Sources */,
 				CEA32E3F2AF38787001B5619 /* GenericProtocol.swift in Sources */,
 				CE9A16B52AD28F0D0051BE23 /* Image.swift in Sources */,
+				CE83F4D52B9ABD7500B067DC /* RecordData.swift in Sources */,
 				CE4DF9132ACBC6BB00546526 /* DatabaseError.swift in Sources */,
 				CE6F36B82B96E737007AD6AB /* Font.swift in Sources */,
 				CE52CB752AC71B47007AD7F8 /* InvalidError.swift in Sources */,
@@ -710,8 +738,11 @@
 				CE4DF90D2ACBBC3E00546526 /* Place.swift in Sources */,
 				CE4DF9112ACBC63200546526 /* PlaceRepository.swift in Sources */,
 				CEA4458C2AE4DD100000A57F /* PlaceListProtocol.swift in Sources */,
+				CE83F4D12B9AB5F300B067DC /* RecordReadView.swift in Sources */,
 				CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */,
 				CE3DF81F2AC52C3B00653CE1 /* SearchViewController.swift in Sources */,
+				CE83F4D32B9AB73900B067DC /* BasicImageView.swift in Sources */,
+				CE83F4CF2B9AB59800B067DC /* RecordReadViewModel.swift in Sources */,
 				CE9B0E8D2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift in Sources */,
 				CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */,
 				CE3DF81D2AC52C2E00653CE1 /* SearchView.swift in Sources */,
@@ -732,6 +763,7 @@
 				CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */,
 				CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */,
 				CE6F36B32B96E56D007AD6AB /* Design.swift in Sources */,
+				CE83F4CD2B9AB58D00B067DC /* RecordReadViewController.swift in Sources */,
 				CEB5ECFA2AD0595E00BC6143 /* RecordRepository.swift in Sources */,
 				CE94E7892AE6A6600005B593 /* ReturnTodayButton.swift in Sources */,
 			);
@@ -1044,6 +1076,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		CE83F4D82B9ADEA600B067DC /* XCRemoteSwiftPackageReference "ReactorKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactorKit/ReactorKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
 		CE9B0E892ACA6A0A008A0694 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scenee/FloatingPanel.git";
@@ -1120,6 +1160,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE814A622AD59D1B00068854 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		CE83F4D92B9ADEA600B067DC /* ReactorKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE83F4D82B9ADEA600B067DC /* XCRemoteSwiftPackageReference "ReactorKit" */;
+			productName = ReactorKit;
 		};
 		CE9B0E8A2ACA6A0A008A0694 /* FloatingPanel */ = {
 			isa = XCSwiftPackageProductDependency;

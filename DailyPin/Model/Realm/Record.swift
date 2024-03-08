@@ -22,4 +22,8 @@ final class Record: Object {
         self.date = date
         self.memo = memo
     }
+    
+    func toDomain() -> RecordData {
+        return RecordData(title: title, date: date, memo: memo)
+    }
 }
