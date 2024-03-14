@@ -69,7 +69,7 @@ class BaseViewController: UIViewController {
     func showToastMessage(message: String) {
         
         var style = ToastStyle()
-        style.messageFont = UIFont(name: "NanumGothic", size: 13) ?? .systemFont(ofSize: 13)
+        style.messageFont = Font.body.fontStyle//UIFont(name: "NanumGothic", size: 13) ?? .systemFont(ofSize: 13)
         DispatchQueue.main.async {
             self.view.makeToast(message, duration: 2.0, position: .top, style: style)
         }

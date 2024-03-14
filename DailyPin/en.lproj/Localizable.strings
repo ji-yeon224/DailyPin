@@ -31,6 +31,9 @@
 "alert_alertEditModeTitle" = "There is still a record being created.";
 "alert_alertEditModeMessage" = "The content you are writing will not be saved!";
 "alert_addRecordTitle" = "Would you like to register your records here?";
+"record_titleLimit" = "Please write within 20 characters.";
+"createText" = "New Record";
+"updateText" = "Edit Record";
 
 // Error
 "alert_dateLoadError" = "There was a problem loading the data.";
@@ -52,6 +55,7 @@
 // record view - placeholder
 "record_writeRecord" = "Write a note!";
 "record_writeTitle" = "Please enter a title.";
+
 
 "saveButton" = "Save";
 "editButton" = "Edit";

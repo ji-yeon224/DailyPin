@@ -70,7 +70,7 @@ enum Router: URLRequestConvertible {
     func asURLRequest() throws -> URLRequest {
         let url = baseURL
         
-        var urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)!
+        let urlComponent = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         
         var request = URLRequest(url: urlComponent.url!)
         request.headers = header

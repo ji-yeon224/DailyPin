@@ -11,3 +11,8 @@ enum Mode: String {
     case read
     case edit
 }
+
+enum RecordMode: String {
+    case update
+    case create
+}

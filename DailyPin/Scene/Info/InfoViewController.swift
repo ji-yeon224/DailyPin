@@ -69,7 +69,7 @@ final class InfoViewController: BaseViewController {
     @objc private func addButtonClicked() {
 
         
-        let vc = RecordViewController(mode: .edit, record: nil, location: viewModel.place.value)
+        let vc = RecordWriteViewController(mode: .create, record: nil, location: viewModel.place.value)//RecordViewController(mode: .edit, record: nil, location: viewModel.place.value)
 //        vc.location = viewModel.place.value
 //        vc.record = nil
 //        vc.mode = .edit
@@ -137,11 +137,11 @@ extension InfoViewController: RecordCollectionViewProtocol {
             return
         }
         
-        let vc = RecordViewController(mode: .read, record: item, location: viewModel.place.value)
+//        let vc = RecordViewController(mode: .read, record: item, location: viewModel.place.value)
 //        vc.record = item
 //        vc.location = viewModel.place.value
 //        vc.mode = .read
-        
+        let vc = RecordReadViewController(record: item, location: viewModel.place.value)
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
         nav.modalTransitionStyle = .crossDissolve
