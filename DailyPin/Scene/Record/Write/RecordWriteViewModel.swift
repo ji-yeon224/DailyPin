@@ -56,7 +56,6 @@ final class RecordWriteViewModel {
             .bind(with: self) { owner, value in
                 let record = value.0
                 let newData = value.1
-                print(newData)
                 do {
                     let data = try owner.recordRepository.updateRecord(id: record.objectID, newData)
                     updateData.onNext(data)

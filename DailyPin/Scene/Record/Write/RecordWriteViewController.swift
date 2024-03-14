@@ -174,6 +174,25 @@ extension RecordWriteViewController {
                 }
             }
             .disposed(by: disposeBag)
+        
+        mainView.memoTextView.rx.text.changed
+            .bind(with: self) { owner, value in
+                owner.mainView.placeHolderLabel.isHidden = value != ""
+                if let text = value {
+                    owner.mainView.memoTextView.attributedText = text.setLineSpacing()
+                }
+                owner.mainView.scrollView.updateContentView()
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.titleTextField.rx.text.changed
+            .withLatestFrom(mainView.titleTextField.rx.text.orEmpty)
+            .bind(with: self) { owner, value in
+                if value.count >= 20 {
+                    owner.showToastMessage(message: "20글자 이내로 작성해주세요.")
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     private func getSaveRecordData() -> Record? {
