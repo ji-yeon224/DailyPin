@@ -55,7 +55,6 @@ final class RecordWriteView: BaseView {
     
     lazy var memoTextView = MemoTextView().then {
         $0.font = Font.nanum.fontStyle//UIFont(name: "NanumGothic", size: 15)
-        $0.isEditable = false
     }
     
     override func configureUI() {

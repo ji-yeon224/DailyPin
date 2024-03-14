@@ -53,13 +53,14 @@ final class RecordReadViewController: BaseViewController {
             dismiss(animated: true)
             return
         }
+        mainView.setRecordData(data: record)
         mainView.addressLabel.text = location.formattedAddress
-        mainView.titleLabel.text = record.title
-        mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
-        if let memo = record.memo {
-            mainView.memoTextView.attributedText = memo.setLineSpacing()
-        }
-        mainView.setMemoTextView()
+//        mainView.titleLabel.text = record.title
+//        mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
+//        if let memo = record.memo {
+//            mainView.memoTextView.attributedText = memo.setLineSpacing()
+//        }
+//        mainView.setMemoTextView()
         
         
         
@@ -104,6 +105,7 @@ extension RecordReadViewController {
     
     
     private func bindEvent() {
+        let refreshRecord = PublishRelay<Record>()
         navigationItem.leftBarButtonItem?.rx.tap
             .asDriver()
             .drive(with: self) { owner, value in
@@ -114,8 +116,27 @@ extension RecordReadViewController {
         editButtonTap
             .bind(with: self) { owner, _ in
                 //수정 뷰 이동
+                if let record = owner.record, let location = owner.location {
+                    let vc = RecordWriteViewController(mode: .update, record: record, location: location)
+                    vc.updateRecord = { data in
+                        refreshRecord.accept(data)
+                    }
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    nav.modalTransitionStyle = .crossDissolve
+                    owner.present(nav, animated: true)
+//                    owner.navigationController?.pushViewController(vc, animated: true)
+                }
+               
             }
             .disposed(by: disposeBag)
+        
+        refreshRecord
+            .bind(with: self) { owner, value in
+                owner.mainView.setRecordData(data: value)
+            }
+            .disposed(by: disposeBag)
+        
         deleteButtonTap
             .bind(with: self) { owner, _ in
                 guard let record = owner.record, let location = owner.location else {

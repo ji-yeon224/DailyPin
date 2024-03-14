@@ -147,7 +147,7 @@ extension CalendarViewController: RecordCollectionViewProtocol {
             return
         }
         
-        let vc = RecordViewController(mode: .read, record: item, location: viewModel.convertToStruct(place))
+        let vc = RecordReadViewController(record: item, location: viewModel.convertToStruct(place))//RecordViewController(mode: .read, record: item, location: viewModel.convertToStruct(place))
 //        vc.record = item
 //        vc.location = viewModel.convertToStruct(place)
 //        vc.mode = .read

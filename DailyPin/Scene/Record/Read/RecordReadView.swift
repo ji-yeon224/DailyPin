@@ -64,12 +64,22 @@ final class RecordReadView: BaseView {
         
     }
     
-    func setMemoTextView() {
+    private func setMemoTextView() {
         if let memo = memoTextView.text, memo.isEmpty || memoTextView.text == nil {
             memoTextView.isHidden = true
         } else {
             memoTextView.isHidden = false
         }
+    }
+    
+    func setRecordData(data: Record) {
+//        addressLabel.text = location
+        titleLabel.text = data.title
+        dateLabel.text = DateFormatter.convertDate(date: data.date)
+        if let memo = data.memo {
+            memoTextView.attributedText = memo.setLineSpacing()
+        }
+        setMemoTextView()
     }
     
     override func setConstraints() {

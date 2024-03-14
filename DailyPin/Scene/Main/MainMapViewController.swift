@@ -110,10 +110,7 @@ final class MainMapViewController: BaseViewController {
                 
                 self.showAlertMap(address: place.formattedAddress, cood: mapPoint) {
                     
-                    let vc = RecordViewController(mode: .edit, record: nil, location: self.viewModel.selectedLocation)
-//                    vc.location = self.viewModel.selectedLocation
-//                    vc.record = nil
-//                    vc.mode = .edit
+                    let vc = RecordWriteViewController(mode: .create, record: nil, location: self.viewModel.selectedLocation)
                     vc.longPressHandler = {
                         DispatchQueue.main.async {
                             self.mainView.setRegion(center: mapPoint, self.mainView.mapView.region.span)
@@ -128,7 +125,6 @@ final class MainMapViewController: BaseViewController {
                     nav.modalPresentationStyle = .fullScreen
                     nav.modalTransitionStyle = .crossDissolve
                     self.present(nav, animated: true)
-                    
                     
                 } cancelHandler: {
                     return

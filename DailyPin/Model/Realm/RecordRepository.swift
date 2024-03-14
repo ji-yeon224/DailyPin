@@ -37,17 +37,19 @@ final class RecordRepository {
         }
     }
     
-    func updateRecord(id: ObjectId, _ item: Record) throws {
+    func updateRecord(id: ObjectId, _ item: Record) throws -> Record {
         
         
         do {
             try realm.write {
                 realm.create(Record.self, value: ["objectID": id, "title": item.title, "date": item.date, "memo": item.memo as Any, "placeInfo": item.placeInfo] , update: .modified)
-                
+            
             }
         } catch {
             throw DataBaseError.updateError
         }
+        let result = try searchItemByID(id)
+        return result
         
     }
     

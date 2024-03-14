@@ -13,6 +13,7 @@ import RxGesture
 final class RecordWriteViewController: BaseViewController {
     
     private let mainView = RecordWriteView()
+    private let viewModel = RecordWriteViewModel()
     private let disposeBag = DisposeBag()
     
     private var record: Record?
@@ -23,6 +24,7 @@ final class RecordWriteViewController: BaseViewController {
     private var recordMode: RecordMode = .create
     
     var longPressHandler: (() -> Void)?
+    var updateRecord: ((Record) -> Void)?
     
     override func loadView() {
         self.view = mainView
@@ -51,7 +53,7 @@ final class RecordWriteViewController: BaseViewController {
         setNavBar()
         setData()
         bindEvent()
-       
+        bind()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
@@ -99,7 +101,58 @@ final class RecordWriteViewController: BaseViewController {
 
 extension RecordWriteViewController {
     private func bind() {
+        let requestCreate = PublishRelay<(Record, PlaceElement)>()
+        let requestUpdate = PublishRelay<(Record, Record)>()
         
+        let input = RecordWriteViewModel.Input(createRecord: requestCreate, updateRecord: requestUpdate)
+        let output = viewModel.transform(input: input)
+        
+        saveButtonTap
+            .bind(with: self) { owner, _ in
+                guard let newData = owner.getSaveRecordData(), let location = owner.location else {
+                    owner.showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) { }
+                    return
+                }
+                switch owner.recordMode {
+                case .create:
+                    requestCreate.accept((newData, location))
+                case .update:
+                    if let record = owner.record {
+                        requestUpdate.accept((record, newData))
+                    }
+                    
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        output.msg
+            .asDriver(onErrorJustReturn: "")
+            .filter { !$0.isEmpty }
+            .drive(with: self) { owner, value in
+                owner.showToastMessage(message: value)
+            }
+            .disposed(by: disposeBag)
+        
+        output.successMsg
+            .bind(with: self) { owner, value in
+                owner.showOKAlert(title: "", message: value) {
+                    NotificationCenter.default.post(name: .updateCell, object: nil)
+                    
+                    owner.dismiss(animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        output.updateData
+            .bind(with: self) { owner, data in
+                owner.showOKAlert(title: "", message: "수정을 완료하였습니다.") {
+                    NotificationCenter.default.post(name: .updateCell, object: nil)
+                    owner.updateRecord?(data)
+                    owner.dismiss(animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
+
     }
     
     private func bindEvent() {
@@ -121,6 +174,21 @@ extension RecordWriteViewController {
                 }
             }
             .disposed(by: disposeBag)
+    }
+    
+    private func getSaveRecordData() -> Record? {
+        guard let location = location else {
+            
+            return nil
+        }
+        
+        var title = mainView.titleTextField.text?.trimmingCharacters(in: .whitespaces) ?? location.displayName.placeName
+        
+        if title.isEmpty {
+            title = location.displayName.placeName
+        }
+        
+        return Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)
     }
 }
 
@@ -166,7 +234,7 @@ extension RecordWriteViewController {
     }
     
     @objc private func saveButtonTapped() {
-//        saveButton.accept(true)
+        saveButtonTap.accept(())
         
     }
 }
