@@ -43,7 +43,7 @@ final class RecordWriteViewModel {
                 
                 do {
                     try owner.placeRepository.updateRecordList(record: record, place: place)
-                    successMsg.accept("저장을 완료하였습니다.")
+                    successMsg.accept("toast_saveComplete".localized())
                 } catch {
                     debugPrint("error")
                     msg.accept(error.localizedDescription)

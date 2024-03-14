@@ -145,7 +145,7 @@ extension RecordWriteViewController {
         
         output.updateData
             .bind(with: self) { owner, data in
-                owner.showOKAlert(title: "", message: "수정을 완료하였습니다.") {
+                owner.showOKAlert(title: "", message: "toast_editComplete".localized()) {
                     NotificationCenter.default.post(name: .updateCell, object: nil)
                     owner.updateRecord?(data)
                     owner.dismiss(animated: true)
@@ -189,7 +189,7 @@ extension RecordWriteViewController {
             .withLatestFrom(mainView.titleTextField.rx.text.orEmpty)
             .bind(with: self) { owner, value in
                 if value.count >= 20 {
-                    owner.showToastMessage(message: "20글자 이내로 작성해주세요.")
+                    owner.showToastMessage(message: "record_titleLimit".localized())
                 }
             }
             .disposed(by: disposeBag)
@@ -240,9 +240,9 @@ extension RecordWriteViewController {
         
         switch recordMode {
         case .update:
-            title = "기록 수정"
+            title = "updateText".localized()
         case .create:
-            title = "기록 작성"
+            title = "createText".localized()
         }
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: nil)

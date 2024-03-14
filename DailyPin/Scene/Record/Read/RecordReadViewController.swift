@@ -55,14 +55,6 @@ final class RecordReadViewController: BaseViewController {
         }
         mainView.setRecordData(data: record)
         mainView.addressLabel.text = location.formattedAddress
-//        mainView.titleLabel.text = record.title
-//        mainView.dateLabel.text = DateFormatter.convertDate(date: record.date)
-//        if let memo = record.memo {
-//            mainView.memoTextView.attributedText = memo.setLineSpacing()
-//        }
-//        mainView.setMemoTextView()
-        
-        
         
     }
     
@@ -89,7 +81,7 @@ extension RecordReadViewController {
         output.successDelete
             .bind(with: self) { owner, value in
                 let (msg, refresh) = value
-                owner.showOKAlert(title: "삭제", message: msg) {
+                owner.showOKAlert(title: "deleteButton".localized(), message: msg) {
                     NotificationCenter.default.post(name: .updateCell, object: nil)
                     owner.dismiss(animated: true)
                     
@@ -140,7 +132,7 @@ extension RecordReadViewController {
         deleteButtonTap
             .bind(with: self) { owner, _ in
                 guard let record = owner.record, let location = owner.location else {
-                    owner.showOKAlert(title: "", message: "기록을 찾을 수 없습니다.") { }
+                    owner.showOKAlert(title: "", message: "toase_recordLoadError".localized()) { }
                     return
                 }
                 owner.showAlertWithCancel(title: "alert_deleteTitle".localized(), message: "alert_deleteMessage".localized()) {

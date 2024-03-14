@@ -10,7 +10,6 @@
 		CE2951EA2ADEA96E00EE2571 /* NanumGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */; };
 		CE2951EB2ADEA96E00EE2571 /* NanumGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */; };
 		CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */; };
-		CE2951F02ADFAFCD00EE2571 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2951EF2ADFAFCD00EE2571 /* RecordViewModel.swift */; };
 		CE3015C42AEB5ACB00BA3AAA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE3015C32AEB5ACB00BA3AAA /* Settings.bundle */; };
 		CE32459A2AC8FAF500582FC5 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = CE3245992AC8FAF500582FC5 /* Toast */; };
 		CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32459B2AC9682200582FC5 /* InfoViewController.swift */; };
@@ -100,8 +99,6 @@
 		CEB1AE5F2AF7EA560086DEA9 /* BoldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */; };
 		CEB3373A2ADA9CE20027D90E /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB337392ADA9CE20027D90E /* Geocoding.swift */; };
 		CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390A62ACE840600E4B2AC /* SearchParameter.swift */; };
-		CEB390AA2ACEF50100E4B2AC /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390A92ACEF50100E4B2AC /* RecordViewController.swift */; };
-		CEB390AC2ACEF50800E4B2AC /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390AB2ACEF50800E4B2AC /* RecordView.swift */; };
 		CEB390AE2ACF0DB200E4B2AC /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390AD2ACF0DB200E4B2AC /* UIScrollView.swift */; };
 		CEB390B42ACFCD4600E4B2AC /* MemoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390B32ACFCD4600E4B2AC /* MemoTextView.swift */; };
 		CEB390B62ACFDC0C00E4B2AC /* RecordMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390B52ACFDC0C00E4B2AC /* RecordMode.swift */; };
@@ -126,7 +123,6 @@
 		CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Regular.ttf"; sourceTree = "<group>"; };
 		CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Bold.ttf"; sourceTree = "<group>"; };
 		CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldProtocol.swift; sourceTree = "<group>"; };
-		CE2951EF2ADFAFCD00EE2571 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
 		CE3015C32AEB5ACB00BA3AAA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CE32459B2AC9682200582FC5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		CE32459E2AC9683300582FC5 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
@@ -210,8 +206,6 @@
 		CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoldLabel.swift; sourceTree = "<group>"; };
 		CEB337392ADA9CE20027D90E /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
 		CEB390A62ACE840600E4B2AC /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
-		CEB390A92ACEF50100E4B2AC /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
-		CEB390AB2ACEF50800E4B2AC /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		CEB390AD2ACF0DB200E4B2AC /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		CEB390B32ACFCD4600E4B2AC /* MemoTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTextView.swift; sourceTree = "<group>"; };
 		CEB390B52ACFDC0C00E4B2AC /* RecordMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMode.swift; sourceTree = "<group>"; };
@@ -544,9 +538,6 @@
 			children = (
 				CE83F4DF2B9AEFD900B067DC /* Write */,
 				CE83F4CB2B9AB57700B067DC /* Read */,
-				CEB390A92ACEF50100E4B2AC /* RecordViewController.swift */,
-				CEB390AB2ACEF50800E4B2AC /* RecordView.swift */,
-				CE2951EF2ADFAFCD00EE2571 /* RecordViewModel.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -730,7 +721,6 @@
 				CE90EEC52AE4CD7B0034C03B /* PlaceListViewController.swift in Sources */,
 				CEB3373A2ADA9CE20027D90E /* Geocoding.swift in Sources */,
 				CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */,
-				CEB390AC2ACEF50800E4B2AC /* RecordView.swift in Sources */,
 				CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */,
 				CE52CB772AC7B454007AD7F8 /* NetworkError.swift in Sources */,
 				CEB1AE5D2AF7E8070086DEA9 /* PlainLabel.swift in Sources */,
@@ -739,7 +729,6 @@
 				CE6F36BD2B96F2EC007AD6AB /* CustomImageButton.swift in Sources */,
 				CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */,
 				CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */,
-				CE2951F02ADFAFCD00EE2571 /* RecordViewModel.swift in Sources */,
 				CE3DF7FA2AC2B1BB00653CE1 /* BaseViewController.swift in Sources */,
 				CE814A662AD59D4900068854 /* CustomCalendarView.swift in Sources */,
 				CE3DF8032AC2B5BA00653CE1 /* MainMapView.swift in Sources */,
@@ -779,7 +768,6 @@
 				CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */,
 				CE83F4E52B9AEFF000B067DC /* RecordWriteViewModel.swift in Sources */,
 				CEB390B62ACFDC0C00E4B2AC /* RecordMode.swift in Sources */,
-				CEB390AA2ACEF50100E4B2AC /* RecordViewController.swift in Sources */,
 				CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */,
 				CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */,
 				CE6F36B32B96E56D007AD6AB /* Design.swift in Sources */,
