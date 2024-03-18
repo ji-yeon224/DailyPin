@@ -60,6 +60,7 @@
 		CE6F36B82B96E737007AD6AB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B72B96E737007AD6AB /* Font.swift */; };
 		CE6F36BB2B96E8D7007AD6AB /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = CE6F36BA2B96E8D7007AD6AB /* Then */; };
 		CE6F36BD2B96F2EC007AD6AB /* CustomImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */; };
+		CE743E282BA81C4400E0D9EA /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE743E272BA81C4400E0D9EA /* CircleButton.swift */; };
 		CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */; };
 		CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5E2AD594EF00068854 /* CalendarViewController.swift */; };
 		CE814A612AD594FB00068854 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A602AD594FB00068854 /* CalendarView.swift */; };
@@ -109,6 +110,13 @@
 		CEBAB9042AE01B71008AF9C8 /* GowunBatang-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */; };
 		CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */; };
 		CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */; };
+		CED3A6E52BA2EB4F00B17B41 /* PHPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3A6E42BA2EB4F00B17B41 /* PHPickerManager.swift */; };
+		CED3A6E72BA2EC8800B17B41 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3A6E62BA2EC8800B17B41 /* ImageCollectionViewCell.swift */; };
+		CED3A6E92BA2EDE100B17B41 /* SelectedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3A6E82BA2EDE100B17B41 /* SelectedImage.swift */; };
+		CED3A6EB2BA3F99E00B17B41 /* SelectImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3A6EA2BA3F99E00B17B41 /* SelectImageModel.swift */; };
+		CED3A6EE2BA3F9E600B17B41 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = CED3A6ED2BA3F9E600B17B41 /* RxDataSources */; };
+		CED3A6F02BA3FEBF00B17B41 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3A6EF2BA3FEBF00B17B41 /* UIImage+Extension.swift */; };
+		CED3A6F22BA3FF3200B17B41 /* ImageCollectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3A6F12BA3FF3200B17B41 /* ImageCollectionProtocol.swift */; };
 		CEE2AFA42AE2BAC3009A9BDD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE2AFA32AE2BAC3009A9BDD /* GoogleService-Info.plist */; };
 		CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */; };
 		CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */; };
@@ -168,6 +176,7 @@
 		CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBasicLabel.swift; sourceTree = "<group>"; };
 		CE6F36B72B96E737007AD6AB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageButton.swift; sourceTree = "<group>"; };
+		CE743E272BA81C4400E0D9EA /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		CE814A5E2AD594EF00068854 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		CE814A602AD594FB00068854 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -216,6 +225,12 @@
 		CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Regular.ttf"; sourceTree = "<group>"; };
 		CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewProtocol.swift; sourceTree = "<group>"; };
 		CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPanelController+Extension.swift"; sourceTree = "<group>"; };
+		CED3A6E42BA2EB4F00B17B41 /* PHPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerManager.swift; sourceTree = "<group>"; };
+		CED3A6E62BA2EC8800B17B41 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		CED3A6E82BA2EDE100B17B41 /* SelectedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedImage.swift; sourceTree = "<group>"; };
+		CED3A6EA2BA3F99E00B17B41 /* SelectImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageModel.swift; sourceTree = "<group>"; };
+		CED3A6EF2BA3FEBF00B17B41 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		CED3A6F12BA3FF3200B17B41 /* ImageCollectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionProtocol.swift; sourceTree = "<group>"; };
 		CEE2AFA32AE2BAC3009A9BDD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEE630672AD674AA006A5DD9 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		CEE630692AD68BA6006A5DD9 /* FSCalendarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarProtocol.swift; sourceTree = "<group>"; };
@@ -233,6 +248,7 @@
 				CE32459A2AC8FAF500582FC5 /* Toast in Frameworks */,
 				CE6F36BB2B96E8D7007AD6AB /* Then in Frameworks */,
 				CEF61E592B32CF3700A24BE3 /* RxCocoa in Frameworks */,
+				CED3A6EE2BA3F9E600B17B41 /* RxDataSources in Frameworks */,
 				CE3EA89F2AFE55B000628B07 /* FirebaseMessaging in Frameworks */,
 				CE9B0E8B2ACA6A0A008A0694 /* FloatingPanel in Frameworks */,
 				CE3DF8222AC53E5700653CE1 /* SnapKit in Frameworks */,
@@ -259,6 +275,7 @@
 				CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */,
 				CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */,
 				CEA32E3E2AF38787001B5619 /* GenericProtocol.swift */,
+				CED3A6F12BA3FF3200B17B41 /* ImageCollectionProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -289,6 +306,7 @@
 				CE6F36AF2B96E535007AD6AB /* Constants */,
 				CE2951EC2ADEE7A500EE2571 /* Protocol */,
 				CE3DF80C2AC2D24100653CE1 /* Extension */,
+				CED3A6E42BA2EB4F00B17B41 /* PHPickerManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -366,6 +384,8 @@
 				CEB390B52ACFDC0C00E4B2AC /* RecordMode.swift */,
 				CEB337392ADA9CE20027D90E /* Geocoding.swift */,
 				CE83F4D42B9ABD7500B067DC /* RecordData.swift */,
+				CED3A6E82BA2EDE100B17B41 /* SelectedImage.swift */,
+				CED3A6EA2BA3F99E00B17B41 /* SelectImageModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -378,6 +398,7 @@
 				CEB390B92ACFDF4C00E4B2AC /* DateFormatter.swift */,
 				CE3541D52AD5313F00773CD3 /* NSNotification.Name.swift */,
 				CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */,
+				CED3A6EF2BA3FEBF00B17B41 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -442,6 +463,7 @@
 				CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */,
 				CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */,
 				CE83F4D22B9AB73900B067DC /* BasicImageView.swift */,
+				CE743E272BA81C4400E0D9EA /* CircleButton.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -462,6 +484,7 @@
 				CE83F4E02B9AEFE300B067DC /* RecordWriteViewController.swift */,
 				CE83F4E22B9AEFE900B067DC /* RecordWriteView.swift */,
 				CE83F4E42B9AEFF000B067DC /* RecordWriteViewModel.swift */,
+				CED3A6E62BA2EC8800B17B41 /* ImageCollectionViewCell.swift */,
 			);
 			path = Write;
 			sourceTree = "<group>";
@@ -587,6 +610,7 @@
 				CEF61E622B32DCFA00A24BE3 /* RxGesture */,
 				CE6F36BA2B96E8D7007AD6AB /* Then */,
 				CE83F4D92B9ADEA600B067DC /* ReactorKit */,
+				CED3A6ED2BA3F9E600B17B41 /* RxDataSources */,
 			);
 			productName = DailyPin;
 			productReference = CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */;
@@ -629,6 +653,7 @@
 				CEF61E612B32DCFA00A24BE3 /* XCRemoteSwiftPackageReference "RxGesture" */,
 				CE6F36B92B96E8D7007AD6AB /* XCRemoteSwiftPackageReference "Then" */,
 				CE83F4D82B9ADEA600B067DC /* XCRemoteSwiftPackageReference "ReactorKit" */,
+				CED3A6EC2BA3F9E600B17B41 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = CEB00FBE2AC030BF001E7BB0 /* Products */;
 			projectDirPath = "";
@@ -710,14 +735,17 @@
 				CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */,
 				CEA32E412AF394D9001B5619 /* FloatingType.swift in Sources */,
 				CE83F4E32B9AEFE900B067DC /* RecordWriteView.swift in Sources */,
+				CED3A6F22BA3FF3200B17B41 /* ImageCollectionProtocol.swift in Sources */,
 				CEE694932ADCFD5300FDE8E6 /* AlertMapViewController.swift in Sources */,
 				CE814A612AD594FB00068854 /* CalendarView.swift in Sources */,
 				CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */,
 				CE52CB702AC7186F007AD7F8 /* LangCode.swift in Sources */,
+				CED3A6E92BA2EDE100B17B41 /* SelectedImage.swift in Sources */,
 				CE3DF8012AC2B5B100653CE1 /* MainMapViewController.swift in Sources */,
 				CE90EEC92AE4CD8B0034C03B /* PlaceListViewModel.swift in Sources */,
 				CE3DF80E2AC2D25600653CE1 /* String+Extension.swift in Sources */,
 				CE546CD42AD44CCE00C0392B /* BaseAnnotationView.swift in Sources */,
+				CED3A6EB2BA3F99E00B17B41 /* SelectImageModel.swift in Sources */,
 				CE90EEC52AE4CD7B0034C03B /* PlaceListViewController.swift in Sources */,
 				CEB3373A2ADA9CE20027D90E /* Geocoding.swift in Sources */,
 				CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */,
@@ -741,14 +769,17 @@
 				CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */,
 				CE3541D62AD5313F00773CD3 /* NSNotification.Name.swift in Sources */,
 				CE6F36B62B96E707007AD6AB /* CustomBasicLabel.swift in Sources */,
+				CED3A6F02BA3FEBF00B17B41 /* UIImage+Extension.swift in Sources */,
 				CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */,
 				CE546CD82AD44F2200C0392B /* SelectAnnotation.swift in Sources */,
 				CE4DF90D2ACBBC3E00546526 /* Place.swift in Sources */,
 				CE4DF9112ACBC63200546526 /* PlaceRepository.swift in Sources */,
 				CEA4458C2AE4DD100000A57F /* PlaceListProtocol.swift in Sources */,
+				CE743E282BA81C4400E0D9EA /* CircleButton.swift in Sources */,
 				CE83F4D12B9AB5F300B067DC /* RecordReadView.swift in Sources */,
 				CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */,
 				CE3DF81F2AC52C3B00653CE1 /* SearchViewController.swift in Sources */,
+				CED3A6E52BA2EB4F00B17B41 /* PHPickerManager.swift in Sources */,
 				CE83F4D32B9AB73900B067DC /* BasicImageView.swift in Sources */,
 				CE83F4CF2B9AB59800B067DC /* RecordReadViewModel.swift in Sources */,
 				CE9B0E8D2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift in Sources */,
@@ -757,6 +788,7 @@
 				CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */,
 				CEB1AE5F2AF7EA560086DEA9 /* BoldLabel.swift in Sources */,
 				CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */,
+				CED3A6E72BA2EC8800B17B41 /* ImageCollectionViewCell.swift in Sources */,
 				CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */,
 				CE3DF7FC2AC2B39D00653CE1 /* BaseView.swift in Sources */,
 				CE52CB7B2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift in Sources */,
@@ -1100,6 +1132,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		CED3A6EC2BA3F9E600B17B41 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
 		CEF61E572B32CF3700A24BE3 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -1178,6 +1218,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE9B0E892ACA6A0A008A0694 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
 			productName = FloatingPanel;
+		};
+		CED3A6ED2BA3F9E600B17B41 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CED3A6EC2BA3F9E600B17B41 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 		CEF61E582B32CF3700A24BE3 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -29,7 +29,7 @@ extension Constants {
         static let leftButton = UIImage(systemName: "chevron.left")
         static let rightButton = UIImage(systemName: "chevron.right")
         static let xmark = UIImage(systemName: "xmark")
-        
+        static let xmarkCircle = UIImage(systemName: "x.circle.fill")
         
         static let selectPin = UIImage(named: "baseline_place_white_24pt")
         static let pushPin = UIImage(named: "PushPin")
@@ -41,6 +41,9 @@ extension Constants {
         static let placeListButton = UIImage(named: "PlaceList")
         static let addRecord = UIImage(named: "AddRecord")
         
+        
+        static let photo = UIImage(systemName: "photo.on.rectangle")
+        static let keyboardDown = UIImage(systemName: "keyboard.chevron.compact.down")
     }
     
 }
