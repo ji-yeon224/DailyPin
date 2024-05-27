@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE09C75B2C041F1A00002869 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C75A2C041F1A00002869 /* APIKey.swift */; };
 		CE2951EA2ADEA96E00EE2571 /* NanumGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */; };
 		CE2951EB2ADEA96E00EE2571 /* NanumGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */; };
 		CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */; };
@@ -42,7 +43,6 @@
 		CE4DF9152ACBD5C500546526 /* MainMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4DF9142ACBD5C500546526 /* MainMapViewModel.swift */; };
 		CE52CB682AC5ADBB007AD7F8 /* GoogleNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB672AC5ADBB007AD7F8 /* GoogleNetwork.swift */; };
 		CE52CB6A2AC5AE17007AD7F8 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB692AC5AE17007AD7F8 /* Search.swift */; };
-		CE52CB6C2AC5AED6007AD7F8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB6B2AC5AED6007AD7F8 /* APIKey.swift */; };
 		CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB6D2AC5B1D6007AD7F8 /* Router.swift */; };
 		CE52CB702AC7186F007AD7F8 /* LangCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB6F2AC7186F007AD7F8 /* LangCode.swift */; };
 		CE52CB722AC7197C007AD7F8 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB712AC7197C007AD7F8 /* SearchViewModel.swift */; };
@@ -128,6 +128,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE09C75A2C041F1A00002869 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Regular.ttf"; sourceTree = "<group>"; };
 		CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Bold.ttf"; sourceTree = "<group>"; };
 		CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldProtocol.swift; sourceTree = "<group>"; };
@@ -158,7 +159,6 @@
 		CE4DF9142ACBD5C500546526 /* MainMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewModel.swift; sourceTree = "<group>"; };
 		CE52CB672AC5ADBB007AD7F8 /* GoogleNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleNetwork.swift; sourceTree = "<group>"; };
 		CE52CB692AC5AE17007AD7F8 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
-		CE52CB6B2AC5AED6007AD7F8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		CE52CB6D2AC5B1D6007AD7F8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		CE52CB6F2AC7186F007AD7F8 /* LangCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangCode.swift; sourceTree = "<group>"; };
 		CE52CB712AC7197C007AD7F8 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -367,7 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				CE52CB672AC5ADBB007AD7F8 /* GoogleNetwork.swift */,
-				CE52CB6B2AC5AED6007AD7F8 /* APIKey.swift */,
+				CE09C75A2C041F1A00002869 /* APIKey.swift */,
 				CE52CB6D2AC5B1D6007AD7F8 /* Router.swift */,
 				CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */,
 			);
@@ -722,7 +722,6 @@
 				CE6F36B12B96E553007AD6AB /* Color.swift in Sources */,
 				CE3DF8162AC3311400653CE1 /* BaseUIButton.swift in Sources */,
 				CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */,
-				CE52CB6C2AC5AED6007AD7F8 /* APIKey.swift in Sources */,
 				CE3DF81A2AC3B26900653CE1 /* Observable.swift in Sources */,
 				CEB390AE2ACF0DB200E4B2AC /* UIScrollView.swift in Sources */,
 				CEA32E3F2AF38787001B5619 /* GenericProtocol.swift in Sources */,
@@ -788,6 +787,7 @@
 				CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */,
 				CEB1AE5F2AF7EA560086DEA9 /* BoldLabel.swift in Sources */,
 				CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */,
+				CE09C75B2C041F1A00002869 /* APIKey.swift in Sources */,
 				CED3A6E72BA2EC8800B17B41 /* ImageCollectionViewCell.swift in Sources */,
 				CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */,
 				CE3DF7FC2AC2B39D00653CE1 /* BaseView.swift in Sources */,
