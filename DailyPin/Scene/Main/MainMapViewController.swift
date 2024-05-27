@@ -41,7 +41,7 @@ final class MainMapViewController: BaseViewController {
         MapKitManager.shared.delegate = self
         
         mainView.mapViewDelegate = self
-        mainView.placeListDelegate = self
+//        mainView.placeListDelegate = self
         
         mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
         mainView.mapView.register(SelectAnnotationView.self, forAnnotationViewWithReuseIdentifier: SelectAnnotationView.identifier)
@@ -50,6 +50,7 @@ final class MainMapViewController: BaseViewController {
         
         viewModel.getAllPlaceAnnotation()
         bindData()
+        BottomSheetManager.shared.delegate = self
         
         
         
@@ -107,7 +108,7 @@ final class MainMapViewController: BaseViewController {
         
         if sender.state == .began {
             
-            dismissFloatingViews()
+            BottomSheetManager.shared.dismiss()
             
             if !NetworkMonitor.shared.isConnected {
                 self.getNetworkNotification()
@@ -123,11 +124,7 @@ final class MainMapViewController: BaseViewController {
                     vc.longPressHandler = {
                         DispatchQueue.main.async {
                             self.mainView.setRegion(center: mapPoint, self.mainView.mapView.region.span)
-                            //self.mainView.setFloatingPanel(data: place)
-                            self.mainView.setFloatingViewTransition(type: .info, place)
-                            guard let fpc = self.mainView.fpc1 else { return }
-                            self.present(fpc, animated: true)
-                            self.infoViewOn = true
+                            BottomSheetManager.shared.setFloatingView(viewType: .info(data: place), vc: self)
                         }
                     }
                     let nav = UINavigationController(rootViewController: vc)
@@ -162,21 +159,8 @@ final class MainMapViewController: BaseViewController {
         deleteSearchAnnotation()
         mainView.deSelectedAnnotation()
         
-        if infoViewOn {
-            guard let fpc = mainView.fpc1 else { return }
-            fpc.dismiss(animated: true)
-            mainView.fpc1 = nil
-            infoViewOn.toggle()
-        }
-        
-        //
-        if !listViewOn {
-            //mainView.setPlaceFloatingPanel()
-            mainView.setFloatingViewTransition(type: .place, nil)
-            guard let fpc = mainView.fpc1 else { return }
-            listViewOn = true
-            present(fpc, animated: true)
-        }
+        BottomSheetManager.shared.setFloatingView(viewType: .place, vc: self)
+//        BottomSheetManager.shared.present()
         
     }
     
@@ -207,7 +191,7 @@ final class MainMapViewController: BaseViewController {
     
     @objc private func calendarButtonTapped() {
         
-        dismissFloatingViews()
+        BottomSheetManager.shared.dismiss()
         mainView.deSelectedAnnotation()
         
         let vc = CalendarViewController()
@@ -215,7 +199,7 @@ final class MainMapViewController: BaseViewController {
     }
     
     @objc private func mapViewTapped() {
-        dismissFloatingViews()
+        BottomSheetManager.shared.dismiss()
         deleteSearchAnnotation()
         mainView.deSelectedAnnotation()
         
@@ -225,7 +209,7 @@ final class MainMapViewController: BaseViewController {
     @objc private func searchViewTransition() {
         let vc = SearchViewController()
         
-        dismissFloatingViews()
+        BottomSheetManager.shared.dismiss()
         
         if !mainView.mapView.selectedAnnotations.isEmpty {
             mainView.mapView.deselectAnnotation(mainView.mapView.selectedAnnotations.first, animated: true)
@@ -247,11 +231,7 @@ final class MainMapViewController: BaseViewController {
             
             
             DispatchQueue.main.async {
-                //self.mainView.setFloatingPanel(data: value)
-                self.mainView.setFloatingViewTransition(type: .info, value)
-                guard let fpc = self.mainView.fpc1 else { return }
-                self.present(fpc, animated: true)
-                self.infoViewOn = true
+                BottomSheetManager.shared.setFloatingView(viewType: .info(data: value), vc: self)
             }
             
         }
@@ -300,56 +280,29 @@ final class MainMapViewController: BaseViewController {
         present(alert, animated: true)
     }
     
-    // floating view 모두 dismiss 
-    private func dismissFloatingViews() {
-        if infoViewOn == true {
-            infoViewOn = false
-            guard let fpc = self.mainView.fpc1 else { return }
-            fpc.dismiss(animated: true)
-        }
-        
-        if listViewOn == true {
-            listViewOn = false
-            guard let fpc = self.mainView.fpc1 else { return }
-            fpc.dismiss(animated: true)
-            
-        }
-    }
-    
-    
 }
 
-extension MainMapViewController: PlaceListProtocol {
-    func setPlaceLoaction(data: Place) {
-        if listViewOn {
-            //mainView.placeFpc.dismiss(animated: true)
-            guard let fpc = mainView.fpc1 else { return }
-            fpc.dismiss(animated: true)
-            listViewOn.toggle()
-        }
-        
-        let center = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
-        searchAnnotation = SelectAnnotation(placeID: data.placeId, coordinate: center)
-        if let searchAnnotation = self.searchAnnotation {
-            self.mainView.setOneAnnotation(annotation: searchAnnotation)
-        }
-        
-        mainView.setFloatingViewTransition(type: .info, viewModel.convertPlaceToPlaceElement(place: data))
-        guard let fpc = self.mainView.fpc1 else { return }
-        infoViewOn = true
-        present(fpc, animated: true)
-        
-        
-        
-        
-    }
-    
-    
-}
+//extension MainMapViewController: PlaceListProtocol {
+//    func setPlaceLoaction(data: Place) {
+//        
+//        let center = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
+//        searchAnnotation = SelectAnnotation(placeID: data.placeId, coordinate: center)
+//        if let searchAnnotation = self.searchAnnotation {
+//            self.mainView.setOneAnnotation(annotation: searchAnnotation)
+//        }
+//        
+//        BottomSheetManager.shared.setFloatingView(viewType: .info(data: viewModel.convertPlaceToPlaceElement(place: data)), vc: self)
+//        
+//        
+//        
+//    }
+//    
+//    
+//}
 
 extension MainMapViewController: MapViewProtocol {
     func didSelect(annotation: CustomAnnotation) {
-        dismissFloatingViews()
+        
         
         // InfoView Present
         guard let place = viewModel.getPlaceData(id: annotation.placeID) else {
@@ -359,15 +312,31 @@ extension MainMapViewController: MapViewProtocol {
         
         let coord = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
         mainView.setRegion(center: coord, mainView.mapView.region.span)
-        //mainView.setFloatingPanel(data: viewModel.convertPlaceToPlaceElement(place: place))
-        //navigationController?.pushViewController(self.mainView.fpc, animated: true)
-        mainView.setFloatingViewTransition(type: .info, viewModel.convertPlaceToPlaceElement(place: place))
-        guard let fpc = self.mainView.fpc1 else { return }
-        present(fpc, animated: true)
-        infoViewOn = true
+        BottomSheetManager.shared.setFloatingView(viewType: .info(data: viewModel.convertPlaceToPlaceElement(place: place)), vc: self)
         
     }
     
+    
+    
+}
+
+extension MainMapViewController: BottomSheetProtocol {
+    func setLocation(data: Place) {
+        print("delegate3")
+        let center = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
+        searchAnnotation = SelectAnnotation(placeID: data.placeId, coordinate: center)
+        if let searchAnnotation = self.searchAnnotation {
+            self.mainView.setOneAnnotation(annotation: searchAnnotation)
+        }
+        
+        BottomSheetManager.shared.setFloatingView(viewType: .info(data: viewModel.convertPlaceToPlaceElement(place: data)), vc: self)
+        
+        
+    }
+    
+    func deSelectAnnotation() {
+        mainView.deSelectedAnnotation()
+    }
     
     
 }
