@@ -10,6 +10,7 @@ import CoreLocation
 
 import RxSwift
 import RxCocoa
+import RxGesture
 
 final class MainMapViewController: BaseViewController {
     
@@ -30,7 +31,6 @@ final class MainMapViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configMapView()
         mainView.mapViewDelegate = self
         notificationObserver()
         bindData()
@@ -38,11 +38,18 @@ final class MainMapViewController: BaseViewController {
         
     }
     
-   
+    
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
         MapKitManager.shared.checkDeviceLocationAuthorization()
+    }
+    
+    override func configureUI() {
+        super.configureUI()
+        bindUI()
+        configMapView()
+        
     }
     
     private func notificationObserver() {
@@ -57,7 +64,6 @@ final class MainMapViewController: BaseViewController {
         viewModel.getAllPlaceAnnotation()
         
     }
-    
     
     private func bindData() {
         
@@ -76,20 +82,63 @@ final class MainMapViewController: BaseViewController {
                 owner.showToastMessage(message: value)
             }
             .disposed(by: disposeBag)
-            
+        
+        
     }
     
-    override func configureUI() {
-        super.configureUI()
-        setButtonAction()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped))
-        mainView.mapView.addGestureRecognizer(tapGesture)
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressMap(_ :)))
-        longPressGesture.minimumPressDuration = 0.5
-        longPressGesture.delaysTouchesBegan = true
+    private func bindUI() {
         
-        mainView.mapView.addGestureRecognizer(longPressGesture)
+        mainView.currentLocation.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                MapKitManager.shared.checkDeviceLocationAuthorization()
+            }
+            .disposed(by: disposeBag)
         
+        mainView.calendarButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                BottomSheetManager.shared.dismiss()
+                owner.deleteSearchAnnotation()
+                owner.mainView.deSelectedAnnotation()
+                owner.transitionPushNav(vc: CalendarViewController())
+            }
+            .disposed(by: disposeBag)
+        mainView.placeListButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                owner.deleteSearchAnnotation()
+                owner.mainView.deSelectedAnnotation()
+                
+                BottomSheetManager.shared.setFloatingView(viewType: .place, vc: owner)
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.searchButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                owner.searchViewTransition()
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.mapView.rx.tapGesture()
+            .subscribe(with: self) { owner, _ in
+                BottomSheetManager.shared.dismiss()
+                owner.deleteSearchAnnotation()
+                owner.mainView.deSelectedAnnotation()
+            }
+            .disposed(by: disposeBag)
+        mainView.mapView.rx.longPressGesture()
+            .when(.began)
+            .subscribe(with: self) { owner, gesture in
+                owner.longPressMap(gesture)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func transitionPushNav(vc: UIViewController?) {
+        guard let vc = vc else { return }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func transitionNav(vc: UIViewController?) {
@@ -100,72 +149,18 @@ final class MainMapViewController: BaseViewController {
         self.present(nav, animated: true)
     }
     
+}
+
+extension MainMapViewController {
+    
     @objc private func getNetworkNotification() {
         DispatchQueue.main.async {
-            self.showOKAlert(title: "network_connectErrorTitle".localized(), message: "network_connectError".localized()) {
-                
-            }
-        }
-        
-    }
-    
-    @objc private func longPressMap(_ sender: UILongPressGestureRecognizer) {
-        let location: CGPoint = sender.location(in: self.mainView.mapView)
-        let mapPoint: CLLocationCoordinate2D = self.mainView.mapView.convert(location, toCoordinateFrom: self.mainView.mapView)
-        
-        if sender.state == .began {
-            
-            BottomSheetManager.shared.dismiss()
-            
-            if !NetworkMonitor.shared.isConnected {
-                self.getNetworkNotification()
-                return
-            }
-            self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) { [weak self] place in
-                
-                guard let self = self else { return }
-                
-                self.showAlertMap(address: place.formattedAddress, cood: mapPoint) {
-                    
-                    let vc = RecordWriteViewController(mode: .create, record: nil, location: self.viewModel.selectedLocation)
-                    vc.longPressHandler = {
-                        DispatchQueue.main.async {
-                            self.mainView.setRegion(center: mapPoint, self.mainView.mapView.region.span)
-                            BottomSheetManager.shared.setFloatingView(viewType: .info(data: place), vc: self)
-                        }
-                    }
-                    self.transitionNav(vc: vc)
-                    
-                } cancelHandler: {
-                    return
-                }
-                
-                
-            } failCompletion: { error in
-                self.toastMessage.accept(error.errorDescription ?? "toast_errorAlert".localized())
-            }
+            self.showOKAlert(title: "network_connectErrorTitle".localized(), message: "network_connectError".localized()) {}
         }
     }
     
-    private func setButtonAction() {
-        mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
-        mainView.searchButton.addTarget(self, action: #selector(searchViewTransition), for: .touchUpInside)
-        mainView.calendarButton.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
-        mainView.placeListButton.addTarget(self, action: #selector(placeListButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc private func placeListButtonTapped() {
-        
-        deleteSearchAnnotation()
-        mainView.deSelectedAnnotation()
-        
-        BottomSheetManager.shared.setFloatingView(viewType: .place, vc: self)
-        
-    }
     
     @objc private func getChangeNotification(notification: NSNotification) {
-        
-        
         guard let notiInfo = notification.userInfo else { return }
         
         if let type = notiInfo["changeType"] as? String {
@@ -180,29 +175,43 @@ final class MainMapViewController: BaseViewController {
         viewModel.getAllPlaceAnnotation()
     }
     
-
-    
-    
-    
-    @objc private func calendarButtonTapped() {
+    private func longPressMap(_ sender: UILongPressGestureRecognizer) {
+        let location: CGPoint = sender.location(in: self.mainView.mapView)
+        let mapPoint: CLLocationCoordinate2D = self.mainView.mapView.convert(location, toCoordinateFrom: self.mainView.mapView)
         
         BottomSheetManager.shared.dismiss()
-        deleteSearchAnnotation()
-        mainView.deSelectedAnnotation()
         
-        let vc = CalendarViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        if !NetworkMonitor.shared.isConnected {
+            self.getNetworkNotification()
+            return
+        }
+        self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) { [weak self] place in
+            
+            guard let self = self else { return }
+            
+            self.showAlertMap(address: place.formattedAddress, cood: mapPoint) {
+                
+                let vc = RecordWriteViewController(mode: .create, record: nil, location: self.viewModel.selectedLocation)
+                vc.longPressHandler = {
+                    DispatchQueue.main.async {
+                        self.mainView.setRegion(center: mapPoint, self.mainView.mapView.region.span)
+                        BottomSheetManager.shared.setFloatingView(viewType: .info(data: place), vc: self)
+                    }
+                }
+                self.transitionNav(vc: vc)
+                
+            } cancelHandler: {
+                return
+            }
+            
+            
+        } failCompletion: { error in
+            self.toastMessage.accept(error.errorDescription ?? "toast_errorAlert".localized())
+        }
     }
     
-    @objc private func mapViewTapped() {
-        BottomSheetManager.shared.dismiss()
-        deleteSearchAnnotation()
-        mainView.deSelectedAnnotation()
-        
-    }
     
-    
-    @objc private func searchViewTransition() {
+    private func searchViewTransition() {
         let vc = SearchViewController()
         
         BottomSheetManager.shared.dismiss()
@@ -237,11 +246,6 @@ final class MainMapViewController: BaseViewController {
         
     }
     
-    
-    @objc private func currentButtonClicked() {
-        MapKitManager.shared.checkDeviceLocationAuthorization()
-    }
-    
     // 검색 결과로 찍힌 핀 지우기
     private func deleteSearchAnnotation() {
         if let searchAnnotation = searchAnnotation {
@@ -272,28 +276,20 @@ final class MainMapViewController: BaseViewController {
         
         present(alert, animated: true)
     }
-    
 }
-
 
 
 extension MainMapViewController: MapViewProtocol {
     func didSelect(annotation: CustomAnnotation) {
-        
-        
         // InfoView Present
         guard let place = viewModel.getPlaceData(id: annotation.placeID) else {
             return
         }
-        
-        
         let coord = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
         mainView.setRegion(center: coord, mainView.mapView.region.span)
         BottomSheetManager.shared.setFloatingView(viewType: .info(data: viewModel.convertPlaceToPlaceElement(place: place)), vc: self)
         
     }
-    
-    
     
 }
 
@@ -307,13 +303,11 @@ extension MainMapViewController: BottomSheetProtocol {
         
         BottomSheetManager.shared.setFloatingView(viewType: .info(data: viewModel.convertPlaceToPlaceElement(place: data)), vc: self)
         
-        
     }
     
     func deSelectAnnotation() {
         mainView.deSelectedAnnotation()
     }
-    
     
 }
 
