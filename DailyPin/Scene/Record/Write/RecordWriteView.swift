@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import RxDataSources
+import RxCocoa
 
 final class RecordWriteView: BaseView {
     let scrollView = UIScrollView(frame: .zero)
+    
+//    weak var delegate: ImageCollectionProtocol?
+    
     private let stackView = UIStackView().then {
         $0.axis = .vertical
         $0.distribution = .fill
@@ -57,6 +62,35 @@ final class RecordWriteView: BaseView {
         $0.font = Font.nanum.fontStyle//UIFont(name: "NanumGothic", size: 15)
     }
     
+//    let toolbar = UIToolbar(frame: .init(x: 0, y: 0, width: 100, height: 100))
+    
+//    private var imgBackView = UIView()
+//    lazy var imagePickCollectionView = {
+//        let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+//        view.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
+//        return view
+//    }()
+    
+//    var dataSource: RxCollectionViewSectionedReloadDataSource<SelectImageModel>!
+//    
+//    private func configDataSource() {
+//        dataSource = RxCollectionViewSectionedReloadDataSource<SelectImageModel> { dataSource, imagePickCollectionView, indexPath, item in
+//            guard let cell = imagePickCollectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.identifier, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
+//            
+//            cell.imageView.image = item.image.resize(width: 50)
+//            cell.cancelButton.rx.tap
+//                .asDriver()
+//                .drive(with: self, onNext: { owner, _ in
+//                    owner.delegate?.cancelButtonTap(index: indexPath.item)
+//                })
+//                .disposed(by: cell.disposeBag)
+//            
+//            return cell
+//        }
+//    }
+    
+    
+    
     override func configureUI() {
         super.configureUI()
         addSubview(scrollView)
@@ -75,7 +109,10 @@ final class RecordWriteView: BaseView {
             dateView.addSubview($0)
         }
         memoTextView.addSubview(placeHolderLabel)
+//        addSubview(toolbar)
         
+//        addSubview(imagePickCollectionView)
+//        configDataSource()
     }
     
     override func setConstraints() {
@@ -147,6 +184,17 @@ final class RecordWriteView: BaseView {
             make.height.equalTo(30)
         }
         
+//        imagePickCollectionView.snp.makeConstraints { make in
+//            make.width.equalTo(self.safeAreaLayoutGuide).inset(15)
+//            make.bottom.equalTo(toolbar.snp.top)
+//            make.height.equalTo(80)
+//        }
+//        
+//        toolbar.snp.makeConstraints { make in
+//            make.horizontalEdges.equalToSuperview()
+//            make.bottom.equalTo(keyboardLayoutGuide.snp.top)
+//        }
+        
     }
     
     func isEmptyText() -> Bool {
@@ -162,6 +210,18 @@ final class RecordWriteView: BaseView {
         
         return false
     }
+    
+    private func collectionViewLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 5
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+        let size = UIScreen.main.bounds.width - 40 //self.frame.width - 40
+        layout.itemSize = CGSize(width: size / 5, height: size / 5)
+        return layout
+    }
+    
 }
 
 extension RecordWriteView: UITextFieldDelegate {
