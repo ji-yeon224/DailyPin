@@ -7,8 +7,9 @@
 
 import UIKit
 import CoreLocation
-import MapKit
+
 import RxSwift
+import RxCocoa
 
 final class MainMapViewController: BaseViewController {
     
@@ -19,6 +20,7 @@ final class MainMapViewController: BaseViewController {
     private var searchAnnotation: SelectAnnotation?
     
     private var disposeBag = DisposeBag()
+    private let toastMessage = PublishRelay<String>()
     
     override func loadView() {
         self.view = mainView
@@ -67,6 +69,13 @@ final class MainMapViewController: BaseViewController {
                 owner.mainView.setRegion(center: coordinate)
             }
             .disposed(by: disposeBag)
+        
+        toastMessage
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self) { owner, value in
+                owner.showToastMessage(message: value)
+            }
+            .disposed(by: disposeBag)
             
     }
     
@@ -83,6 +92,13 @@ final class MainMapViewController: BaseViewController {
         
     }
     
+    private func transitionNav(vc: UIViewController?) {
+        guard let vc = vc else { return }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        nav.modalTransitionStyle = .crossDissolve
+        self.present(nav, animated: true)
+    }
     
     @objc private func getNetworkNotification() {
         DispatchQueue.main.async {
@@ -118,10 +134,7 @@ final class MainMapViewController: BaseViewController {
                             BottomSheetManager.shared.setFloatingView(viewType: .info(data: place), vc: self)
                         }
                     }
-                    let nav = UINavigationController(rootViewController: vc)
-                    nav.modalPresentationStyle = .fullScreen
-                    nav.modalTransitionStyle = .crossDissolve
-                    self.present(nav, animated: true)
+                    self.transitionNav(vc: vc)
                     
                 } cancelHandler: {
                     return
@@ -129,14 +142,10 @@ final class MainMapViewController: BaseViewController {
                 
                 
             } failCompletion: { error in
-                self.showToastMessage(message: error.errorDescription ?? "toast_errorAlert".localized())
+                self.toastMessage.accept(error.errorDescription ?? "toast_errorAlert".localized())
             }
-            
-            
         }
-        
     }
-    
     
     private func setButtonAction() {
         mainView.currentLocation.addTarget(self, action: #selector(currentButtonClicked), for: .touchUpInside)
@@ -223,10 +232,7 @@ final class MainMapViewController: BaseViewController {
             
         }
         vc.centerLocation = (mainView.mapView.centerCoordinate.latitude, mainView.mapView.centerCoordinate.longitude)
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        vc.modalTransitionStyle = .crossDissolve
-        present(nav, animated: true)
+        transitionNav(vc: vc)
         
         
     }
