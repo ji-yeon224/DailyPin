@@ -33,9 +33,6 @@ final class MapKitManager: NSObject {
                 }
             }else {
                 self.delegate?.failGetUserLoaction(title: "", message: "locationServicesEnabled".localized())
-//                self.showOKAlert(title: "", message: "locationServicesEnabled".localized()) {
-//                    self.mainView.setRegion(center: self.defaultLoaction)
-//                }
             }
         }
     }
@@ -48,9 +45,6 @@ final class MapKitManager: NSObject {
             locationManager.requestWhenInUseAuthorization() // 인증 요청
         case .restricted: // 위치 서비스 사용 권한이 없음
             delegate?.failGetUserLoaction(title: "locationAlertTitle".localized(), message: "location_Restricted".localized())
-//            showOKAlert(title: "locationAlertTitle".localized(), message: "location_Restricted".localized()) {
-//                self.mainView.setRegion(center: self.defaultLoaction)
-//            }
         case .denied: // 사용자가 권한 요청 거부
             delegate?.showRequestLocationServiceAlert()
         case .authorizedAlways: break
@@ -69,7 +63,6 @@ extension MapKitManager: CLLocationManagerDelegate {
     // 사용자의 위치를 성공적으로 가져옴
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
-//            mainView.setRegion(center: coordinate)
             setUserLocation.onNext(coordinate)
         }
         locationManager.stopUpdatingLocation()

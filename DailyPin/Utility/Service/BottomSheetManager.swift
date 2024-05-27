@@ -67,7 +67,7 @@ final class BottomSheetManager {
 extension BottomSheetManager: FloatingPanelControllerDelegate {
     
     func floatingPanelWillBeginAttracting(_ fpc: FloatingPanelController, to state: FloatingPanelState) {        
-        guard let floatingView = floatingView else { return }
+        
         if state == FloatingPanelState.tip {
             dismiss()
             delegate?.deSelectAnnotation()

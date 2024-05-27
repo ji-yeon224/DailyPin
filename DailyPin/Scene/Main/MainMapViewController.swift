@@ -35,14 +35,14 @@ final class MainMapViewController: BaseViewController {
         notificationObserver()
         bindData()
         BottomSheetManager.shared.delegate = self
-        
+        MapKitManager.shared.checkDeviceLocationAuthorization()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        MapKitManager.shared.checkDeviceLocationAuthorization()
+        
     }
     
     override func configureUI() {
@@ -187,10 +187,6 @@ extension MainMapViewController {
         
         BottomSheetManager.shared.dismiss()
         
-//        if !NetworkMonitor.shared.isConnected {
-//            self.getNetworkNotification()
-//            return
-//        }
         self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) { [weak self] place in
             
             guard let self = self else { return }
@@ -218,7 +214,7 @@ extension MainMapViewController {
     
     
     private func searchViewTransition() {
-        let vc = SearchViewController()
+        
         
         BottomSheetManager.shared.dismiss()
         
@@ -227,26 +223,8 @@ extension MainMapViewController {
         }
         
         deleteSearchAnnotation()
-        
-        vc.selectLocationHandler = { [weak self] value in
-            
-            guard let self = self else { return }
-            
-            let center = CLLocationCoordinate2D(latitude: value.location.latitude, longitude: value.location.longitude)
-            
-            
-            self.searchAnnotation = SelectAnnotation(placeID: value.id, coordinate: center)
-            if let searchAnnotation = self.searchAnnotation {
-                self.mainView.setOneAnnotation(annotation: searchAnnotation)
-            }
-            
-            
-            DispatchQueue.main.async {
-                BottomSheetManager.shared.setFloatingView(viewType: .info(data: value), vc: self)
-            }
-            
-        }
-        vc.centerLocation = (mainView.mapView.centerCoordinate.latitude, mainView.mapView.centerCoordinate.longitude)
+        let vc = SearchViewController(location: (mainView.mapView.centerCoordinate.latitude, mainView.mapView.centerCoordinate.longitude))
+        vc.delegate = self
         transitionNav(vc: vc)
         
         
@@ -282,6 +260,24 @@ extension MainMapViewController {
         
         present(alert, animated: true)
     }
+}
+
+extension MainMapViewController: SearchResultProtocol {
+    func selectSearchResult(place: PlaceElement) {
+        let center = CLLocationCoordinate2D(latitude: place.location.latitude, longitude: place.location.longitude)
+        
+        
+        searchAnnotation = SelectAnnotation(placeID: place.id, coordinate: center)
+        if let searchAnnotation = searchAnnotation {
+            mainView.setOneAnnotation(annotation: searchAnnotation)
+        }
+        
+        DispatchQueue.main.async {
+            BottomSheetManager.shared.setFloatingView(viewType: .info(data: place), vc: self)
+        }
+    }
+    
+    
 }
 
 

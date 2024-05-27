@@ -12,6 +12,7 @@
 		CE09C75F2C04294B00002869 /* AuthorizationLocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C75E2C04294B00002869 /* AuthorizationLocationProtocol.swift */; };
 		CE09C7612C0433E800002869 /* BottomSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C7602C0433E800002869 /* BottomSheetManager.swift */; };
 		CE09C7642C0458B500002869 /* BottomSheetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C7632C0458B500002869 /* BottomSheetProtocol.swift */; };
+		CE09C7662C04A9D300002869 /* SearchResultProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C7652C04A9D300002869 /* SearchResultProtocol.swift */; };
 		CE2951EA2ADEA96E00EE2571 /* NanumGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */; };
 		CE2951EB2ADEA96E00EE2571 /* NanumGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */; };
 		CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */; };
@@ -91,7 +92,6 @@
 		CE9B0E8D2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */; };
 		CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */; };
 		CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E942ACA95D7008A0694 /* SearchButton.swift */; };
-		CEA32E3F2AF38787001B5619 /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA32E3E2AF38787001B5619 /* GenericProtocol.swift */; };
 		CEA32E412AF394D9001B5619 /* FloatingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA32E402AF394D9001B5619 /* FloatingType.swift */; };
 		CEA4458C2AE4DD100000A57F /* PlaceListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */; };
 		CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */; };
@@ -137,6 +137,7 @@
 		CE09C75E2C04294B00002869 /* AuthorizationLocationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationLocationProtocol.swift; sourceTree = "<group>"; };
 		CE09C7602C0433E800002869 /* BottomSheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetManager.swift; sourceTree = "<group>"; };
 		CE09C7632C0458B500002869 /* BottomSheetProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetProtocol.swift; sourceTree = "<group>"; };
+		CE09C7652C04A9D300002869 /* SearchResultProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultProtocol.swift; sourceTree = "<group>"; };
 		CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Regular.ttf"; sourceTree = "<group>"; };
 		CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Bold.ttf"; sourceTree = "<group>"; };
 		CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldProtocol.swift; sourceTree = "<group>"; };
@@ -208,7 +209,6 @@
 		CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelCustomLayout.swift; sourceTree = "<group>"; };
 		CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		CE9B0E942ACA95D7008A0694 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
-		CEA32E3E2AF38787001B5619 /* GenericProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocol.swift; sourceTree = "<group>"; };
 		CEA32E402AF394D9001B5619 /* FloatingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingType.swift; sourceTree = "<group>"; };
 		CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListProtocol.swift; sourceTree = "<group>"; };
 		CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,10 +291,10 @@
 				CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */,
 				CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */,
 				CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */,
-				CEA32E3E2AF38787001B5619 /* GenericProtocol.swift */,
 				CED3A6F12BA3FF3200B17B41 /* ImageCollectionProtocol.swift */,
 				CE09C75E2C04294B00002869 /* AuthorizationLocationProtocol.swift */,
 				CE09C7632C0458B500002869 /* BottomSheetProtocol.swift */,
+				CE09C7652C04A9D300002869 /* SearchResultProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -744,7 +744,6 @@
 				CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */,
 				CE3DF81A2AC3B26900653CE1 /* Observable.swift in Sources */,
 				CEB390AE2ACF0DB200E4B2AC /* UIScrollView.swift in Sources */,
-				CEA32E3F2AF38787001B5619 /* GenericProtocol.swift in Sources */,
 				CE9A16B52AD28F0D0051BE23 /* Image.swift in Sources */,
 				CE83F4D52B9ABD7500B067DC /* RecordData.swift in Sources */,
 				CE83F4E12B9AEFE300B067DC /* RecordWriteViewController.swift in Sources */,
@@ -754,6 +753,7 @@
 				CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */,
 				CEA32E412AF394D9001B5619 /* FloatingType.swift in Sources */,
 				CE83F4E32B9AEFE900B067DC /* RecordWriteView.swift in Sources */,
+				CE09C7662C04A9D300002869 /* SearchResultProtocol.swift in Sources */,
 				CED3A6F22BA3FF3200B17B41 /* ImageCollectionProtocol.swift in Sources */,
 				CEE694932ADCFD5300FDE8E6 /* AlertMapViewController.swift in Sources */,
 				CE814A612AD594FB00068854 /* CalendarView.swift in Sources */,
