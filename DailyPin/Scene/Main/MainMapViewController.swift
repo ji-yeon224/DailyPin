@@ -82,7 +82,13 @@ final class MainMapViewController: BaseViewController {
                 owner.showToastMessage(message: value)
             }
             .disposed(by: disposeBag)
-        
+        NetworkMonitor.shared.connected
+            .bind(with: self) { owner, isConnected in
+                if !isConnected {
+                    owner.showOKAlert(title: "network_connectErrorTitle".localized(), message: "network_connectError".localized()) {}
+                }
+            }
+            .disposed(by: DisposeBag())
         
     }
     
@@ -181,10 +187,10 @@ extension MainMapViewController {
         
         BottomSheetManager.shared.dismiss()
         
-        if !NetworkMonitor.shared.isConnected {
-            self.getNetworkNotification()
-            return
-        }
+//        if !NetworkMonitor.shared.isConnected {
+//            self.getNetworkNotification()
+//            return
+//        }
         self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) { [weak self] place in
             
             guard let self = self else { return }
