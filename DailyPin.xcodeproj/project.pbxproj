@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CE09C75B2C041F1A00002869 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C75A2C041F1A00002869 /* APIKey.swift */; };
+		CE09C75D2C04289A00002869 /* MapKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C75C2C04289A00002869 /* MapKitManager.swift */; };
+		CE09C75F2C04294B00002869 /* AuthorizationLocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C75E2C04294B00002869 /* AuthorizationLocationProtocol.swift */; };
 		CE2951EA2ADEA96E00EE2571 /* NanumGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */; };
 		CE2951EB2ADEA96E00EE2571 /* NanumGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */; };
 		CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */; };
@@ -129,6 +131,8 @@
 
 /* Begin PBXFileReference section */
 		CE09C75A2C041F1A00002869 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		CE09C75C2C04289A00002869 /* MapKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitManager.swift; sourceTree = "<group>"; };
+		CE09C75E2C04294B00002869 /* AuthorizationLocationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationLocationProtocol.swift; sourceTree = "<group>"; };
 		CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Regular.ttf"; sourceTree = "<group>"; };
 		CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Bold.ttf"; sourceTree = "<group>"; };
 		CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldProtocol.swift; sourceTree = "<group>"; };
@@ -276,6 +280,8 @@
 				CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */,
 				CEA32E3E2AF38787001B5619 /* GenericProtocol.swift */,
 				CED3A6F12BA3FF3200B17B41 /* ImageCollectionProtocol.swift */,
+				CE09C75C2C04289A00002869 /* MapKitManager.swift */,
+				CE09C75E2C04294B00002869 /* AuthorizationLocationProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -766,6 +772,7 @@
 				CE9A16B82AD2BE240051BE23 /* CustomAnnotationView.swift in Sources */,
 				CE52CB792AC7D302007AD7F8 /* BaseCollectionViewCell.swift in Sources */,
 				CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */,
+				CE09C75F2C04294B00002869 /* AuthorizationLocationProtocol.swift in Sources */,
 				CE3541D62AD5313F00773CD3 /* NSNotification.Name.swift in Sources */,
 				CE6F36B62B96E707007AD6AB /* CustomBasicLabel.swift in Sources */,
 				CED3A6F02BA3FEBF00B17B41 /* UIImage+Extension.swift in Sources */,
@@ -782,6 +789,7 @@
 				CE83F4D32B9AB73900B067DC /* BasicImageView.swift in Sources */,
 				CE83F4CF2B9AB59800B067DC /* RecordReadViewModel.swift in Sources */,
 				CE9B0E8D2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift in Sources */,
+				CE09C75D2C04289A00002869 /* MapKitManager.swift in Sources */,
 				CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */,
 				CE3DF81D2AC52C2E00653CE1 /* SearchView.swift in Sources */,
 				CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */,

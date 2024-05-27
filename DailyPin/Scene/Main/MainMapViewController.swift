@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import MapKit
+import RxSwift
 
 final class MainMapViewController: BaseViewController {
     
@@ -15,7 +16,6 @@ final class MainMapViewController: BaseViewController {
     private let viewModel = MainMapViewModel()
     private let placeRepository = PlaceRepository()
     
-    private let locationManager = CLLocationManager()
     private let defaultLoaction = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
     
     private var infoViewOn: Bool = false
@@ -26,6 +26,8 @@ final class MainMapViewController: BaseViewController {
     private var searchAnnotation: SelectAnnotation?
     private var annotations: [CustomAnnotation] = []
     
+    private var disposeBag = DisposeBag()
+    
     override func loadView() {
         self.view = mainView
         
@@ -35,8 +37,9 @@ final class MainMapViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationManager.delegate = self 
-        checkDeviceLocationAuthorization()
+        
+        MapKitManager.shared.delegate = self
+        
         mainView.mapViewDelegate = self
         mainView.placeListDelegate = self
         
@@ -55,6 +58,7 @@ final class MainMapViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        MapKitManager.shared.checkDeviceLocationAuthorization()
     }
     
     private func notificationObserver() {
@@ -66,7 +70,12 @@ final class MainMapViewController: BaseViewController {
         viewModel.annotations.bind { data in
             self.mainView.setAllCustomAnnotation(annotation: data)
         }
-        
+        MapKitManager.shared.setUserLocation
+            .bind(with: self) { owner, coordinate in
+                owner.mainView.setRegion(center: coordinate)
+            }
+            .disposed(by: disposeBag)
+            
     }
     
     override func configureUI() {
@@ -257,7 +266,7 @@ final class MainMapViewController: BaseViewController {
     
     
     @objc private func currentButtonClicked() {
-        checkDeviceLocationAuthorization()
+        MapKitManager.shared.checkDeviceLocationAuthorization()
     }
     
     // 검색 결과로 찍힌 핀 지우기
@@ -363,46 +372,9 @@ extension MainMapViewController: MapViewProtocol {
     
 }
 
-// 위치 서비스
-extension MainMapViewController {
-    private func checkDeviceLocationAuthorization() {
-        //위치 서비스 활성화 체크
-        DispatchQueue.global().async {
-            if CLLocationManager.locationServicesEnabled() {
-                let authorization: CLAuthorizationStatus = self.locationManager.authorizationStatus
-                DispatchQueue.main.async {
-                    self.checkCurrentLocationAuthorization(status: authorization)
-                }
-            }else {
-                self.showOKAlert(title: "", message: "locationServicesEnabled".localized()) {
-                    self.mainView.setRegion(center: self.defaultLoaction)
-                }
-            }
-        }
-    }
-    
-    // 권한 상태 확인
-    private func checkCurrentLocationAuthorization(status: CLAuthorizationStatus) {
-        switch status {
-        case .notDetermined: // 사용자가 권한 설정 여부를 선택 안함
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters // 정확도
-            locationManager.requestWhenInUseAuthorization() // 인증 요청
-        case .restricted: // 위치 서비스 사용 권한이 없음
-            showOKAlert(title: "locationAlertTitle".localized(), message: "location_Restricted".localized()) {
-                self.mainView.setRegion(center: self.defaultLoaction)
-            }
-        case .denied: // 사용자가 권한 요청 거부
-            showRequestLocationServiceAlert()
-        case .authorizedAlways: break
-        case .authorizedWhenInUse:
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-            locationManager.startUpdatingLocation()
-        @unknown default: break
-        }
-    }
-    
+extension MainMapViewController: AuthorizationLocationProtocol {
     // 권한이 거부되었을 때 얼럿
-    private func showRequestLocationServiceAlert() {
+    func showRequestLocationServiceAlert() {
         
         showAlertWithCancel(title: "locationAlertTitle".localized(), message: "location_denied".localized()) {
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
@@ -412,29 +384,12 @@ extension MainMapViewController {
         
         self.mainView.setRegion(center: self.defaultLoaction)
     }
-}
-
-extension MainMapViewController: CLLocationManagerDelegate {
     
-    
-    // 사용자의 위치를 성공적으로 가져옴
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let coordinate = locations.last?.coordinate {
-            mainView.setRegion(center: coordinate)
+    func failGetUserLoaction(title: String, message: String) {
+        showOKAlert(title: title, message: message) {
+            self.mainView.setRegion(center: self.defaultLoaction)
         }
-        locationManager.stopUpdatingLocation()
     }
     
-    
-    // 사용자의 위치를 가져오지 못함
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("fail")
-        self.mainView.setRegion(center: self.defaultLoaction)
-    }
-    
-    // 사용자의 권한 상태가 바뀜을 체크함(iOS 14~)
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkDeviceLocationAuthorization()
-    }
     
 }
