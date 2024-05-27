@@ -159,13 +159,6 @@ final class MainMapViewController: BaseViewController {
 
 extension MainMapViewController {
     
-    @objc private func getNetworkNotification() {
-        DispatchQueue.main.async {
-            self.showOKAlert(title: "network_connectErrorTitle".localized(), message: "network_connectError".localized()) {}
-        }
-    }
-    
-    
     @objc private func getChangeNotification(notification: NSNotification) {
         guard let notiInfo = notification.userInfo else { return }
         
@@ -326,10 +319,9 @@ extension MainMapViewController: AuthorizationLocationProtocol {
         self.mainView.setRegion(center: self.defaultLoaction)
     }
     
-    func failGetUserLoaction(title: String, message: String) {
-        showOKAlert(title: title, message: message) {
-            self.mainView.setRegion(center: self.defaultLoaction)
-        }
+    func failGetUserLoaction(message: String) {
+        toastMessage.accept(message)
+        mainView.setRegion(center: self.defaultLoaction)
     }
     
     

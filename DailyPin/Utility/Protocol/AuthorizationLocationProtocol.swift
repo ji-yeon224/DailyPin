@@ -8,6 +8,6 @@
 import Foundation
 protocol AuthorizationLocationProtocol: AnyObject {
     func showRequestLocationServiceAlert()
-    func failGetUserLoaction(title: String, message: String)
+    func failGetUserLoaction(message: String)
     
 }

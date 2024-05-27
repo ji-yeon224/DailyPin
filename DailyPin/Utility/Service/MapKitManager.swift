@@ -32,7 +32,7 @@ final class MapKitManager: NSObject {
                     self.checkCurrentLocationAuthorization(status: authorization)
                 }
             }else {
-                self.delegate?.failGetUserLoaction(title: "", message: "locationServicesEnabled".localized())
+                self.delegate?.failGetUserLoaction(message: "locationServicesEnabled".localized())
             }
         }
     }
@@ -44,7 +44,7 @@ final class MapKitManager: NSObject {
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters // 정확도
             locationManager.requestWhenInUseAuthorization() // 인증 요청
         case .restricted: // 위치 서비스 사용 권한이 없음
-            delegate?.failGetUserLoaction(title: "locationAlertTitle".localized(), message: "location_Restricted".localized())
+            delegate?.failGetUserLoaction(message: "location_Restricted".localized())
         case .denied: // 사용자가 권한 요청 거부
             delegate?.showRequestLocationServiceAlert()
         case .authorizedAlways: break
@@ -72,7 +72,7 @@ extension MapKitManager: CLLocationManagerDelegate {
     // 사용자의 위치를 가져오지 못함
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         debugPrint("fail")
-//        self.mainView.setRegion(center: self.defaultLoaction)
+        delegate?.failGetUserLoaction(message: "locationFail".localized())
     }
     
     // 사용자의 권한 상태가 바뀜을 체크함(iOS 14~)
