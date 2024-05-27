@@ -14,48 +14,29 @@ final class MainMapViewController: BaseViewController {
     
     private let mainView = MainMapView()
     private let viewModel = MainMapViewModel()
-    private let placeRepository = PlaceRepository()
     
     private let defaultLoaction = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
-    
-    private var infoViewOn: Bool = false
-    private var listViewOn: Bool = false
-    private let repository = PlaceRepository()
-    private var allData: [Place]?
-    
     private var searchAnnotation: SelectAnnotation?
-    private var annotations: [CustomAnnotation] = []
     
     private var disposeBag = DisposeBag()
     
     override func loadView() {
         self.view = mainView
-        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        MapKitManager.shared.delegate = self
-        
+        configMapView()
         mainView.mapViewDelegate = self
-//        mainView.placeListDelegate = self
-        
-        mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
-        mainView.mapView.register(SelectAnnotationView.self, forAnnotationViewWithReuseIdentifier: SelectAnnotationView.identifier)
-        
         notificationObserver()
-        
-        viewModel.getAllPlaceAnnotation()
         bindData()
         BottomSheetManager.shared.delegate = self
         
-        
-        
     }
     
+   
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
@@ -65,6 +46,16 @@ final class MainMapViewController: BaseViewController {
     private func notificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: .databaseChange, object: nil)
     }
+    
+    private func configMapView() {
+        
+        MapKitManager.shared.delegate = self
+        mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
+        mainView.mapView.register(SelectAnnotationView.self, forAnnotationViewWithReuseIdentifier: SelectAnnotationView.identifier)
+        viewModel.getAllPlaceAnnotation()
+        
+    }
+    
     
     private func bindData() {
         
@@ -172,11 +163,7 @@ final class MainMapViewController: BaseViewController {
             if type == "save" {
                 deleteSearchAnnotation()
             } else {
-                if infoViewOn {
-                    guard let fpc = mainView.fpc1 else { return }
-                    fpc.dismiss(animated: true)
-                    infoViewOn.toggle()
-                }
+                BottomSheetManager.shared.dismiss()
                 deleteSearchAnnotation()
             }
         }

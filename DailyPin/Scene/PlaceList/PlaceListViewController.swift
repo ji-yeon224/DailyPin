@@ -9,7 +9,7 @@ import UIKit
 
 final class PlaceListViewController: BaseViewController {
     
-    let mainView = PlaceListView()
+    private let mainView = PlaceListView()
     private let viewModel = PlaceListViewModel()
     
     weak var placeListDelegate: PlaceListProtocol?
