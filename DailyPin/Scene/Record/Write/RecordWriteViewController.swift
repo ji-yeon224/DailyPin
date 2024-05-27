@@ -23,11 +23,11 @@ final class RecordWriteViewController: BaseViewController {
     private let backButtonTap = PublishRelay<Void>()
     private var recordMode: RecordMode = .create
     private var imgList: [SelectedImage] = []
-    private let imageModel = PublishRelay<[SelectImageModel]>()
+//    private let imageModel = PublishRelay<[SelectImageModel]>()
     
-    private lazy var photoButton = UIBarButtonItem(image: Constants.Image.photo, style: .plain, target: self, action: nil)
+//    private lazy var photoButton = UIBarButtonItem(image: Constants.Image.photo, style: .plain, target: self, action: nil)
     
-    private lazy var doneButton = UIBarButtonItem(image: Constants.Image.keyboardDown, style: .plain, target: self, action: nil)
+//    private lazy var doneButton = UIBarButtonItem(image: Constants.Image.keyboardDown, style: .plain, target: self, action: nil)
     
     var longPressHandler: (() -> Void)?
     var updateRecord: ((Record) -> Void)?
@@ -64,8 +64,8 @@ final class RecordWriteViewController: BaseViewController {
         setData()
         bindEvent()
         bind()
-        configToolBar()
-        mainView.delegate = self
+//        configToolBar()
+//        mainView.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -207,41 +207,41 @@ extension RecordWriteViewController {
             }
             .disposed(by: disposeBag)
         
-        photoButton.rx.tap
-            .throttle(.seconds(1), scheduler: MainScheduler.instance)
-            .asDriver(onErrorJustReturn: ())
-            .drive(with: self) { owner, _ in
-//                owner.configImageCell()
-                PHPickerManager.shared.presentPicker(vc: self, selectLimit: 2)
-            }
-            .disposed(by: disposeBag)
+//        photoButton.rx.tap
+//            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+//            .asDriver(onErrorJustReturn: ())
+//            .drive(with: self) { owner, _ in
+////                owner.configImageCell()
+//                PHPickerManager.shared.presentPicker(vc: self, selectLimit: 2)
+//            }
+//            .disposed(by: disposeBag)
         
-        imageModel
-            .bind(to: mainView.imagePickCollectionView.rx.items(dataSource: mainView.dataSource))
-            .disposed(by: disposeBag)
+//        imageModel
+//            .bind(to: mainView.imagePickCollectionView.rx.items(dataSource: mainView.dataSource))
+//            .disposed(by: disposeBag)
         
-        PHPickerManager.shared.selectedImage
-            .bind(with: self) { owner, image in
-                owner.imgList.append(contentsOf: image.map { return SelectedImage(image: $0)})
-                
-                let data = SelectImageModel(section: "", items: owner.imgList)
-                owner.imageModel.accept([data])
-            }
-            .disposed(by: disposeBag)
+//        PHPickerManager.shared.selectedImage
+//            .bind(with: self) { owner, image in
+//                owner.imgList.append(contentsOf: image.map { return SelectedImage(image: $0)})
+//                
+//                let data = SelectImageModel(section: "", items: owner.imgList)
+//                owner.imageModel.accept([data])
+//            }
+//            .disposed(by: disposeBag)
     }
     
-    private func configImageCell() {
-        PHPickerManager.shared.presentPicker(vc: self, selectLimit: 2)
-        PHPickerManager.shared.selectedImage
-            .bind(with: self) { owner, image in
-                owner.imgList.append(contentsOf: image.map { return SelectedImage(image: $0)})
-                print(owner.imgList.count)
-                let data = SelectImageModel(section: "", items: owner.imgList)
-                owner.imageModel.accept([data])
-            }
-            .disposed(by: disposeBag)
-        
-    }
+//    private func configImageCell() {
+//        PHPickerManager.shared.presentPicker(vc: self, selectLimit: 2)
+//        PHPickerManager.shared.selectedImage
+//            .bind(with: self) { owner, image in
+//                owner.imgList.append(contentsOf: image.map { return SelectedImage(image: $0)})
+//                print(owner.imgList.count)
+//                let data = SelectImageModel(section: "", items: owner.imgList)
+//                owner.imageModel.accept([data])
+//            }
+//            .disposed(by: disposeBag)
+//        
+//    }
     
     private func getSaveRecordData() -> Record? {
         guard let location = location else {
@@ -259,15 +259,15 @@ extension RecordWriteViewController {
     }
 }
 
-extension RecordWriteViewController: ImageCollectionProtocol {
-    func cancelButtonTap(index: Int) {
-        imgList.remove(at: index)
-        let data = SelectImageModel(section: "", items: imgList)
-        imageModel.accept([data])
-    }
-    
-    
-}
+//extension RecordWriteViewController: ImageCollectionProtocol {
+//    func cancelButtonTap(index: Int) {
+//        imgList.remove(at: index)
+//        let data = SelectImageModel(section: "", items: imgList)
+//        imageModel.accept([data])
+//    }
+//    
+//    
+//}
 
 extension RecordWriteViewController {
     @objc private func keyboardWillShow(notification:NSNotification) {
@@ -315,13 +315,13 @@ extension RecordWriteViewController {
         
     }
     
-    private func configToolBar() {
-        
-        let flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        photoButton.tintColor = Constants.Color.basicText
-        doneButton.tintColor = Constants.Color.basicText
-        
-        mainView.toolbar.setItems([photoButton, flexibleSpaceButton, doneButton], animated: true)
-    }
+//    private func configToolBar() {
+//        
+//        let flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        
+//        photoButton.tintColor = Constants.Color.basicText
+//        doneButton.tintColor = Constants.Color.basicText
+//        
+//        mainView.toolbar.setItems([photoButton, flexibleSpaceButton, doneButton], animated: true)
+//    }
 }
