@@ -160,7 +160,6 @@ final class MainMapViewController: BaseViewController {
         mainView.deSelectedAnnotation()
         
         BottomSheetManager.shared.setFloatingView(viewType: .place, vc: self)
-//        BottomSheetManager.shared.present()
         
     }
     
@@ -192,6 +191,7 @@ final class MainMapViewController: BaseViewController {
     @objc private func calendarButtonTapped() {
         
         BottomSheetManager.shared.dismiss()
+        deleteSearchAnnotation()
         mainView.deSelectedAnnotation()
         
         let vc = CalendarViewController()
@@ -282,23 +282,7 @@ final class MainMapViewController: BaseViewController {
     
 }
 
-//extension MainMapViewController: PlaceListProtocol {
-//    func setPlaceLoaction(data: Place) {
-//        
-//        let center = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
-//        searchAnnotation = SelectAnnotation(placeID: data.placeId, coordinate: center)
-//        if let searchAnnotation = self.searchAnnotation {
-//            self.mainView.setOneAnnotation(annotation: searchAnnotation)
-//        }
-//        
-//        BottomSheetManager.shared.setFloatingView(viewType: .info(data: viewModel.convertPlaceToPlaceElement(place: data)), vc: self)
-//        
-//        
-//        
-//    }
-//    
-//    
-//}
+
 
 extension MainMapViewController: MapViewProtocol {
     func didSelect(annotation: CustomAnnotation) {
@@ -322,7 +306,6 @@ extension MainMapViewController: MapViewProtocol {
 
 extension MainMapViewController: BottomSheetProtocol {
     func setLocation(data: Place) {
-        print("delegate3")
         let center = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
         searchAnnotation = SelectAnnotation(placeID: data.placeId, coordinate: center)
         if let searchAnnotation = self.searchAnnotation {
