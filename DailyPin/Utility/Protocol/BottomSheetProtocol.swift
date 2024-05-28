@@ -7,6 +7,6 @@
 
 import Foundation
 protocol BottomSheetProtocol: AnyObject {
-    func setLocation(data: Place)
+    func setLocation(data: PlaceItem)
     func deSelectAnnotation()
 }

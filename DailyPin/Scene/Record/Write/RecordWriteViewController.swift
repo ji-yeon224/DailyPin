@@ -17,7 +17,7 @@ final class RecordWriteViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     
     private var record: Record?
-    private var location: PlaceElement?
+    private var location: PlaceItem?
     
     private let saveButtonTap = PublishRelay<Void>()
     private let backButtonTap = PublishRelay<Void>()
@@ -36,7 +36,7 @@ final class RecordWriteViewController: BaseViewController {
         self.view = mainView
     }
     
-    init(mode: RecordMode, record: Record?, location: PlaceElement?) {
+    init(mode: RecordMode, record: Record?, location: PlaceItem?) {
         super.init(nibName: nil, bundle: nil)
         self.record = record
         self.location = location
@@ -84,8 +84,8 @@ final class RecordWriteViewController: BaseViewController {
         }
         mainView.titleTextField.becomeFirstResponder()
         
-        mainView.addressLabel.text = location.formattedAddress
-        mainView.titleTextField.placeholder = location.displayName.placeName
+        mainView.addressLabel.text = location.address
+        mainView.titleTextField.placeholder = location.name
         
         if let record = record {
             mainView.titleTextField.text = record.title
@@ -112,7 +112,7 @@ final class RecordWriteViewController: BaseViewController {
 
 extension RecordWriteViewController {
     private func bind() {
-        let requestCreate = PublishRelay<(Record, PlaceElement)>()
+        let requestCreate = PublishRelay<(Record, PlaceItem)>()
         let requestUpdate = PublishRelay<(Record, Record)>()
         
         let input = RecordWriteViewModel.Input(createRecord: requestCreate, updateRecord: requestUpdate)
@@ -249,10 +249,10 @@ extension RecordWriteViewController {
             return nil
         }
         
-        var title = mainView.titleTextField.text?.trimmingCharacters(in: .whitespaces) ?? location.displayName.placeName
+        var title = mainView.titleTextField.text?.trimmingCharacters(in: .whitespaces) ?? location.name
         
         if title.isEmpty {
-            title = location.displayName.placeName
+            title = location.name
         }
         
         return Record(title: title, date: mainView.datePickerView.date, memo: mainView.memoTextView.text)

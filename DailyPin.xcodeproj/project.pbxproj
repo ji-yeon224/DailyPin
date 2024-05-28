@@ -47,7 +47,7 @@
 		CE4DF9132ACBC6BB00546526 /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4DF9122ACBC6BB00546526 /* DatabaseError.swift */; };
 		CE4DF9152ACBD5C500546526 /* MainMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4DF9142ACBD5C500546526 /* MainMapViewModel.swift */; };
 		CE52CB682AC5ADBB007AD7F8 /* GoogleNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB672AC5ADBB007AD7F8 /* GoogleNetwork.swift */; };
-		CE52CB6A2AC5AE17007AD7F8 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB692AC5AE17007AD7F8 /* Search.swift */; };
+		CE52CB6A2AC5AE17007AD7F8 /* SearchResDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB692AC5AE17007AD7F8 /* SearchResDto.swift */; };
 		CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB6D2AC5B1D6007AD7F8 /* Router.swift */; };
 		CE52CB702AC7186F007AD7F8 /* LangCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB6F2AC7186F007AD7F8 /* LangCode.swift */; };
 		CE52CB722AC7197C007AD7F8 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB712AC7197C007AD7F8 /* SearchViewModel.swift */; };
@@ -172,7 +172,7 @@
 		CE4DF9122ACBC6BB00546526 /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		CE4DF9142ACBD5C500546526 /* MainMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewModel.swift; sourceTree = "<group>"; };
 		CE52CB672AC5ADBB007AD7F8 /* GoogleNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleNetwork.swift; sourceTree = "<group>"; };
-		CE52CB692AC5AE17007AD7F8 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		CE52CB692AC5AE17007AD7F8 /* SearchResDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResDto.swift; sourceTree = "<group>"; };
 		CE52CB6D2AC5B1D6007AD7F8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		CE52CB6F2AC7186F007AD7F8 /* LangCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangCode.swift; sourceTree = "<group>"; };
 		CE52CB712AC7197C007AD7F8 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -602,7 +602,7 @@
 		CEB739212C05981F004A9A20 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				CE52CB692AC5AE17007AD7F8 /* Search.swift */,
+				CE52CB692AC5AE17007AD7F8 /* SearchResDto.swift */,
 				CE3B809D2C05AA4400911814 /* PlaceItem.swift */,
 			);
 			path = Search;
@@ -843,7 +843,7 @@
 				CE52CB7B2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift in Sources */,
 				CE09C7642C0458B500002869 /* BottomSheetProtocol.swift in Sources */,
 				CEB390B42ACFCD4600E4B2AC /* MemoTextView.swift in Sources */,
-				CE52CB6A2AC5AE17007AD7F8 /* Search.swift in Sources */,
+				CE52CB6A2AC5AE17007AD7F8 /* SearchResDto.swift in Sources */,
 				CE90EEC72AE4CD820034C03B /* PlaceListView.swift in Sources */,
 				CE4DF9152ACBD5C500546526 /* MainMapViewModel.swift in Sources */,
 				CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */,

@@ -8,6 +8,6 @@
 import Foundation
 
 protocol PlaceListProtocol: AnyObject {
-    func setPlaceLoaction(data: Place) 
+    func setPlaceLoaction(data: PlaceItem)
     
 }

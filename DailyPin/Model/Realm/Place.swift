@@ -26,5 +26,7 @@ final class Place: Object {
         self.latitude = latitude
         self.longitude = longitude
     }
-    
+    func toDomain() -> PlaceItem {
+        return .init(id: placeId, address: address, latitude: latitude, longitude: longitude, name: placeName)
+    }
 }

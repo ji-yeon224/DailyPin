@@ -184,7 +184,7 @@ extension MainMapViewController {
             
             guard let self = self else { return }
             
-            self.showAlertMap(address: place.formattedAddress, cood: mapPoint) {
+            self.showAlertMap(address: place.address, cood: mapPoint) {
                 
                 let vc = RecordWriteViewController(mode: .create, record: nil, location: self.viewModel.selectedLocation)
                 vc.longPressHandler = {
@@ -256,8 +256,8 @@ extension MainMapViewController {
 }
 
 extension MainMapViewController: SearchResultProtocol {
-    func selectSearchResult(place: PlaceElement) {
-        let center = CLLocationCoordinate2D(latitude: place.location.latitude, longitude: place.location.longitude)
+    func selectSearchResult(place: PlaceItem) {
+        let center = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
         
         
         searchAnnotation = SelectAnnotation(placeID: place.id, coordinate: center)
@@ -289,14 +289,14 @@ extension MainMapViewController: MapViewProtocol {
 }
 
 extension MainMapViewController: BottomSheetProtocol {
-    func setLocation(data: Place) {
+    func setLocation(data: PlaceItem) {
         let center = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
-        searchAnnotation = SelectAnnotation(placeID: data.placeId, coordinate: center)
+        searchAnnotation = SelectAnnotation(placeID: data.id, coordinate: center)
         if let searchAnnotation = self.searchAnnotation {
             self.mainView.setOneAnnotation(annotation: searchAnnotation)
         }
         
-        BottomSheetManager.shared.setFloatingView(viewType: .info(data: viewModel.convertPlaceToPlaceElement(place: data)), vc: self)
+        BottomSheetManager.shared.setFloatingView(viewType: .info(data: data), vc: self)
         
     }
     

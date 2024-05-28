@@ -18,7 +18,7 @@ final class InfoViewController: BaseViewController {
         self.view = mainView
     }
     
-    init(placeData: PlaceElement?) {
+    init(placeData: PlaceItem?) {
         super.init(nibName: nil, bundle: nil)
         viewModel.place.value = placeData
     }
@@ -101,8 +101,8 @@ final class InfoViewController: BaseViewController {
                 
                 return
             }
-            self.mainView.titleLabel.text = place.displayName.placeName
-            self.mainView.addressLabel.text = place.formattedAddress
+            self.mainView.titleLabel.text = place.name
+            self.mainView.addressLabel.text = place.address
             
             do {
                 try self.viewModel.getRecordList()

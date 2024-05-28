@@ -15,10 +15,10 @@ final class MainMapViewModel {
     let place: Observable<[Place]?> = Observable(nil)
     let annotations: Observable<[CustomAnnotation]> = Observable([])
     private var placeInfo: PlaceInfo = PlaceInfo(addressComponents: [], address: "", placeID: "")
-    var selectedLocation: PlaceElement? = nil
-    var placeList: [Place]? = nil
+    var selectedLocation: PlaceItem? = nil
+//    var placeList: [Place]? = nil
     
-    func requestSelectedLocation(lat: Double, lng: Double, completion: @escaping((PlaceElement) -> Void), failCompletion: @escaping((NetworkError) -> Void) ) {
+    func requestSelectedLocation(lat: Double, lng: Double, completion: @escaping((PlaceItem) -> Void), failCompletion: @escaping((NetworkError) -> Void) ) {
         
         GoogleNetwork.shared.requestGeocoder(api: .geocoding(lat: lat, lng: lng)) { response in
             switch response {
@@ -46,9 +46,10 @@ final class MainMapViewModel {
             name = "\(addressCompnents[1].longName) \(addressCompnents[0].longName)"
         }
         
-        let placeName = DisplayName(placeName: name)
+//        let placeName = DisplayName(placeName: name)
         
-        selectedLocation = PlaceElement(id: placeInfo.placeID, formattedAddress: placeInfo.address, location: location, displayName: placeName)
+        selectedLocation = PlaceItem(id: placeInfo.placeID, address: placeInfo.address, latitude: lat, longitude: lng, name: name)
+        //PlaceElement(id: placeInfo.placeID, formattedAddress: placeInfo.address, location: location, displayName: placeName)
         
     }
     
@@ -83,8 +84,9 @@ final class MainMapViewModel {
         }
     }
     
-    func convertPlaceToPlaceElement(place: Place) -> PlaceElement {
-        return PlaceElement(id: place.placeId, formattedAddress: place.address, location: Location(latitude: place.latitude, longitude: place.longitude), displayName: DisplayName(placeName: place.placeName))
+    func convertPlaceToPlaceElement(place: Place) -> PlaceItem {
+        return place.toDomain()
+//        return PlaceElement(id: place.placeId, formattedAddress: place.address, location: Location(latitude: place.latitude, longitude: place.longitude), displayName: DisplayName(placeName: place.placeName))
     }
     
     

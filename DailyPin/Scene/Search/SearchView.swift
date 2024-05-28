@@ -59,7 +59,7 @@ final class SearchView: BaseView {
         return view
     }()
 
-    var dataSource: UICollectionViewDiffableDataSource<Int, PlaceElement>!
+    var dataSource: UICollectionViewDiffableDataSource<Int, PlaceItem>!
     
     override func configureUI() {
         super.configureUI()
@@ -129,9 +129,9 @@ final class SearchView: BaseView {
     
     private func configureDataSource() {
         
-        let cellRegistration = UICollectionView.CellRegistration<SearchCollectionViewCell, PlaceElement> { cell, indexPath, itemIdentifier in
-            cell.title.text = itemIdentifier.displayName.placeName
-            cell.address.text = itemIdentifier.formattedAddress
+        let cellRegistration = UICollectionView.CellRegistration<SearchCollectionViewCell, PlaceItem> { cell, indexPath, itemIdentifier in
+            cell.title.text = itemIdentifier.name
+            cell.address.text = itemIdentifier.address
             
         }
         

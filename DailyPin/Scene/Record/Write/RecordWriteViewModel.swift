@@ -16,7 +16,7 @@ final class RecordWriteViewModel {
     private let disposeBag = DisposeBag()
     
     struct Input {
-        let createRecord: PublishRelay<(Record, PlaceElement)>
+        let createRecord: PublishRelay<(Record, PlaceItem)>
         let updateRecord: PublishRelay<(Record, Record)>
         
     }
@@ -77,7 +77,7 @@ final class RecordWriteViewModel {
 
 extension RecordWriteViewModel {
     // 기존에 저장된 장소가 있다면 읽어오기, 없으면 장소 새로 저장하기(savePlace)
-    private func getPlace(_ data: PlaceElement) -> Place? {
+    private func getPlace(_ data: PlaceItem) -> Place? {
         
         if placeRepository.isExistPlace(id: data.id) {
             do {
@@ -94,13 +94,13 @@ extension RecordWriteViewModel {
     }
     
     
-    private func savePlace(_ location: PlaceElement?) -> Place? {
+    private func savePlace(_ location: PlaceItem?) -> Place? {
         
-        guard let data = location else {
+        guard let location = location else {
             return nil
         }
         
-        let place = Place(placeId: data.id, address: data.formattedAddress, placeName: data.displayName.placeName, latitude: data.location.latitude, longitude: data.location.longitude)
+        let place = Place(placeId: location.id, address: location.address, placeName: location.name, latitude: location.latitude, longitude: location.longitude)
         
         
         do {

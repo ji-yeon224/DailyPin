@@ -78,7 +78,7 @@ extension BottomSheetManager: FloatingPanelControllerDelegate {
 }
 extension BottomSheetManager: PlaceListProtocol {
     
-    func setPlaceLoaction(data: Place) {
+    func setPlaceLoaction(data: PlaceItem) {
         dismiss()
         delegate?.setLocation(data: data)
         

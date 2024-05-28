@@ -9,7 +9,7 @@ import UIKit
 
 enum FloatingType {
     case place
-    case info(data: PlaceElement?)
+    case info(data: PlaceItem?)
     
     var viewcontroller: UIViewController {
         switch self {
