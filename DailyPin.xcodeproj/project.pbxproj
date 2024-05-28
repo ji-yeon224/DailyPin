@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE09C75B2C041F1A00002869 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C75A2C041F1A00002869 /* APIKey.swift */; };
 		CE09C75D2C04289A00002869 /* MapKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C75C2C04289A00002869 /* MapKitManager.swift */; };
 		CE09C75F2C04294B00002869 /* AuthorizationLocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C75E2C04294B00002869 /* AuthorizationLocationProtocol.swift */; };
 		CE09C7612C0433E800002869 /* BottomSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C7602C0433E800002869 /* BottomSheetManager.swift */; };
@@ -110,6 +109,9 @@
 		CEB390BA2ACFDF4C00E4B2AC /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390B92ACFDF4C00E4B2AC /* DateFormatter.swift */; };
 		CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390BB2ACFF89300E4B2AC /* Record.swift */; };
 		CEB5ECFA2AD0595E00BC6143 /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */; };
+		CEB739182C059200004A9A20 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB739172C059200004A9A20 /* APIKey.swift */; };
+		CEB7391A2C059276004A9A20 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB739192C059276004A9A20 /* Endpoint.swift */; };
+		CEB7391C2C05928D004A9A20 /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB7391B2C05928D004A9A20 /* BaseURL.swift */; };
 		CEBAB9022AE01B69008AF9C8 /* GowunBatang-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB9012AE01B69008AF9C8 /* GowunBatang-Bold.ttf */; };
 		CEBAB9042AE01B71008AF9C8 /* GowunBatang-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */; };
 		CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */; };
@@ -132,7 +134,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CE09C75A2C041F1A00002869 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		CE09C75C2C04289A00002869 /* MapKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitManager.swift; sourceTree = "<group>"; };
 		CE09C75E2C04294B00002869 /* AuthorizationLocationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationLocationProtocol.swift; sourceTree = "<group>"; };
 		CE09C7602C0433E800002869 /* BottomSheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetManager.swift; sourceTree = "<group>"; };
@@ -229,6 +230,9 @@
 		CEB390B92ACFDF4C00E4B2AC /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CEB390BB2ACFF89300E4B2AC /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		CEB5ECF92AD0595E00BC6143 /* RecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepository.swift; sourceTree = "<group>"; };
+		CEB739172C059200004A9A20 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		CEB739192C059276004A9A20 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		CEB7391B2C05928D004A9A20 /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
 		CEBAB9012AE01B69008AF9C8 /* GowunBatang-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Bold.ttf"; sourceTree = "<group>"; };
 		CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Regular.ttf"; sourceTree = "<group>"; };
 		CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewProtocol.swift; sourceTree = "<group>"; };
@@ -387,9 +391,11 @@
 			isa = PBXGroup;
 			children = (
 				CE52CB672AC5ADBB007AD7F8 /* GoogleNetwork.swift */,
-				CE09C75A2C041F1A00002869 /* APIKey.swift */,
+				CEB739172C059200004A9A20 /* APIKey.swift */,
 				CE52CB6D2AC5B1D6007AD7F8 /* Router.swift */,
 				CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */,
+				CEB739192C059276004A9A20 /* Endpoint.swift */,
+				CEB7391B2C05928D004A9A20 /* BaseURL.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -795,6 +801,7 @@
 				CE4DF90D2ACBBC3E00546526 /* Place.swift in Sources */,
 				CE4DF9112ACBC63200546526 /* PlaceRepository.swift in Sources */,
 				CEA4458C2AE4DD100000A57F /* PlaceListProtocol.swift in Sources */,
+				CEB739182C059200004A9A20 /* APIKey.swift in Sources */,
 				CE743E282BA81C4400E0D9EA /* CircleButton.swift in Sources */,
 				CE83F4D12B9AB5F300B067DC /* RecordReadView.swift in Sources */,
 				CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */,
@@ -809,7 +816,6 @@
 				CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */,
 				CEB1AE5F2AF7EA560086DEA9 /* BoldLabel.swift in Sources */,
 				CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */,
-				CE09C75B2C041F1A00002869 /* APIKey.swift in Sources */,
 				CED3A6E72BA2EC8800B17B41 /* ImageCollectionViewCell.swift in Sources */,
 				CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */,
 				CE3DF7FC2AC2B39D00653CE1 /* BaseView.swift in Sources */,
@@ -823,6 +829,8 @@
 				CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */,
 				CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */,
 				CE83F4E52B9AEFF000B067DC /* RecordWriteViewModel.swift in Sources */,
+				CEB7391A2C059276004A9A20 /* Endpoint.swift in Sources */,
+				CEB7391C2C05928D004A9A20 /* BaseURL.swift in Sources */,
 				CEB390B62ACFDC0C00E4B2AC /* RecordMode.swift in Sources */,
 				CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */,
 				CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */,
