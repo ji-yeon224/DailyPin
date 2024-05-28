@@ -9,10 +9,10 @@ import UIKit
 
 final class PlaceListViewController: BaseViewController {
     
-    let mainView = PlaceListView()
+    private let mainView = PlaceListView()
     private let viewModel = PlaceListViewModel()
     
-    var placeListDelegate: PlaceListProtocol?
+    weak var placeListDelegate: PlaceListProtocol?
     
     override func loadView() {
         self.view = mainView

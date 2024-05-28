@@ -15,12 +15,23 @@ final class SearchViewController: BaseViewController {
     
     private let monitor = NWPathMonitor()
     var selectLocationHandler: ((PlaceElement) -> Void)?
-    var centerLocation: (Double, Double) = (0, 0)
+    private var centerLocation: (Double, Double) = (0, 0)
+    weak var delegate: SearchResultProtocol?
     
     override func loadView() {
         mainView.collectionViewDelegate = self
         self.view = mainView
         
+    }
+    
+    init(location: (Double, Double)) {
+        super.init(nibName: nil, bundle: nil)
+        centerLocation = location
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -134,8 +145,8 @@ extension SearchViewController: CollectionViewProtocol {
             return
         }
         
-        selectLocationHandler?(item)
-        
+//        selectLocationHandler?(item)
+        delegate?.selectSearchResult(place: item)
         dismiss(animated: true)
         
     }

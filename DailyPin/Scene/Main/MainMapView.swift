@@ -7,13 +7,9 @@
 
 import UIKit
 import MapKit
-import FloatingPanel
 
 final class MainMapView: BaseView {
     
-    var fpc1: FloatingPanelController?
-    var cntVC: UIViewController?
-    weak var placeListDelegate: PlaceListProtocol?
     weak var mapViewDelegate: MapViewProtocol?
 
     lazy var mapView = {
@@ -35,7 +31,6 @@ final class MainMapView: BaseView {
         [searchButton, calendarButton, placeListButton, currentLocation].forEach {
             mapView.addSubview($0)
         }
-        fpc1?.delegate = self
     }
     
     
@@ -116,47 +111,9 @@ extension MainMapView {
         
     }
     
-   
-    
 }
 
-extension MainMapView {
-    
-    func setFloatingViewTransition (type: FloatingType, _ data: PlaceElement?) {
-        fpc1 = FloatingPanelController()
-        guard let fpc = fpc1 else { return }
-        fpc.surfaceView.insetsLayoutMarginsFromSafeArea = true
-        cntVC = type.viewcontroller
-        
-        switch type {
-        case .place:
-            guard let cntVC =  cntVC as? PlaceListViewController else { return }
-            fpc.track(scrollView: cntVC.mainView.collectionView)
-            fpc.view.frame = cntVC.view.bounds
-            cntVC.placeListDelegate = self
-            
-        case .info:
-            guard let cntVC = cntVC as? InfoViewController else { return }
-            //guard let data = data as? PlaceElement else { return }
-            guard let data = data else { return }
-            cntVC.viewModel.place.value = data
-            
-            
-            fpc.track(scrollView: cntVC.mainView.collectionView)
-            fpc.view.frame = cntVC.view.bounds
-            
-        }
-        
-        fpc.set(contentViewController: cntVC)
-        
-        fpc.layout = FloatingPanelCustomLayout()
-        fpc.changePanelStyle()
-        fpc.invalidateLayout()
-        self.fpc1 = fpc
-        
-    }
    
-}
 
 extension MainMapView: MKMapViewDelegate {
     
@@ -228,23 +185,3 @@ extension MainMapView: MKMapViewDelegate {
 }
 
 
-extension MainMapView: FloatingPanelControllerDelegate {
-    
-    func floatingPanelWillBeginAttracting(_ fpc: FloatingPanelController, to state: FloatingPanelState) {
-        if state == FloatingPanelState.tip {
-            fpc.dismiss(animated: true, completion: nil)
-            deSelectedAnnotation()
-            
-        }
-    }
-    
-    
-}
-
-extension MainMapView: PlaceListProtocol {
-    
-    func setPlaceLoaction(data: Place) {
-        placeListDelegate?.setPlaceLoaction(data: data)
-    }
-    
-}

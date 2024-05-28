@@ -18,6 +18,16 @@ final class InfoViewController: BaseViewController {
         self.view = mainView
     }
     
+    init(placeData: PlaceElement?) {
+        super.init(nibName: nil, bundle: nil)
+        viewModel.place.value = placeData
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

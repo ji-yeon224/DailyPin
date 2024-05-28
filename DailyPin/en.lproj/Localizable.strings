@@ -16,6 +16,7 @@
 "location_denied" = "Location service not available. Please turn on the location service under 'Settings > Privacy & Security' on the device.";
 "location_Restricted" = "Location service unavailable.";
 "locationServicesEnabled" = "Location service is turned off.";
+"locationFail" = "Failed to retrieve location information.";
 
 // toastAlert
 "toast_errorAlert" = "A problem has occurred. Please try again.";

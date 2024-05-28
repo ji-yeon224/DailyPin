@@ -8,14 +8,15 @@
 import UIKit
 
 enum FloatingType {
-    case place, info
+    case place
+    case info(data: PlaceElement?)
     
     var viewcontroller: UIViewController {
         switch self {
         case .place:
             return PlaceListViewController()
-        case .info:
-            return InfoViewController()
+        case let .info(info):
+            return InfoViewController(placeData: info)
         }
     }
 }
