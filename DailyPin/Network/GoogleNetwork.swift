@@ -13,6 +13,9 @@ final class GoogleNetwork {
     static let shared = GoogleNetwork()
     private init() { }
     
+    func requestData() {
+        
+    }
     
     func requestPlace(api: Router, completion: @escaping (Result<Search, NetworkError>) -> Void) {
 

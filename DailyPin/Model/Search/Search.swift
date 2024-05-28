@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Place
-struct Search: Decodable, Hashable {
+struct SearchResultDto: Decodable, Hashable {
     var places: [PlaceElement]
 }
 

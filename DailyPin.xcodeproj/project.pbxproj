@@ -21,6 +21,7 @@
 		CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32459E2AC9683300582FC5 /* InfoView.swift */; };
 		CE3541D62AD5313F00773CD3 /* NSNotification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3541D52AD5313F00773CD3 /* NSNotification.Name.swift */; };
 		CE3886E82AFF48FA00F5B2D2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CE3886E72AFF48FA00F5B2D2 /* README.md */; };
+		CE3B809E2C05AA4400911814 /* PlaceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B809D2C05AA4400911814 /* PlaceItem.swift */; };
 		CE3DF7EA2AC1602D00653CE1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CE3DF7E92AC1602D00653CE1 /* .gitignore */; };
 		CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */; };
 		CE3DF7F22AC2A9C500653CE1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE3DF7F42AC2A9C500653CE1 /* Localizable.strings */; };
@@ -112,6 +113,8 @@
 		CEB739182C059200004A9A20 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB739172C059200004A9A20 /* APIKey.swift */; };
 		CEB7391A2C059276004A9A20 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB739192C059276004A9A20 /* Endpoint.swift */; };
 		CEB7391C2C05928D004A9A20 /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB7391B2C05928D004A9A20 /* BaseURL.swift */; };
+		CEB7391E2C059751004A9A20 /* ResponseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB7391D2C059751004A9A20 /* ResponseProtocol.swift */; };
+		CEB739202C059775004A9A20 /* ModelTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB7391F2C059775004A9A20 /* ModelTypeProtocol.swift */; };
 		CEBAB9022AE01B69008AF9C8 /* GowunBatang-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB9012AE01B69008AF9C8 /* GowunBatang-Bold.ttf */; };
 		CEBAB9042AE01B71008AF9C8 /* GowunBatang-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */; };
 		CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */; };
@@ -147,6 +150,7 @@
 		CE32459E2AC9683300582FC5 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		CE3541D52AD5313F00773CD3 /* NSNotification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotification.Name.swift; sourceTree = "<group>"; };
 		CE3886E72AFF48FA00F5B2D2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CE3B809D2C05AA4400911814 /* PlaceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceItem.swift; sourceTree = "<group>"; };
 		CE3DF7E92AC1602D00653CE1 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		CE3DF7EC2AC1AFCA00653CE1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE3DF7F32AC2A9C500653CE1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -233,6 +237,8 @@
 		CEB739172C059200004A9A20 /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		CEB739192C059276004A9A20 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		CEB7391B2C05928D004A9A20 /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
+		CEB7391D2C059751004A9A20 /* ResponseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseProtocol.swift; sourceTree = "<group>"; };
+		CEB7391F2C059775004A9A20 /* ModelTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTypeProtocol.swift; sourceTree = "<group>"; };
 		CEBAB9012AE01B69008AF9C8 /* GowunBatang-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Bold.ttf"; sourceTree = "<group>"; };
 		CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Regular.ttf"; sourceTree = "<group>"; };
 		CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewProtocol.swift; sourceTree = "<group>"; };
@@ -299,6 +305,8 @@
 				CE09C75E2C04294B00002869 /* AuthorizationLocationProtocol.swift */,
 				CE09C7632C0458B500002869 /* BottomSheetProtocol.swift */,
 				CE09C7652C04A9D300002869 /* SearchResultProtocol.swift */,
+				CEB7391D2C059751004A9A20 /* ResponseProtocol.swift */,
+				CEB7391F2C059775004A9A20 /* ModelTypeProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -403,8 +411,8 @@
 		CE3DF7FF2AC2B59900653CE1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CEB739212C05981F004A9A20 /* Search */,
 				CE4DF90B2ACBBC2700546526 /* Realm */,
-				CE52CB692AC5AE17007AD7F8 /* Search.swift */,
 				CE52CB6F2AC7186F007AD7F8 /* LangCode.swift */,
 				CEB390A62ACE840600E4B2AC /* SearchParameter.swift */,
 				CEB390B52ACFDC0C00E4B2AC /* RecordMode.swift */,
@@ -591,6 +599,15 @@
 			path = Record;
 			sourceTree = "<group>";
 		};
+		CEB739212C05981F004A9A20 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				CE52CB692AC5AE17007AD7F8 /* Search.swift */,
+				CE3B809D2C05AA4400911814 /* PlaceItem.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		CEBAB9002AE01B4F008AF9C8 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -761,6 +778,7 @@
 				CE83F4E32B9AEFE900B067DC /* RecordWriteView.swift in Sources */,
 				CE09C7662C04A9D300002869 /* SearchResultProtocol.swift in Sources */,
 				CED3A6F22BA3FF3200B17B41 /* ImageCollectionProtocol.swift in Sources */,
+				CEB7391E2C059751004A9A20 /* ResponseProtocol.swift in Sources */,
 				CEE694932ADCFD5300FDE8E6 /* AlertMapViewController.swift in Sources */,
 				CE814A612AD594FB00068854 /* CalendarView.swift in Sources */,
 				CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */,
@@ -803,7 +821,9 @@
 				CEA4458C2AE4DD100000A57F /* PlaceListProtocol.swift in Sources */,
 				CEB739182C059200004A9A20 /* APIKey.swift in Sources */,
 				CE743E282BA81C4400E0D9EA /* CircleButton.swift in Sources */,
+				CEB739202C059775004A9A20 /* ModelTypeProtocol.swift in Sources */,
 				CE83F4D12B9AB5F300B067DC /* RecordReadView.swift in Sources */,
+				CE3B809E2C05AA4400911814 /* PlaceItem.swift in Sources */,
 				CE52CB6E2AC5B1D6007AD7F8 /* Router.swift in Sources */,
 				CE3DF81F2AC52C3B00653CE1 /* SearchViewController.swift in Sources */,
 				CED3A6E52BA2EB4F00B17B41 /* PHPickerManager.swift in Sources */,
