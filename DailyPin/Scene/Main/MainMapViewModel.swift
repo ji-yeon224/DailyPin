@@ -7,16 +7,37 @@
 
 import Foundation
 import MapKit
+import RxSwift
 
 final class MainMapViewModel {
     
     private let placeRepository = PlaceRepository()
     
+    let searchError = PublishSubject<String>()
+    let geoInfo = PublishSubject<PlaceItem>()
+    
     let place: Observable<[Place]?> = Observable(nil)
     let annotations: Observable<[CustomAnnotation]> = Observable([])
-    private var placeInfo: PlaceInfo = PlaceInfo(addressComponents: [], address: "", placeID: "")
+    private var placeInfo: GeocodeData = GeocodeData(addressComponents: [], address: "", placeID: "")
     var selectedLocation: PlaceItem? = nil
 //    var placeList: [Place]? = nil
+    
+    
+    func requestGeocoding(lat: Double, lng: Double) {
+        Task {
+            do {
+                let item = try await GoogleNetwork.shared.requestData(api: .geocoding(lat: lat, lng: lng), resultType: GeocodingResDto.self)
+                guard let item = item as? PlaceItemList else { return }
+                var info = item.item[0]
+                info.latitude = lat
+                info.longitude = lng
+                geoInfo.onNext(info)
+                selectedLocation = info
+            } catch {
+                searchError.onNext(error.localizedDescription)
+            }
+        }
+    }
     
     func requestSelectedLocation(lat: Double, lng: Double, completion: @escaping((PlaceItem) -> Void), failCompletion: @escaping((NetworkError) -> Void) ) {
         
@@ -35,7 +56,7 @@ final class MainMapViewModel {
     
 
     
-    private func convertToPlaceElement(placeInfo: PlaceInfo, lat: Double, lng: Double) {
+    private func convertToPlaceElement(placeInfo: GeocodeData, lat: Double, lng: Double) {
         
         let location = Location(latitude: lat, longitude: lng)
         let addressCompnents = placeInfo.addressComponents

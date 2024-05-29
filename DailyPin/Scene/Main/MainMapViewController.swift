@@ -22,6 +22,7 @@ final class MainMapViewController: BaseViewController {
     
     private var disposeBag = DisposeBag()
     private let toastMessage = PublishRelay<String>()
+    private let writeLongPress = PublishSubject<(Double, Double)>()
     
     override func loadView() {
         self.view = mainView
@@ -90,6 +91,22 @@ final class MainMapViewController: BaseViewController {
             }
             .disposed(by: DisposeBag())
         
+        viewModel.geoInfo
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, item in
+                owner.showAlertMap(placeInfo: item)
+            }
+            .disposed(by: disposeBag)
+        writeLongPress
+            .bind(with: self) { owner, coord in
+                let vc = RecordWriteViewController(mode: .create, record: nil, location: owner.viewModel.selectedLocation)
+                vc.longPressHandler = {
+                    owner.mainView.setRegion(center: CLLocationCoordinate2D(latitude: coord.0, longitude: coord.1))
+                    BottomSheetManager.shared.setFloatingView(viewType: .info(data: owner.viewModel.selectedLocation), vc: owner)
+                }
+                owner.transitionNav(vc: vc)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func bindUI() {
@@ -140,6 +157,7 @@ final class MainMapViewController: BaseViewController {
                 owner.longPressMap(gesture)
             }
             .disposed(by: disposeBag)
+        
     }
     
     private func transitionPushNav(vc: UIViewController?) {
@@ -179,30 +197,31 @@ extension MainMapViewController {
         let mapPoint: CLLocationCoordinate2D = self.mainView.mapView.convert(location, toCoordinateFrom: self.mainView.mapView)
         
         BottomSheetManager.shared.dismiss()
+        viewModel.requestGeocoding(lat: mapPoint.latitude, lng: mapPoint.longitude)
         
-        self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) { [weak self] place in
-            
-            guard let self = self else { return }
-            
-            self.showAlertMap(address: place.address, cood: mapPoint) {
-                
-                let vc = RecordWriteViewController(mode: .create, record: nil, location: self.viewModel.selectedLocation)
-                vc.longPressHandler = {
-                    DispatchQueue.main.async {
-                        self.mainView.setRegion(center: mapPoint, self.mainView.mapView.region.span)
-                        BottomSheetManager.shared.setFloatingView(viewType: .info(data: place), vc: self)
-                    }
-                }
-                self.transitionNav(vc: vc)
-                
-            } cancelHandler: {
-                return
-            }
-            
-            
-        } failCompletion: { error in
-            self.toastMessage.accept(error.errorDescription ?? "toast_errorAlert".localized())
-        }
+//        self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) { [weak self] place in
+//            
+//            guard let self = self else { return }
+//            
+//            self.showAlertMap(address: place.address, cood: mapPoint) {
+//                
+//                let vc = RecordWriteViewController(mode: .create, record: nil, location: self.viewModel.selectedLocation)
+//                vc.longPressHandler = {
+//                    DispatchQueue.main.async {
+//                        self.mainView.setRegion(center: mapPoint, self.mainView.mapView.region.span)
+//                        BottomSheetManager.shared.setFloatingView(viewType: .info(data: place), vc: self)
+//                    }
+//                }
+//                self.transitionNav(vc: vc)
+//                
+//            } cancelHandler: {
+//                return
+//            }
+//            
+//            
+//        } failCompletion: { error in
+//            self.toastMessage.accept(error.errorDescription ?? "toast_errorAlert".localized())
+//        }
     }
     
     
@@ -234,20 +253,23 @@ extension MainMapViewController {
     }
     
     // alert 지도
-    private func showAlertMap(address: String, cood: CLLocationCoordinate2D, okHandler: (() -> Void)?, cancelHandler: (() -> Void)?) {
-        let alert = UIAlertController(title: "alert_addRecordTitle".localized(), message: address, preferredStyle: .alert)
+    private func showAlertMap(placeInfo: PlaceItem) {
+        
+        guard let lat = placeInfo.latitude, let lng = placeInfo.longitude else { return }
+        
+        let alert = UIAlertController(title: "alert_addRecordTitle".localized(), message: placeInfo.address, preferredStyle: .alert)
         
         let ok = UIAlertAction(title: "okText".localized(), style: .default) { _ in
-            okHandler?()
+            self.writeLongPress.onNext((lat, lng))
         }
         let cancel = UIAlertAction(title: "cancelText".localized(), style: .destructive) { _ in
-            cancelHandler?()
+            
         }
         alert.addAction(cancel)
         alert.addAction(ok)
         
-        let contentVC = AlertMapViewController()
-        contentVC.cood = cood
+        let contentVC = AlertMapViewController(lat: lat, lng: lng)
+        
         
         alert.setValue(contentVC, forKey: "contentViewController")
         
@@ -257,7 +279,8 @@ extension MainMapViewController {
 
 extension MainMapViewController: SearchResultProtocol {
     func selectSearchResult(place: PlaceItem) {
-        let center = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+        guard let lat = place.latitude, let lng = place.longitude else { return }
+        let center = CLLocationCoordinate2D(latitude: lat, longitude: lng)
         
         
         searchAnnotation = SelectAnnotation(placeID: place.id, coordinate: center)
@@ -290,7 +313,9 @@ extension MainMapViewController: MapViewProtocol {
 
 extension MainMapViewController: BottomSheetProtocol {
     func setLocation(data: PlaceItem) {
-        let center = CLLocationCoordinate2D(latitude: data.latitude, longitude: data.longitude)
+        guard let lat = data.latitude, let lng = data.longitude else { return }
+        let center = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+        
         searchAnnotation = SelectAnnotation(placeID: data.id, coordinate: center)
         if let searchAnnotation = self.searchAnnotation {
             self.mainView.setOneAnnotation(annotation: searchAnnotation)

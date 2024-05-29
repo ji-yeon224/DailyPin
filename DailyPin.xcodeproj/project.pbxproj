@@ -102,7 +102,7 @@
 		CEB00FCD2AC030C0001E7BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FCB2AC030C0001E7BB0 /* LaunchScreen.storyboard */; };
 		CEB1AE5D2AF7E8070086DEA9 /* PlainLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1AE5C2AF7E8070086DEA9 /* PlainLabel.swift */; };
 		CEB1AE5F2AF7EA560086DEA9 /* BoldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */; };
-		CEB3373A2ADA9CE20027D90E /* Geocoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB337392ADA9CE20027D90E /* Geocoding.swift */; };
+		CEB3373A2ADA9CE20027D90E /* GeocodingResDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB337392ADA9CE20027D90E /* GeocodingResDto.swift */; };
 		CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390A62ACE840600E4B2AC /* SearchParameter.swift */; };
 		CEB390AE2ACF0DB200E4B2AC /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390AD2ACF0DB200E4B2AC /* UIScrollView.swift */; };
 		CEB390B42ACFCD4600E4B2AC /* MemoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390B32ACFCD4600E4B2AC /* MemoTextView.swift */; };
@@ -226,7 +226,7 @@
 		CEB00FCE2AC030C0001E7BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEB1AE5C2AF7E8070086DEA9 /* PlainLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainLabel.swift; sourceTree = "<group>"; };
 		CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoldLabel.swift; sourceTree = "<group>"; };
-		CEB337392ADA9CE20027D90E /* Geocoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoding.swift; sourceTree = "<group>"; };
+		CEB337392ADA9CE20027D90E /* GeocodingResDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingResDto.swift; sourceTree = "<group>"; };
 		CEB390A62ACE840600E4B2AC /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
 		CEB390AD2ACF0DB200E4B2AC /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		CEB390B32ACFCD4600E4B2AC /* MemoTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTextView.swift; sourceTree = "<group>"; };
@@ -331,6 +331,14 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		CE3B809F2C05CE2C00911814 /* Geocoding */ = {
+			isa = PBXGroup;
+			children = (
+				CEB337392ADA9CE20027D90E /* GeocodingResDto.swift */,
+			);
+			path = Geocoding;
+			sourceTree = "<group>";
+		};
 		CE3DF7EB2AC17CE500653CE1 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,12 +419,12 @@
 		CE3DF7FF2AC2B59900653CE1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CE3B809F2C05CE2C00911814 /* Geocoding */,
 				CEB739212C05981F004A9A20 /* Search */,
 				CE4DF90B2ACBBC2700546526 /* Realm */,
 				CE52CB6F2AC7186F007AD7F8 /* LangCode.swift */,
 				CEB390A62ACE840600E4B2AC /* SearchParameter.swift */,
 				CEB390B52ACFDC0C00E4B2AC /* RecordMode.swift */,
-				CEB337392ADA9CE20027D90E /* Geocoding.swift */,
 				CE83F4D42B9ABD7500B067DC /* RecordData.swift */,
 				CED3A6E82BA2EDE100B17B41 /* SelectedImage.swift */,
 				CED3A6EA2BA3F99E00B17B41 /* SelectImageModel.swift */,
@@ -790,7 +798,7 @@
 				CE546CD42AD44CCE00C0392B /* BaseAnnotationView.swift in Sources */,
 				CED3A6EB2BA3F99E00B17B41 /* SelectImageModel.swift in Sources */,
 				CE90EEC52AE4CD7B0034C03B /* PlaceListViewController.swift in Sources */,
-				CEB3373A2ADA9CE20027D90E /* Geocoding.swift in Sources */,
+				CEB3373A2ADA9CE20027D90E /* GeocodingResDto.swift in Sources */,
 				CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */,
 				CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */,
 				CE52CB772AC7B454007AD7F8 /* NetworkError.swift in Sources */,

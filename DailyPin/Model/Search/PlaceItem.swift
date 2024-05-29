@@ -11,8 +11,8 @@ import Foundation
 struct PlaceItem: ModelTypeProtocol {
     let id: String
     let address: String
-    let latitude: Double
-    let longitude: Double
+    var latitude: Double? = 0.0
+    var longitude: Double? = 0.0
     let name: String
 }
 

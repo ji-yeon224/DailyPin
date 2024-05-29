@@ -9,7 +9,18 @@ import UIKit
 import MapKit
 
 final class AlertMapViewController : UIViewController{
-    var cood: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
+    private var cood: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
+    
+    init(lat: Double?, lng: Double?) {
+        super.init(nibName: nil, bundle: nil)
+        if let lat = lat, let lng = lng {
+            cood = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
   override func viewDidLoad() {
       super.viewDidLoad()

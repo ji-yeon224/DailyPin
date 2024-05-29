@@ -96,11 +96,11 @@ extension RecordWriteViewModel {
     
     private func savePlace(_ location: PlaceItem?) -> Place? {
         
-        guard let location = location else {
+        guard let location = location, let lat = location.latitude, let lng = location.longitude else {
             return nil
         }
         
-        let place = Place(placeId: location.id, address: location.address, placeName: location.name, latitude: location.latitude, longitude: location.longitude)
+        let place = Place(placeId: location.id, address: location.address, placeName: location.name, latitude: lat, longitude: lng)
         
         
         do {
