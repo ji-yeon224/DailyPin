@@ -10,7 +10,7 @@ import RxSwift
 
 final class PlaceListViewController: BaseViewController {
     
-    private let mainView = PlaceListView()
+    let mainView = PlaceListView()
     private let viewModel = PlaceListViewModel()
     private let disposeBag = DisposeBag()
     

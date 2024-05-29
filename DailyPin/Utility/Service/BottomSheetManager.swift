@@ -36,12 +36,18 @@ final class BottomSheetManager {
         case .place:
             let vc = PlaceListViewController()
             vc.placeListDelegate = self
-            floatingView.set(contentViewController: vc)
             
+            floatingView.track(scrollView: vc.mainView.collectionView)
+            floatingView.view.frame = vc.view.bounds
+            floatingView.set(contentViewController: vc)
         case .info(let data):
             let vc = InfoViewController(placeData: data)
+            
+            floatingView.track(scrollView: vc.mainView.collectionView)
+            floatingView.view.frame = vc.view.bounds
             floatingView.set(contentViewController: vc)
         }
+        
         floatingView.layout = layout
         floatingView.changePanelStyle()
         floatingView.invalidateLayout()
