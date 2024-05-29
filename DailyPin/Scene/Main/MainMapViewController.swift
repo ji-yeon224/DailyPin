@@ -34,7 +34,7 @@ final class MainMapViewController: BaseViewController {
         
         mainView.mapViewDelegate = self
         notificationObserver()
-        bindData()
+        
         BottomSheetManager.shared.delegate = self
         MapKitManager.shared.checkDeviceLocationAuthorization()
     }
@@ -48,6 +48,7 @@ final class MainMapViewController: BaseViewController {
     
     override func configureUI() {
         super.configureUI()
+        bindData()
         bindUI()
         configMapView()
         
@@ -68,9 +69,13 @@ final class MainMapViewController: BaseViewController {
     
     private func bindData() {
         
-        viewModel.annotations.bind { data in
-            self.mainView.setAllCustomAnnotation(annotation: data)
-        }
+        viewModel.allAnnotations
+            .bind(with: self) { owner, annotations in
+                owner.mainView.setAllCustomAnnotation(annotation: annotations)
+            }
+        
+            .disposed(by: disposeBag)
+        
         MapKitManager.shared.setUserLocation
             .bind(with: self) { owner, coordinate in
                 owner.mainView.setRegion(center: coordinate)
@@ -188,7 +193,7 @@ extension MainMapViewController {
                 deleteSearchAnnotation()
             }
         }
-        mainView.removeAllCustomAnnotation(annotations: viewModel.annotations.value)
+        mainView.removeAllCustomAnnotation(annotations: viewModel.allAnnotationList)
         viewModel.getAllPlaceAnnotation()
     }
     
@@ -277,12 +282,12 @@ extension MainMapViewController: SearchResultProtocol {
 extension MainMapViewController: MapViewProtocol {
     func didSelect(annotation: CustomAnnotation) {
         // InfoView Present
-        guard let place = viewModel.getPlaceData(id: annotation.placeID) else {
+        guard let place = viewModel.getPlaceData(id: annotation.placeID), let lat = place.latitude, let lng = place.longitude else {
             return
         }
-        let coord = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+        let coord = CLLocationCoordinate2D(latitude: lat, longitude: lng)
         mainView.setRegion(center: coord, mainView.mapView.region.span)
-        BottomSheetManager.shared.setFloatingView(viewType: .info(data: viewModel.convertPlaceToPlaceElement(place: place)), vc: self)
+        BottomSheetManager.shared.setFloatingView(viewType: .info(data: place), vc: self)
         
     }
     

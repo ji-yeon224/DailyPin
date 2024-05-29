@@ -13,9 +13,9 @@ final class PlaceRepository {
     
     private let realm = try! Realm()
     
-    func fetch() -> [Place] {
+    func fetch() -> [PlaceItem] {
         let data = realm.objects(Place.self)
-        return Array(data.reversed())
+        return Array(data.reversed()).map { $0.toDomain() }
     }
     
     func createItem(_ item: Place) throws {

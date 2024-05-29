@@ -15,10 +15,10 @@ final class MainMapViewModel {
     
     let searchError = PublishSubject<String>()
     let geoInfo = PublishSubject<PlaceItem>()
+    let allPlace = PublishSubject<[PlaceItem]>()
     
-    let place: Observable<[Place]?> = Observable(nil)
-    let annotations: Observable<[CustomAnnotation]> = Observable([])
-    
+    let allAnnotations = PublishSubject<[CustomAnnotation]>()
+    var allAnnotationList: [CustomAnnotation] = []
     var selectedLocation: PlaceItem? = nil
     
     
@@ -40,30 +40,32 @@ final class MainMapViewModel {
     
     func getAllPlaceAnnotation() {
         
-        place.value = placeRepository.fetch()
-        setAllAnnotations()
+        let item = placeRepository.fetch()
+        allPlace.onNext(item)
+        setAllAnnotations(item: item)
         
     }
     
-    func setAllAnnotations() {
-        
-        if let place = place.value {
-            annotations.value.removeAll()
-            place.forEach {
-                let coord = CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)
+    private func setAllAnnotations(item: [PlaceItem]) {
+        allAnnotationList.removeAll()
+        item.forEach {
+            if let lat = $0.latitude, let lng = $0.longitude {
+                let coord = CLLocationCoordinate2D(latitude: lat, longitude: lng)
                 
-                let customAnnotation = CustomAnnotation(placeID: $0.placeId, coordinate: coord)
-                annotations.value.append(customAnnotation)
+                let customAnnotation = CustomAnnotation(placeID: $0.id, coordinate: coord)
+                allAnnotationList.append(customAnnotation)
             }
         }
         
+        allAnnotations.onNext(allAnnotationList)
+        
     }
     
-    func getPlaceData(id: String) -> Place? {
+    func getPlaceData(id: String) -> PlaceItem? {
         
         do {
             let place = try placeRepository.searchItemByID(id)
-            return place
+            return place.toDomain()
         } catch {
             return nil
         }
