@@ -18,9 +18,8 @@ final class MainMapViewModel {
     
     let place: Observable<[Place]?> = Observable(nil)
     let annotations: Observable<[CustomAnnotation]> = Observable([])
-    private var placeInfo: GeocodeData = GeocodeData(addressComponents: [], address: "", placeID: "")
+    
     var selectedLocation: PlaceItem? = nil
-//    var placeList: [Place]? = nil
     
     
     func requestGeocoding(lat: Double, lng: Double) {
@@ -37,41 +36,6 @@ final class MainMapViewModel {
                 searchError.onNext(error.localizedDescription)
             }
         }
-    }
-    
-    func requestSelectedLocation(lat: Double, lng: Double, completion: @escaping((PlaceItem) -> Void), failCompletion: @escaping((NetworkError) -> Void) ) {
-        
-        GoogleNetwork.shared.requestGeocoder(api: .geocoding(lat: lat, lng: lng)) { response in
-            switch response {
-            case .success(let data):
-                self.placeInfo = data.results[0]
-                self.convertToPlaceElement(placeInfo: self.placeInfo, lat: lat, lng: lng)
-                completion(self.selectedLocation!)
-            case .failure(let error):
-                failCompletion(error)
-            }
-        }
-        
-    }
-    
-
-    
-    private func convertToPlaceElement(placeInfo: GeocodeData, lat: Double, lng: Double) {
-        
-        let location = Location(latitude: lat, longitude: lng)
-        let addressCompnents = placeInfo.addressComponents
-        var name: String = ""
-        if placeInfo.addressComponents.count < 2 {
-            name = "\(addressCompnents[0].longName)"
-        } else {
-            name = "\(addressCompnents[1].longName) \(addressCompnents[0].longName)"
-        }
-        
-//        let placeName = DisplayName(placeName: name)
-        
-        selectedLocation = PlaceItem(id: placeInfo.placeID, address: placeInfo.address, latitude: lat, longitude: lng, name: name)
-        //PlaceElement(id: placeInfo.placeID, formattedAddress: placeInfo.address, location: location, displayName: placeName)
-        
     }
     
     func getAllPlaceAnnotation() {
@@ -107,7 +71,6 @@ final class MainMapViewModel {
     
     func convertPlaceToPlaceElement(place: Place) -> PlaceItem {
         return place.toDomain()
-//        return PlaceElement(id: place.placeId, formattedAddress: place.address, location: Location(latitude: place.latitude, longitude: place.longitude), displayName: DisplayName(placeName: place.placeName))
     }
     
     

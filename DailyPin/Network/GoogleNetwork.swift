@@ -28,22 +28,4 @@ final class GoogleNetwork {
             throw error
         }
     }
-    
-    func requestGeocoder(api: Router, completion: @escaping (Result<GeocodingResDto, NetworkError>) -> Void) {
-        
-        AF.request(api).responseDecodable(of: GeocodingResDto.self) { response in
-            
-            switch response.result {
-            case .success(let data): completion(.success(data)); //print(data)
-            case .failure(_):
-                let status = response.response?.statusCode ?? 500
-                guard let error = NetworkError(rawValue: status) else { return }
-                completion(.failure(error))
-            }
-        }
-        
-    }
-    
-
-    
 }

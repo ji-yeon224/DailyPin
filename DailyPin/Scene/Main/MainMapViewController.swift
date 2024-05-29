@@ -199,29 +199,6 @@ extension MainMapViewController {
         BottomSheetManager.shared.dismiss()
         viewModel.requestGeocoding(lat: mapPoint.latitude, lng: mapPoint.longitude)
         
-//        self.viewModel.requestSelectedLocation(lat: mapPoint.latitude, lng: mapPoint.longitude) { [weak self] place in
-//            
-//            guard let self = self else { return }
-//            
-//            self.showAlertMap(address: place.address, cood: mapPoint) {
-//                
-//                let vc = RecordWriteViewController(mode: .create, record: nil, location: self.viewModel.selectedLocation)
-//                vc.longPressHandler = {
-//                    DispatchQueue.main.async {
-//                        self.mainView.setRegion(center: mapPoint, self.mainView.mapView.region.span)
-//                        BottomSheetManager.shared.setFloatingView(viewType: .info(data: place), vc: self)
-//                    }
-//                }
-//                self.transitionNav(vc: vc)
-//                
-//            } cancelHandler: {
-//                return
-//            }
-//            
-//            
-//        } failCompletion: { error in
-//            self.toastMessage.accept(error.errorDescription ?? "toast_errorAlert".localized())
-//        }
     }
     
     
