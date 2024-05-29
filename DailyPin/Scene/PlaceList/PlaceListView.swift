@@ -10,7 +10,7 @@ import SnapKit
 
 final class PlaceListView: BaseView {
     
-    var dataSource: UICollectionViewDiffableDataSource<Int, Place>!
+    var dataSource: UICollectionViewDiffableDataSource<Int, PlaceItem>!
     weak var collectionViewDelegate: PlaceCollectionViewProtocol?
     
     private let titleLabel = {
@@ -124,8 +124,8 @@ extension PlaceListView {
     
     
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<SearchCollectionViewCell, Place> { cell, indexPath, itemIdentifier in
-            cell.title.text = itemIdentifier.placeName
+        let cellRegistration = UICollectionView.CellRegistration<SearchCollectionViewCell, PlaceItem> { cell, indexPath, itemIdentifier in
+            cell.title.text = itemIdentifier.name
             cell.address.text = itemIdentifier.address
             cell.layoutIfNeeded()
         }

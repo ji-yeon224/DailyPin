@@ -17,18 +17,18 @@ final class RecordReadViewController: BaseViewController {
     private let viewModel = RecordReadViewModel()
     
     private var record: Record?
-    private var location: PlaceElement?
+    private var location: PlaceItem?
     var disposeBag = DisposeBag()
     private var editButtonTap = PublishRelay<Void>()
     private var deleteButtonTap = PublishRelay<Void>()
     
-    private var requestDeleteRecord = PublishRelay<(Record, PlaceElement)>()
+    private var requestDeleteRecord = PublishRelay<(Record, PlaceItem)>()
     
     override func loadView() {
         self.view = mainView
     }
     
-    init(record: Record?, location: PlaceElement?) {
+    init(record: Record?, location: PlaceItem?) {
         super.init(nibName: nil, bundle: nil)
         self.record = record
         self.location = location
@@ -58,7 +58,7 @@ final class RecordReadViewController: BaseViewController {
             return
         }
         mainView.setRecordData(data: record)
-        mainView.addressLabel.text = location.formattedAddress
+        mainView.addressLabel.text = location.address
         
     }
     

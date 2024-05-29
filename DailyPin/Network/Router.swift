@@ -16,9 +16,9 @@ enum Router: URLRequestConvertible {
     private var baseURL: URL {
         switch self {
         case .place:
-            return URL(string: "https://places.googleapis.com/v1/places:searchText")!
+            return Endpoint.place.url
         case .geocoding:
-            return URL(string: "https://maps.googleapis.com/maps/api/geocode/json")!
+            return Endpoint.geocoding.url
         }
     }
     

@@ -6,16 +6,21 @@
 //
 
 import Foundation
+import RxSwift
 
 final class PlaceListViewModel {
     
     
     private let placeRepository = PlaceRepository()
-    var placeList: Observable<[Place]> = Observable([])
+//    var placeList: Observable<[PlaceItem]> = Observable([])
+    var placeItems: [PlaceItem] = []
+    let placeList = PublishSubject<[PlaceItem]>()
     
     func getAllPlaceData() {
-        placeList.value.removeAll()
-        placeList.value.append(contentsOf: placeRepository.fetch())
+        placeItems.removeAll()
+        placeItems = placeRepository.fetch().map { $0.toDomain() }
+        placeList.onNext(placeItems)
+//        placeList.value.append(contentsOf: placeRepository.fetch())
     }
     
 }

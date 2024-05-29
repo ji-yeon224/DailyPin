@@ -16,7 +16,7 @@ final class RecordReadViewModel {
     private let disposeBag = DisposeBag()
     
     struct Input {
-        let deleteRecord: PublishRelay<(Record, PlaceElement)>
+        let deleteRecord: PublishRelay<(Record, PlaceItem)>
     }
     struct Output {
         let msg: PublishRelay<String>

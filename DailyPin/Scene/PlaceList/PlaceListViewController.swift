@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import RxSwift
 
 final class PlaceListViewController: BaseViewController {
     
     private let mainView = PlaceListView()
     private let viewModel = PlaceListViewModel()
+    private let disposeBag = DisposeBag()
     
     weak var placeListDelegate: PlaceListProtocol?
     
@@ -22,6 +24,7 @@ final class PlaceListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindData()
+        viewModel.getAllPlaceData()
     }
     
     deinit {
@@ -30,7 +33,7 @@ final class PlaceListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getAllPlaceData()
+        
     }
     
     override func configureUI() {
@@ -41,28 +44,27 @@ final class PlaceListViewController: BaseViewController {
     
     private func bindData() {
         
-        viewModel.placeList.bind { data in
-            
-            if data.count == 0 {
-                self.mainView.setPlaceHolder(false)
-            } else {
-                self.mainView.setPlaceHolder(true)
+        viewModel.placeList
+            .asDriver(onErrorJustReturn: [])
+            .drive(with: self) { owner, items in
+                owner.mainView.setPlaceHolder(items.count > 0)
+                owner.updateSnapShot(item: items)
             }
-            self.updateSnapShot()
-        }
+            .disposed(by: disposeBag)
+        
     }
     
-    private func updateSnapShot() {
-        var snapShot = NSDiffableDataSourceSnapshot<Int, Place>()
+    private func updateSnapShot(item: [PlaceItem]) {
+        var snapShot = NSDiffableDataSourceSnapshot<Int, PlaceItem>()
         snapShot.appendSections([0])
-        snapShot.appendItems(viewModel.placeList.value)
+        snapShot.appendItems(item)
         mainView.dataSource.apply(snapShot)
     }
 }
 
 extension PlaceListViewController: PlaceCollectionViewProtocol {
     
-    func didSelectPlaceItem(item: Place?) {
+    func didSelectPlaceItem(item: PlaceItem?) {
         guard let item = item else {
             showToastMessage(message: "toast_errorAlert".localized())
             return

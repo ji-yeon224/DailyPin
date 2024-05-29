@@ -12,7 +12,7 @@ final class InfoViewModel {
     private let placeRepository = PlaceRepository()
     
     let placeName: Observable<String?> = Observable(nil)
-    let place: Observable<PlaceElement?> = Observable(nil)
+    let place: Observable<PlaceItem?> = Observable(nil)
     let recordList: Observable<[Record]?> = Observable(nil)
     
     func getRecordList() throws {

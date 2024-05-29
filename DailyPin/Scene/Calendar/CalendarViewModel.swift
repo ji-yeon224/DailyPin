@@ -36,12 +36,12 @@ final class CalendarViewModel {
         recordFileterByDate.value.append(contentsOf: recordRepository.filterItemByDay(selectedDate))
     }
     
-    func convertToStruct(_ item: Place) -> PlaceElement {
-        
-        let location = Location(latitude: item.latitude, longitude: item.longitude)
-        let displayName = DisplayName(placeName: item.placeName)
-        
-        return PlaceElement(id: item.placeId, formattedAddress: item.address, location: location, displayName: displayName)
+    func convertToStruct(_ item: Place) -> PlaceItem {
+        return item.toDomain()
+//        let location = Location(latitude: item.latitude, longitude: item.longitude)
+//        let displayName = DisplayName(placeName: item.placeName)
+//        
+//        return PlaceElement(id: item.placeId, formattedAddress: item.address, location: location, displayName: displayName)
     }
     
     

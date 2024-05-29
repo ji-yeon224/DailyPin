@@ -8,5 +8,5 @@
 import Foundation
 
 protocol SearchResultProtocol: AnyObject {
-    func selectSearchResult(place: PlaceElement)
+    func selectSearchResult(place: PlaceItem)
 }
