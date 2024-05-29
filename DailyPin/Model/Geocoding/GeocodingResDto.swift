@@ -7,16 +7,12 @@
 
 import Foundation
 
-
-// MARK: - Geocoding
-struct Geocoding: Decodable, Hashable {
-    let results: [PlaceInfo]
+struct GeocodingResDto: Decodable, Hashable {
+    let results: [GeocodeData]
     let status: String
 }
 
-
-// MARK: - PlaceInfo
-struct PlaceInfo: Decodable, Hashable {
+struct GeocodeData: Decodable, Hashable {
     let addressComponents: [AddressComponent]
     let address: String
     let placeID: String
@@ -28,7 +24,7 @@ struct PlaceInfo: Decodable, Hashable {
     }
 }
 
-// MARK: - AddressComponent
+
 struct AddressComponent: Decodable, Hashable {
     let longName: String
     enum CodingKeys: String, CodingKey {
