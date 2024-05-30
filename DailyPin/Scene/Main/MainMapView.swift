@@ -19,7 +19,18 @@ final class MainMapView: BaseView {
         return view
     }()
     
-    let searchButton = SearchButton()
+    private let searchView = UIImageView().then {
+        $0.image = Constants.Image.searchButtonBg
+        $0.backgroundColor = .clear
+        $0.isUserInteractionEnabled = true
+    }
+    let searchTextButton = UIButton().then {
+        $0.setTitle("searchPlaceholder".localized(), for: .normal)
+        $0.setTitleColor(Constants.Color.placeholderColor, for: .normal)
+        $0.contentHorizontalAlignment = .leading
+        $0.titleLabel?.font = Font.body.fontStyle
+    }
+
     
     let calendarButton = CustomImageButton(img: Constants.Image.calendarButton)
     let currentLocation = CustomImageButton(img: Constants.Image.curLocation)
@@ -28,7 +39,8 @@ final class MainMapView: BaseView {
     
     override func configureUI() {
         addSubview(mapView)
-        [searchButton, calendarButton, placeListButton, currentLocation].forEach {
+        searchView.addSubview(searchTextButton)
+        [searchView, calendarButton, placeListButton, currentLocation].forEach {
             mapView.addSubview($0)
         }
     }
@@ -36,23 +48,30 @@ final class MainMapView: BaseView {
     
     override func setConstraints() {
         
+        
+        
         mapView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        searchButton.snp.makeConstraints { make in
+        searchView.snp.makeConstraints { make in
             make.leading.equalTo(mapView).inset(20)
             make.top.equalTo(safeAreaLayoutGuide).offset(10)
             make.height.equalTo(50)
         }
+        searchTextButton.snp.makeConstraints { make in
+            make.leading.equalTo(searchView).inset(15)
+            make.verticalEdges.equalTo(searchView)
+            make.trailing.equalTo(searchView).inset(20)
+        }
         calendarButton.snp.makeConstraints { make in
             make.trailing.equalTo(mapView).inset(15)
-            make.leading.equalTo(searchButton.snp.trailing).offset(10)
+            make.leading.equalTo(searchView.snp.trailing).offset(10)
             make.top.equalTo(safeAreaLayoutGuide).offset(10)
             make.size.equalTo(50)
         }
         
         placeListButton.snp.makeConstraints { make in
-            make.top.equalTo(calendarButton.snp.bottom).offset(20)
+            make.top.equalTo(calendarButton.snp.bottom).offset(15)
             make.trailing.equalTo(mapView).inset(15)
             make.size.equalTo(40)
         }

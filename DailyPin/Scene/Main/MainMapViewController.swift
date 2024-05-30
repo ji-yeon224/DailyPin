@@ -142,7 +142,7 @@ final class MainMapViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        mainView.searchButton.rx.tap
+        mainView.searchTextButton.rx.tap
             .asDriver()
             .drive(with: self) { owner, _ in
                 owner.searchViewTransition()

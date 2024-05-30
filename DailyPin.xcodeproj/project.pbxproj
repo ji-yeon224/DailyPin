@@ -91,7 +91,6 @@
 		CE9B0E8B2ACA6A0A008A0694 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = CE9B0E8A2ACA6A0A008A0694 /* FloatingPanel */; };
 		CE9B0E8D2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */; };
 		CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */; };
-		CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E942ACA95D7008A0694 /* SearchButton.swift */; };
 		CEA32E412AF394D9001B5619 /* FloatingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA32E402AF394D9001B5619 /* FloatingType.swift */; };
 		CEA4458C2AE4DD100000A57F /* PlaceListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */; };
 		CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */; };
@@ -213,7 +212,6 @@
 		CE9A16B92AD2CCBB0051BE23 /* RecordCollectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewProtocol.swift; sourceTree = "<group>"; };
 		CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelCustomLayout.swift; sourceTree = "<group>"; };
 		CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
-		CE9B0E942ACA95D7008A0694 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		CEA32E402AF394D9001B5619 /* FloatingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingType.swift; sourceTree = "<group>"; };
 		CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListProtocol.swift; sourceTree = "<group>"; };
 		CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -500,7 +498,6 @@
 		CE6F36B42B96E6FA007AD6AB /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				CE9B0E942ACA95D7008A0694 /* SearchButton.swift */,
 				CE94E7882AE6A6600005B593 /* ReturnTodayButton.swift */,
 				CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */,
 				CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */,
@@ -861,7 +858,6 @@
 				CEB7391C2C05928D004A9A20 /* BaseURL.swift in Sources */,
 				CEB390B62ACFDC0C00E4B2AC /* RecordMode.swift in Sources */,
 				CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */,
-				CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */,
 				CE6F36B32B96E56D007AD6AB /* Design.swift in Sources */,
 				CE83F4CD2B9AB58D00B067DC /* RecordReadViewController.swift in Sources */,
 				CEB5ECFA2AD0595E00BC6143 /* RecordRepository.swift in Sources */,
