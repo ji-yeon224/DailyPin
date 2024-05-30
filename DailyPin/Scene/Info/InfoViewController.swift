@@ -38,6 +38,7 @@ final class InfoViewController: BaseViewController {
         
         mainView.collectionViewDelegate = self
         bindData()
+        bindUI()
         
         requestRecordList.onNext(placeData)
         
@@ -57,14 +58,8 @@ final class InfoViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self, name: .updateCell, object: nil)
     }
     
-    @objc private func getChangeNotification(notification: NSNotification) {
-        requestRecordList.onNext(placeData)
-        
-    }
-    
     override func configureUI() {
         super.configureUI()
-        mainView.addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
         
         if let place = placeData {
             mainView.titleLabel.text = place.name
@@ -102,17 +97,32 @@ final class InfoViewController: BaseViewController {
         
     }
     
-    @objc private func addButtonClicked() {
+    private func bindUI() {
+        mainView.addButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                let vc = RecordWriteViewController(mode: .create, record: nil, location: owner.placeData)
+                owner.modalTransition(vc: vc)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    
+}
 
+extension InfoViewController {
+    
+    @objc private func getChangeNotification(notification: NSNotification) {
+        requestRecordList.onNext(placeData)
         
-        let vc = RecordWriteViewController(mode: .create, record: nil, location: placeData)
+    }
+    
+    private func modalTransition(vc: UIViewController) {
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
         nav.modalTransitionStyle = .crossDissolve
         present(nav, animated: true)
-        
     }
-    
     
     
     
@@ -123,8 +133,6 @@ final class InfoViewController: BaseViewController {
         snapShot.appendItems(item)
         mainView.dataSource.apply(snapShot)
     }
-    
-    
 }
 
 extension InfoViewController: RecordCollectionViewProtocol {
@@ -135,11 +143,7 @@ extension InfoViewController: RecordCollectionViewProtocol {
         }
         
         let vc = RecordReadViewController(record: item, location: placeData)
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        nav.modalTransitionStyle = .crossDissolve
-        
-        present(nav, animated: true)
+        modalTransition(vc: vc)
         
     }
     
