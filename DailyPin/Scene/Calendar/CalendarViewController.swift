@@ -143,11 +143,8 @@ extension CalendarViewController: FSCalendarProtocol {
     }
     
     func calendarCurrentPageDidChange(date: Date) {
-
         requestMonthData.onNext(nil)
         requestDayRecord.accept(date)
-        
-        
     }
     
 }
@@ -163,7 +160,6 @@ extension CalendarViewController: RecordCollectionViewProtocol {
             showOKAlert(title: "", message: "alert_locationLoadError".localized()) { }
             return
         }
-        print("select")
         let vc = RecordReadViewController(record: item, location: viewModel.convertToStruct(place))
         
         let nav = UINavigationController(rootViewController: vc)

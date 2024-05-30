@@ -11,12 +11,8 @@ import RxSwift
 final class CalendarViewModel {
     
     private let recordRepository = RecordRepository()
-    
-    
     let recordDates = PublishSubject<[Date]>()
     let filteredRecords = PublishSubject<[Record]>()
-    
-    
     
     func getRecords(date: Date) {
         var dateSet: Set<Date> = []

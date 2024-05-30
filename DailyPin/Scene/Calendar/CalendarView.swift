@@ -142,7 +142,6 @@ extension CalendarView: UICollectionViewDelegate  {
         }
         
         collectionViewDelegate?.didSelectRecordItem(item: item)
-        
     }
     
 }
