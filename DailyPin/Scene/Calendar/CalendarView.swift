@@ -58,8 +58,8 @@ final class CalendarView: BaseView {
         returnTodayButton.snp.makeConstraints { make in
             make.centerY.equalTo(calendarView.calendarHeaderView)
             make.trailing.equalTo(calendarView.calendarHeaderView.snp.trailing).inset(10)
-            make.height.equalTo(25)
-            make.width.equalTo(40)
+            
+            make.size.equalTo(35)
             
         }
         
