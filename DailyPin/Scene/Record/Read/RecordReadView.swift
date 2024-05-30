@@ -75,7 +75,7 @@ final class RecordReadView: BaseView {
     func setRecordData(data: Record) {
 //        addressLabel.text = location
         titleLabel.text = data.title
-        dateLabel.text = DateFormatter.convertDate(date: data.date)
+        dateLabel.text = DateFormatter.convertToString(format: .fullDateTime, date: data.date)
         if let memo = data.memo {
             memoTextView.attributedText = memo.setLineSpacing()
         }

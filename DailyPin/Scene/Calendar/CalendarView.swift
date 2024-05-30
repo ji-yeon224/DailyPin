@@ -126,7 +126,7 @@ extension CalendarView: UICollectionViewDelegate  {
         let cellRegistration = UICollectionView.CellRegistration<InfoCollectionViewCell, Record> { cell, indexPath, itemIdentifier in
             cell.titleLabel.text = itemIdentifier.title
             cell.address.text = itemIdentifier.placeInfo[0].address
-            cell.dateLabel.text = DateFormatter.convertDate(date: itemIdentifier.date)
+            cell.dateLabel.text = DateFormatter.convertToString(format: .fullTime, date: itemIdentifier.date)
             cell.layoutIfNeeded()
             
         }

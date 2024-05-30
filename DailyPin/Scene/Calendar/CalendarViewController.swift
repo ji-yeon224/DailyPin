@@ -121,9 +121,6 @@ final class CalendarViewController: BaseViewController {
         mainView.dataSource.apply(snapShot)
     }
     
-    func convertDate(_ date: Date) -> String {
-        return DateFormatter.convertCalendarDate(date: date)
-    }
     
 }
 

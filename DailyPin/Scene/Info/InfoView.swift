@@ -121,7 +121,7 @@ extension InfoView {
     private func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<InfoCollectionViewCell, Record> { cell, indexPath, itemIdentifier in
             cell.titleLabel.text = itemIdentifier.title
-            cell.dateLabel.text = DateFormatter.convertDate(date: itemIdentifier.date)
+            cell.dateLabel.text = DateFormatter.convertToString(format: .fullDateTime, date: itemIdentifier.date)
             cell.address.isHidden = true
             cell.layoutIfNeeded()
         }

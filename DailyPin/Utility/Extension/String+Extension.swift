@@ -27,5 +27,18 @@ extension String {
         return attrString
     }
     
+    static func convertToDate(format: DateFormatterType, date: String) -> String? {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(identifier: TimeZone.current.identifier)
+        formatter.dateFormat = format.rawValue
+        if let date = formatter.date(from: date) {
+            let str = DateFormatter.convertToString(format: format, date: date)
+            return str
+        }
+        return nil
+    }
+    
+    
     
 }

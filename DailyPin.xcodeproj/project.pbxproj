@@ -12,6 +12,7 @@
 		CE09C7612C0433E800002869 /* BottomSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C7602C0433E800002869 /* BottomSheetManager.swift */; };
 		CE09C7642C0458B500002869 /* BottomSheetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C7632C0458B500002869 /* BottomSheetProtocol.swift */; };
 		CE09C7662C04A9D300002869 /* SearchResultProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C7652C04A9D300002869 /* SearchResultProtocol.swift */; };
+		CE2343F42C08CAE1005F1420 /* DateFormatterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2343F32C08CAE1005F1420 /* DateFormatterType.swift */; };
 		CE2951EA2ADEA96E00EE2571 /* NanumGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */; };
 		CE2951EB2ADEA96E00EE2571 /* NanumGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */; };
 		CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */; };
@@ -139,6 +140,7 @@
 		CE09C7602C0433E800002869 /* BottomSheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetManager.swift; sourceTree = "<group>"; };
 		CE09C7632C0458B500002869 /* BottomSheetProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetProtocol.swift; sourceTree = "<group>"; };
 		CE09C7652C04A9D300002869 /* SearchResultProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultProtocol.swift; sourceTree = "<group>"; };
+		CE2343F32C08CAE1005F1420 /* DateFormatterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterType.swift; sourceTree = "<group>"; };
 		CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Regular.ttf"; sourceTree = "<group>"; };
 		CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Bold.ttf"; sourceTree = "<group>"; };
 		CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldProtocol.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				CE2951EC2ADEE7A500EE2571 /* Protocol */,
 				CE3DF80C2AC2D24100653CE1 /* Extension */,
 				CED3A6E42BA2EB4F00B17B41 /* PHPickerManager.swift */,
+				CE2343F32C08CAE1005F1420 /* DateFormatterType.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -765,6 +768,7 @@
 				CE3DF8162AC3311400653CE1 /* BaseUIButton.swift in Sources */,
 				CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */,
 				CE3DF81A2AC3B26900653CE1 /* Observable.swift in Sources */,
+				CE2343F42C08CAE1005F1420 /* DateFormatterType.swift in Sources */,
 				CEB390AE2ACF0DB200E4B2AC /* UIScrollView.swift in Sources */,
 				CE9A16B52AD28F0D0051BE23 /* Image.swift in Sources */,
 				CE83F4D52B9ABD7500B067DC /* RecordData.swift in Sources */,
