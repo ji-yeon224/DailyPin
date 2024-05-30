@@ -141,7 +141,7 @@ extension CalendarView: UICollectionViewDelegate  {
             return
         }
         
-        calendarDelegate?.moveDate(date: currentPage)
+        collectionViewDelegate?.didSelectRecordItem(item: item)
         
     }
     
