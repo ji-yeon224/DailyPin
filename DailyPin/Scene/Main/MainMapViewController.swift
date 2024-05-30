@@ -19,7 +19,7 @@ final class MainMapViewController: BaseViewController {
     private let viewModel = MainMapViewModel()
     
     private let defaultLoaction = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
-    private var highlighState: (CustomAnnotation?, CustomAnnotationView?) // view -> 이미 지도에 있던거
+    private var highlightState: (CustomAnnotation?, CustomAnnotationView?) // view -> 이미 지도에 있던거
     
     private var disposeBag = DisposeBag()
     private let toastMessage = PublishRelay<String>()
@@ -184,6 +184,7 @@ final class MainMapViewController: BaseViewController {
     
 }
 
+// - Event
 extension MainMapViewController {
     
     @objc private func getChangeNotification(notification: NSNotification) {
@@ -228,17 +229,6 @@ extension MainMapViewController {
         
     }
     
-    // 검색 결과로 찍힌 핀 지우기
-    private func deleteSearchAnnotation() {
-        if let tempAnnotation = highlighState.0 {
-            if let annoView = highlighState.1 { // 이미 있던 것
-                annoView.changePin(state: .nomal)
-            } else {
-                mainView.removeOneAnnotation(annotation: tempAnnotation)
-            }
-        }
-        
-    }
     
     // alert 지도
     private func showAlertMap(placeInfo: PlaceItem) {
@@ -264,6 +254,11 @@ extension MainMapViewController {
         present(alert, animated: true)
     }
     
+}
+
+// - Map Control Method
+extension MainMapViewController {
+    
     private func setAnnotationState(place: PlaceItem) {
         guard let lat = place.latitude, let lng = place.longitude else { return }
         let center = CLLocationCoordinate2D(latitude: lat, longitude: lng)
@@ -275,18 +270,28 @@ extension MainMapViewController {
             let annotationView = mainView.mapView.view(for: annotation) as? CustomAnnotationView {
             
             annotationView.changePin(state: .highlight)
-            self.highlighState = (annotation, annotationView)
+            self.highlightState = (annotation, annotationView)
             
         } else {
             let anno = CustomAnnotation(placeID: place.id, coordinate: center, isHighlight: true)
             self.mainView.setOneAnnotation(annotation: anno)
-            self.highlighState = (anno, nil)
+            self.highlightState = (anno, nil)
             
         }
     }
+    
+    // 검색 결과로 찍힌 핀 지우기
+    private func deleteSearchAnnotation() {
+        if let tempAnnotation = highlightState.0 {
+            if let annoView = highlightState.1 { // 이미 있던 것
+                annoView.changePin(state: .nomal)
+            } else {
+                mainView.removeOneAnnotation(annotation: tempAnnotation)
+            }
+        }
+        
+    }
 }
-
-
 
 extension MainMapViewController: SearchResultProtocol {
     func selectSearchResult(place: PlaceItem) {
