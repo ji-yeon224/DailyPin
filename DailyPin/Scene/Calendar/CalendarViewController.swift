@@ -131,15 +131,7 @@ final class CalendarViewController: BaseViewController {
 
 extension CalendarViewController: FSCalendarProtocol {
     
-    func returnButtonTapped() {
-        requestDayRecord.accept(Date())
-    }
-    
-    func moveCalendar(date: Date) {
-        requestDayRecord.accept(date)
-    }
-    
-    func didSelectDate(date: Date) {
+    func moveDate(date: Date) {
         requestDayRecord.accept(date)
     }
     

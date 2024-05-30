@@ -78,7 +78,8 @@ final class CalendarView: BaseView {
     @objc private func returnButtonTapped() {
         calendarView.setCurrentPage(Date(), animated: true)
         setDefaultSelectDate(Date())
-        calendarDelegate?.returnButtonTapped()
+
+        calendarDelegate?.moveDate(date: Date())
     }
     
     // 달 이동 로직
@@ -88,7 +89,8 @@ final class CalendarView: BaseView {
         self.currentPage = Calendar.current.date(byAdding: dateComponents, to: self.currentPage)!
         calendarView.setCurrentPage(self.currentPage, animated: true)
         setDefaultSelectDate(currentPage)
-        calendarDelegate?.moveCalendar(date: currentPage)
+
+        calendarDelegate?.moveDate(date: currentPage)
         
     }
     
@@ -139,7 +141,7 @@ extension CalendarView: UICollectionViewDelegate  {
             return
         }
         
-        collectionViewDelegate?.didSelectRecordItem(item: item)
+        calendarDelegate?.moveDate(date: currentPage)
         
     }
     
@@ -150,7 +152,8 @@ extension CalendarView: UICollectionViewDelegate  {
 extension CalendarView: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        calendarDelegate?.didSelectDate(date: date)
+
+        calendarDelegate?.moveDate(date: date)
     }
    
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
