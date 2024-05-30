@@ -42,7 +42,7 @@ final class SearchViewController: BaseViewController {
         super.viewDidLoad()
         navigationItem.titleView = mainView.searchBar
         mainView.searchBar.becomeFirstResponder()
-        mainView.searchBar.delegate = self
+        
         bindData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(networkConfiguration), name: .networkConnect, object: nil)
@@ -80,13 +80,15 @@ final class SearchViewController: BaseViewController {
         
         
         viewModel.searchResult
-            .bind(with: self) { owner, result in
+            .asDriver(onErrorJustReturn: [])
+            .drive(with: self) { owner, result in
                 owner.updateSnapShot(item: result)
             }
             .disposed(by: disposeBag)
         
         viewModel.searchError
-            .bind(with: self) { owner, value in
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self) { owner, value in
                 owner.showToastMessage(message: value)
             }
             .disposed(by: disposeBag)
@@ -102,11 +104,32 @@ final class SearchViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-//        viewModel.resultError.bind { [weak self] data in
-//            guard let data = data else { return }
-//            self?.viewModel.removeSearchResult()
-//            self?.showToastMessage(message: data)
-//        }
+        mainView.searchBar.rx.text.orEmpty
+            .bind(with: self) { owner, text in
+                if text.count == 0 {
+                    owner.viewModel.removeSearchResult()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.searchBar.rx.searchButtonClicked
+            .withLatestFrom(mainView.searchBar.rx.text.orEmpty) { _, value in
+                return value
+            }
+            .bind(with: self) { owner, text in
+                if text.count <= 0 {
+                    owner.mainView.configureErrorView(image: Constants.Image.noData, description: "error_emptySearchResult".localized())
+                    owner.mainView.configureHidden(collection: true, error: false)
+                } else {
+                    owner.viewModel.callPlaceRequest(query: text, langCode: .ko, location: owner.centerLocation)
+                    owner.mainView.configureHidden(collection: false, error: true)
+                    owner.view.endEditing(true)
+                }
+            }
+            .disposed(by: disposeBag)
+            
+            
+        
     }
     
     
@@ -115,12 +138,6 @@ final class SearchViewController: BaseViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonClicked))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
         
-//        if NetworkMonitor.shared.isConnected {
-//            self.mainView.configureHidden(collection: false, error: true)
-//            self.mainView.configureErrorView(image: Constants.Image.networkError, description: "network_connectError".localized())
-//        } else {
-//            self.mainView.configureHidden(collection: true, error: false)
-//        }
         
     }
     
@@ -137,30 +154,6 @@ final class SearchViewController: BaseViewController {
     }
 }
 
-
-extension SearchViewController: UISearchBarDelegate {
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let query = searchBar.text?.trimmingCharacters(in: .whitespaces), !query.isEmpty else {
-            mainView.configureErrorView(image: Constants.Image.noData, description: "error_emptySearchResult".localized())
-            mainView.configureHidden(collection: true, error: false)
-            return
-        }
-        
-        viewModel.callPlaceRequest(query: query, langCode: .ko, location: centerLocation)
-        mainView.configureHidden(collection: false, error: true)
-        view.endEditing(true)
-        
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        if searchBar.text == "" && viewModel.items.count > 0 {
-            viewModel.removeSearchResult()
-        }
-    }
-    
-}
 
 extension SearchViewController: CollectionViewProtocol {
     

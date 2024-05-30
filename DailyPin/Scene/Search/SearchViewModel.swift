@@ -32,21 +32,6 @@ final class SearchViewModel {
             
             
         }
-       
-        
-//        GoogleNetwork.shared.requestPlace(api: .place(query: query, langCode: langCode, location: location)) { response in
-//            
-//            switch response {
-//            case .success(let success):
-//                if success.places.count == 0 {
-//                    print("결과 없음")
-//                }
-//                
-//                self.searchResult.value = success
-//            case .failure(let failure):
-//                self.resultError.value = failure.localizedDescription
-//            }
-//        }
         
     }
     
