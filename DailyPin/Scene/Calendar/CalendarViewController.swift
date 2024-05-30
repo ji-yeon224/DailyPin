@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class CalendarViewController: BaseViewController {
     
@@ -13,11 +15,17 @@ final class CalendarViewController: BaseViewController {
     private let viewModel = CalendarViewModel()
     private var dateList: [Date] = []
     private var selectedDate = Date()
-    
+    private let requestDayRecord = BehaviorRelay<Date>(value: Date())
+    private let requestMonthData = PublishSubject<Date?>()
+    private let disposeBag = DisposeBag()
     
     override func loadView() {
         self.view = mainView
         
+    }
+    
+    deinit {
+        debugPrint("calendarview deinit")
     }
     
     override func viewDidLoad() {
@@ -28,8 +36,10 @@ final class CalendarViewController: BaseViewController {
         
         navigationController?.navigationBar.isHidden = false
         bindData()
-        viewModel.filterDate(selectedDate)
-        updateSnapShot()
+
+        requestDayRecord.accept(selectedDate)
+        requestMonthData.onNext(nil)
+
         
         NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: .updateCell, object: nil)
         
@@ -49,13 +59,38 @@ final class CalendarViewController: BaseViewController {
     
     private func bindData() {
         
-        viewModel.recordDateList.bind { data in
-            self.dateList = data
-        }
+        requestDayRecord
+            .asDriver()
+            .drive(with: self) { owner, date in
+                owner.selectedDate = date
+                owner.viewModel.filterDate(date)
+            }
+            .disposed(by: disposeBag)
         
-        viewModel.recordFileterByDate.bind { data in
-            self.updateSnapShot()
-        }
+        requestMonthData
+            .asDriver(onErrorJustReturn: mainView.calendarView.currentPage)
+            .drive(with: self) { owner, date in
+                if let date = date {
+                    owner.viewModel.getRecords(date: date)
+                } else {
+                    owner.viewModel.getRecords(date: owner.mainView.calendarView.currentPage)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.recordDates
+            .bind(with: self) { owner, dates in
+                owner.dateList = dates
+                owner.mainView.calendarView.reloadData()
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.filteredRecords
+            .asDriver(onErrorJustReturn: [])
+            .drive(with: self) { owner, records in
+                owner.updateSnapShot(item: records)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureUI() {
@@ -64,12 +99,6 @@ final class CalendarViewController: BaseViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
         
-        let date = mainView.calendarView.currentPage
-        viewModel.getRecords(date: date)
-        
-        
-        
-        
         mainView.setDefaultSelectDate(selectedDate)
         mainView.collectionView.collectionViewLayout.invalidateLayout()
         
@@ -77,19 +106,18 @@ final class CalendarViewController: BaseViewController {
     
     @objc private func getChangeNotification(notification: NSNotification) {
         
-        viewModel.getRecords(date: mainView.calendarView.currentPage)
-        viewModel.filterDate(selectedDate)
-        mainView.calendarView.reloadData()
+        requestMonthData.onNext(nil)
+        requestDayRecord.accept(selectedDate)
     }
     
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
     
-    private func updateSnapShot() {
+    private func updateSnapShot(item: [Record]) {
         var snapShot = NSDiffableDataSourceSnapshot<Int, Record>()
         snapShot.appendSections([0])
-        snapShot.appendItems(viewModel.recordFileterByDate.value)
+        snapShot.appendItems(item)
         mainView.dataSource.apply(snapShot)
     }
     
@@ -104,18 +132,15 @@ final class CalendarViewController: BaseViewController {
 extension CalendarViewController: FSCalendarProtocol {
     
     func returnButtonTapped() {
-        viewModel.filterDate(Date())
-        selectedDate = Date()
+        requestDayRecord.accept(Date())
     }
     
     func moveCalendar(date: Date) {
-        viewModel.filterDate(date)
-        selectedDate = date
+        requestDayRecord.accept(date)
     }
     
     func didSelectDate(date: Date) {
-        viewModel.filterDate(date)
-        selectedDate = date
+        requestDayRecord.accept(date)
     }
     
     func numberOfEventsFor(date: Date) -> Int {
@@ -126,10 +151,10 @@ extension CalendarViewController: FSCalendarProtocol {
     }
     
     func calendarCurrentPageDidChange(date: Date) {
-        viewModel.getRecords(date: mainView.calendarView.currentPage)
-        viewModel.filterDate(date)
-        selectedDate = date
-        mainView.calendarView.reloadData()
+
+        requestMonthData.onNext(nil)
+        requestDayRecord.accept(date)
+        
         
     }
     
@@ -147,10 +172,8 @@ extension CalendarViewController: RecordCollectionViewProtocol {
             return
         }
         
-        let vc = RecordReadViewController(record: item, location: viewModel.convertToStruct(place))//RecordViewController(mode: .read, record: item, location: viewModel.convertToStruct(place))
-//        vc.record = item
-//        vc.location = viewModel.convertToStruct(place)
-//        vc.mode = .read
+        let vc = RecordReadViewController(record: item, location: viewModel.convertToStruct(place))
+        
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
         nav.modalTransitionStyle = .crossDissolve

@@ -6,42 +6,40 @@
 //
 
 import Foundation
+import RxSwift
 
 final class CalendarViewModel {
     
     private let recordRepository = RecordRepository()
     
-    let recordDateList: Observable<[Date]> = Observable([])
-    let recordFileterByDate: Observable<[Record]> = Observable([])
-    private var dateSet: Set<Date> = []
+    
+    let recordDates = PublishSubject<[Date]>()
+    let filteredRecords = PublishSubject<[Record]>()
+    
+    
     
     func getRecords(date: Date) {
-        recordDateList.value.removeAll()
-        dateSet.removeAll()
-        
+        var dateSet: Set<Date> = []
+        print(date)
         let dateList = recordRepository.filterItemByMonthOnlyDate(date)
         let calendar = Calendar.current
         
         dateList.forEach {
             dateSet.insert(calendar.startOfDay(for: $0))
         }
-        recordDateList.value.append(contentsOf: dateSet)
+        recordDates.onNext(Array(dateSet))
         
     }
     
     func filterDate(_ date: Date) {
         let calendar = Calendar.current
         let selectedDate = calendar.startOfDay(for: date)
-        recordFileterByDate.value.removeAll()
-        recordFileterByDate.value.append(contentsOf: recordRepository.filterItemByDay(selectedDate))
+        let item = recordRepository.filterItemByDay(selectedDate)
+        filteredRecords.onNext(item)
     }
     
     func convertToStruct(_ item: Place) -> PlaceItem {
         return item.toDomain()
-//        let location = Location(latitude: item.latitude, longitude: item.longitude)
-//        let displayName = DisplayName(placeName: item.placeName)
-//        
-//        return PlaceElement(id: item.placeId, formattedAddress: item.address, location: location, displayName: displayName)
     }
     
     
