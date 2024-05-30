@@ -6,13 +6,18 @@
 //
 
 import UIKit
-
+import RxSwift
+import RxCocoa
 
 final class InfoViewController: BaseViewController {
     
     let mainView = InfoView()
-    let viewModel = InfoViewModel()
+    private let viewModel = InfoViewModel()
     private let repository = PlaceRepository()
+    
+    private let requestRecordList = PublishSubject<PlaceItem?>()
+    private let disposeBag = DisposeBag()
+    private var placeData: PlaceItem?
     
     override func loadView() {
         self.view = mainView
@@ -20,7 +25,7 @@ final class InfoViewController: BaseViewController {
     
     init(placeData: PlaceItem?) {
         super.init(nibName: nil, bundle: nil)
-        viewModel.place.value = placeData
+        self.placeData = placeData
     }
     
     @available(*, unavailable)
@@ -34,17 +39,12 @@ final class InfoViewController: BaseViewController {
         mainView.collectionViewDelegate = self
         bindData()
         
-        do {
-            try viewModel.getRecordList()
-        } catch {
-            return
-        }
-        
+        requestRecordList.onNext(placeData)
         
     }
     
     deinit {
-        print("infovc deinit")
+        debugPrint("infovc deinit")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,12 +58,7 @@ final class InfoViewController: BaseViewController {
     }
     
     @objc private func getChangeNotification(notification: NSNotification) {
-        do {
-            try viewModel.getRecordList()
-        } catch {
-            return
-        }
-        
+        requestRecordList.onNext(placeData)
         
     }
     
@@ -71,6 +66,37 @@ final class InfoViewController: BaseViewController {
         super.configureUI()
         mainView.addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
         
+        if let place = placeData {
+            mainView.titleLabel.text = place.name
+            mainView.addressLabel.text = place.address
+        }
+        
+        
+    }
+    
+    private func bindData() {
+        
+        requestRecordList
+            .bind(with: self) { owner, item in
+                owner.viewModel.getRecordItems(place: item)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.errorMsg
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self) { owner, msg in
+                if msg.count > 0 {
+                    owner.showToastMessage(message: msg)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.recordItems
+            .asDriver(onErrorJustReturn: [])
+            .drive(with: self) { owner, items in
+                owner.updateSnapShot(item: items)
+            }
+            .disposed(by: disposeBag)
         
         
         
@@ -79,10 +105,7 @@ final class InfoViewController: BaseViewController {
     @objc private func addButtonClicked() {
 
         
-        let vc = RecordWriteViewController(mode: .create, record: nil, location: viewModel.place.value)//RecordViewController(mode: .edit, record: nil, location: viewModel.place.value)
-//        vc.location = viewModel.place.value
-//        vc.record = nil
-//        vc.mode = .edit
+        let vc = RecordWriteViewController(mode: .create, record: nil, location: placeData)
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
         nav.modalTransitionStyle = .crossDissolve
@@ -90,50 +113,14 @@ final class InfoViewController: BaseViewController {
         
     }
     
-    private func bindData() {
-        
-        viewModel.place.bind { [weak self] data in
-            guard let self = self else { return }
-            guard let place = data else {
-                self.showOKAlert(title: "", message: InvalidError.noExistData.localizedDescription) {
-                    self.dismiss(animated: true)
-                }
-                
-                return
-            }
-            self.mainView.titleLabel.text = place.name
-            self.mainView.addressLabel.text = place.address
-            
-            do {
-                try self.viewModel.getRecordList()
-            } catch {
-                self.showToastMessage(message: "toase_recordLoadError".localized())
-            }
-            
-            
-        }
-        
-        viewModel.recordList.bind { [weak self] data in
-            guard data != nil else {
-                return
-            }
-            
-            self?.updateSnapShot()
-            
-        }
-        
-    }
     
     
-    private func updateSnapShot() {
+    
+    private func updateSnapShot(item: [Record]) {
         var snapShot = NSDiffableDataSourceSnapshot<Int, Record>()
         snapShot.appendSections([0])
         
-        guard let records = viewModel.recordList.value else {
-            return
-        }
-        
-        snapShot.appendItems(records)
+        snapShot.appendItems(item)
         mainView.dataSource.apply(snapShot)
     }
     
@@ -147,11 +134,7 @@ extension InfoViewController: RecordCollectionViewProtocol {
             return
         }
         
-//        let vc = RecordViewController(mode: .read, record: item, location: viewModel.place.value)
-//        vc.record = item
-//        vc.location = viewModel.place.value
-//        vc.mode = .read
-        let vc = RecordReadViewController(record: item, location: viewModel.place.value)
+        let vc = RecordReadViewController(record: item, location: placeData)
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
         nav.modalTransitionStyle = .crossDissolve

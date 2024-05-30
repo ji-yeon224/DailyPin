@@ -6,30 +6,28 @@
 //
 
 import Foundation
+import RxSwift
 
 final class InfoViewModel {
     
     private let placeRepository = PlaceRepository()
     
-    let placeName: Observable<String?> = Observable(nil)
-    let place: Observable<PlaceItem?> = Observable(nil)
-    let recordList: Observable<[Record]?> = Observable(nil)
+    let recordItems = PublishSubject<[Record]>()
+    let errorMsg = PublishSubject<String>()
     
-    func getRecordList() throws {
-        
-        guard let place = place.value else {
-            throw InvalidError.noExistData
+    func getRecordItems(place: PlaceItem?) {
+        guard let place = place else {
+            errorMsg.onNext(InvalidError.noExistData.localizedDescription)
+            return
         }
-        recordList.value?.removeAll()
         do {
-            recordList.value = try placeRepository.getRecordList(id: place.id)
+            let items = try placeRepository.getRecordList(id: place.id)
+            recordItems.onNext(items)
         } catch {
-            recordList.value = nil
+            errorMsg.onNext("toase_recordLoadError".localized())
         }
-        
-        //print(recordList.value)
-        
     }
+    
     
     
 }
