@@ -31,6 +31,9 @@ extension Constants {
         static let xmark = UIImage(systemName: "xmark")
         static let xmarkCircle = UIImage(systemName: "x.circle.fill")
         
+        static let annotation = UIImage(named: "Annotation")
+        static let selectAnnotation = UIImage(named: "SelectAnnotation")
+        static let highlightAnnotation = UIImage(named: "HighlightAnnotation")
         static let selectPin = UIImage(named: "baseline_place_white_24pt")
         static let pushPin = UIImage(named: "PushPin")
         static let starImage = UIImage(named: "star")

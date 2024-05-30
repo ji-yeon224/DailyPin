@@ -11,6 +11,7 @@ import CoreLocation
 import RxSwift
 import RxCocoa
 import RxGesture
+import MapKit
 
 final class MainMapViewController: BaseViewController {
     
@@ -18,7 +19,7 @@ final class MainMapViewController: BaseViewController {
     private let viewModel = MainMapViewModel()
     
     private let defaultLoaction = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
-    private var searchAnnotation: SelectAnnotation?
+    private var highlighState: (CustomAnnotation?, CustomAnnotationView?) // view -> 이미 지도에 있던거
     
     private var disposeBag = DisposeBag()
     private let toastMessage = PublishRelay<String>()
@@ -62,7 +63,7 @@ final class MainMapViewController: BaseViewController {
         
         MapKitManager.shared.delegate = self
         mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
-        mainView.mapView.register(SelectAnnotationView.self, forAnnotationViewWithReuseIdentifier: SelectAnnotationView.identifier)
+        
         viewModel.getAllPlaceAnnotation()
         
     }
@@ -88,6 +89,7 @@ final class MainMapViewController: BaseViewController {
                 owner.showToastMessage(message: value)
             }
             .disposed(by: disposeBag)
+        
         NetworkMonitor.shared.connected
             .bind(with: self) { owner, isConnected in
                 if !isConnected {
@@ -156,12 +158,14 @@ final class MainMapViewController: BaseViewController {
                 owner.mainView.deSelectedAnnotation()
             }
             .disposed(by: disposeBag)
+        
         mainView.mapView.rx.longPressGesture()
             .when(.began)
             .subscribe(with: self) { owner, gesture in
                 owner.longPressMap(gesture)
             }
             .disposed(by: disposeBag)
+        
         
     }
     
@@ -224,12 +228,26 @@ extension MainMapViewController {
         
     }
     
+    func findAnnotation(coord: CLLocationCoordinate2D) -> MKAnnotation? {
+       
+       
+        for annotation in mainView.mapView.annotations {
+           if annotation.coordinate.latitude == coord.latitude && annotation.coordinate.longitude == coord.longitude {
+               return annotation
+           }
+       }
+       
+       return nil
+   }
+    
     // 검색 결과로 찍힌 핀 지우기
     private func deleteSearchAnnotation() {
-        if let searchAnnotation = searchAnnotation {
-            mainView.removeOneAnnotation(annotation: searchAnnotation)
-            
-            self.searchAnnotation = nil
+        if let tempAnnotation = highlighState.0 {
+            if let annoView = highlighState.1 { // 이미 있던 것
+                annoView.changePin(state: .nomal)
+            } else {
+                mainView.removeOneAnnotation(annotation: tempAnnotation)
+            }
         }
         
     }
@@ -264,10 +282,19 @@ extension MainMapViewController: SearchResultProtocol {
         guard let lat = place.latitude, let lng = place.longitude else { return }
         let center = CLLocationCoordinate2D(latitude: lat, longitude: lng)
         
+        mainView.setRegion(center: center)
         
-        searchAnnotation = SelectAnnotation(placeID: place.id, coordinate: center)
-        if let searchAnnotation = searchAnnotation {
-            mainView.setOneAnnotation(annotation: searchAnnotation)
+        if let annotation = findAnnotation(coord: center),
+            let annotation = annotation as? CustomAnnotation,
+            let annotationView = mainView.mapView.view(for: annotation) as? CustomAnnotationView {
+            annotationView.changePin(state: .highlight)
+            self.highlighState = (annotation, annotationView)
+            
+        } else {
+            let anno = CustomAnnotation(placeID: place.id, coordinate: center, isHighlight: true)
+            self.mainView.setOneAnnotation(annotation: anno)
+            self.highlighState = (anno, nil)
+            
         }
         
         DispatchQueue.main.async {
@@ -296,13 +323,22 @@ extension MainMapViewController: MapViewProtocol {
 extension MainMapViewController: BottomSheetProtocol {
     func setLocation(data: PlaceItem) {
         guard let lat = data.latitude, let lng = data.longitude else { return }
+        
         let center = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+        mainView.setRegion(center: center)
         
-        searchAnnotation = SelectAnnotation(placeID: data.id, coordinate: center)
-        if let searchAnnotation = self.searchAnnotation {
-            self.mainView.setOneAnnotation(annotation: searchAnnotation)
+        
+        if let annotation = findAnnotation(coord: center) as? CustomAnnotation, 
+            let annotationView = mainView.mapView.view(for: annotation) as? CustomAnnotationView {
+            annotationView.changePin(state: .select)
+            self.highlighState = (annotation, annotationView)
+        } else {
+            let anno = CustomAnnotation(placeID: data.id, coordinate: center)
+            
+            self.mainView.setOneAnnotation(annotation: anno)
+            self.highlighState = (anno, nil)
+            
         }
-        
         BottomSheetManager.shared.setFloatingView(viewType: .info(data: data), vc: self)
         
     }

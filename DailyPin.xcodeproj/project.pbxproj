@@ -57,8 +57,6 @@
 		CE52CB7B2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB7A2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift */; };
 		CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */; };
 		CE546CD42AD44CCE00C0392B /* BaseAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE546CD32AD44CCD00C0392B /* BaseAnnotationView.swift */; };
-		CE546CD62AD44DB900C0392B /* SelectAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE546CD52AD44DB900C0392B /* SelectAnnotationView.swift */; };
-		CE546CD82AD44F2200C0392B /* SelectAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE546CD72AD44F2200C0392B /* SelectAnnotation.swift */; };
 		CE6F36B12B96E553007AD6AB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B02B96E553007AD6AB /* Color.swift */; };
 		CE6F36B32B96E56D007AD6AB /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B22B96E56D007AD6AB /* Design.swift */; };
 		CE6F36B62B96E707007AD6AB /* CustomBasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */; };
@@ -181,8 +179,6 @@
 		CE52CB7A2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewProtocol.swift; sourceTree = "<group>"; };
 		CE546CD32AD44CCD00C0392B /* BaseAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAnnotationView.swift; sourceTree = "<group>"; };
-		CE546CD52AD44DB900C0392B /* SelectAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAnnotationView.swift; sourceTree = "<group>"; };
-		CE546CD72AD44F2200C0392B /* SelectAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAnnotation.swift; sourceTree = "<group>"; };
 		CE6F36AE2B96E349007AD6AB /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 		CE6F36B02B96E553007AD6AB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CE6F36B22B96E56D007AD6AB /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
@@ -543,8 +539,6 @@
 			children = (
 				CE9A16B22AD2897E0051BE23 /* CustomAnnotation.swift */,
 				CE9A16B72AD2BE240051BE23 /* CustomAnnotationView.swift */,
-				CE546CD52AD44DB900C0392B /* SelectAnnotationView.swift */,
-				CE546CD72AD44F2200C0392B /* SelectAnnotation.swift */,
 			);
 			path = Annotation;
 			sourceTree = "<group>";
@@ -808,7 +802,6 @@
 				CE3DF7FA2AC2B1BB00653CE1 /* BaseViewController.swift in Sources */,
 				CE814A662AD59D4900068854 /* CustomCalendarView.swift in Sources */,
 				CE3DF8032AC2B5BA00653CE1 /* MainMapView.swift in Sources */,
-				CE546CD62AD44DB900C0392B /* SelectAnnotationView.swift in Sources */,
 				CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */,
 				CE9A16B32AD2897E0051BE23 /* CustomAnnotation.swift in Sources */,
 				CE52CB682AC5ADBB007AD7F8 /* GoogleNetwork.swift in Sources */,
@@ -820,7 +813,6 @@
 				CE6F36B62B96E707007AD6AB /* CustomBasicLabel.swift in Sources */,
 				CED3A6F02BA3FEBF00B17B41 /* UIImage+Extension.swift in Sources */,
 				CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */,
-				CE546CD82AD44F2200C0392B /* SelectAnnotation.swift in Sources */,
 				CE4DF90D2ACBBC3E00546526 /* Place.swift in Sources */,
 				CE4DF9112ACBC63200546526 /* PlaceRepository.swift in Sources */,
 				CEA4458C2AE4DD100000A57F /* PlaceListProtocol.swift in Sources */,

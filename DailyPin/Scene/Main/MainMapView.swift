@@ -11,7 +11,7 @@ import MapKit
 final class MainMapView: BaseView {
     
     weak var mapViewDelegate: MapViewProtocol?
-
+    
     lazy var mapView = {
         let view = MKMapView()
         view.showsCompass = false
@@ -30,7 +30,7 @@ final class MainMapView: BaseView {
         $0.contentHorizontalAlignment = .leading
         $0.titleLabel?.font = Font.body.fontStyle
     }
-
+    
     
     let calendarButton = CustomImageButton(img: Constants.Image.calendarButton)
     let currentLocation = CustomImageButton(img: Constants.Image.curLocation)
@@ -106,13 +106,14 @@ extension MainMapView {
         mapView.addAnnotations(annotation)
     }
     
-    func setOneAnnotation(annotation: SelectAnnotation) {
+    func setOneAnnotation(annotation: CustomAnnotation) {
         
         setRegion(center: annotation.coordinate)
         mapView.addAnnotation(annotation)
     }
     
-    func removeOneAnnotation(annotation: SelectAnnotation) {
+    
+    func removeOneAnnotation(annotation: CustomAnnotation) {
         mapView.removeAnnotation(annotation)
     }
     
@@ -132,9 +133,11 @@ extension MainMapView {
     
 }
 
-   
+
 
 extension MainMapView: MKMapViewDelegate {
+    
+    
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotation = view.annotation as? CustomAnnotation else {
@@ -142,41 +145,41 @@ extension MainMapView: MKMapViewDelegate {
         }
         
         guard let view = view as? CustomAnnotationView else { return }
-        view.imageView.tintColor = Constants.Color.subColor
-        
+        view.changePin(state: .select)
         mapViewDelegate?.didSelect(annotation: annotation)
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         
         guard let view = view as? CustomAnnotationView else { return }
-        view.imageView.image = Constants.Image.starImage
-        view.imageView.tintColor = Constants.Color.pinColor
+        view.changePin(state: .nomal)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
         
-        var annotationView: MKAnnotationView?
-        
-        
-        if annotation.isKind(of: SelectAnnotation.self) {
-            if let annotation = annotation as? SelectAnnotation {
-                annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: SelectAnnotationView.identifier, for: annotation)
-                annotationView?.displayPriority = .required
-                
-            }
-        } else if annotation.isKind(of: CustomAnnotation.self) {
-            if let annotation = annotation as? CustomAnnotation {
-                annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier, for: annotation)
-                //annotationView?.clusteringIdentifier = "cluster"
-                annotationView?.displayPriority = .required
+        if let customAnnotation = annotation as? CustomAnnotation {
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier) as? CustomAnnotationView
+            
+            if annotationView == nil {
+                annotationView = CustomAnnotationView(annotation: customAnnotation, reuseIdentifier: CustomAnnotationView.identifier)
+            } else {
+                annotationView?.annotation = customAnnotation
             }
             
+            if customAnnotation.isHighlight {
+                annotationView?.changePin(state: .highlight)
+            } else {
+                annotationView?.changePin(state: .nomal)
+            }
+            
+            annotationView?.displayPriority = .required
+            return annotationView
         }
         
-        return annotationView
+        return nil
+        
     }
     
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
@@ -186,20 +189,20 @@ extension MainMapView: MKMapViewDelegate {
         userView?.canShowCallout = false
     }
     
-//    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
-//        var customAnnotations: [CustomAnnotation] = []
-//        for anot in memberAnnotations {
-//            if let anot = anot as? CustomAnnotation {
-//                customAnnotations.append(anot)
-//            }
-//
-//        }
-//
-//        let cluster = MKClusterAnnotation(memberAnnotations: customAnnotations)
-//        cluster.title = "+\(customAnnotations.count)"
-//        cluster.subtitle = ""
-//        return cluster
-//    }
+    //    func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
+    //        var customAnnotations: [CustomAnnotation] = []
+    //        for anot in memberAnnotations {
+    //            if let anot = anot as? CustomAnnotation {
+    //                customAnnotations.append(anot)
+    //            }
+    //
+    //        }
+    //
+    //        let cluster = MKClusterAnnotation(memberAnnotations: customAnnotations)
+    //        cluster.title = "+\(customAnnotations.count)"
+    //        cluster.subtitle = ""
+    //        return cluster
+    //    }
     
 }
 
