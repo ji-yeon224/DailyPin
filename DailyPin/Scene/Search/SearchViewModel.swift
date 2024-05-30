@@ -10,11 +10,8 @@ import RxSwift
 
 final class SearchViewModel {
     
-    let searchQuery: Observable<String> = Observable("")
-//    var searchResult: Observable<Search> = Observable(Search(places: []))
     var items: [PlaceItem] = []
     let searchResult = PublishSubject<[PlaceItem]>()
-    var resultError: Observable<String?> = Observable(nil)
     let searchError = PublishSubject<String>()
     
     func callPlaceRequest(query: String, langCode: LangCode, location: (Double, Double)) {
