@@ -44,7 +44,7 @@ extension Constants {
         static let calendarButton = UIImage(named: "Calendar")
         static let placeListButton = UIImage(named: "PlaceList")
         static let addRecord = UIImage(named: "AddRecord")
-        
+        static let recordSeparator = UIImage(named: "RecordBar")
         
         static let photo = UIImage(systemName: "photo.on.rectangle")
         static let keyboardDown = UIImage(systemName: "keyboard.chevron.compact.down")

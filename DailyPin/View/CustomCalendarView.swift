@@ -14,6 +14,7 @@ class CustomCalendarView: FSCalendar {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        backgroundColor = Constants.Color.background
     }
     
     @available(*, unavailable)
@@ -41,7 +42,7 @@ class CustomCalendarView: FSCalendar {
         appearance.weekdayTextColor = Constants.Color.basicText
         
         appearance.titleFont = UIFont(name: "NanumGothic", size: 13)
-        appearance.todayColor = Constants.Color.subColor
+        appearance.todayColor = Constants.Color.subYellowColor
         
         placeholderType = .none
         appearance.borderRadius = 1

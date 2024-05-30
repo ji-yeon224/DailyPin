@@ -28,6 +28,7 @@ final class CalendarView: BaseView {
         view.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
         view.backgroundColor = Constants.Color.background
         view.delegate = self
+        view.showsVerticalScrollIndicator = false
         return view
     }()
     
@@ -36,6 +37,7 @@ final class CalendarView: BaseView {
     
     override func configureUI() {
         super.configureUI()
+        backgroundColor = Constants.Color.subBGColor
         [calendarView, returnTodayButton, collectionView].forEach{
             addSubview($0)
         }
