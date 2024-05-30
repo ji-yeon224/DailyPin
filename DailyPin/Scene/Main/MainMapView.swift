@@ -131,6 +131,22 @@ extension MainMapView {
         
     }
     
+    func findAnnotation(coord: CLLocationCoordinate2D) -> CustomAnnotation? {
+       
+        for annotation in mapView.annotations {
+           if annotation.coordinate.latitude == coord.latitude && annotation.coordinate.longitude == coord.longitude {
+               if let annotation = annotation as? CustomAnnotation {
+                   return annotation
+               } else {
+                   return nil
+               }
+               
+           }
+       }
+       
+       return nil
+   }
+    
 }
 
 
@@ -145,7 +161,7 @@ extension MainMapView: MKMapViewDelegate {
         }
         
         guard let view = view as? CustomAnnotationView else { return }
-        view.changePin(state: .select)
+        view.changePin(state: .highlight)
         mapViewDelegate?.didSelect(annotation: annotation)
     }
     

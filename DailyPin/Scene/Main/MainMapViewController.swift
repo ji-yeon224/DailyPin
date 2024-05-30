@@ -11,7 +11,7 @@ import CoreLocation
 import RxSwift
 import RxCocoa
 import RxGesture
-import MapKit
+
 
 final class MainMapViewController: BaseViewController {
     
@@ -228,18 +228,6 @@ extension MainMapViewController {
         
     }
     
-    func findAnnotation(coord: CLLocationCoordinate2D) -> MKAnnotation? {
-       
-       
-        for annotation in mainView.mapView.annotations {
-           if annotation.coordinate.latitude == coord.latitude && annotation.coordinate.longitude == coord.longitude {
-               return annotation
-           }
-       }
-       
-       return nil
-   }
-    
     // 검색 결과로 찍힌 핀 지우기
     private func deleteSearchAnnotation() {
         if let tempAnnotation = highlighState.0 {
@@ -275,18 +263,17 @@ extension MainMapViewController {
         
         present(alert, animated: true)
     }
-}
-
-extension MainMapViewController: SearchResultProtocol {
-    func selectSearchResult(place: PlaceItem) {
+    
+    private func setAnnotationState(place: PlaceItem) {
         guard let lat = place.latitude, let lng = place.longitude else { return }
         let center = CLLocationCoordinate2D(latitude: lat, longitude: lng)
         
+        
         mainView.setRegion(center: center)
         
-        if let annotation = findAnnotation(coord: center),
-            let annotation = annotation as? CustomAnnotation,
+        if let annotation = mainView.findAnnotation(coord: center),
             let annotationView = mainView.mapView.view(for: annotation) as? CustomAnnotationView {
+            
             annotationView.changePin(state: .highlight)
             self.highlighState = (annotation, annotationView)
             
@@ -296,7 +283,14 @@ extension MainMapViewController: SearchResultProtocol {
             self.highlighState = (anno, nil)
             
         }
-        
+    }
+}
+
+
+
+extension MainMapViewController: SearchResultProtocol {
+    func selectSearchResult(place: PlaceItem) {
+        setAnnotationState(place: place)
         DispatchQueue.main.async {
             BottomSheetManager.shared.setFloatingView(viewType: .info(data: place), vc: self)
         }
@@ -304,6 +298,8 @@ extension MainMapViewController: SearchResultProtocol {
     
     
 }
+
+
 
 
 extension MainMapViewController: MapViewProtocol {
@@ -321,24 +317,9 @@ extension MainMapViewController: MapViewProtocol {
 }
 
 extension MainMapViewController: BottomSheetProtocol {
+    // PlaceListView
     func setLocation(data: PlaceItem) {
-        guard let lat = data.latitude, let lng = data.longitude else { return }
-        
-        let center = CLLocationCoordinate2D(latitude: lat, longitude: lng)
-        mainView.setRegion(center: center)
-        
-        
-        if let annotation = findAnnotation(coord: center) as? CustomAnnotation, 
-            let annotationView = mainView.mapView.view(for: annotation) as? CustomAnnotationView {
-            annotationView.changePin(state: .select)
-            self.highlighState = (annotation, annotationView)
-        } else {
-            let anno = CustomAnnotation(placeID: data.id, coordinate: center)
-            
-            self.mainView.setOneAnnotation(annotation: anno)
-            self.highlighState = (anno, nil)
-            
-        }
+        setAnnotationState(place: data)
         BottomSheetManager.shared.setFloatingView(viewType: .info(data: data), vc: self)
         
     }
