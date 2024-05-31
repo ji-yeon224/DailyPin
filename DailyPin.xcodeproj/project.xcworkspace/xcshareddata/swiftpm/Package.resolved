@@ -1,4 +1,5 @@
 {
+  "originHash" : "5505805bd45304fc451a1b57d2bd0997e88ced784ee351f51be7daa5bc6a47d1",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -118,6 +119,15 @@
       }
     },
     {
+      "identity" : "nvactivityindicatorview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ninjaprox/NVActivityIndicatorView.git",
+      "state" : {
+        "revision" : "121455c4e630fcb95aaefd7e4257b0c2e3cfe6d5",
+        "version" : "5.2.0"
+      }
+    },
+    {
       "identity" : "promises",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
@@ -226,5 +236,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

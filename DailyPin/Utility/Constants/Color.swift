@@ -25,5 +25,8 @@ extension Constants {
         static let subTextColor = UIColor.lightGray
         static let borderColor = UIColor(named: "CustomGray")
         static let placeholderColor = UIColor.lightGray
+        
+        static let alpha = UIColor(named: "Alpha")
+        static let inActive = UIColor(named: "InActive")
     }
 }

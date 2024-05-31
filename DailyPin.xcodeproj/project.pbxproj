@@ -66,6 +66,11 @@
 		CE743E282BA81C4400E0D9EA /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE743E272BA81C4400E0D9EA /* CircleButton.swift */; };
 		CE7842612C0983A400E4350E /* BasicTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842602C0983A400E4350E /* BasicTextLabel.swift */; };
 		CE7842632C099CBE00E4350E /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842622C099CBE00E4350E /* DividerView.swift */; };
+		CE7842662C09A5EF00E4350E /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = CE7842652C09A5EF00E4350E /* NVActivityIndicatorView */; };
+		CE7842682C09AB4500E4350E /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842672C09AB4500E4350E /* AlertViewController.swift */; };
+		CE78426A2C09AB8000E4350E /* CustomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842692C09AB8000E4350E /* CustomStackView.swift */; };
+		CE78426C2C09AE7E00E4350E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78426B2C09AE7E00E4350E /* CustomButton.swift */; };
+		CE78426E2C09AF6000E4350E /* UIViewController+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78426D2C09AF6000E4350E /* UIViewController+Extenstion.swift */; };
 		CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */; };
 		CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5E2AD594EF00068854 /* CalendarViewController.swift */; };
 		CE814A612AD594FB00068854 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A602AD594FB00068854 /* CalendarView.swift */; };
@@ -188,6 +193,10 @@
 		CE743E272BA81C4400E0D9EA /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		CE7842602C0983A400E4350E /* BasicTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTextLabel.swift; sourceTree = "<group>"; };
 		CE7842622C099CBE00E4350E /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		CE7842672C09AB4500E4350E /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		CE7842692C09AB8000E4350E /* CustomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStackView.swift; sourceTree = "<group>"; };
+		CE78426B2C09AE7E00E4350E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		CE78426D2C09AF6000E4350E /* UIViewController+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extenstion.swift"; sourceTree = "<group>"; };
 		CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		CE814A5E2AD594EF00068854 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		CE814A602AD594FB00068854 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -270,6 +279,7 @@
 				CE3EA89D2AFE55B000628B07 /* FirebaseCrashlytics in Frameworks */,
 				CE4DF9082ACBB6AF00546526 /* Realm in Frameworks */,
 				CE83F4DA2B9ADEA600B067DC /* ReactorKit in Frameworks */,
+				CE7842662C09A5EF00E4350E /* NVActivityIndicatorView in Frameworks */,
 				CE3EA89B2AFE55B000628B07 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,6 +445,7 @@
 				CE3541D52AD5313F00773CD3 /* NSNotification.Name.swift */,
 				CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */,
 				CED3A6EF2BA3FEBF00B17B41 /* UIImage+Extension.swift */,
+				CE78426D2C09AF6000E4350E /* UIViewController+Extenstion.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -499,6 +510,9 @@
 				CE83F4D22B9AB73900B067DC /* BasicImageView.swift */,
 				CE743E272BA81C4400E0D9EA /* CircleButton.swift */,
 				CE7842622C099CBE00E4350E /* DividerView.swift */,
+				CE7842672C09AB4500E4350E /* AlertViewController.swift */,
+				CE7842692C09AB8000E4350E /* CustomStackView.swift */,
+				CE78426B2C09AE7E00E4350E /* CustomButton.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -653,6 +667,7 @@
 				CE6F36BA2B96E8D7007AD6AB /* Then */,
 				CE83F4D92B9ADEA600B067DC /* ReactorKit */,
 				CED3A6ED2BA3F9E600B17B41 /* RxDataSources */,
+				CE7842652C09A5EF00E4350E /* NVActivityIndicatorView */,
 			);
 			productName = DailyPin;
 			productReference = CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */;
@@ -696,6 +711,7 @@
 				CE6F36B92B96E8D7007AD6AB /* XCRemoteSwiftPackageReference "Then" */,
 				CE83F4D82B9ADEA600B067DC /* XCRemoteSwiftPackageReference "ReactorKit" */,
 				CED3A6EC2BA3F9E600B17B41 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				CE7842642C09A5EF00E4350E /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 			);
 			productRefGroup = CEB00FBE2AC030BF001E7BB0 /* Products */;
 			projectDirPath = "";
@@ -763,6 +779,7 @@
 				CE52CB722AC7197C007AD7F8 /* SearchViewModel.swift in Sources */,
 				CE6F36B12B96E553007AD6AB /* Color.swift in Sources */,
 				CE3DF8162AC3311400653CE1 /* BaseUIButton.swift in Sources */,
+				CE78426A2C09AB8000E4350E /* CustomStackView.swift in Sources */,
 				CE7842632C099CBE00E4350E /* DividerView.swift in Sources */,
 				CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */,
 				CE3DF81A2AC3B26900653CE1 /* Observable.swift in Sources */,
@@ -802,6 +819,7 @@
 				CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */,
 				CE3DF7FA2AC2B1BB00653CE1 /* BaseViewController.swift in Sources */,
 				CE814A662AD59D4900068854 /* CustomCalendarView.swift in Sources */,
+				CE7842682C09AB4500E4350E /* AlertViewController.swift in Sources */,
 				CE3DF8032AC2B5BA00653CE1 /* MainMapView.swift in Sources */,
 				CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */,
 				CE9A16B32AD2897E0051BE23 /* CustomAnnotation.swift in Sources */,
@@ -845,6 +863,7 @@
 				CE4DF9152ACBD5C500546526 /* MainMapViewModel.swift in Sources */,
 				CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */,
 				CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */,
+				CE78426C2C09AE7E00E4350E /* CustomButton.swift in Sources */,
 				CE83F4E52B9AEFF000B067DC /* RecordWriteViewModel.swift in Sources */,
 				CEB7391A2C059276004A9A20 /* Endpoint.swift in Sources */,
 				CEB7391C2C05928D004A9A20 /* BaseURL.swift in Sources */,
@@ -854,6 +873,7 @@
 				CE83F4CD2B9AB58D00B067DC /* RecordReadViewController.swift in Sources */,
 				CEB5ECFA2AD0595E00BC6143 /* RecordRepository.swift in Sources */,
 				CE94E7892AE6A6600005B593 /* ReturnTodayButton.swift in Sources */,
+				CE78426E2C09AF6000E4350E /* UIViewController+Extenstion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1156,6 +1176,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		CE7842642C09A5EF00E4350E /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
 		CE814A622AD59D1B00068854 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
@@ -1251,6 +1279,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE6F36B92B96E8D7007AD6AB /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		CE7842652C09A5EF00E4350E /* NVActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE7842642C09A5EF00E4350E /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorView;
 		};
 		CE814A632AD59D1B00068854 /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;

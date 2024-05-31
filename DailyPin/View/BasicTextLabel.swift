@@ -9,8 +9,9 @@ import UIKit
 
 final class BasicTextLabel: UILabel {
     
-    init(style: Font, color: UIColor? = nil, lines: Int = 1) {
+    init(text: String = "", style: Font, color: UIColor? = nil, lines: Int = 1) {
         super.init(frame: .zero)
+        self.text = text
         font = style.fontStyle
         textColor = color ?? Constants.Color.basicText
         numberOfLines = lines
