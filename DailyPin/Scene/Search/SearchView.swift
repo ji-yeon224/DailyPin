@@ -29,29 +29,6 @@ final class SearchView: BaseView {
         return view
     }()
     
-    private let errorView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        view.isHidden = true
-        return view
-    }()
-    
-    private let errorImage = {
-        let view = UIImageView()
-        view.tintColor = Constants.Color.subTextColor
-        view.contentMode = .scaleAspectFit
-        return view
-    }()
-    
-    
-    private let errorLabel = {
-        let view = PlainLabel(size: 18, lines: 0)
-        view.backgroundColor = .clear
-        view.textColor = Constants.Color.subTextColor
-        view.textAlignment = .center
-        return view
-    }()
-    
     private let googleImage = {
         let view = UIImageView()
         view.image = Constants.Image.google
@@ -66,10 +43,6 @@ final class SearchView: BaseView {
         
         addSubview(collectionView)
         addSubview(googleImage)
-        addSubview(errorView)
-        errorView.addSubview(errorImage)
-        errorView.addSubview(errorLabel)
-        
         
         configureDataSource()
     }
@@ -82,29 +55,6 @@ final class SearchView: BaseView {
             make.bottom.equalTo(safeAreaLayoutGuide)
             make.leading.equalToSuperview()
             
-        }
-        setErrorViewConstraints()
-    }
-    
-    private func setErrorViewConstraints() {
-        errorView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(30)
-            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(40)
-            make.height.equalTo(50)
-            
-        }
-        errorImage.snp.makeConstraints { make in
-            make.top.equalTo(errorView)
-            make.centerX.equalTo(errorView)
-            make.width.equalTo(errorView.snp.width).multipliedBy(0.4)
-            make.height.equalTo(errorImage.snp.width)
-            
-        }
-        
-        errorLabel.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(errorView)
-            make.top.equalTo(errorImage.snp.bottom).offset(10)
-            make.bottom.greaterThanOrEqualTo(errorView).offset(10)
         }
     }
     
@@ -140,18 +90,6 @@ final class SearchView: BaseView {
             return cell
         })
         
-    }
-    
-    func configureHidden(collection: Bool, error: Bool) {
-        
-        collectionView.isHidden = collection
-        errorView.isHidden = error
-    }
-    
-    func configureErrorView(image: UIImage?, description: String) {
-        
-        errorImage.image = image ?? Constants.Image.warning
-        errorLabel.text = description
     }
     
     

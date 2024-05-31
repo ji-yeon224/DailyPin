@@ -45,7 +45,7 @@ final class SearchViewController: BaseViewController {
         
         bindData()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(networkConfiguration), name: .networkConnect, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(networkConfiguration), name: .networkConnect, object: nil)
         
         
        
@@ -56,24 +56,24 @@ final class SearchViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self, name: .networkConnect, object: nil)
     }
     
-    @objc private func networkConfiguration(notification: NSNotification) {
-        
-        guard let userInfo = notification.userInfo else { return }
-        
-        if let value = userInfo["isConnected"] as? Bool {
-            if value {
-                DispatchQueue.main.async {
-                    self.mainView.configureHidden(collection: false, error: true)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.mainView.configureHidden(collection: true, error: false)
-                }
-            }
-        }
-        
-        
-    }
+//    @objc private func networkConfiguration(notification: NSNotification) {
+//        
+//        guard let userInfo = notification.userInfo else { return }
+//        
+//        if let value = userInfo["isConnected"] as? Bool {
+//            if value {
+//                DispatchQueue.main.async {
+//                    self.mainView.configureHidden(collection: false, error: true)
+//                }
+//            } else {
+//                DispatchQueue.main.async {
+//                    self.mainView.configureHidden(collection: true, error: false)
+//                }
+//            }
+//        }
+//        
+//        
+//    }
     
     private func bindData() {
         
@@ -96,10 +96,7 @@ final class SearchViewController: BaseViewController {
         NetworkMonitor.shared.connected
             .bind(with: self) { owner, isConnected in
                 if !isConnected { //연결 안됨
-                    owner.mainView.configureHidden(collection: true, error: false)
-                    owner.mainView.configureErrorView(image: Constants.Image.networkError, description: "network_connectError".localized())
-                } else {
-                    owner.mainView.configureHidden(collection: false, error: true)
+                    owner.showToastMessage(message: "network_connectError".localized())
                 }
             }
             .disposed(by: disposeBag)
@@ -118,11 +115,9 @@ final class SearchViewController: BaseViewController {
             }
             .bind(with: self) { owner, text in
                 if text.count <= 0 {
-                    owner.mainView.configureErrorView(image: Constants.Image.noData, description: "error_emptySearchResult".localized())
-                    owner.mainView.configureHidden(collection: true, error: false)
+                    owner.showToastMessage(message: "error_emptySearchResult".localized())
                 } else {
                     owner.viewModel.callPlaceRequest(query: text, langCode: .ko, location: owner.centerLocation)
-                    owner.mainView.configureHidden(collection: false, error: true)
                     owner.view.endEditing(true)
                 }
             }
