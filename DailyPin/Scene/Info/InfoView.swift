@@ -14,15 +14,23 @@ final class InfoView: BaseView {
     var dataSource: UICollectionViewDiffableDataSource<Int, Record>!
     weak var collectionViewDelegate: RecordCollectionViewProtocol?
     
-    private lazy var uiView = UIView()
+    private lazy var topView = UIView()
+    private lazy var stackView = UIStackView(frame: .zero).then {
+        $0.axis = .vertical
+        $0.spacing = 8
+        $0.alignment = .leading
+        $0.distribution = .fill
+        $0.isLayoutMarginsRelativeArrangement = true
+    }
     
-    var titleLabel = CustomBasicLabel(text: "", fontType: Font.bodyLarge)
+    var titleLabel = BasicTextLabel(style: .bodyLarge)
     
-    var addressLabel = CustomBasicLabel(text: "", fontType: .body, color: Constants.Color.subTextColor)
+    var addressLabel = BasicTextLabel(style: .body, color: Constants.Color.subTextColor)
 
     let addButton = CustomImageButton(img: Constants.Image.addRecord)
-
-    // 저장된 목록 보여주기 
+    private let divider = DividerView()
+    
+    // 저장된 목록 보여주기
     lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         view.backgroundColor = Constants.Color.background
@@ -36,60 +44,37 @@ final class InfoView: BaseView {
     
     override func configureUI() {
         super.configureUI()
-        addSubview(uiView)
-        uiView.addSubview(titleLabel)
-        uiView.addSubview(addButton)
-        uiView.addSubview(addressLabel)
-        addSubview(collectionView)
+        [stackView, addButton, collectionView].forEach {
+            addSubview($0)
+        }
+        [titleLabel, addressLabel].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        
         configureDataSource()
     }
     
     override func setConstraints() {
-        uiView.backgroundColor = Constants.Color.background
-        uiView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(5)
-            make.height.equalTo(130)
+        stackView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).inset(30)
+            make.leading.equalTo(safeAreaLayoutGuide).inset(20)
+            make.trailing.equalTo(addButton.snp.leading).offset(-10)
             
         }
-        
-        setUIVIewContentsConstraints()
+        addButton.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).inset(30)
+            make.trailing.equalTo(safeAreaLayoutGuide).inset(20)
+            make.size.equalTo(30)
+        }
         
         collectionView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(10)
-            make.top.equalTo(uiView.snp.bottom)
+            make.top.equalTo(stackView.snp.bottom).offset(20)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
         
         
         
-    }
-    
-    
-
-    
-   
-    
-    private func setUIVIewContentsConstraints() {
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(uiView).offset(35)
-            make.leading.equalTo(uiView).offset(16)
-            make.trailing.equalTo(addButton.snp.leading).offset(-10)
-            make.height.equalTo(40)
-            
-        }
-        
-        addButton.snp.makeConstraints { make in
-            make.top.equalTo(uiView).inset(37)
-            make.trailing.equalTo(uiView).inset(20)
-            make.size.equalTo(30)
-//            make.height.equalTo(addButton.snp.width)
-        }
-        
-        addressLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(4)
-            make.horizontalEdges.equalTo(uiView).inset(16)
-            make.height.equalTo(40)
-        }
     }
     
 }
@@ -121,7 +106,7 @@ extension InfoView {
     private func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<InfoCollectionViewCell, Record> { cell, indexPath, itemIdentifier in
             cell.titleLabel.text = itemIdentifier.title
-            cell.dateLabel.text = DateFormatter.convertDate(date: itemIdentifier.date)
+            cell.dateLabel.text = DateFormatter.convertToString(format: .fullDateTime, date: itemIdentifier.date)
             cell.address.isHidden = true
             cell.layoutIfNeeded()
         }

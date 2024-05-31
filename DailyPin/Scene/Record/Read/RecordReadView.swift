@@ -27,37 +27,32 @@ final class RecordReadView: BaseView {
     private let dateView = UIView()
     
     
-    private let titleImage = BasicImageView(img: Constants.Image.mappin)
-    var titleLabel = PlainLabel(size: 15, lines: 0)
+    private var titleLabel = BasicTextLabel(style: .title1)
     
-    private let addressImageView = BasicImageView(img: Constants.Image.selectPin)
-    let addressLabel = PlainLabel(size: 13, lines: 0)
+    private let addressLabel = BasicTextLabel(style: .body, lines: 0)
     
-    private let dateImage = BasicImageView(img: Constants.Image.calendar)
-    var dateLabel = PlainLabel(size: 15, lines: 1)
+    private var dateLabel = BasicTextLabel(style: .body)
     
     private let bottomView = UIView()
     
-    lazy var memoTextView = MemoTextView().then {
-        $0.font = Font.nanum.fontStyle//UIFont(name: "NanumGothic", size: 15)
-        $0.isEditable = false
-    }
+    private lazy var memoTextView = MemoTextView(mode: .read)
+    private let divider  = DividerView(color: Constants.Color.mainColor)
     
     override func configureUI() {
         super.configureUI()
         addSubview(scrollView)
         scrollView.addSubview(stackView)
         
-        [titleView, addressView, dateView, memoTextView].forEach {
+        [titleView, addressView, dateView, divider, memoTextView].forEach {
             stackView.addArrangedSubview($0)
         }
-        [titleImage, titleLabel].forEach {
+        [titleLabel].forEach {
             titleView.addSubview($0)
         }
-        [addressImageView, addressLabel].forEach {
+        [addressLabel].forEach {
             addressView.addSubview($0)
         }
-        [dateImage, dateLabel].forEach {
+        [dateLabel].forEach {
             dateView.addSubview($0)
         }
 
@@ -67,18 +62,20 @@ final class RecordReadView: BaseView {
     private func setMemoTextView() {
         if let memo = memoTextView.text, memo.isEmpty || memoTextView.text == nil {
             memoTextView.isHidden = true
+            divider.isHidden = true
         } else {
             memoTextView.isHidden = false
+            divider.isHidden = false
         }
     }
     
-    func setRecordData(data: Record) {
-//        addressLabel.text = location
+    func setRecordData(data: Record, address: String) {
         titleLabel.text = data.title
-        dateLabel.text = DateFormatter.convertDate(date: data.date)
+        dateLabel.text = DateFormatter.convertToString(format: .fullDateTime, date: data.date)
         if let memo = data.memo {
             memoTextView.attributedText = memo.setLineSpacing()
         }
+        addressLabel.text = address
         setMemoTextView()
     }
     
@@ -93,53 +90,36 @@ final class RecordReadView: BaseView {
         
         titleView.snp.makeConstraints { make in
             make.width.equalTo(scrollView.snp.width).inset(20)
-            make.height.equalTo(44)
+            make.height.equalTo(30)
         }
         addressView.snp.makeConstraints { make in
             make.width.equalTo(scrollView.snp.width).inset(20)
-            make.height.equalTo(50)
+            make.height.equalTo(25)
         }
         
         dateView.snp.makeConstraints { make in
             make.width.equalTo(scrollView.snp.width).inset(20)
-            make.height.equalTo(44)
+            make.height.equalTo(25)
+        }
+        divider.snp.makeConstraints { make in
+            make.width.equalTo(scrollView.snp.width).inset(20)
+            make.height.equalTo(1)
         }
         
-        
-        titleImage.snp.makeConstraints { make in
-            make.leading.equalTo(titleView)
-            make.centerY.equalTo(titleView)
-            make.width.equalTo(titleView).multipliedBy(0.08)
-            make.height.equalTo(titleImage.snp.width).multipliedBy(1.0)
-            
-        }
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(titleImage.snp.trailing).offset(15)
+            make.leading.equalTo(titleView)
             make.trailing.equalTo(titleView)
             make.height.equalTo(titleView)
         }
         
-        addressImageView.snp.makeConstraints { make in
-            make.leading.equalTo(addressView)
-            make.centerY.equalTo(addressView)
-            make.width.equalTo(addressView).multipliedBy(0.08)
-            make.height.equalTo(titleImage.snp.width).multipliedBy(1.0)
-        }
         addressLabel.snp.makeConstraints { make in
-            make.leading.equalTo(addressImageView.snp.trailing).offset(15)
+            make.leading.equalTo(addressView)
             make.trailing.equalTo(addressView)
             make.height.equalTo(addressView)
         }
         
-        dateImage.snp.makeConstraints { make in
-            make.leading.equalTo(dateView)
-            make.centerY.equalTo(dateView)
-            make.width.equalTo(dateView).multipliedBy(0.08)
-            make.height.equalTo(dateImage.snp.width).multipliedBy(1.0)
-        }
-        
         dateLabel.snp.makeConstraints { make in
-            make.leading.equalTo(dateImage.snp.trailing).offset(15)
+            make.leading.equalTo(dateView)
             make.trailing.equalTo(dateView)
             make.height.equalTo(dateView)
         }

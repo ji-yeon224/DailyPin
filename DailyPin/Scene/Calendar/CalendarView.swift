@@ -28,6 +28,7 @@ final class CalendarView: BaseView {
         view.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
         view.backgroundColor = Constants.Color.background
         view.delegate = self
+        view.showsVerticalScrollIndicator = false
         return view
     }()
     
@@ -36,6 +37,7 @@ final class CalendarView: BaseView {
     
     override func configureUI() {
         super.configureUI()
+        backgroundColor = Constants.Color.subBGColor
         [calendarView, returnTodayButton, collectionView].forEach{
             addSubview($0)
         }
@@ -56,8 +58,8 @@ final class CalendarView: BaseView {
         returnTodayButton.snp.makeConstraints { make in
             make.centerY.equalTo(calendarView.calendarHeaderView)
             make.trailing.equalTo(calendarView.calendarHeaderView.snp.trailing).inset(10)
-            make.height.equalTo(25)
-            make.width.equalTo(40)
+            
+            make.size.equalTo(35)
             
         }
         
@@ -124,7 +126,7 @@ extension CalendarView: UICollectionViewDelegate  {
         let cellRegistration = UICollectionView.CellRegistration<InfoCollectionViewCell, Record> { cell, indexPath, itemIdentifier in
             cell.titleLabel.text = itemIdentifier.title
             cell.address.text = itemIdentifier.placeInfo[0].address
-            cell.dateLabel.text = DateFormatter.convertDate(date: itemIdentifier.date)
+            cell.dateLabel.text = DateFormatter.convertToString(format: .fullTime, date: itemIdentifier.date)
             cell.layoutIfNeeded()
             
         }

@@ -57,8 +57,8 @@ final class RecordReadViewController: BaseViewController {
             dismiss(animated: true)
             return
         }
-        mainView.setRecordData(data: record)
-        mainView.addressLabel.text = location.address
+        mainView.setRecordData(data: record, address: location.address)
+        
         
     }
     
@@ -101,7 +101,7 @@ extension RecordReadViewController {
     
     
     private func bindEvent() {
-        let refreshRecord = PublishRelay<Record>()
+        let refreshRecord = PublishRelay<(Record, String)>()
         navigationItem.leftBarButtonItem?.rx.tap
             .asDriver()
             .drive(with: self) { owner, value in
@@ -115,7 +115,7 @@ extension RecordReadViewController {
                 if let record = owner.record, let location = owner.location {
                     let vc = RecordWriteViewController(mode: .update, record: record, location: location)
                     vc.updateRecord = { data in
-                        refreshRecord.accept(data)
+                        refreshRecord.accept((data, location.address))
                     }
                     let nav = UINavigationController(rootViewController: vc)
                     nav.modalPresentationStyle = .fullScreen
@@ -129,7 +129,7 @@ extension RecordReadViewController {
         
         refreshRecord
             .bind(with: self) { owner, value in
-                owner.mainView.setRecordData(data: value)
+                owner.mainView.setRecordData(data: value.0, address: value.1)
             }
             .disposed(by: disposeBag)
         

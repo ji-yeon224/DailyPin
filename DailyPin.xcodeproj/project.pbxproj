@@ -12,6 +12,7 @@
 		CE09C7612C0433E800002869 /* BottomSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C7602C0433E800002869 /* BottomSheetManager.swift */; };
 		CE09C7642C0458B500002869 /* BottomSheetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C7632C0458B500002869 /* BottomSheetProtocol.swift */; };
 		CE09C7662C04A9D300002869 /* SearchResultProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09C7652C04A9D300002869 /* SearchResultProtocol.swift */; };
+		CE2343F42C08CAE1005F1420 /* DateFormatterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2343F32C08CAE1005F1420 /* DateFormatterType.swift */; };
 		CE2951EA2ADEA96E00EE2571 /* NanumGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */; };
 		CE2951EB2ADEA96E00EE2571 /* NanumGothic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */; };
 		CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */; };
@@ -57,15 +58,19 @@
 		CE52CB7B2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB7A2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift */; };
 		CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */; };
 		CE546CD42AD44CCE00C0392B /* BaseAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE546CD32AD44CCD00C0392B /* BaseAnnotationView.swift */; };
-		CE546CD62AD44DB900C0392B /* SelectAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE546CD52AD44DB900C0392B /* SelectAnnotationView.swift */; };
-		CE546CD82AD44F2200C0392B /* SelectAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE546CD72AD44F2200C0392B /* SelectAnnotation.swift */; };
 		CE6F36B12B96E553007AD6AB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B02B96E553007AD6AB /* Color.swift */; };
 		CE6F36B32B96E56D007AD6AB /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B22B96E56D007AD6AB /* Design.swift */; };
-		CE6F36B62B96E707007AD6AB /* CustomBasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */; };
 		CE6F36B82B96E737007AD6AB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B72B96E737007AD6AB /* Font.swift */; };
 		CE6F36BB2B96E8D7007AD6AB /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = CE6F36BA2B96E8D7007AD6AB /* Then */; };
 		CE6F36BD2B96F2EC007AD6AB /* CustomImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */; };
 		CE743E282BA81C4400E0D9EA /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE743E272BA81C4400E0D9EA /* CircleButton.swift */; };
+		CE7842612C0983A400E4350E /* BasicTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842602C0983A400E4350E /* BasicTextLabel.swift */; };
+		CE7842632C099CBE00E4350E /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842622C099CBE00E4350E /* DividerView.swift */; };
+		CE7842662C09A5EF00E4350E /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = CE7842652C09A5EF00E4350E /* NVActivityIndicatorView */; };
+		CE7842682C09AB4500E4350E /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842672C09AB4500E4350E /* AlertViewController.swift */; };
+		CE78426A2C09AB8000E4350E /* CustomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842692C09AB8000E4350E /* CustomStackView.swift */; };
+		CE78426C2C09AE7E00E4350E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78426B2C09AE7E00E4350E /* CustomButton.swift */; };
+		CE78426E2C09AF6000E4350E /* UIViewController+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78426D2C09AF6000E4350E /* UIViewController+Extenstion.swift */; };
 		CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */; };
 		CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5E2AD594EF00068854 /* CalendarViewController.swift */; };
 		CE814A612AD594FB00068854 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A602AD594FB00068854 /* CalendarView.swift */; };
@@ -91,7 +96,6 @@
 		CE9B0E8B2ACA6A0A008A0694 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = CE9B0E8A2ACA6A0A008A0694 /* FloatingPanel */; };
 		CE9B0E8D2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */; };
 		CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */; };
-		CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0E942ACA95D7008A0694 /* SearchButton.swift */; };
 		CEA32E412AF394D9001B5619 /* FloatingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA32E402AF394D9001B5619 /* FloatingType.swift */; };
 		CEA4458C2AE4DD100000A57F /* PlaceListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */; };
 		CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB00FC02AC030BF001E7BB0 /* AppDelegate.swift */; };
@@ -100,8 +104,6 @@
 		CEB00FC82AC030BF001E7BB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FC62AC030BF001E7BB0 /* Main.storyboard */; };
 		CEB00FCA2AC030C0001E7BB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FC92AC030C0001E7BB0 /* Assets.xcassets */; };
 		CEB00FCD2AC030C0001E7BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FCB2AC030C0001E7BB0 /* LaunchScreen.storyboard */; };
-		CEB1AE5D2AF7E8070086DEA9 /* PlainLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1AE5C2AF7E8070086DEA9 /* PlainLabel.swift */; };
-		CEB1AE5F2AF7EA560086DEA9 /* BoldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */; };
 		CEB3373A2ADA9CE20027D90E /* GeocodingResDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB337392ADA9CE20027D90E /* GeocodingResDto.swift */; };
 		CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390A62ACE840600E4B2AC /* SearchParameter.swift */; };
 		CEB390AE2ACF0DB200E4B2AC /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390AD2ACF0DB200E4B2AC /* UIScrollView.swift */; };
@@ -142,6 +144,7 @@
 		CE09C7602C0433E800002869 /* BottomSheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetManager.swift; sourceTree = "<group>"; };
 		CE09C7632C0458B500002869 /* BottomSheetProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetProtocol.swift; sourceTree = "<group>"; };
 		CE09C7652C04A9D300002869 /* SearchResultProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultProtocol.swift; sourceTree = "<group>"; };
+		CE2343F32C08CAE1005F1420 /* DateFormatterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterType.swift; sourceTree = "<group>"; };
 		CE2951E82ADEA96E00EE2571 /* NanumGothic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Regular.ttf"; sourceTree = "<group>"; };
 		CE2951E92ADEA96E00EE2571 /* NanumGothic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NanumGothic-Bold.ttf"; sourceTree = "<group>"; };
 		CE2951ED2ADEE7F300EE2571 /* TextFieldProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldProtocol.swift; sourceTree = "<group>"; };
@@ -182,15 +185,18 @@
 		CE52CB7A2AC7D3A5007AD7F8 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE52CB7E2AC879D5007AD7F8 /* CollectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewProtocol.swift; sourceTree = "<group>"; };
 		CE546CD32AD44CCD00C0392B /* BaseAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAnnotationView.swift; sourceTree = "<group>"; };
-		CE546CD52AD44DB900C0392B /* SelectAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAnnotationView.swift; sourceTree = "<group>"; };
-		CE546CD72AD44F2200C0392B /* SelectAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAnnotation.swift; sourceTree = "<group>"; };
 		CE6F36AE2B96E349007AD6AB /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 		CE6F36B02B96E553007AD6AB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CE6F36B22B96E56D007AD6AB /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
-		CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBasicLabel.swift; sourceTree = "<group>"; };
 		CE6F36B72B96E737007AD6AB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageButton.swift; sourceTree = "<group>"; };
 		CE743E272BA81C4400E0D9EA /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
+		CE7842602C0983A400E4350E /* BasicTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTextLabel.swift; sourceTree = "<group>"; };
+		CE7842622C099CBE00E4350E /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		CE7842672C09AB4500E4350E /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		CE7842692C09AB8000E4350E /* CustomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStackView.swift; sourceTree = "<group>"; };
+		CE78426B2C09AE7E00E4350E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		CE78426D2C09AF6000E4350E /* UIViewController+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extenstion.swift"; sourceTree = "<group>"; };
 		CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		CE814A5E2AD594EF00068854 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		CE814A602AD594FB00068854 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -213,7 +219,6 @@
 		CE9A16B92AD2CCBB0051BE23 /* RecordCollectionViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionViewProtocol.swift; sourceTree = "<group>"; };
 		CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelCustomLayout.swift; sourceTree = "<group>"; };
 		CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
-		CE9B0E942ACA95D7008A0694 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		CEA32E402AF394D9001B5619 /* FloatingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingType.swift; sourceTree = "<group>"; };
 		CEA4458B2AE4DD100000A57F /* PlaceListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListProtocol.swift; sourceTree = "<group>"; };
 		CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,8 +229,6 @@
 		CEB00FC92AC030C0001E7BB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEB00FCC2AC030C0001E7BB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEB00FCE2AC030C0001E7BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CEB1AE5C2AF7E8070086DEA9 /* PlainLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainLabel.swift; sourceTree = "<group>"; };
-		CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoldLabel.swift; sourceTree = "<group>"; };
 		CEB337392ADA9CE20027D90E /* GeocodingResDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingResDto.swift; sourceTree = "<group>"; };
 		CEB390A62ACE840600E4B2AC /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
 		CEB390AD2ACF0DB200E4B2AC /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
@@ -276,6 +279,7 @@
 				CE3EA89D2AFE55B000628B07 /* FirebaseCrashlytics in Frameworks */,
 				CE4DF9082ACBB6AF00546526 /* Realm in Frameworks */,
 				CE83F4DA2B9ADEA600B067DC /* ReactorKit in Frameworks */,
+				CE7842662C09A5EF00E4350E /* NVActivityIndicatorView in Frameworks */,
 				CE3EA89B2AFE55B000628B07 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +351,7 @@
 				CE2951EC2ADEE7A500EE2571 /* Protocol */,
 				CE3DF80C2AC2D24100653CE1 /* Extension */,
 				CED3A6E42BA2EB4F00B17B41 /* PHPickerManager.swift */,
+				CE2343F32C08CAE1005F1420 /* DateFormatterType.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -385,8 +390,7 @@
 				CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */,
 				CEB390B32ACFCD4600E4B2AC /* MemoTextView.swift */,
 				CE814A652AD59D4900068854 /* CustomCalendarView.swift */,
-				CEB1AE5C2AF7E8070086DEA9 /* PlainLabel.swift */,
-				CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */,
+				CE7842602C0983A400E4350E /* BasicTextLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -441,6 +445,7 @@
 				CE3541D52AD5313F00773CD3 /* NSNotification.Name.swift */,
 				CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */,
 				CED3A6EF2BA3FEBF00B17B41 /* UIImage+Extension.swift */,
+				CE78426D2C09AF6000E4350E /* UIViewController+Extenstion.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -500,12 +505,14 @@
 		CE6F36B42B96E6FA007AD6AB /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				CE9B0E942ACA95D7008A0694 /* SearchButton.swift */,
 				CE94E7882AE6A6600005B593 /* ReturnTodayButton.swift */,
-				CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */,
 				CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */,
 				CE83F4D22B9AB73900B067DC /* BasicImageView.swift */,
 				CE743E272BA81C4400E0D9EA /* CircleButton.swift */,
+				CE7842622C099CBE00E4350E /* DividerView.swift */,
+				CE7842672C09AB4500E4350E /* AlertViewController.swift */,
+				CE7842692C09AB8000E4350E /* CustomStackView.swift */,
+				CE78426B2C09AE7E00E4350E /* CustomButton.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -546,8 +553,6 @@
 			children = (
 				CE9A16B22AD2897E0051BE23 /* CustomAnnotation.swift */,
 				CE9A16B72AD2BE240051BE23 /* CustomAnnotationView.swift */,
-				CE546CD52AD44DB900C0392B /* SelectAnnotationView.swift */,
-				CE546CD72AD44F2200C0392B /* SelectAnnotation.swift */,
 			);
 			path = Annotation;
 			sourceTree = "<group>";
@@ -662,6 +667,7 @@
 				CE6F36BA2B96E8D7007AD6AB /* Then */,
 				CE83F4D92B9ADEA600B067DC /* ReactorKit */,
 				CED3A6ED2BA3F9E600B17B41 /* RxDataSources */,
+				CE7842652C09A5EF00E4350E /* NVActivityIndicatorView */,
 			);
 			productName = DailyPin;
 			productReference = CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */;
@@ -705,6 +711,7 @@
 				CE6F36B92B96E8D7007AD6AB /* XCRemoteSwiftPackageReference "Then" */,
 				CE83F4D82B9ADEA600B067DC /* XCRemoteSwiftPackageReference "ReactorKit" */,
 				CED3A6EC2BA3F9E600B17B41 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				CE7842642C09A5EF00E4350E /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 			);
 			productRefGroup = CEB00FBE2AC030BF001E7BB0 /* Products */;
 			projectDirPath = "";
@@ -772,8 +779,11 @@
 				CE52CB722AC7197C007AD7F8 /* SearchViewModel.swift in Sources */,
 				CE6F36B12B96E553007AD6AB /* Color.swift in Sources */,
 				CE3DF8162AC3311400653CE1 /* BaseUIButton.swift in Sources */,
+				CE78426A2C09AB8000E4350E /* CustomStackView.swift in Sources */,
+				CE7842632C099CBE00E4350E /* DividerView.swift in Sources */,
 				CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */,
 				CE3DF81A2AC3B26900653CE1 /* Observable.swift in Sources */,
+				CE2343F42C08CAE1005F1420 /* DateFormatterType.swift in Sources */,
 				CEB390AE2ACF0DB200E4B2AC /* UIScrollView.swift in Sources */,
 				CE9A16B52AD28F0D0051BE23 /* Image.swift in Sources */,
 				CE83F4D52B9ABD7500B067DC /* RecordData.swift in Sources */,
@@ -802,7 +812,6 @@
 				CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */,
 				CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */,
 				CE52CB772AC7B454007AD7F8 /* NetworkError.swift in Sources */,
-				CEB1AE5D2AF7E8070086DEA9 /* PlainLabel.swift in Sources */,
 				CEB390BA2ACFDF4C00E4B2AC /* DateFormatter.swift in Sources */,
 				CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */,
 				CE6F36BD2B96F2EC007AD6AB /* CustomImageButton.swift in Sources */,
@@ -810,20 +819,19 @@
 				CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */,
 				CE3DF7FA2AC2B1BB00653CE1 /* BaseViewController.swift in Sources */,
 				CE814A662AD59D4900068854 /* CustomCalendarView.swift in Sources */,
+				CE7842682C09AB4500E4350E /* AlertViewController.swift in Sources */,
 				CE3DF8032AC2B5BA00653CE1 /* MainMapView.swift in Sources */,
-				CE546CD62AD44DB900C0392B /* SelectAnnotationView.swift in Sources */,
 				CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */,
 				CE9A16B32AD2897E0051BE23 /* CustomAnnotation.swift in Sources */,
 				CE52CB682AC5ADBB007AD7F8 /* GoogleNetwork.swift in Sources */,
 				CE9A16B82AD2BE240051BE23 /* CustomAnnotationView.swift in Sources */,
+				CE7842612C0983A400E4350E /* BasicTextLabel.swift in Sources */,
 				CE52CB792AC7D302007AD7F8 /* BaseCollectionViewCell.swift in Sources */,
 				CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */,
 				CE09C75F2C04294B00002869 /* AuthorizationLocationProtocol.swift in Sources */,
 				CE3541D62AD5313F00773CD3 /* NSNotification.Name.swift in Sources */,
-				CE6F36B62B96E707007AD6AB /* CustomBasicLabel.swift in Sources */,
 				CED3A6F02BA3FEBF00B17B41 /* UIImage+Extension.swift in Sources */,
 				CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */,
-				CE546CD82AD44F2200C0392B /* SelectAnnotation.swift in Sources */,
 				CE4DF90D2ACBBC3E00546526 /* Place.swift in Sources */,
 				CE4DF9112ACBC63200546526 /* PlaceRepository.swift in Sources */,
 				CEA4458C2AE4DD100000A57F /* PlaceListProtocol.swift in Sources */,
@@ -842,7 +850,6 @@
 				CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */,
 				CE3DF81D2AC52C2E00653CE1 /* SearchView.swift in Sources */,
 				CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */,
-				CEB1AE5F2AF7EA560086DEA9 /* BoldLabel.swift in Sources */,
 				CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */,
 				CED3A6E72BA2EC8800B17B41 /* ImageCollectionViewCell.swift in Sources */,
 				CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */,
@@ -856,16 +863,17 @@
 				CE4DF9152ACBD5C500546526 /* MainMapViewModel.swift in Sources */,
 				CEB00FC32AC030BF001E7BB0 /* SceneDelegate.swift in Sources */,
 				CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */,
+				CE78426C2C09AE7E00E4350E /* CustomButton.swift in Sources */,
 				CE83F4E52B9AEFF000B067DC /* RecordWriteViewModel.swift in Sources */,
 				CEB7391A2C059276004A9A20 /* Endpoint.swift in Sources */,
 				CEB7391C2C05928D004A9A20 /* BaseURL.swift in Sources */,
 				CEB390B62ACFDC0C00E4B2AC /* RecordMode.swift in Sources */,
 				CE3DF7ED2AC1AFCA00653CE1 /* Constants.swift in Sources */,
-				CE9B0E952ACA95D7008A0694 /* SearchButton.swift in Sources */,
 				CE6F36B32B96E56D007AD6AB /* Design.swift in Sources */,
 				CE83F4CD2B9AB58D00B067DC /* RecordReadViewController.swift in Sources */,
 				CEB5ECFA2AD0595E00BC6143 /* RecordRepository.swift in Sources */,
 				CE94E7892AE6A6600005B593 /* ReturnTodayButton.swift in Sources */,
+				CE78426E2C09AF6000E4350E /* UIViewController+Extenstion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1168,6 +1176,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		CE7842642C09A5EF00E4350E /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
 		CE814A622AD59D1B00068854 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
@@ -1263,6 +1279,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE6F36B92B96E8D7007AD6AB /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		CE7842652C09A5EF00E4350E /* NVActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE7842642C09A5EF00E4350E /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorView;
 		};
 		CE814A632AD59D1B00068854 /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;

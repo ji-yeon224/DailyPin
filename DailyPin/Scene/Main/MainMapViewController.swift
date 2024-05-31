@@ -12,13 +12,14 @@ import RxSwift
 import RxCocoa
 import RxGesture
 
+
 final class MainMapViewController: BaseViewController {
     
     private let mainView = MainMapView()
     private let viewModel = MainMapViewModel()
     
     private let defaultLoaction = CLLocationCoordinate2D(latitude: 37.566713, longitude: 126.978428)
-    private var searchAnnotation: SelectAnnotation?
+    private var highlightState: (CustomAnnotation?, CustomAnnotationView?) // view -> 이미 지도에 있던거
     
     private var disposeBag = DisposeBag()
     private let toastMessage = PublishRelay<String>()
@@ -62,7 +63,7 @@ final class MainMapViewController: BaseViewController {
         
         MapKitManager.shared.delegate = self
         mainView.mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
-        mainView.mapView.register(SelectAnnotationView.self, forAnnotationViewWithReuseIdentifier: SelectAnnotationView.identifier)
+        
         viewModel.getAllPlaceAnnotation()
         
     }
@@ -88,6 +89,7 @@ final class MainMapViewController: BaseViewController {
                 owner.showToastMessage(message: value)
             }
             .disposed(by: disposeBag)
+        
         NetworkMonitor.shared.connected
             .bind(with: self) { owner, isConnected in
                 if !isConnected {
@@ -142,7 +144,7 @@ final class MainMapViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        mainView.searchButton.rx.tap
+        mainView.searchTextButton.rx.tap
             .asDriver()
             .drive(with: self) { owner, _ in
                 owner.searchViewTransition()
@@ -156,12 +158,14 @@ final class MainMapViewController: BaseViewController {
                 owner.mainView.deSelectedAnnotation()
             }
             .disposed(by: disposeBag)
+        
         mainView.mapView.rx.longPressGesture()
             .when(.began)
             .subscribe(with: self) { owner, gesture in
                 owner.longPressMap(gesture)
             }
             .disposed(by: disposeBag)
+        
         
     }
     
@@ -180,6 +184,7 @@ final class MainMapViewController: BaseViewController {
     
 }
 
+// - Event
 extension MainMapViewController {
     
     @objc private func getChangeNotification(notification: NSNotification) {
@@ -224,15 +229,6 @@ extension MainMapViewController {
         
     }
     
-    // 검색 결과로 찍힌 핀 지우기
-    private func deleteSearchAnnotation() {
-        if let searchAnnotation = searchAnnotation {
-            mainView.removeOneAnnotation(annotation: searchAnnotation)
-            
-            self.searchAnnotation = nil
-        }
-        
-    }
     
     // alert 지도
     private func showAlertMap(placeInfo: PlaceItem) {
@@ -257,19 +253,49 @@ extension MainMapViewController {
         
         present(alert, animated: true)
     }
+    
 }
 
-extension MainMapViewController: SearchResultProtocol {
-    func selectSearchResult(place: PlaceItem) {
+// - Map Control Method
+extension MainMapViewController {
+    
+    private func setAnnotationState(place: PlaceItem) {
         guard let lat = place.latitude, let lng = place.longitude else { return }
         let center = CLLocationCoordinate2D(latitude: lat, longitude: lng)
         
         
-        searchAnnotation = SelectAnnotation(placeID: place.id, coordinate: center)
-        if let searchAnnotation = searchAnnotation {
-            mainView.setOneAnnotation(annotation: searchAnnotation)
+        mainView.setRegion(center: center)
+        
+        if let annotation = mainView.findAnnotation(coord: center),
+            let annotationView = mainView.mapView.view(for: annotation) as? CustomAnnotationView {
+            
+            annotationView.changePin(state: .highlight)
+            self.highlightState = (annotation, annotationView)
+            
+        } else {
+            let anno = CustomAnnotation(placeID: place.id, coordinate: center, isHighlight: true)
+            self.mainView.setOneAnnotation(annotation: anno)
+            self.highlightState = (anno, nil)
+            
+        }
+    }
+    
+    // 검색 결과로 찍힌 핀 지우기
+    private func deleteSearchAnnotation() {
+        if let tempAnnotation = highlightState.0 {
+            if let annoView = highlightState.1 { // 이미 있던 것
+                annoView.changePin(state: .nomal)
+            } else {
+                mainView.removeOneAnnotation(annotation: tempAnnotation)
+            }
         }
         
+    }
+}
+
+extension MainMapViewController: SearchResultProtocol {
+    func selectSearchResult(place: PlaceItem) {
+        setAnnotationState(place: place)
         DispatchQueue.main.async {
             BottomSheetManager.shared.setFloatingView(viewType: .info(data: place), vc: self)
         }
@@ -277,6 +303,8 @@ extension MainMapViewController: SearchResultProtocol {
     
     
 }
+
+
 
 
 extension MainMapViewController: MapViewProtocol {
@@ -294,15 +322,9 @@ extension MainMapViewController: MapViewProtocol {
 }
 
 extension MainMapViewController: BottomSheetProtocol {
+    // PlaceListView
     func setLocation(data: PlaceItem) {
-        guard let lat = data.latitude, let lng = data.longitude else { return }
-        let center = CLLocationCoordinate2D(latitude: lat, longitude: lng)
-        
-        searchAnnotation = SelectAnnotation(placeID: data.id, coordinate: center)
-        if let searchAnnotation = self.searchAnnotation {
-            self.mainView.setOneAnnotation(annotation: searchAnnotation)
-        }
-        
+        setAnnotationState(place: data)
         BottomSheetManager.shared.setFloatingView(viewType: .info(data: data), vc: self)
         
     }

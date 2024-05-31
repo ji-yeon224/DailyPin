@@ -12,7 +12,7 @@ final class CircleButton: UIButton {
     init(image: UIImage?) {
         super.init(frame: .zero)
         
-        let config = UIImage.SymbolConfiguration(pointSize: 9, weight: .bold)
+//        let config = UIImage.SymbolConfiguration(pointSize: 9, weight: .bold)
 //        let image = UIImage(systemName: "xmark", withConfiguration: config)
 //        self.tintColor = .black
         setImage(image, for: .normal)

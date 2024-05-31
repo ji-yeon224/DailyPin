@@ -95,7 +95,7 @@ final class CalendarViewController: BaseViewController {
     
     override func configureUI() {
         super.configureUI()
-        
+//        view.backgroundColor = Constants.Color.subBGColor
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
         
@@ -121,9 +121,6 @@ final class CalendarViewController: BaseViewController {
         mainView.dataSource.apply(snapShot)
     }
     
-    func convertDate(_ date: Date) -> String {
-        return DateFormatter.convertCalendarDate(date: date)
-    }
     
 }
 

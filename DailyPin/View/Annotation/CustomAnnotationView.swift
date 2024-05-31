@@ -8,6 +8,12 @@
 import Foundation
 import UIKit
 
+enum AnnotationState {
+    case nomal
+    case select
+    case highlight
+}
+
 final class CustomAnnotationView: BaseAnnotationView {
     
     static let identifier = "CustomAnnotationView"
@@ -15,7 +21,7 @@ final class CustomAnnotationView: BaseAnnotationView {
     
     let backView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         view.clipsToBounds = false
         return view
     }()
@@ -23,14 +29,29 @@ final class CustomAnnotationView: BaseAnnotationView {
     let imageView = {
         let view = UIImageView()
         view.backgroundColor = .clear
-        view.image = Constants.Image.starImage
+        view.image = UIImage(named: "Annotation")//Constants.Image.starImage
         view.contentMode = .scaleAspectFit
-        view.tintColor = Constants.Color.pinColor
-        view.layer.cornerRadius = view.frame.width / 2
+//        view.tintColor = Constants.Color.pinColor
+//        view.layer.cornerRadius = view.frame.width / 2
         view.clipsToBounds = true
         return view
     }()
     
+    func changePin(state: AnnotationState) {
+        switch state {
+        case .nomal:
+            imageView.image = Constants.Image.annotation
+        case .select:
+            imageView.image = Constants.Image.selectAnnotation
+        case .highlight:
+            imageView.image = Constants.Image.highlightAnnotation
+        }
+//        if isSelected { // 선택
+//            imageView.image = UIImage(named: "SelectAnnotation")
+//        } else {
+//            imageView.image = UIImage(named: "Annotation")
+//        }
+    }
     
     
     
@@ -42,7 +63,7 @@ final class CustomAnnotationView: BaseAnnotationView {
     
     override func setConstraints() {
         backView.snp.makeConstraints { make in
-            make.size.equalTo(25)
+            make.size.equalTo(35)
         }
         imageView.snp.makeConstraints { make in
             make.edges.equalTo(backView)
@@ -61,9 +82,9 @@ final class CustomAnnotationView: BaseAnnotationView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        bounds.size = CGSize(width: 25, height: 25)
-        centerOffset = CGPoint(x: 0, y: bounds.size.width / 2)
-        shadow()
+        bounds.size = CGSize(width: 35, height: 35)
+        centerOffset = CGPoint(x: 0, y: 0)
+//        shadow()
         
         
     }

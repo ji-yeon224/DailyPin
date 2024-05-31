@@ -9,8 +9,8 @@ import UIKit
 
 final class SearchCollectionViewCell: BaseCollectionViewCell {
     
-    var title = BoldLabel(size: 14, lines: 1)
-    var address = PlainLabel(size: 11, lines: 0)
+    var title = BasicTextLabel(style: .bodyBold)
+    var address = BasicTextLabel(style: .caption2, lines: 0)
     
     private var image = {
         var view = UIImageView()

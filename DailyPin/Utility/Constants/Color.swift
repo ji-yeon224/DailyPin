@@ -20,9 +20,13 @@ extension Constants {
         static let cellBackgroundColor = UIColor(named: "CellBackgroundColor")
         static let infoCellColor = UIColor(named: "InfoCell")
         static let subBGColor = UIColor(named: "subBGColor")
+        static let subYellowColor = UIColor(named: "SubYellowColor")
         static let tintColor = UIColor.black
         static let subTextColor = UIColor.lightGray
-        static let borderColor = UIColor.lightGray
+        static let borderColor = UIColor(named: "CustomGray")
         static let placeholderColor = UIColor.lightGray
+        
+        static let alpha = UIColor(named: "Alpha")
+        static let inActive = UIColor(named: "InActive")
     }
 }

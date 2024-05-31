@@ -14,11 +14,12 @@ final class CustomAnnotation: NSObject, MKAnnotation {
     
     let placeID: String
     @objc dynamic var coordinate: CLLocationCoordinate2D
+    var isHighlight: Bool = false
     
-    init(placeID: String, coordinate: CLLocationCoordinate2D) {
+    init(placeID: String, coordinate: CLLocationCoordinate2D, isHighlight: Bool = false) {
         self.placeID = placeID
         self.coordinate = coordinate
-        super.init()
+        self.isHighlight = isHighlight
     }
     
 }
