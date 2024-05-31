@@ -8,13 +8,15 @@
 import Foundation
 import UIKit
 import FSCalendar
+import RxDataSources
 
 final class CalendarView: BaseView {
     
     lazy var currentPage = calendarView.currentPage
     weak var calendarDelegate: FSCalendarProtocol?
-    weak var collectionViewDelegate: RecordCollectionViewProtocol?
-    var dataSource: UICollectionViewDiffableDataSource<Int, Record>!
+    
+    
+    var rxdataSource: RxCollectionViewSectionedReloadDataSource<RecordSectionModel>!
     
     lazy var calendarView = {
         let view = CustomCalendarView()
@@ -23,14 +25,12 @@ final class CalendarView: BaseView {
         return view
     }()
     
-    lazy var collectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-        view.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
-        view.backgroundColor = Constants.Color.background
-        view.delegate = self
-        view.showsVerticalScrollIndicator = false
-        return view
-    }()
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout()).then {
+        $0.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
+        $0.backgroundColor = Constants.Color.background
+        $0.showsVerticalScrollIndicator = false
+        $0.register(InfoCollectionViewCell.self, forCellWithReuseIdentifier: InfoCollectionViewCell.identifier)
+    }
     
     
     private let returnTodayButton = ReturnTodayButton()
@@ -123,28 +123,19 @@ extension CalendarView: UICollectionViewDelegate  {
     }
     
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<InfoCollectionViewCell, Record> { cell, indexPath, itemIdentifier in
-            cell.titleLabel.text = itemIdentifier.title
-            cell.address.text = itemIdentifier.placeInfo[0].address
-            cell.dateLabel.text = DateFormatter.convertToString(format: .fullTime, date: itemIdentifier.date)
-            cell.layoutIfNeeded()
-            
-        }
         
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+        rxdataSource = RxCollectionViewSectionedReloadDataSource(configureCell: { dataSource, collectionView, indexPath, item in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InfoCollectionViewCell.identifier, for: indexPath) as? InfoCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            cell.titleLabel.text = item.title
+            cell.address.text = item.placeInfo[0].address
+            cell.dateLabel.text = DateFormatter.convertToString(format: .fullTime, date: item.date)
             return cell
         })
+        
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let item = dataSource.itemIdentifier(for: indexPath) else {
-            collectionViewDelegate?.didSelectRecordItem(item: nil)
-            return
-        }
-        
-        collectionViewDelegate?.didSelectRecordItem(item: item)
-    }
     
 }
 

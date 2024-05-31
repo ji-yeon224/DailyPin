@@ -105,7 +105,6 @@ final class InfoViewController: BaseViewController {
         
         mainView.collectionView.rx.modelSelected(Record.self)
             .bind(with: self) { owner, item in
-                print(item.title)
                 let vc = RecordReadViewController(record: item, location: owner.placeData)
                 owner.modalTransition(vc: vc)
             }
