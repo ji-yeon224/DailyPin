@@ -36,9 +36,8 @@ final class RecordReadView: BaseView {
     private let bottomView = UIView()
     
     private lazy var memoTextView = MemoTextView(mode: .read)
-    private let divider  = UIView().then {
-        $0.backgroundColor = Constants.Color.mainColor
-    }
+    private let divider  = DividerView(color: Constants.Color.mainColor)
+    
     override func configureUI() {
         super.configureUI()
         addSubview(scrollView)

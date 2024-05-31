@@ -65,6 +65,7 @@
 		CE6F36BD2B96F2EC007AD6AB /* CustomImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */; };
 		CE743E282BA81C4400E0D9EA /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE743E272BA81C4400E0D9EA /* CircleButton.swift */; };
 		CE7842612C0983A400E4350E /* BasicTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842602C0983A400E4350E /* BasicTextLabel.swift */; };
+		CE7842632C099CBE00E4350E /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842622C099CBE00E4350E /* DividerView.swift */; };
 		CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */; };
 		CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5E2AD594EF00068854 /* CalendarViewController.swift */; };
 		CE814A612AD594FB00068854 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A602AD594FB00068854 /* CalendarView.swift */; };
@@ -186,6 +187,7 @@
 		CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageButton.swift; sourceTree = "<group>"; };
 		CE743E272BA81C4400E0D9EA /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		CE7842602C0983A400E4350E /* BasicTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTextLabel.swift; sourceTree = "<group>"; };
+		CE7842622C099CBE00E4350E /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
 		CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		CE814A5E2AD594EF00068854 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		CE814A602AD594FB00068854 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */,
 				CE83F4D22B9AB73900B067DC /* BasicImageView.swift */,
 				CE743E272BA81C4400E0D9EA /* CircleButton.swift */,
+				CE7842622C099CBE00E4350E /* DividerView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -760,6 +763,7 @@
 				CE52CB722AC7197C007AD7F8 /* SearchViewModel.swift in Sources */,
 				CE6F36B12B96E553007AD6AB /* Color.swift in Sources */,
 				CE3DF8162AC3311400653CE1 /* BaseUIButton.swift in Sources */,
+				CE7842632C099CBE00E4350E /* DividerView.swift in Sources */,
 				CEB390BC2ACFF89300E4B2AC /* Record.swift in Sources */,
 				CE3DF81A2AC3B26900653CE1 /* Observable.swift in Sources */,
 				CE2343F42C08CAE1005F1420 /* DateFormatterType.swift in Sources */,
