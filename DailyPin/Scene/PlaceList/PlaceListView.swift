@@ -12,12 +12,9 @@ final class PlaceListView: BaseView {
     
     var dataSource: UICollectionViewDiffableDataSource<Int, PlaceItem>!
     weak var collectionViewDelegate: PlaceCollectionViewProtocol?
-    
-    private let titleLabel = {
-        let view = BoldLabel(size: 16, lines: 1)
-        view.text = "myRecord".localized()
-        return view
-    }()
+    private let titleLabel = BasicTextLabel(style: .title2).then {
+        $0.text = "myRecord".localized()
+    }
     
     lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
@@ -41,13 +38,10 @@ final class PlaceListView: BaseView {
         return view
     }()
     
-    private let placeHolderLabel = {
-        let view = PlainLabel(size: 14, lines: 2)
-        view.text = "placeHolder_noPlaceList".localized()
-        view.textColor = Constants.Color.placeholderColor
-        view.textAlignment = .center
-        return view
-    }()
+    private let placeHolderLabel = BasicTextLabel(style: .body, color: Constants.Color.placeholderColor, lines: 2).then {
+        $0.text = "placeHolder_noPlaceList".localized()
+        $0.textAlignment = .center
+    }
     
     override func configureUI() {
         [titleLabel, collectionView, placeHolderView].forEach {

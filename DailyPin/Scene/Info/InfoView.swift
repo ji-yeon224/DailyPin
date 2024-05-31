@@ -16,9 +16,9 @@ final class InfoView: BaseView {
     
     private lazy var uiView = UIView()
     
-    var titleLabel = CustomBasicLabel(text: "", fontType: Font.bodyLarge)
+    var titleLabel = BasicTextLabel(style: .bodyLarge)
     
-    var addressLabel = CustomBasicLabel(text: "", fontType: .body, color: Constants.Color.subTextColor)
+    var addressLabel = BasicTextLabel(style: .body, color: Constants.Color.subTextColor)
 
     let addButton = CustomImageButton(img: Constants.Image.addRecord)
 

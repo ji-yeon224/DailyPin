@@ -23,15 +23,14 @@ final class InfoCollectionViewCell: BaseCollectionViewCell {
         $0.contentMode = .scaleToFill
     }
     
-    var titleLabel = CustomBasicLabel(text: "", fontType: Font.title2).then {
+    var titleLabel = BasicTextLabel(style: .title2).then {
         $0.textAlignment = .left
     }
     
     
-    var address = CustomBasicLabel(text: "", fontType: Font.body, color: Constants.Color.basicText)
+    var address = BasicTextLabel(style: .body)
     
-    var dateLabel = CustomBasicLabel(text: "", fontType: Font.caption, color: Constants.Color.subTextColor)
-    
+    var dateLabel = BasicTextLabel(style: .caption, color: Constants.Color.subTextColor)
     
     override func configureUI() {
         super.configureUI()

@@ -60,7 +60,6 @@
 		CE546CD42AD44CCE00C0392B /* BaseAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE546CD32AD44CCD00C0392B /* BaseAnnotationView.swift */; };
 		CE6F36B12B96E553007AD6AB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B02B96E553007AD6AB /* Color.swift */; };
 		CE6F36B32B96E56D007AD6AB /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B22B96E56D007AD6AB /* Design.swift */; };
-		CE6F36B62B96E707007AD6AB /* CustomBasicLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */; };
 		CE6F36B82B96E737007AD6AB /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36B72B96E737007AD6AB /* Font.swift */; };
 		CE6F36BB2B96E8D7007AD6AB /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = CE6F36BA2B96E8D7007AD6AB /* Then */; };
 		CE6F36BD2B96F2EC007AD6AB /* CustomImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */; };
@@ -99,8 +98,6 @@
 		CEB00FC82AC030BF001E7BB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FC62AC030BF001E7BB0 /* Main.storyboard */; };
 		CEB00FCA2AC030C0001E7BB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FC92AC030C0001E7BB0 /* Assets.xcassets */; };
 		CEB00FCD2AC030C0001E7BB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB00FCB2AC030C0001E7BB0 /* LaunchScreen.storyboard */; };
-		CEB1AE5D2AF7E8070086DEA9 /* PlainLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1AE5C2AF7E8070086DEA9 /* PlainLabel.swift */; };
-		CEB1AE5F2AF7EA560086DEA9 /* BoldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */; };
 		CEB3373A2ADA9CE20027D90E /* GeocodingResDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB337392ADA9CE20027D90E /* GeocodingResDto.swift */; };
 		CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390A62ACE840600E4B2AC /* SearchParameter.swift */; };
 		CEB390AE2ACF0DB200E4B2AC /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB390AD2ACF0DB200E4B2AC /* UIScrollView.swift */; };
@@ -185,7 +182,6 @@
 		CE6F36AE2B96E349007AD6AB /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro.ttf"; sourceTree = "<group>"; };
 		CE6F36B02B96E553007AD6AB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CE6F36B22B96E56D007AD6AB /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
-		CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBasicLabel.swift; sourceTree = "<group>"; };
 		CE6F36B72B96E737007AD6AB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageButton.swift; sourceTree = "<group>"; };
 		CE743E272BA81C4400E0D9EA /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
@@ -222,8 +218,6 @@
 		CEB00FC92AC030C0001E7BB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEB00FCC2AC030C0001E7BB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEB00FCE2AC030C0001E7BB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CEB1AE5C2AF7E8070086DEA9 /* PlainLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainLabel.swift; sourceTree = "<group>"; };
-		CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoldLabel.swift; sourceTree = "<group>"; };
 		CEB337392ADA9CE20027D90E /* GeocodingResDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingResDto.swift; sourceTree = "<group>"; };
 		CEB390A62ACE840600E4B2AC /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
 		CEB390AD2ACF0DB200E4B2AC /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
@@ -384,8 +378,6 @@
 				CE9B0E8C2ACA6A1E008A0694 /* FloatingPanelCustomLayout.swift */,
 				CEB390B32ACFCD4600E4B2AC /* MemoTextView.swift */,
 				CE814A652AD59D4900068854 /* CustomCalendarView.swift */,
-				CEB1AE5C2AF7E8070086DEA9 /* PlainLabel.swift */,
-				CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */,
 				CE7842602C0983A400E4350E /* BasicTextLabel.swift */,
 			);
 			path = View;
@@ -501,7 +493,6 @@
 			isa = PBXGroup;
 			children = (
 				CE94E7882AE6A6600005B593 /* ReturnTodayButton.swift */,
-				CE6F36B52B96E707007AD6AB /* CustomBasicLabel.swift */,
 				CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */,
 				CE83F4D22B9AB73900B067DC /* BasicImageView.swift */,
 				CE743E272BA81C4400E0D9EA /* CircleButton.swift */,
@@ -800,7 +791,6 @@
 				CE32459F2AC9683300582FC5 /* InfoView.swift in Sources */,
 				CEF4298D2AD14DB500A9ED50 /* InfoCollectionViewCell.swift in Sources */,
 				CE52CB772AC7B454007AD7F8 /* NetworkError.swift in Sources */,
-				CEB1AE5D2AF7E8070086DEA9 /* PlainLabel.swift in Sources */,
 				CEB390BA2ACFDF4C00E4B2AC /* DateFormatter.swift in Sources */,
 				CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */,
 				CE6F36BD2B96F2EC007AD6AB /* CustomImageButton.swift in Sources */,
@@ -818,7 +808,6 @@
 				CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */,
 				CE09C75F2C04294B00002869 /* AuthorizationLocationProtocol.swift in Sources */,
 				CE3541D62AD5313F00773CD3 /* NSNotification.Name.swift in Sources */,
-				CE6F36B62B96E707007AD6AB /* CustomBasicLabel.swift in Sources */,
 				CED3A6F02BA3FEBF00B17B41 /* UIImage+Extension.swift in Sources */,
 				CEB390A72ACE840600E4B2AC /* SearchParameter.swift in Sources */,
 				CE4DF90D2ACBBC3E00546526 /* Place.swift in Sources */,
@@ -839,7 +828,6 @@
 				CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */,
 				CE3DF81D2AC52C2E00653CE1 /* SearchView.swift in Sources */,
 				CEE6306A2AD68BA6006A5DD9 /* FSCalendarProtocol.swift in Sources */,
-				CEB1AE5F2AF7EA560086DEA9 /* BoldLabel.swift in Sources */,
 				CEB00FC12AC030BF001E7BB0 /* AppDelegate.swift in Sources */,
 				CED3A6E72BA2EC8800B17B41 /* ImageCollectionViewCell.swift in Sources */,
 				CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */,

@@ -24,9 +24,7 @@ final class RecordWriteView: BaseView {
         $0.isLayoutMarginsRelativeArrangement = true
     }
     
-    let placeHolderLabel = UILabel().then {
-        $0.textColor = Constants.Color.placeholderColor
-        $0.font = Font.nanum.fontStyle //UIFont(name: "NanumGothic", size: 15)
+    let placeHolderLabel = BasicTextLabel(style: .nanum, color: Constants.Color.placeholderColor).then {
         $0.text = "record_writeRecord".localized()
         $0.textAlignment = .left
     }
@@ -37,7 +35,7 @@ final class RecordWriteView: BaseView {
     
     private let titleImage = BasicImageView(img: Constants.Image.mappin)
     lazy var titleTextField = UITextField().then{
-        $0.font = Font.nanum.fontStyle //UIFont(name: "NanumGothic", size: 15)
+        $0.font = Font.nanum.fontStyle
         $0.textColor = Constants.Color.basicText
         $0.tintColor = Constants.Color.mainColor
         $0.contentVerticalAlignment = .center
@@ -46,7 +44,7 @@ final class RecordWriteView: BaseView {
     }
     
     private let addressImageView = BasicImageView(img: Constants.Image.selectPin)
-    let addressLabel = PlainLabel(size: 13, lines: 0)
+    let addressLabel = BasicTextLabel(style: .body, lines: 0)
     
     private let dateImage = BasicImageView(img: Constants.Image.calendar)
     var datePickerView = UIDatePicker().then {
