@@ -12,9 +12,7 @@ import RxSwift
 final class InfoViewModel {
     
     private let placeRepository = PlaceRepository()
-    var items: [Record] = []
-    let recordItems = PublishSubject<[Record]>()
-    let recordSectionItme = PublishSubject<[RecordSectionModel]>()
+    let recordItem = PublishSubject<[RecordSectionModel]>()
     let errorMsg = PublishSubject<String>()
     
     func getRecordItems(place: PlaceItem?) {
@@ -23,9 +21,8 @@ final class InfoViewModel {
             return
         }
         do {
-            items = try placeRepository.getRecordList(id: place.id)
-            recordSectionItme.onNext([RecordSectionModel(section: 0, items: items)])
-            recordItems.onNext(items)
+            let items = try placeRepository.getRecordList(id: place.id)
+            recordItem.onNext([RecordSectionModel(section: 0, items: items)])
         } catch {
             errorMsg.onNext("toase_recordLoadError".localized())
         }

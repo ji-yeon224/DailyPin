@@ -85,7 +85,7 @@ final class InfoViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.recordSectionItme
+        viewModel.recordItem
             .asDriver(onErrorJustReturn: [])
             .drive(mainView.collectionView.rx.items(dataSource: mainView.rxdataSource))
             .disposed(by: disposeBag)
