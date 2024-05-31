@@ -12,7 +12,7 @@ final class CalendarViewModel {
     
     private let recordRepository = RecordRepository()
     let recordDates = PublishSubject<[Date]>()
-    let filteredRecords = PublishSubject<[Record]>()
+    let recordItem = PublishSubject<[RecordSectionModel]>()
     
     func getRecords(date: Date) {
         var dateSet: Set<Date> = []
@@ -31,7 +31,7 @@ final class CalendarViewModel {
         let calendar = Calendar.current
         let selectedDate = calendar.startOfDay(for: date)
         let item = recordRepository.filterItemByDay(selectedDate)
-        filteredRecords.onNext(item)
+        recordItem.onNext([RecordSectionModel(section: 0, items: item)])
     }
     
     func convertToStruct(_ item: Place) -> PlaceItem {

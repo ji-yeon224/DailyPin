@@ -32,14 +32,13 @@ final class CalendarViewController: BaseViewController {
         super.viewDidLoad()
         
         mainView.calendarDelegate = self
-        mainView.collectionViewDelegate = self
         
         navigationController?.navigationBar.isHidden = false
         bindData()
-
+        
         requestDayRecord.accept(selectedDate)
         requestMonthData.onNext(nil)
-
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: .updateCell, object: nil)
         
@@ -85,17 +84,26 @@ final class CalendarViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.filteredRecords
+        
+        viewModel.recordItem
             .asDriver(onErrorJustReturn: [])
-            .drive(with: self) { owner, records in
-                owner.updateSnapShot(item: records)
+            .drive(mainView.collectionView.rx.items(dataSource: mainView.rxdataSource))
+            .disposed(by: disposeBag)
+        
+        mainView.collectionView.rx.modelSelected(Record.self)
+            .bind(with: self) { owner, item in
+                if let place = item.placeInfo.first {
+                    let vc = RecordReadViewController(record: item, location: place.toDomain())
+                    owner.modalTransition(vc: vc)
+                    
+                }
             }
             .disposed(by: disposeBag)
     }
     
     override func configureUI() {
         super.configureUI()
-//        view.backgroundColor = Constants.Color.subBGColor
+        //        view.backgroundColor = Constants.Color.subBGColor
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
         
@@ -114,13 +122,13 @@ final class CalendarViewController: BaseViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    private func updateSnapShot(item: [Record]) {
-        var snapShot = NSDiffableDataSourceSnapshot<Int, Record>()
-        snapShot.appendSections([0])
-        snapShot.appendItems(item)
-        mainView.dataSource.apply(snapShot)
-    }
     
+    private func modalTransition(vc: UIViewController) {
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        nav.modalTransitionStyle = .crossDissolve
+        present(nav, animated: true)
+    }
     
 }
 
@@ -143,31 +151,5 @@ extension CalendarViewController: FSCalendarProtocol {
         requestMonthData.onNext(nil)
         requestDayRecord.accept(date)
     }
-    
-}
-
-extension CalendarViewController: RecordCollectionViewProtocol {
-    func didSelectRecordItem(item: Record?) {
-        guard let item = item else {
-            showOKAlert(title: "", message: "alert_dateLoadError".localized()) { }
-            return
-        }
-        
-        guard let place = item.placeInfo.first else {
-            showOKAlert(title: "", message: "alert_locationLoadError".localized()) { }
-            return
-        }
-        let vc = RecordReadViewController(record: item, location: viewModel.convertToStruct(place))
-        
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        nav.modalTransitionStyle = .crossDissolve
-        present(nav, animated: true)
-        
-
-    }
-    
-    
-    
     
 }

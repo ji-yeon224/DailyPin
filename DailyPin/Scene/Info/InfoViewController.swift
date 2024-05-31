@@ -36,7 +36,6 @@ final class InfoViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainView.collectionViewDelegate = self
         bindData()
         bindUI()
         
@@ -86,11 +85,9 @@ final class InfoViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.recordItems
+        viewModel.recordItem
             .asDriver(onErrorJustReturn: [])
-            .drive(with: self) { owner, items in
-                owner.updateSnapShot(item: items)
-            }
+            .drive(mainView.collectionView.rx.items(dataSource: mainView.rxdataSource))
             .disposed(by: disposeBag)
         
         
@@ -102,6 +99,13 @@ final class InfoViewController: BaseViewController {
             .asDriver()
             .drive(with: self) { owner, _ in
                 let vc = RecordWriteViewController(mode: .create, record: nil, location: owner.placeData)
+                owner.modalTransition(vc: vc)
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.collectionView.rx.modelSelected(Record.self)
+            .bind(with: self) { owner, item in
+                let vc = RecordReadViewController(record: item, location: owner.placeData)
                 owner.modalTransition(vc: vc)
             }
             .disposed(by: disposeBag)
@@ -124,28 +128,5 @@ extension InfoViewController {
         present(nav, animated: true)
     }
     
-    
-    
-    private func updateSnapShot(item: [Record]) {
-        var snapShot = NSDiffableDataSourceSnapshot<Int, Record>()
-        snapShot.appendSections([0])
-        
-        snapShot.appendItems(item)
-        mainView.dataSource.apply(snapShot)
-    }
 }
 
-extension InfoViewController: RecordCollectionViewProtocol {
-    func didSelectRecordItem(item: Record?) {
-        guard let item = item else {
-            showOKAlert(title: "", message: "alert_dateLoadError".localized()) { }
-            return
-        }
-        
-        let vc = RecordReadViewController(record: item, location: placeData)
-        modalTransition(vc: vc)
-        
-    }
-    
-    
-}

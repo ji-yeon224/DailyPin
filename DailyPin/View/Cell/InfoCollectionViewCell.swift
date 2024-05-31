@@ -9,6 +9,8 @@ import UIKit
 
 final class InfoCollectionViewCell: BaseCollectionViewCell {
     
+    static let identifier = "InfoCollectionViewCell"
+    
     private lazy var stackView = {
         let view = UIStackView()
         view.axis = .vertical
