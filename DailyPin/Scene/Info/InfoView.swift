@@ -6,13 +6,12 @@
 //
 
 import UIKit
-
+import RxDataSources
 
 
 final class InfoView: BaseView {
     
-    var dataSource: UICollectionViewDiffableDataSource<Int, Record>!
-    weak var collectionViewDelegate: RecordCollectionViewProtocol?
+    var rxdataSource: RxCollectionViewSectionedReloadDataSource<RecordSectionModel>!
     
     private lazy var topView = UIView()
     private lazy var stackView = UIStackView(frame: .zero).then {
@@ -31,13 +30,11 @@ final class InfoView: BaseView {
     private let divider = DividerView()
     
     // 저장된 목록 보여주기
-    lazy var collectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-        view.backgroundColor = Constants.Color.background
-        view.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
-        view.delegate = self 
-        return view
-    }()
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout()).then {
+        $0.backgroundColor = Constants.Color.background
+        $0.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
+        $0.register(InfoCollectionViewCell.self, forCellWithReuseIdentifier: InfoCollectionViewCell.identifier)
+    }
     
     
     
@@ -104,15 +101,14 @@ extension InfoView {
     
     
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<InfoCollectionViewCell, Record> { cell, indexPath, itemIdentifier in
-            cell.titleLabel.text = itemIdentifier.title
-            cell.dateLabel.text = DateFormatter.convertToString(format: .fullDateTime, date: itemIdentifier.date)
-            cell.address.isHidden = true
-            cell.layoutIfNeeded()
-        }
         
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+        rxdataSource = RxCollectionViewSectionedReloadDataSource(configureCell: { dataSource, collectionView, indexPath, item in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InfoCollectionViewCell.identifier, for: indexPath) as? InfoCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            cell.titleLabel.text = item.title
+            cell.dateLabel.text = DateFormatter.convertToString(format: .fullDateTime, date: item.date)
+            cell.address.isHidden = true
             return cell
         })
     }
@@ -122,16 +118,3 @@ extension InfoView {
     
 }
 
-extension InfoView: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let item = dataSource.itemIdentifier(for: indexPath) else {
-            collectionViewDelegate?.didSelectRecordItem(item: nil)
-            return
-        }
-        
-        collectionViewDelegate?.didSelectRecordItem(item: item)
-        
-    }
-    
-}
