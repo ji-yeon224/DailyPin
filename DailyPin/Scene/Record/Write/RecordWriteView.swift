@@ -58,7 +58,7 @@ final class RecordWriteView: BaseView {
     }
     private let bottomView = UIView()
     
-    lazy var memoTextView = MemoTextView().then {
+    lazy var memoTextView = MemoTextView(mode: .edit).then {
         $0.font = Font.nanum.fontStyle//UIFont(name: "NanumGothic", size: 15)
     }
     

@@ -65,6 +65,7 @@
 		CE6F36BB2B96E8D7007AD6AB /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = CE6F36BA2B96E8D7007AD6AB /* Then */; };
 		CE6F36BD2B96F2EC007AD6AB /* CustomImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */; };
 		CE743E282BA81C4400E0D9EA /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE743E272BA81C4400E0D9EA /* CircleButton.swift */; };
+		CE7842612C0983A400E4350E /* BasicTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842602C0983A400E4350E /* BasicTextLabel.swift */; };
 		CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */; };
 		CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5E2AD594EF00068854 /* CalendarViewController.swift */; };
 		CE814A612AD594FB00068854 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A602AD594FB00068854 /* CalendarView.swift */; };
@@ -188,6 +189,7 @@
 		CE6F36B72B96E737007AD6AB /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		CE6F36BC2B96F2EC007AD6AB /* CustomImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageButton.swift; sourceTree = "<group>"; };
 		CE743E272BA81C4400E0D9EA /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
+		CE7842602C0983A400E4350E /* BasicTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTextLabel.swift; sourceTree = "<group>"; };
 		CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		CE814A5E2AD594EF00068854 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		CE814A602AD594FB00068854 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				CE814A652AD59D4900068854 /* CustomCalendarView.swift */,
 				CEB1AE5C2AF7E8070086DEA9 /* PlainLabel.swift */,
 				CEB1AE5E2AF7EA560086DEA9 /* BoldLabel.swift */,
+				CE7842602C0983A400E4350E /* BasicTextLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -810,6 +813,7 @@
 				CE9A16B32AD2897E0051BE23 /* CustomAnnotation.swift in Sources */,
 				CE52CB682AC5ADBB007AD7F8 /* GoogleNetwork.swift in Sources */,
 				CE9A16B82AD2BE240051BE23 /* CustomAnnotationView.swift in Sources */,
+				CE7842612C0983A400E4350E /* BasicTextLabel.swift in Sources */,
 				CE52CB792AC7D302007AD7F8 /* BaseCollectionViewCell.swift in Sources */,
 				CE52CB7F2AC879D5007AD7F8 /* CollectionViewProtocol.swift in Sources */,
 				CE09C75F2C04294B00002869 /* AuthorizationLocationProtocol.swift in Sources */,

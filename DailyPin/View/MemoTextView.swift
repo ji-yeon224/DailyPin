@@ -9,9 +9,21 @@ import UIKit
 
 class MemoTextView: UITextView {
     
+    convenience init(mode: Mode) {
+        self.init()
+        configure()
+        switch mode {
+        case .read:
+            isEditable = false
+        case .edit:
+            configBorder()
+            isEditable = true
+        }
+    }
+    
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
-        configure()
+        
     }
     
     @available(*, unavailable)
@@ -21,14 +33,18 @@ class MemoTextView: UITextView {
     
     private func configure() {
         isScrollEnabled = false
-        layer.cornerRadius = 3
-        layer.borderWidth = 1
-        layer.borderColor = Constants.Color.mainColor?.cgColor
         textColor = Constants.Color.basicText
         backgroundColor = Constants.Color.background
         font = UIFont(name: "NanumGothic", size: 15)
-        textContainerInset = UIEdgeInsets(top: 18, left: 18, bottom: 18, right: 18)
         tintColor = Constants.Color.mainColor
+    }
+    
+    private func configBorder() {
+        
+        layer.cornerRadius = 3
+        layer.borderWidth = 1
+        layer.borderColor = Constants.Color.mainColor?.cgColor
+        textContainerInset = UIEdgeInsets(top: 18, left: 18, bottom: 18, right: 18)
     }
     
 }
