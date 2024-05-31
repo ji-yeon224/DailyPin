@@ -22,6 +22,7 @@ extension Constants {
         static let caption2: UIFont = UIFont(name: "SFPro-Regular", size: 11) ?? .systemFont(ofSize: 11)
         
         static let nanumFont: UIFont = UIFont(name: "NanumGothic", size: 13) ?? .systemFont(ofSize: 13)
+        static let nanumBold: UIFont = UIFont(name: "NanumGothicBold", size: 13) ?? .systemFont(ofSize: 13, weight: .bold)
         
     }
 

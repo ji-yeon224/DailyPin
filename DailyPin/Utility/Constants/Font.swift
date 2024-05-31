@@ -16,6 +16,7 @@ enum Font {
     case caption
     case caption2
     case nanum
+    case nanumBold
     
     var fontStyle: UIFont {
         switch self {
@@ -35,6 +36,8 @@ enum Font {
             return Constants.Design.caption2
         case .nanum:
             return Constants.Design.nanumFont
+        case .nanumBold:
+            return Constants.Design.nanumBold
         }
     }
 }
