@@ -48,6 +48,7 @@ final class RecordReadViewModel {
         deletePlace
             .bind(with: self) { owner, value in
                 var refresh = false
+                // 해당 장소에 모든 레코드가 삭제됨 -> 장소 삭제
                 if owner.placeRepository.getRecordListCount(id: value) == 0 {
                     var deletePlace: Place
                     do {

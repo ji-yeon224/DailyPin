@@ -86,12 +86,13 @@ extension RecordReadViewController {
             .bind(with: self) { owner, value in
                 let (msg, refresh) = value
                 owner.showOKAlert(title: "deleteButton".localized(), message: msg) {
-                    NotificationCenter.default.post(name: .updateCell, object: nil)
-                    owner.dismiss(animated: true)
                     
                     if refresh {
                         NotificationCenter.default.post(name: .databaseChange, object: nil, userInfo:  [NotificationKey.changeType: ChangeType.delete])
+                    } else {
+                        NotificationCenter.default.post(name: .updateCell, object: nil)
                     }
+                    owner.dismiss(animated: true)
                     
                 }
             }

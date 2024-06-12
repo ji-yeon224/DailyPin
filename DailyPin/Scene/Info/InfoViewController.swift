@@ -50,6 +50,8 @@ final class InfoViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: .updateCell, object: nil)
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -109,6 +111,19 @@ final class InfoViewController: BaseViewController {
                 owner.modalTransition(vc: vc)
             }
             .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(.databaseChange)
+            .bind(with: self) { owner, notification in
+                if let notiInfo = notification.userInfo,
+                   let changeType = notiInfo[NotificationKey.changeType] as? ChangeType {
+                    if changeType == .delete {
+                        owner.dismiss(animated: true)
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        
     }
     
     
