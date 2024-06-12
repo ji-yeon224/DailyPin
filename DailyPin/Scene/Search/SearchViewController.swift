@@ -45,15 +45,7 @@ final class SearchViewController: BaseViewController {
         
         bindData()
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(networkConfiguration), name: .networkConnect, object: nil)
-        
-        
        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: .networkConnect, object: nil)
     }
     
 //    @objc private func networkConfiguration(notification: NSNotification) {

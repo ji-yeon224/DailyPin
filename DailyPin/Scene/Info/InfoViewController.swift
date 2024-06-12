@@ -38,6 +38,7 @@ final class InfoViewController: BaseViewController {
         
         bindData()
         bindUI()
+        bindNotification()
         
         requestRecordList.onNext(placeData)
         
@@ -45,18 +46,6 @@ final class InfoViewController: BaseViewController {
     
     deinit {
         debugPrint("infovc deinit")
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: .updateCell, object: nil)
-        
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: .updateCell, object: nil)
     }
     
     override func configureUI() {
@@ -112,7 +101,10 @@ final class InfoViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        NotificationCenter.default.rx.notification(.databaseChange)
+    }
+    
+    private func bindNotification() {
+        NotificationCenterManager.databaseChange.addObserver()
             .bind(with: self) { owner, notification in
                 if let notiInfo = notification.userInfo,
                    let changeType = notiInfo[NotificationKey.changeType] as? ChangeType {
@@ -122,8 +114,11 @@ final class InfoViewController: BaseViewController {
                 }
             }
             .disposed(by: disposeBag)
-        
-        
+        NotificationCenterManager.updateCell.addObserver()
+            .bind(with: self) { owner, _ in
+                owner.requestRecordList.onNext(owner.placeData)
+            }
+            .disposed(by: disposeBag)
     }
     
     

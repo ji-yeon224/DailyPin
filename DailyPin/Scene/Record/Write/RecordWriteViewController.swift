@@ -147,7 +147,6 @@ extension RecordWriteViewController {
         output.successMsg
             .bind(with: self) { owner, value in
                 owner.showOKAlert(title: "", message: value) {
-                    NotificationCenter.default.post(name: .updateCell, object: nil)
                     
                     owner.dismiss(animated: true)
                 }
@@ -157,7 +156,6 @@ extension RecordWriteViewController {
         output.updateData
             .bind(with: self) { owner, data in
                 owner.showOKAlert(title: "", message: "toast_editComplete".localized()) {
-                    NotificationCenter.default.post(name: .updateCell, object: nil)
                     owner.updateRecord?(data)
                     owner.dismiss(animated: true)
                 }

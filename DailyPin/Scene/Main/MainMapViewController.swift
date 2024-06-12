@@ -34,8 +34,7 @@ final class MainMapViewController: BaseViewController {
         super.viewDidLoad()
         
         mainView.mapViewDelegate = self
-        notificationObserver()
-        
+        bindNotification()
         BottomSheetManager.shared.delegate = self
         MapKitManager.shared.checkDeviceLocationAuthorization()
     }
@@ -55,9 +54,6 @@ final class MainMapViewController: BaseViewController {
         
     }
     
-    private func notificationObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: .databaseChange, object: nil)
-    }
     
     private func configMapView() {
         
@@ -169,6 +165,26 @@ final class MainMapViewController: BaseViewController {
         
     }
     
+    private func bindNotification() {
+        NotificationCenterManager.databaseChange.addObserver()
+            .bind(with: self) { owner, notification in
+                guard let notiInfo = notification.userInfo else { return }
+                
+                if let changeType = notiInfo[NotificationKey.changeType] as? ChangeType {
+                    switch changeType {
+                    case .save:
+                        owner.deleteSearchAnnotation()
+                    case .delete:
+                        BottomSheetManager.shared.dismiss()
+                        owner.deleteSearchAnnotation()
+                    }
+                }
+                owner.mainView.removeAllCustomAnnotation(annotations: owner.viewModel.allAnnotationList)
+                owner.viewModel.getAllPlaceAnnotation()
+            }
+            .disposed(by: disposeBag)
+    }
+    
     private func transitionPushNav(vc: UIViewController?) {
         guard let vc = vc else { return }
         navigationController?.pushViewController(vc, animated: true)
@@ -200,14 +216,6 @@ extension MainMapViewController {
             }
         }
         
-//        if let type = notiInfo["changeType"] as? String {
-//            if type == "save" {
-//                deleteSearchAnnotation()
-//            } else {
-//                BottomSheetManager.shared.dismiss()
-//                deleteSearchAnnotation()
-//            }
-//        }
         mainView.removeAllCustomAnnotation(annotations: viewModel.allAnnotationList)
         viewModel.getAllPlaceAnnotation()
     }

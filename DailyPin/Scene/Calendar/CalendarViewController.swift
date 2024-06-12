@@ -38,21 +38,13 @@ final class CalendarViewController: BaseViewController {
         
         requestDayRecord.accept(selectedDate)
         requestMonthData.onNext(nil)
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(getChangeNotification), name: .updateCell, object: nil)
-        
+          
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: .updateCell, object: nil)
     }
     
     
@@ -101,6 +93,15 @@ final class CalendarViewController: BaseViewController {
             .disposed(by: disposeBag)
     }
     
+    private func bindNotification() {
+        NotificationCenterManager.updateCell.addObserver()
+            .bind(with: self) { owner, _ in
+                owner.requestMonthData.onNext(nil)
+                owner.requestDayRecord.accept(owner.selectedDate)
+            }
+            .disposed(by: disposeBag)
+    }
+    
     override func configureUI() {
         super.configureUI()
         //        view.backgroundColor = Constants.Color.subBGColor
@@ -112,11 +113,6 @@ final class CalendarViewController: BaseViewController {
         
     }
     
-    @objc private func getChangeNotification(notification: NSNotification) {
-        
-        requestMonthData.onNext(nil)
-        requestDayRecord.accept(selectedDate)
-    }
     
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)

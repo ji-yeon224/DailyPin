@@ -43,6 +43,7 @@ final class RecordWriteViewModel {
                 
                 do {
                     try owner.placeRepository.updateRecordList(record: record, place: place)
+                    NotificationCenterManager.updateCell.post()
                     successMsg.accept("toast_saveComplete".localized())
                 } catch {
                     debugPrint("error")
@@ -59,6 +60,7 @@ final class RecordWriteViewModel {
                 do {
                     let data = try owner.recordRepository.updateRecord(id: record.objectID, newData)
                     updateData.onNext(data)
+                    NotificationCenterManager.updateCell.post()
                 } catch {
                     msg.accept(error.localizedDescription)
 //                    self.currentRecord = nil
@@ -106,7 +108,7 @@ extension RecordWriteViewModel {
         do {
             try placeRepository.createItem(place)
             
-            NotificationCenter.default.post(name: .databaseChange, object: nil, userInfo: [NotificationKey.changeType: ChangeType.save])
+            NotificationCenterManager.databaseChange.post(userInfo: [NotificationKey.changeType: ChangeType.save])
             
             return place
         } catch {
