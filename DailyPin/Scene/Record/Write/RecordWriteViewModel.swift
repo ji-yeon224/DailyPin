@@ -105,7 +105,8 @@ extension RecordWriteViewModel {
         
         do {
             try placeRepository.createItem(place)
-            NotificationCenter.default.post(name: .databaseChange, object: nil, userInfo: ["changeType": "save"])
+            
+            NotificationCenter.default.post(name: .databaseChange, object: nil, userInfo: [NotificationKey.changeType: ChangeType.save])
             
             return place
         } catch {

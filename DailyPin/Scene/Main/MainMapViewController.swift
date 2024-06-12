@@ -190,14 +190,24 @@ extension MainMapViewController {
     @objc private func getChangeNotification(notification: NSNotification) {
         guard let notiInfo = notification.userInfo else { return }
         
-        if let type = notiInfo["changeType"] as? String {
-            if type == "save" {
+        if let changeType = notiInfo[NotificationKey.changeType] as? ChangeType {
+            switch changeType {
+            case .save:
                 deleteSearchAnnotation()
-            } else {
+            case .delete:
                 BottomSheetManager.shared.dismiss()
                 deleteSearchAnnotation()
             }
         }
+        
+//        if let type = notiInfo["changeType"] as? String {
+//            if type == "save" {
+//                deleteSearchAnnotation()
+//            } else {
+//                BottomSheetManager.shared.dismiss()
+//                deleteSearchAnnotation()
+//            }
+//        }
         mainView.removeAllCustomAnnotation(annotations: viewModel.allAnnotationList)
         viewModel.getAllPlaceAnnotation()
     }

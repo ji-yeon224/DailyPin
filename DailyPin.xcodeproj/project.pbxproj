@@ -122,6 +122,7 @@
 		CEBAB9022AE01B69008AF9C8 /* GowunBatang-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB9012AE01B69008AF9C8 /* GowunBatang-Bold.ttf */; };
 		CEBAB9042AE01B71008AF9C8 /* GowunBatang-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */; };
 		CEBD2C972AD982B5000932F7 /* MapViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */; };
+		CEC108DD2C1971F900874455 /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC108DC2C1971F900874455 /* NotificationKey.swift */; };
 		CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */; };
 		CED3A6E52BA2EB4F00B17B41 /* PHPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3A6E42BA2EB4F00B17B41 /* PHPickerManager.swift */; };
 		CED3A6E72BA2EC8800B17B41 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3A6E62BA2EC8800B17B41 /* ImageCollectionViewCell.swift */; };
@@ -249,6 +250,7 @@
 		CEBAB9012AE01B69008AF9C8 /* GowunBatang-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Bold.ttf"; sourceTree = "<group>"; };
 		CEBAB9032AE01B71008AF9C8 /* GowunBatang-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GowunBatang-Regular.ttf"; sourceTree = "<group>"; };
 		CEBD2C962AD982B5000932F7 /* MapViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewProtocol.swift; sourceTree = "<group>"; };
+		CEC108DC2C1971F900874455 /* NotificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
 		CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPanelController+Extension.swift"; sourceTree = "<group>"; };
 		CED3A6E42BA2EB4F00B17B41 /* PHPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerManager.swift; sourceTree = "<group>"; };
 		CED3A6E62BA2EC8800B17B41 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -504,6 +506,7 @@
 				CE6F36B02B96E553007AD6AB /* Color.swift */,
 				CE6F36B22B96E56D007AD6AB /* Design.swift */,
 				CE6F36B72B96E737007AD6AB /* Font.swift */,
+				CEC108DC2C1971F900874455 /* NotificationKey.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -816,6 +819,7 @@
 				CE9B0E932ACA8122008A0694 /* InfoViewModel.swift in Sources */,
 				CE52CB702AC7186F007AD7F8 /* LangCode.swift in Sources */,
 				CED3A6E92BA2EDE100B17B41 /* SelectedImage.swift in Sources */,
+				CEC108DD2C1971F900874455 /* NotificationKey.swift in Sources */,
 				CE3DF8012AC2B5B100653CE1 /* MainMapViewController.swift in Sources */,
 				CE90EEC92AE4CD8B0034C03B /* PlaceListViewModel.swift in Sources */,
 				CE3DF80E2AC2D25600653CE1 /* String+Extension.swift in Sources */,

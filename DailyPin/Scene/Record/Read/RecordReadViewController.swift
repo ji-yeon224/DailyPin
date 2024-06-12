@@ -90,7 +90,7 @@ extension RecordReadViewController {
                     owner.dismiss(animated: true)
                     
                     if refresh {
-                        NotificationCenter.default.post(name: .databaseChange, object: nil, userInfo: ["changeType": "delete"])
+                        NotificationCenter.default.post(name: .databaseChange, object: nil, userInfo:  [NotificationKey.changeType: ChangeType.delete])
                     }
                     
                 }
