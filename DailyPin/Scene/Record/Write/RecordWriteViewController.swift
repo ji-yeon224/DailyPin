@@ -23,11 +23,7 @@ final class RecordWriteViewController: BaseViewController {
     private let backButtonTap = PublishRelay<Void>()
     private var recordMode: RecordMode = .create
     private var imgList: [SelectedImage] = []
-//    private let imageModel = PublishRelay<[SelectImageModel]>()
     
-//    private lazy var photoButton = UIBarButtonItem(image: Constants.Image.photo, style: .plain, target: self, action: nil)
-    
-//    private lazy var doneButton = UIBarButtonItem(image: Constants.Image.keyboardDown, style: .plain, target: self, action: nil)
     
     var longPressHandler: (() -> Void)?
     var updateRecord: ((Record) -> Void)?
@@ -52,30 +48,31 @@ final class RecordWriteViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        config()
-        
-    }
-    
-    private func config() {
-        setNavBar()
-        setData()
-        bindEvent()
-        bind()
-//        configToolBar()
-//        mainView.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        removeKeyboardNotification()
         longPressHandler?()
     }
+    
+    
+    override func configureUI() {
+        setNavBar()
+        setData()
+        bindEvent()
+        bind()
+        addKeyboardNotification()
+    }
+    
+    
+}
+
+// MARK: Config
+extension RecordWriteViewController {
     
     private func setData() {
         guard let location = location else {
@@ -108,8 +105,19 @@ final class RecordWriteViewController: BaseViewController {
         }
     }
     
+    private func addKeyboardNotification() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeKeyboardNotification() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
 }
 
+// MARK: Binding
 extension RecordWriteViewController {
     private func bind() {
         let requestCreate = PublishRelay<(Record, PlaceItem)>()
@@ -205,41 +213,8 @@ extension RecordWriteViewController {
             }
             .disposed(by: disposeBag)
         
-//        photoButton.rx.tap
-//            .throttle(.seconds(1), scheduler: MainScheduler.instance)
-//            .asDriver(onErrorJustReturn: ())
-//            .drive(with: self) { owner, _ in
-////                owner.configImageCell()
-//                PHPickerManager.shared.presentPicker(vc: self, selectLimit: 2)
-//            }
-//            .disposed(by: disposeBag)
-        
-//        imageModel
-//            .bind(to: mainView.imagePickCollectionView.rx.items(dataSource: mainView.dataSource))
-//            .disposed(by: disposeBag)
-        
-//        PHPickerManager.shared.selectedImage
-//            .bind(with: self) { owner, image in
-//                owner.imgList.append(contentsOf: image.map { return SelectedImage(image: $0)})
-//                
-//                let data = SelectImageModel(section: "", items: owner.imgList)
-//                owner.imageModel.accept([data])
-//            }
-//            .disposed(by: disposeBag)
     }
     
-//    private func configImageCell() {
-//        PHPickerManager.shared.presentPicker(vc: self, selectLimit: 2)
-//        PHPickerManager.shared.selectedImage
-//            .bind(with: self) { owner, image in
-//                owner.imgList.append(contentsOf: image.map { return SelectedImage(image: $0)})
-//                print(owner.imgList.count)
-//                let data = SelectImageModel(section: "", items: owner.imgList)
-//                owner.imageModel.accept([data])
-//            }
-//            .disposed(by: disposeBag)
-//        
-//    }
     
     private func getSaveRecordData() -> Record? {
         guard let location = location else {
@@ -257,16 +232,7 @@ extension RecordWriteViewController {
     }
 }
 
-//extension RecordWriteViewController: ImageCollectionProtocol {
-//    func cancelButtonTap(index: Int) {
-//        imgList.remove(at: index)
-//        let data = SelectImageModel(section: "", items: imgList)
-//        imageModel.accept([data])
-//    }
-//    
-//    
-//}
-
+// MARK: Keyboard Notification
 extension RecordWriteViewController {
     @objc private func keyboardWillShow(notification:NSNotification) {
 
@@ -291,6 +257,7 @@ extension RecordWriteViewController {
     }
 }
 
+// MARK: Config NavigationView
 extension RecordWriteViewController {
     private func setNavBar() {
         
@@ -313,13 +280,4 @@ extension RecordWriteViewController {
         
     }
     
-//    private func configToolBar() {
-//        
-//        let flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        
-//        photoButton.tintColor = Constants.Color.basicText
-//        doneButton.tintColor = Constants.Color.basicText
-//        
-//        mainView.toolbar.setItems([photoButton, flexibleSpaceButton, doneButton], animated: true)
-//    }
 }

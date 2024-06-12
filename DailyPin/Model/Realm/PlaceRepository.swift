@@ -62,7 +62,6 @@ final class PlaceRepository {
         do {
             place = try searchItemByID(id)
         } catch {
-            debugPrint(error)
             throw DataBaseError.searchError
         }
         

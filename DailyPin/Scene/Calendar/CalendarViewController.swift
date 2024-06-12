@@ -48,6 +48,35 @@ final class CalendarViewController: BaseViewController {
     }
     
     
+    override func configureUI() {
+        super.configureUI()
+        //        view.backgroundColor = Constants.Color.subBGColor
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
+        
+        mainView.setDefaultSelectDate(selectedDate)
+        mainView.collectionView.collectionViewLayout.invalidateLayout()
+        
+    }
+    
+    
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
+    private func modalTransition(vc: UIViewController) {
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overFullScreen
+        nav.modalTransitionStyle = .crossDissolve
+        present(nav, animated: true)
+    }
+    
+}
+
+// MARK: Binding
+extension CalendarViewController {
+    
     private func bindData() {
         
         requestDayRecord
@@ -101,35 +130,9 @@ final class CalendarViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
     }
-    
-    override func configureUI() {
-        super.configureUI()
-        //        view.backgroundColor = Constants.Color.subBGColor
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
-        
-        mainView.setDefaultSelectDate(selectedDate)
-        mainView.collectionView.collectionViewLayout.invalidateLayout()
-        
-    }
-    
-    
-    @objc private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    
-    private func modalTransition(vc: UIViewController) {
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        nav.modalTransitionStyle = .crossDissolve
-        present(nav, animated: true)
-    }
-    
 }
 
-
-
+// MARK: Calendar Protocol
 extension CalendarViewController: FSCalendarProtocol {
     
     func moveDate(date: Date) {

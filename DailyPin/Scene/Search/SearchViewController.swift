@@ -44,32 +44,33 @@ final class SearchViewController: BaseViewController {
         mainView.searchBar.becomeFirstResponder()
         
         bindData()
-        
-       
     }
     
-//    @objc private func networkConfiguration(notification: NSNotification) {
-//        
-//        guard let userInfo = notification.userInfo else { return }
-//        
-//        if let value = userInfo["isConnected"] as? Bool {
-//            if value {
-//                DispatchQueue.main.async {
-//                    self.mainView.configureHidden(collection: false, error: true)
-//                }
-//            } else {
-//                DispatchQueue.main.async {
-//                    self.mainView.configureHidden(collection: true, error: false)
-//                }
-//            }
-//        }
-//        
-//        
-//    }
+    override func configureUI() {
+        super.configureUI()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonClicked))
+        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
+        
+        
+    }
+    
+    @objc private func backButtonClicked() {
+        dismiss(animated: true)
+    }
+    
+    
+    private func updateSnapShot(item: [PlaceItem]) {
+        var snapShot = NSDiffableDataSourceSnapshot<Int, PlaceItem>()
+        snapShot.appendSections([0])
+        snapShot.appendItems(item)
+        mainView.dataSource.apply(snapShot)
+    }
+}
+
+// - MARK: Binding
+extension SearchViewController {
     
     private func bindData() {
-        
-        
         
         viewModel.searchResult
             .asDriver(onErrorJustReturn: [])
@@ -118,29 +119,7 @@ final class SearchViewController: BaseViewController {
             
         
     }
-    
-    
-    override func configureUI() {
-        super.configureUI()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: #selector(backButtonClicked))
-        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
-        
-        
-    }
-    
-    @objc private func backButtonClicked() {
-        dismiss(animated: true)
-    }
-    
-    
-    private func updateSnapShot(item: [PlaceItem]) {
-        var snapShot = NSDiffableDataSourceSnapshot<Int, PlaceItem>()
-        snapShot.appendSections([0])
-        snapShot.appendItems(item)
-        mainView.dataSource.apply(snapShot)
-    }
 }
-
 
 extension SearchViewController: CollectionViewProtocol {
     

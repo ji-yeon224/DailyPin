@@ -52,21 +52,10 @@ final class RecordReadViewController: BaseViewController {
     }
     
     
-    private func configData() {
-        guard let record = record, let location = location else {
-            dismiss(animated: true)
-            return
-        }
-        mainView.setRecordData(data: record, address: location.address)
-        
-        
-    }
-    
-    
-    
     
 }
 
+// MARK: Binding
 extension RecordReadViewController {
     
     private func bind() {
@@ -149,7 +138,18 @@ extension RecordReadViewController {
     }
 }
 
+// MARK: Config View
 extension RecordReadViewController {
+    
+    private func configData() {
+        guard let record = record, let location = location else {
+            dismiss(animated: true)
+            return
+        }
+        mainView.setRecordData(data: record, address: location.address)
+        
+    }
+    
     private func setNavBar() {
         title = "기록"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.xmark, style: .plain, target: self, action: nil)
@@ -161,13 +161,10 @@ extension RecordReadViewController {
         var menuItems: [UIAction] = []
         
         let editAction = UIAction(title: "editButton".localized()) { action in
-//            self.mode = .edit
-//            self.modeType.accept(self.mode)
             self.editButtonTap.accept(())
             
         }
         let deleteAction = UIAction(title: "deleteButton".localized()) { action in
-//            self.deleteButton.accept(true)
             self.deleteButtonTap.accept(())
             
         }

@@ -64,6 +64,12 @@ final class MainMapViewController: BaseViewController {
         
     }
     
+    
+}
+
+// - MARK: Binding
+extension MainMapViewController  {
+    
     private func bindData() {
         
         viewModel.allAnnotations
@@ -184,6 +190,10 @@ final class MainMapViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
     }
+}
+
+// - MARK: Event
+extension MainMapViewController {
     
     private func transitionPushNav(vc: UIViewController?) {
         guard let vc = vc else { return }
@@ -196,28 +206,6 @@ final class MainMapViewController: BaseViewController {
         nav.modalPresentationStyle = .fullScreen
         nav.modalTransitionStyle = .crossDissolve
         self.present(nav, animated: true)
-    }
-    
-}
-
-// - Event
-extension MainMapViewController {
-    
-    @objc private func getChangeNotification(notification: NSNotification) {
-        guard let notiInfo = notification.userInfo else { return }
-        
-        if let changeType = notiInfo[NotificationKey.changeType] as? ChangeType {
-            switch changeType {
-            case .save:
-                deleteSearchAnnotation()
-            case .delete:
-                BottomSheetManager.shared.dismiss()
-                deleteSearchAnnotation()
-            }
-        }
-        
-        mainView.removeAllCustomAnnotation(annotations: viewModel.allAnnotationList)
-        viewModel.getAllPlaceAnnotation()
     }
     
     private func longPressMap(_ sender: UILongPressGestureRecognizer) {
@@ -274,7 +262,7 @@ extension MainMapViewController {
     
 }
 
-// - Map Control Method
+// - MARK: Map Control Method
 extension MainMapViewController {
     
     private func setAnnotationState(place: PlaceItem) {
@@ -321,8 +309,6 @@ extension MainMapViewController: SearchResultProtocol {
     
     
 }
-
-
 
 
 extension MainMapViewController: MapViewProtocol {
