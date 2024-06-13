@@ -3,3 +3,4 @@ APIKey.swift
 xcuserdata/
 BaseURL.swift
 *.xcodeproj/*
+*.xcuserstate
