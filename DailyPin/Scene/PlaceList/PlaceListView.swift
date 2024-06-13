@@ -13,7 +13,7 @@ final class PlaceListView: BaseView {
     var dataSource: UICollectionViewDiffableDataSource<Int, PlaceItem>!
     weak var collectionViewDelegate: PlaceCollectionViewProtocol?
     private let titleLabel = BasicTextLabel(style: .title2).then {
-        $0.text = "myRecord".localized()
+        $0.text = LocalizableKey.myRecord.localized
     }
     
     lazy var collectionView = {
@@ -39,7 +39,7 @@ final class PlaceListView: BaseView {
     }()
     
     private let placeHolderLabel = BasicTextLabel(style: .body, color: Constants.Color.placeholderColor, lines: 2).then {
-        $0.text = "placeHolder_noPlaceList".localized()
+        $0.text = LocalizableKey.placeHolder_noPlaceList.localized
         $0.textAlignment = .center
     }
     

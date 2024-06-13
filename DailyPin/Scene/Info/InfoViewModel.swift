@@ -24,7 +24,7 @@ final class InfoViewModel {
             let items = try placeRepository.getRecordList(id: place.id)
             recordItem.onNext([RecordSectionModel(section: 0, items: items)])
         } catch {
-            errorMsg.onNext("toase_recordLoadError".localized())
+            errorMsg.onNext(LocalizableKey.toase_recordLoadError.localized)
         }
     }
     

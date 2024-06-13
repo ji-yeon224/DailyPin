@@ -61,6 +61,7 @@ final class RecordWriteViewController: BaseViewController {
     
     
     override func configureUI() {
+        view.backgroundColor = Constants.Color.background
         setNavBar()
         setData()
         bindEvent()
@@ -163,7 +164,7 @@ extension RecordWriteViewController {
         
         output.updateData
             .bind(with: self) { owner, data in
-                owner.showOKAlert(title: "", message: "toast_editComplete".localized()) {
+                owner.showOKAlert(title: "", message: LocalizableKey.toast_editComplete.localized) {
                     owner.updateRecord?(data)
                     owner.dismiss(animated: true)
                 }
@@ -185,7 +186,7 @@ extension RecordWriteViewController {
         navigationItem.leftBarButtonItem?.rx.tap
             .bind(with: self) { owner, value in
                 if !owner.mainView.isEmptyText() {
-                    owner.okDesctructiveAlert(title: "alert_alertEditModeTitle".localized(), message: "alert_alertEditModeMessage".localized()) {
+                    owner.okDesctructiveAlert(title: LocalizableKey.alert_alertEditModeTitle.localized, message: LocalizableKey.alert_alertEditModeMessage.localized) {
                         owner.dismiss(animated: true)
                     } cancelHandler: {  }
                 } else {
@@ -208,7 +209,7 @@ extension RecordWriteViewController {
             .withLatestFrom(mainView.titleTextField.rx.text.orEmpty)
             .bind(with: self) { owner, value in
                 if value.count >= 20 {
-                    owner.showToastMessage(message: "record_titleLimit".localized())
+                    owner.showToastMessage(message: LocalizableKey.record_titleLimit.localized)
                 }
             }
             .disposed(by: disposeBag)
@@ -263,15 +264,15 @@ extension RecordWriteViewController {
         
         switch recordMode {
         case .update:
-            title = "updateText".localized()
+            title = LocalizableKey.updateText.localized
         case .create:
-            title = "createText".localized()
+            title = LocalizableKey.createText.localized
         }
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.backButton, style: .plain, target: self, action: nil)
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "saveButton".localized(), style: .plain, target: self, action: #selector(saveButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: LocalizableKey.saveButton.localized, style: .plain, target: self, action: #selector(saveButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = Constants.Color.basicText
     }
     

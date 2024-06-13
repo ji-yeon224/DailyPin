@@ -67,7 +67,7 @@ final class RecordReadViewModel {
                     
                     refresh = true
                 }
-                successDelete.accept(("삭제를 완료하였습니다.", refresh))
+                successDelete.accept((LocalizableKey.successDelete.localized, refresh))
                 
             }
             .disposed(by: disposeBag)

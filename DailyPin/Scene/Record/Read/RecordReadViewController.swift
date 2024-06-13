@@ -74,7 +74,7 @@ extension RecordReadViewController {
         output.successDelete
             .bind(with: self) { owner, value in
                 let (msg, refresh) = value
-                owner.showOKAlert(title: "deleteButton".localized(), message: msg) {
+                owner.showOKAlert(title: LocalizableKey.deleteButton.localized, message: msg) {
                     
                     if refresh {
                         NotificationCenterManager.databaseChange.post(userInfo: [NotificationKey.changeType: ChangeType.delete])

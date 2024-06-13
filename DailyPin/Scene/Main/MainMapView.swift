@@ -25,7 +25,7 @@ final class MainMapView: BaseView {
         $0.isUserInteractionEnabled = true
     }
     let searchTextButton = UIButton().then {
-        $0.setTitle("searchPlaceholder".localized(), for: .normal)
+        $0.setTitle(LocalizableKey.searchPlaceholder.localized, for: .normal)
         $0.setTitleColor(Constants.Color.placeholderColor, for: .normal)
         $0.contentHorizontalAlignment = .leading
         $0.titleLabel?.font = Font.body.fontStyle

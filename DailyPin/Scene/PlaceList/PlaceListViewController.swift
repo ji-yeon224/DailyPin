@@ -66,7 +66,7 @@ extension PlaceListViewController: PlaceCollectionViewProtocol {
     
     func didSelectPlaceItem(item: PlaceItem?) {
         guard let item = item else {
-            showToastMessage(message: "toast_errorAlert".localized())
+            showToastMessage(message: LocalizableKey.toast_errorAlert.localized)
             return
         }
         placeListDelegate?.setPlaceLoaction(data: item)

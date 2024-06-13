@@ -95,7 +95,7 @@ extension MainMapViewController  {
         NetworkMonitor.shared.connected
             .bind(with: self) { owner, isConnected in
                 if !isConnected {
-                    owner.showOKAlert(title: "network_connectErrorTitle".localized(), message: "network_connectError".localized()) {}
+                    owner.showOKAlert(title: LocalizableKey.network_connectErrorTitle.localized, message: LocalizableKey.network_connectError.localized) {}
                 }
             }
             .disposed(by: DisposeBag())
@@ -241,12 +241,12 @@ extension MainMapViewController {
         
         guard let lat = placeInfo.latitude, let lng = placeInfo.longitude else { return }
         
-        let alert = UIAlertController(title: "alert_addRecordTitle".localized(), message: placeInfo.address, preferredStyle: .alert)
+        let alert = UIAlertController(title: LocalizableKey.alert_addRecordTitle.localized, message: placeInfo.address, preferredStyle: .alert)
         
-        let ok = UIAlertAction(title: "okText".localized(), style: .default) { _ in
+        let ok = UIAlertAction(title: LocalizableKey.okText.localized, style: .default) { _ in
             self.writeLongPress.onNext((lat, lng))
         }
-        let cancel = UIAlertAction(title: "cancelText".localized(), style: .destructive) { _ in
+        let cancel = UIAlertAction(title: LocalizableKey.cancelText.localized, style: .destructive) { _ in
             
         }
         alert.addAction(cancel)
@@ -343,10 +343,10 @@ extension MainMapViewController: AuthorizationLocationProtocol {
     // 권한이 거부되었을 때 얼럿
     func showRequestLocationServiceAlert() {
         
-        showAlertWithCancel(title: "locationAlertTitle".localized(), message: "location_denied".localized()) {
+        showAlertWithCancel(title: LocalizableKey.locationAlertTitle.localized, message: LocalizableKey.location_denied.localized) {
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         } cancelHandler: {
-            self.showOKAlert(title: "", message: "location_Restricted".localized()) { }
+            self.showOKAlert(title: "", message: LocalizableKey.location_Restricted.localized) { }
         }
         
         self.mainView.setRegion(center: self.defaultLoaction)

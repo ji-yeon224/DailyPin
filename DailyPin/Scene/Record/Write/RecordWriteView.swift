@@ -25,7 +25,7 @@ final class RecordWriteView: BaseView {
     }
     
     let placeHolderLabel = BasicTextLabel(style: .nanum, color: Constants.Color.placeholderColor).then {
-        $0.text = "record_writeRecord".localized()
+        $0.text = LocalizableKey.record_writeRecord.localized
         $0.textAlignment = .left
     }
     

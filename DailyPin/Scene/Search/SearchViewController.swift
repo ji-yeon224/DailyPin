@@ -89,7 +89,7 @@ extension SearchViewController {
         NetworkMonitor.shared.connected
             .bind(with: self) { owner, isConnected in
                 if !isConnected { //연결 안됨
-                    owner.showToastMessage(message: "network_connectError".localized())
+                    owner.showToastMessage(message: LocalizableKey.network_connectError.localized)
                 }
             }
             .disposed(by: disposeBag)
@@ -108,7 +108,7 @@ extension SearchViewController {
             }
             .bind(with: self) { owner, text in
                 if text.count <= 0 {
-                    owner.showToastMessage(message: "error_emptySearchResult".localized())
+                    owner.showToastMessage(message: LocalizableKey.error_emptySearchResult.localized)
                 } else {
                     owner.viewModel.callPlaceRequest(query: text, langCode: .ko, location: owner.centerLocation)
                     owner.view.endEditing(true)

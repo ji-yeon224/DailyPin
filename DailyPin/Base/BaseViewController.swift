@@ -27,7 +27,7 @@ class BaseViewController: UIViewController {
     
     func showOKAlert(title: String, message: String, handler: (() -> ())?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "okText".localized(), style: .default) { _ in
+        let ok = UIAlertAction(title: LocalizableKey.okText.localized, style: .default) { _ in
             handler?()
         }
         alert.addAction(ok)
@@ -37,10 +37,10 @@ class BaseViewController: UIViewController {
     
     func showAlertWithCancel(title: String, message: String, okHandler: (() -> Void)?, cancelHandler: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "okText".localized(), style: .default) { _ in
+        let ok = UIAlertAction(title: LocalizableKey.okText.localized, style: .default) { _ in
             okHandler?()
         }
-        let cancel = UIAlertAction(title: "cancelText".localized(), style: .destructive) { _ in
+        let cancel = UIAlertAction(title: LocalizableKey.cancelText.localized, style: .destructive) { _ in
             cancelHandler?()
         }
         alert.addAction(cancel)
@@ -53,10 +53,10 @@ class BaseViewController: UIViewController {
     // 확인 버튼이 빨간버튼
     func okDesctructiveAlert(title: String, message: String, okHandler: (() -> Void)?, cancelHandler: (() -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "okText".localized(), style: .destructive) { _ in
+        let ok = UIAlertAction(title: LocalizableKey.okText.localized, style: .destructive) { _ in
             okHandler?()
         }
-        let cancel = UIAlertAction(title: "cancelText".localized(), style: .cancel) { _ in
+        let cancel = UIAlertAction(title: LocalizableKey.cancelText.localized, style: .cancel) { _ in
             cancelHandler?()
         }
         alert.addAction(ok)

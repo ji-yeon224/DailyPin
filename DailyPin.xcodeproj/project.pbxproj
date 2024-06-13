@@ -69,7 +69,6 @@
 		CE78426A2C09AB8000E4350E /* CustomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842692C09AB8000E4350E /* CustomStackView.swift */; };
 		CE78426C2C09AE7E00E4350E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78426B2C09AE7E00E4350E /* CustomButton.swift */; };
 		CE78426E2C09AF6000E4350E /* UIViewController+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78426D2C09AF6000E4350E /* UIViewController+Extenstion.swift */; };
-		CE7842702C0A1EBB00E4350E /* InfoReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78426F2C0A1EBB00E4350E /* InfoReactor.swift */; };
 		CE7842732C0A21C500E4350E /* RecordSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842722C0A21C500E4350E /* RecordSectionModel.swift */; };
 		CE814A5B2AD54A2E00068854 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */; };
 		CE814A5F2AD594EF00068854 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE814A5E2AD594EF00068854 /* CalendarViewController.swift */; };
@@ -200,7 +199,6 @@
 		CE7842692C09AB8000E4350E /* CustomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStackView.swift; sourceTree = "<group>"; };
 		CE78426B2C09AE7E00E4350E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		CE78426D2C09AF6000E4350E /* UIViewController+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extenstion.swift"; sourceTree = "<group>"; };
-		CE78426F2C0A1EBB00E4350E /* InfoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoReactor.swift; sourceTree = "<group>"; };
 		CE7842722C0A21C500E4350E /* RecordSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSectionModel.swift; sourceTree = "<group>"; };
 		CE814A5A2AD54A2E00068854 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		CE814A5E2AD594EF00068854 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -331,7 +329,6 @@
 				CE32459B2AC9682200582FC5 /* InfoViewController.swift */,
 				CE32459E2AC9683300582FC5 /* InfoView.swift */,
 				CE9B0E922ACA8122008A0694 /* InfoViewModel.swift */,
-				CE78426F2C0A1EBB00E4350E /* InfoReactor.swift */,
 			);
 			path = Info;
 			sourceTree = "<group>";
@@ -854,7 +851,6 @@
 				CE3DF8032AC2B5BA00653CE1 /* MainMapView.swift in Sources */,
 				CEB00FC52AC030BF001E7BB0 /* ViewController.swift in Sources */,
 				CE9A16B32AD2897E0051BE23 /* CustomAnnotation.swift in Sources */,
-				CE7842702C0A1EBB00E4350E /* InfoReactor.swift in Sources */,
 				CE52CB682AC5ADBB007AD7F8 /* GoogleNetwork.swift in Sources */,
 				CE9A16B82AD2BE240051BE23 /* CustomAnnotationView.swift in Sources */,
 				CE7842612C0983A400E4350E /* BasicTextLabel.swift in Sources */,

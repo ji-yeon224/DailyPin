@@ -13,7 +13,7 @@ final class SearchView: BaseView {
     
     let searchBar = {
         let view = UISearchBar()
-        view.placeholder = "searchPlaceholder".localized()
+        view.placeholder = LocalizableKey.searchPlaceholder.localized
         view.backgroundColor = Constants.Color.background
         view.searchTextField.backgroundColor = .clear
         view.searchTextField.textColor = Constants.Color.basicText

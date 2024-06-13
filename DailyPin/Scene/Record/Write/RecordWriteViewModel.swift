@@ -44,7 +44,7 @@ final class RecordWriteViewModel {
                 do {
                     try owner.placeRepository.updateRecordList(record: record, place: place)
                     NotificationCenterManager.updateCell.post()
-                    successMsg.accept("toast_saveComplete".localized())
+                    successMsg.accept(LocalizableKey.toast_saveComplete.localized)
                 } catch {
                     debugPrint("error")
                     msg.accept(error.localizedDescription)

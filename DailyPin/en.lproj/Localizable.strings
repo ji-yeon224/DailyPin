@@ -35,6 +35,7 @@
 "record_titleLimit" = "Please write within 20 characters.";
 "createText" = "New Record";
 "updateText" = "Edit Record";
+"successDelete" = "Deletion has been completed";
 
 // Error
 "alert_dateLoadError" = "There was a problem loading the data.";
