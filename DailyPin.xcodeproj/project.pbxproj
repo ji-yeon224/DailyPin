@@ -65,7 +65,6 @@
 		CE743E282BA81C4400E0D9EA /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE743E272BA81C4400E0D9EA /* CircleButton.swift */; };
 		CE7842612C0983A400E4350E /* BasicTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842602C0983A400E4350E /* BasicTextLabel.swift */; };
 		CE7842632C099CBE00E4350E /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842622C099CBE00E4350E /* DividerView.swift */; };
-		CE7842662C09A5EF00E4350E /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = CE7842652C09A5EF00E4350E /* NVActivityIndicatorView */; };
 		CE7842682C09AB4500E4350E /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842672C09AB4500E4350E /* AlertViewController.swift */; };
 		CE78426A2C09AB8000E4350E /* CustomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7842692C09AB8000E4350E /* CustomStackView.swift */; };
 		CE78426C2C09AE7E00E4350E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78426B2C09AE7E00E4350E /* CustomButton.swift */; };
@@ -124,6 +123,7 @@
 		CEC108DD2C1971F900874455 /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC108DC2C1971F900874455 /* NotificationKey.swift */; };
 		CEC108DF2C19838200874455 /* NotificationCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC108DE2C19838200874455 /* NotificationCenterManager.swift */; };
 		CEC108E22C1983CE00874455 /* NotificationCenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC108E12C1983CE00874455 /* NotificationCenterProtocol.swift */; };
+		CEC108E62C1999DD00874455 /* LocalizableKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC108E52C1999DD00874455 /* LocalizableKey.swift */; };
 		CECCB79A2ADC27430071F55B /* FloatingPanelController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */; };
 		CED3A6E52BA2EB4F00B17B41 /* PHPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3A6E42BA2EB4F00B17B41 /* PHPickerManager.swift */; };
 		CED3A6E72BA2EC8800B17B41 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3A6E62BA2EC8800B17B41 /* ImageCollectionViewCell.swift */; };
@@ -253,6 +253,7 @@
 		CEC108DC2C1971F900874455 /* NotificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
 		CEC108DE2C19838200874455 /* NotificationCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterManager.swift; sourceTree = "<group>"; };
 		CEC108E12C1983CE00874455 /* NotificationCenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterProtocol.swift; sourceTree = "<group>"; };
+		CEC108E52C1999DD00874455 /* LocalizableKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableKey.swift; sourceTree = "<group>"; };
 		CECCB7992ADC27430071F55B /* FloatingPanelController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPanelController+Extension.swift"; sourceTree = "<group>"; };
 		CED3A6E42BA2EB4F00B17B41 /* PHPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerManager.swift; sourceTree = "<group>"; };
 		CED3A6E62BA2EC8800B17B41 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -287,7 +288,6 @@
 				CE3EA89D2AFE55B000628B07 /* FirebaseCrashlytics in Frameworks */,
 				CE4DF9082ACBB6AF00546526 /* Realm in Frameworks */,
 				CE83F4DA2B9ADEA600B067DC /* ReactorKit in Frameworks */,
-				CE7842662C09A5EF00E4350E /* NVActivityIndicatorView in Frameworks */,
 				CE3EA89B2AFE55B000628B07 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,6 +509,7 @@
 				CE6F36B02B96E553007AD6AB /* Color.swift */,
 				CE6F36B22B96E56D007AD6AB /* Design.swift */,
 				CE6F36B72B96E737007AD6AB /* Font.swift */,
+				CEC108E52C1999DD00874455 /* LocalizableKey.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -695,7 +696,6 @@
 				CE6F36BA2B96E8D7007AD6AB /* Then */,
 				CE83F4D92B9ADEA600B067DC /* ReactorKit */,
 				CED3A6ED2BA3F9E600B17B41 /* RxDataSources */,
-				CE7842652C09A5EF00E4350E /* NVActivityIndicatorView */,
 			);
 			productName = DailyPin;
 			productReference = CEB00FBD2AC030BF001E7BB0 /* DailyPin.app */;
@@ -739,7 +739,6 @@
 				CE6F36B92B96E8D7007AD6AB /* XCRemoteSwiftPackageReference "Then" */,
 				CE83F4D82B9ADEA600B067DC /* XCRemoteSwiftPackageReference "ReactorKit" */,
 				CED3A6EC2BA3F9E600B17B41 /* XCRemoteSwiftPackageReference "RxDataSources" */,
-				CE7842642C09A5EF00E4350E /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 			);
 			productRefGroup = CEB00FBE2AC030BF001E7BB0 /* Products */;
 			projectDirPath = "";
@@ -845,6 +844,7 @@
 				CE52CB772AC7B454007AD7F8 /* NetworkError.swift in Sources */,
 				CEB390BA2ACFDF4C00E4B2AC /* DateFormatter.swift in Sources */,
 				CE2951EE2ADEE7F300EE2571 /* TextFieldProtocol.swift in Sources */,
+				CEC108E62C1999DD00874455 /* LocalizableKey.swift in Sources */,
 				CE6F36BD2B96F2EC007AD6AB /* CustomImageButton.swift in Sources */,
 				CE32459C2AC9682200582FC5 /* InfoViewController.swift in Sources */,
 				CEE630682AD674AA006A5DD9 /* CalendarViewModel.swift in Sources */,
@@ -1208,14 +1208,6 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		CE7842642C09A5EF00E4350E /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.2.0;
-			};
-		};
 		CE814A622AD59D1B00068854 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
@@ -1311,11 +1303,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE6F36B92B96E8D7007AD6AB /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
-		};
-		CE7842652C09A5EF00E4350E /* NVActivityIndicatorView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CE7842642C09A5EF00E4350E /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
-			productName = NVActivityIndicatorView;
 		};
 		CE814A632AD59D1B00068854 /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
