@@ -4,3 +4,7 @@ xcuserdata/
 BaseURL.swift
 *.xcodeproj/*
 *.xcuserstate
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
