@@ -16,7 +16,6 @@ final class CalendarViewModel {
     
     func getRecords(date: Date) {
         var dateSet: Set<Date> = []
-        print(date)
         let dateList = recordRepository.filterItemByMonthOnlyDate(date)
         let calendar = Calendar.current
         

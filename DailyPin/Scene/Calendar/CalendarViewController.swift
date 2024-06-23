@@ -35,7 +35,7 @@ final class CalendarViewController: BaseViewController {
         
         navigationController?.navigationBar.isHidden = false
         bindData()
-        
+        bindNotification()
         requestDayRecord.accept(selectedDate)
         requestMonthData.onNext(nil)
           
