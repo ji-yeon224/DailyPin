@@ -5,7 +5,8 @@
 
 
 
-![](https://github.com/ji-yeon224/DailyPin/assets/69784492/371edf62-1854-4f81-a184-c61ff2ee8497)
+![DailyPin_ReadMe](https://github.com/ji-yeon224/DailyPin/assets/69784492/23debbdf-b9aa-411f-ae1f-5bb96f58630c)
+
 
 [🔗 앱스토어 바로가기](https://apps.apple.com/kr/app/dailypin-%EC%9E%A5%EC%86%8C%EC%9D%BC%EA%B8%B0/id6470025950)
 
