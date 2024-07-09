@@ -1,10 +1,16 @@
+
 APIKey.swift
+
+Swift.gitignore
 */xcuserdata/*
 xcuserdata/
 BaseURL.swift
 *.xcodeproj/*
+!*.xcodeproj/xcshareddata/
 *.xcuserstate
 .DS_Store
 ._.DS_Store
 **/.DS_Store
 **/._.DS_Store
+.build/
+DerivedData/
